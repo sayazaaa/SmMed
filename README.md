@@ -1,2 +1,0 @@
-# SmMed
-BIT Smart Medicine 
