@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui network sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -24,6 +24,12 @@ HEADERS += \
 
 FORMS += \
     mainwindow.ui
+
+DESTDIR += out
+OBJECTS_DIR += obj
+MOC_DIR += moc
+RCCDIR += rcc
+UI_DIR += ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
