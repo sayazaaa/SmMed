@@ -3,14 +3,13 @@
 #include <QGraphicsDropShadowEffect>
 int choice_state=0;
 Widget::Widget(QWidget *parent) :
-    QWidget(parent),
+    FramelessWidget(parent),
     ui(new Ui::Widget)
 {
     ui->setupUi(this);
     QTimer *timer = new QTimer(this);
     connect(timer,SIGNAL(timeout()),this,SLOT(timerUpdate()));
     timer->start(1000);
-    this->setProperty("canMove",true);
     this->initUi();
     this->initMember();
 }
@@ -25,9 +24,9 @@ Widget::~Widget()
 void Widget::initUi()
 {
     //初始化窗口边框
-    this->setAttribute(Qt::WA_StyledBackground);
-    this->setAttribute(Qt::WA_TranslucentBackground, true);
-    this->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
+    //this->setAttribute(Qt::WA_StyledBackground);
+    //this->setAttribute(Qt::WA_TranslucentBackground, true);
+    //this->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
     this->setAttribute(Qt::WA_Hover);
     QGraphicsDropShadowEffect *shadow = new QGraphicsDropShadowEffect(this);
     shadow->setOffset(0, 0);
@@ -56,11 +55,11 @@ void Widget::initMember()
     trayIcon->setIcon(icon);
     trayIcon->setToolTip("BIT SMS"); //提示文字
     //添加托盘列表项(还原与退出)
-    returnNormal = new QAction(" Show", this);
+    returnNormal = new QAction(" 打开", this);
     returnNormal->setFont(QFont("Arial", 9));
     returnNormal->setObjectName("returnNormal");
     returnNormal->setIcon(QIcon(":/icons/show.png"));
-    quitAction = new QAction(" Quit", this);
+    quitAction = new QAction(" 关闭", this);
     quitAction->setFont(QFont("Arial", 9));
     quitAction->setObjectName("quitAction");
     quitAction->setIcon(QIcon(":/icons/out.png"));

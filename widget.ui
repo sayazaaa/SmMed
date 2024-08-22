@@ -24,7 +24,7 @@
   </property>
   <property name="maximumSize">
    <size>
-    <width>1133</width>
+    <width>16777215</width>
     <height>16777215</height>
    </size>
   </property>
@@ -675,19 +675,6 @@
             <number>40</number>
            </property>
            <item>
-            <spacer name="horizontalSpacer_8">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item>
             <widget class="QPushButton" name="btn_main_item_1">
              <property name="enabled">
               <bool>true</bool>
@@ -805,19 +792,6 @@
               <string/>
              </property>
             </widget>
-           </item>
-           <item>
-            <spacer name="horizontalSpacer_9">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
            </item>
           </layout>
          </item>

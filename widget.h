@@ -6,17 +6,17 @@
 #include <QSystemTrayIcon>
 #include <QCloseEvent>
 #include <QMenu>
-#include <QAction>
 #include<QTimer>
 #include<QDateTime>
 //自定义弹窗
 #include "mymessagebox.h"
+#include "framelesswidget.h"
 
 namespace Ui {
 class Widget;
 }
 
-class Widget : public QWidget
+class Widget : public FramelessWidget
 {
     Q_OBJECT
 
