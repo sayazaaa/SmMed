@@ -44,3 +44,10 @@ void login::on_checkBox_stateChanged(int arg1)
     doctor_check=1-doctor_check;
 }
 
+
+void login::on_pushButton_2_clicked()
+{
+    information *me=new information;
+    me->show();
+}
+

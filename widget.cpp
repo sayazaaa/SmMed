@@ -145,12 +145,14 @@ void Widget::on_btn_mine_clicked(bool checked)
 
 void Widget::on_btn_mine_clicked()
 {
-
+    information *me=new information;
+    me->show();
 }
 
 
 void Widget::on_btn_menu_item_1_clicked()
 {
+    ui->sw_main->setCurrentIndex(1);
     choice_state=1;
     btn_hide();
     ui->btn_main_item_1->setText("最近一年");
@@ -184,6 +186,7 @@ void Widget::btn_hide()
 
 void Widget::on_btn_menu_item_3_clicked()
 {
+    ui->sw_main->setCurrentIndex(3);
     choice_state=2;
     btn_hide();
     ui->btn_main_item_1->setText("挂号预约");
@@ -195,6 +198,7 @@ void Widget::on_btn_menu_item_3_clicked()
 
 void Widget::on_btn_menu_item_2_clicked()
 {
+    ui->sw_main->setCurrentIndex(5);
     choice_state=3;
     btn_hide();
     ui->btn_main_item_1->setText("当日在班医生");
@@ -206,6 +210,7 @@ void Widget::on_btn_menu_item_2_clicked()
 
 void Widget::on_btn_menu_item_4_clicked()
 {
+    ui->sw_main->setCurrentIndex(7);
     choice_state=4;
     btn_hide();
     ui->btn_main_item_1->setText("医生列表");
@@ -215,8 +220,9 @@ void Widget::on_btn_menu_item_4_clicked()
 }
 
 
-void Widget::on_btn_menu_item_6_clicked()
+void Widget::on_btn_menu_item_5_clicked()
 {
+    ui->sw_main->setCurrentIndex(9);
     choice_state=5;
     btn_hide();
     ui->btn_main_item_1->setText("研发人员");

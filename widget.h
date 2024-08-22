@@ -11,6 +11,7 @@
 //自定义弹窗
 #include "mymessagebox.h"
 #include "framelesswidget.h"
+#include"information.h"
 
 namespace Ui {
 class Widget;
@@ -59,7 +60,7 @@ private slots:
 
     void on_btn_menu_item_4_clicked();
 
-    void on_btn_menu_item_6_clicked();
+    void on_btn_menu_item_5_clicked();
 
 private:
     Ui::Widget *ui;

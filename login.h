@@ -2,7 +2,7 @@
 #define LOGIN_H
 #include "widget.h"
 #include <QDialog>
-
+#include"information.h"
 
 namespace Ui {
 class login;
@@ -25,6 +25,8 @@ private slots:
 
 
     void on_checkBox_stateChanged(int arg1);
+
+    void on_pushButton_2_clicked();
 
 private:
     Ui::login *ui;
