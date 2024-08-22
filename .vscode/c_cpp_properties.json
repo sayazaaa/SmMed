@@ -3,7 +3,7 @@
         {
             "name": "Linux",
             "includePath": [
-                "/home/ikklo/Qt5.12.8/5.12.8/gcc_64/include/**",
+            "/home/ikklo/Qt5.12.8/5.12.8/gcc_64/include/**",
             "${workspaceRoot}/**"
             
             ],
