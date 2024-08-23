@@ -1,5 +1,5 @@
-#ifndef SHARED_GLOBAL_H
-#define SHARED_GLOBAL_H
+#ifndef SHAREDGLOBAL_H
+#define SHAREDGLOBAL_H
 
 #include <QtCore/qglobal.h>
 
@@ -9,4 +9,4 @@
 #  define SHARED_EXPORT Q_DECL_IMPORT
 #endif
 
-#endif // SHARED_GLOBAL_H
+#endif // SHAREDGLOBAL_H

@@ -1,6 +1,6 @@
 #include <QCoreApplication>
 //#include <include/dbserver.h>
-#include <shared_global.h>
+#include <sharedglobal.h>
 #include <shared.h>
 #include <include/dbserver.h>
 int main(int argc, char *argv[])

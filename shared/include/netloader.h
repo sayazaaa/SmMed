@@ -1,9 +1,13 @@
-#ifndef NETLOADER_H
-#define NETLOADER_H
+#ifndef NET_LOADER_H
+#define NET_LOADER_H
+#include <QJsonObject>
 
-class NetLoader{
-    NetLoader();
+namespace  NetLoader{
+    QJsonObject fun(){
 
-};
 
-#endif
+    }
+
+}
+
+#endif // NET_LOADER_H

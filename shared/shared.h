@@ -1,7 +1,7 @@
 #ifndef SHARED_H
 #define SHARED_H
 
-#include "shared_global.h"
+#include "sharedglobal.h"
 
 class SHARED_EXPORT Shared
 {
