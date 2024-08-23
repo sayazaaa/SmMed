@@ -2,7 +2,7 @@ TEMPLATE = subdirs
 
 SUBDIRS += \
     commonuser \
-    db_client \
+    dbclient \
     doctor \
     server \
     shared
