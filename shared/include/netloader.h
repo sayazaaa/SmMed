@@ -1,5 +1,5 @@
-#ifndef NET_LOADER_H
-#define NET_LOADER_H
+#ifndef NETLOADER_H
+#define NETLOADER_H
 #include <QJsonObject>
 
 #include "dataclass_global.h"
@@ -38,4 +38,4 @@ namespace  NetLoader{
 
 }
 
-#endif // NET_LOADER_H
+#endif // NETLOADER_H

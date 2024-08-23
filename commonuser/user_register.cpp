@@ -21,6 +21,6 @@ void user_register::on_close_clicked()
 
 void user_register::on_register_confirm_clicked()
 {
-
+    NetLoader::post_login(ui->username->text(), ui->password->text(), NetClient());
 }
 

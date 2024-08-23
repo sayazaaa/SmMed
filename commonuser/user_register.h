@@ -2,6 +2,8 @@
 #define USER_REGISTER_H
 
 #include <QDialog>
+#include "netclient.h"
+#include "netloader.h"
 
 namespace Ui {
 class user_register;
