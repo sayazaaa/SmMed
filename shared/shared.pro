@@ -32,3 +32,10 @@ unix {
 !isEmpty(target.path): INSTALLS += target
 
 unix|win32: LIBS += -lmysqlpp
+
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../dataclass/release/ -ldataclass
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../dataclass/debug/ -ldataclass
+else:unix: LIBS += -L$$OUT_PWD/../dataclass/ -ldataclass
+
+INCLUDEPATH += $$PWD/../dataclass
+DEPENDPATH += $$PWD/../dataclass
