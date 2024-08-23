@@ -1,5 +1,4 @@
 #include "widget.h"
-#include "appinit.h"
 #include "login.h"
 #include <QApplication>
 #include <QFile>
@@ -20,9 +19,6 @@ int main(int argc, char *argv[])
     //全局字体
     QFont font("Arial", 10);
     a.setFont(font);
-
-    //屏幕拖动
-    AppInit::Instance()->start();
 
     login *l=new login;
     l->show();

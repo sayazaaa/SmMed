@@ -3,14 +3,13 @@
 #include <QGraphicsDropShadowEffect>
 int choice_state=0;
 Widget::Widget(QWidget *parent) :
-    QWidget(parent),
+    FramelessWidget(parent),
     ui(new Ui::Widget)
 {
     ui->setupUi(this);
     QTimer *timer = new QTimer(this);
     connect(timer,SIGNAL(timeout()),this,SLOT(timerUpdate()));
     timer->start(1000);
-    this->setProperty("canMove",true);
     this->initUi();
     this->initMember();
 }
@@ -25,9 +24,9 @@ Widget::~Widget()
 void Widget::initUi()
 {
     //初始化窗口边框
-    this->setAttribute(Qt::WA_StyledBackground);
-    this->setAttribute(Qt::WA_TranslucentBackground, true);
-    this->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
+    //this->setAttribute(Qt::WA_StyledBackground);
+    //this->setAttribute(Qt::WA_TranslucentBackground, true);
+    //this->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
     this->setAttribute(Qt::WA_Hover);
     QGraphicsDropShadowEffect *shadow = new QGraphicsDropShadowEffect(this);
     shadow->setOffset(0, 0);
@@ -56,11 +55,11 @@ void Widget::initMember()
     trayIcon->setIcon(icon);
     trayIcon->setToolTip("BIT SMS"); //提示文字
     //添加托盘列表项(还原与退出)
-    returnNormal = new QAction(" Show", this);
+    returnNormal = new QAction(" 打开", this);
     returnNormal->setFont(QFont("Arial", 9));
     returnNormal->setObjectName("returnNormal");
     returnNormal->setIcon(QIcon(":/icons/show.png"));
-    quitAction = new QAction(" Quit", this);
+    quitAction = new QAction(" 关闭", this);
     quitAction->setFont(QFont("Arial", 9));
     quitAction->setObjectName("quitAction");
     quitAction->setIcon(QIcon(":/icons/out.png"));
@@ -146,12 +145,14 @@ void Widget::on_btn_mine_clicked(bool checked)
 
 void Widget::on_btn_mine_clicked()
 {
-
+    information *me=new information;
+    me->show();
 }
 
 
 void Widget::on_btn_menu_item_1_clicked()
 {
+    ui->sw_main->setCurrentIndex(1);
     choice_state=1;
     btn_hide();
     ui->btn_main_item_1->setText("最近一年");
@@ -159,12 +160,38 @@ void Widget::on_btn_menu_item_1_clicked()
     ui->btn_main_item_1->show();
     ui->btn_main_item_2->show();
 }
+// 映射表：英文星期名称到中文星期名称
+QMap<QString, QString> dayMap = {
+    {"Sunday", "星期日"},
+    {"Monday", "星期一"},
+    {"Tuesday", "星期二"},
+    {"Wednesday", "星期三"},
+    {"Thursday", "星期四"},
+    {"Friday", "星期五"},
+    {"Saturday", "星期六"}
+};
+
+// 将英文星期名称转换为中文星期名称
+QString convertDayToChinese(const QString& day)
+{
+    auto it = dayMap.find(day);
+    if (it != dayMap.end())
+    {
+        return it.value();
+    }
+    else
+    {
+        // 如果找不到对应的星期名称，返回原字符串
+        return day;
+    }
+}
 
 void Widget::timerUpdate(void)
 {
     QDateTime time = QDateTime::currentDateTime();
-    QString timeStr=time.toString("yyyy-MM-dd hh:mm:ss dddd");
-    ui->time_block->setText(timeStr);
+    QString timeStr=time.toString("yyyy-MM-dd hh:mm:ss ");
+    QString day=time.toString("dddd");
+    ui->time_block->setText(timeStr+convertDayToChinese(day));
 }
 
 
@@ -185,6 +212,7 @@ void Widget::btn_hide()
 
 void Widget::on_btn_menu_item_3_clicked()
 {
+    ui->sw_main->setCurrentIndex(3);
     choice_state=2;
     btn_hide();
     ui->btn_main_item_1->setText("挂号预约");
@@ -196,6 +224,7 @@ void Widget::on_btn_menu_item_3_clicked()
 
 void Widget::on_btn_menu_item_2_clicked()
 {
+    ui->sw_main->setCurrentIndex(5);
     choice_state=3;
     btn_hide();
     ui->btn_main_item_1->setText("当日在班医生");
@@ -207,6 +236,7 @@ void Widget::on_btn_menu_item_2_clicked()
 
 void Widget::on_btn_menu_item_4_clicked()
 {
+    ui->sw_main->setCurrentIndex(7);
     choice_state=4;
     btn_hide();
     ui->btn_main_item_1->setText("医生列表");
@@ -216,8 +246,9 @@ void Widget::on_btn_menu_item_4_clicked()
 }
 
 
-void Widget::on_btn_menu_item_6_clicked()
+void Widget::on_btn_menu_item_5_clicked()
 {
+    ui->sw_main->setCurrentIndex(9);
     choice_state=5;
     btn_hide();
     ui->btn_main_item_1->setText("研发人员");
