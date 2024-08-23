@@ -1,6 +1,6 @@
 * { color: #3d4150; }
 QPushButton { border-style: none;border: 1px solid #DCDFE6;border-radius: 6px;padding: 5px 10px;font-size: 13px; }
-QPushButton:hover { color: #ffffff; font-weight: bold; background-color: #8df2f2; }
+QPushButton:hover { color: #ffffff; font-weight: bold; background-color: #1e90ff; }
 QScrollBar:vertical { background:#f5f6f8; padding:0px; border-radius: 3px; width:6px; }
 QScrollBar::handle:vertical { background:#C0C4CC; border-radius: 3px; }
 QScrollBar::handle:vertical:hover { background:#909399; }
@@ -28,10 +28,10 @@ QTabWidget::pane:right { left:-1px; }
 QTabBar::tab:selected { background-color: #ffffff; border-bottom: none; }
 QGroupBox { border: 1px solid #DCDFE6; border-radius: 6px; font-size: 13px; margin-top: 7px; }
 QGroupBox::title { subcontrol-origin: margin; subcontrol-position: top center; padding: 0px 5px 3px; }
-#w_bg { background-color: #f2f1f5; border-radius: 22px; }
+#w_bg,#inf { background-color: #f2f1f5; border-radius: 22px; }
 #w_menu { background-color: #f8f8f8; border-radius: 16px; }
-#btn_menu_item_1, #btn_menu_item_2, #btn_menu_item_3, #btn_menu_item_4, #btn_menu_item_5, #btn_menu_item_6 { background-color: #ffffff; border-radius: 5px; padding: 12px 0 0; }
-#btn_menu_item_1:hover, #btn_menu_item_2:hover, #btn_menu_item_3:hover, #btn_menu_item_4:hover, #btn_menu_item_5:hover, #btn_menu_item_6:hover { background-color: #f8f8f8; border: 1px solid #f0f0f0; }
+#btn_menu_item_1, #btn_menu_item_2, #btn_menu_item_3, #btn_menu_item_4, #btn_menu_item_5{ background-color: #ffffff; border-radius: 5px; padding: 12px 0 0; }
+#btn_menu_item_1:hover, #btn_menu_item_2:hover, #btn_menu_item_3:hover, #btn_menu_item_4:hover, #btn_menu_item_5:hover{ background-color: #f8f8f8; border: 1px solid #f0f0f0; }
 #lab_title { padding: 0 10px; }
 #btn_main_item_1, #btn_main_item_2, #btn_main_item_3, #btn_main_item_4 { padding: 8px 12px; color: #909399; border: none; }
 #btn_main_item_1:hover, #btn_main_item_2:hover, #btn_main_item_3:hover, #btn_main_item_4:hover { background-color: #ffffff; border-radius: 15px; color: #3d4150; }
@@ -41,4 +41,5 @@ QGroupBox::title { subcontrol-origin: margin; subcontrol-position: top center; p
 #lab_mess_1, #lab_mess_2, #lab_mess_3, #lab_mess_4 { color: #C0C4CC; }
 #MyMessageBox QLabel { color: #3d4150; }
 #btn_mbox_btn01, #btn_mbox_btn02 { height: 16px; font-size: 14px; background-color: #f2f2f2; border: 1px solid #DCDFE6; border-radius: 13px; padding: 6px 20px; }
-#btn_mbox_btn01:hover, #btn_mbox_btn02:hover { color: #ffffff; font-weight: bold; background-color: #8df2f2; }
+#btn_mbox_btn01:hover, #btn_mbox_btn02:hover { color: #ffffff; font-weight: bold; background-color: #1e90ff; }
+#confirm:hover{ color: #ffffff; font-weight: bold; background-color: #1e90ff; }

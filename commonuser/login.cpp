@@ -1,5 +1,6 @@
 #include "login.h"
 #include "ui_login.h"
+#include "user_register.h"
 #include<QMessageBox>
 int doctor_check=0;
 login::login(QWidget *parent) :
@@ -39,8 +40,10 @@ void login::on_password_textEdited(const QString &arg1)
 
 
 
-void login::on_checkBox_stateChanged(int arg1)
+
+void login::on_pushButton_2_clicked()
 {
-    doctor_check=1-doctor_check;
+    user_register *me=new user_register;
+    me->show();
 }
 

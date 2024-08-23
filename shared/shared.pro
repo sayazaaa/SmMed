@@ -1,5 +1,4 @@
-QT += core gui
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+QT += core network widgets
 
 TEMPLATE = lib
 DEFINES += SHARED_LIBRARY
@@ -14,7 +13,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 INCLUDEPATH +=  include \
                 /usr/include/mysql  \
                 /usr/include/botan-2 \
-                /usr/include/botan
+                /usr/include/botan \
+                /usr/include/c++/9 \
+                /usr/include/c++/7
 
 # You can also make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -25,8 +26,8 @@ SOURCES +=  shared.cpp \
             src/StringFactory.cpp
 HEADERS +=  shared.h \
             include/StringFactory.h \
-            shared_global.h \
-            $$files(include/*.h)
+            $$files(include/*.h) \
+            sharedglobal.h
 
 # Default rules for deployment.
 unix {
@@ -35,5 +36,12 @@ unix {
 !isEmpty(target.path): INSTALLS += target
 
 unix|win32: LIBS += -lmysqlpp
+
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../dataclass/release/ -ldataclass
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../dataclass/debug/ -ldataclass
+else:unix: LIBS += -L$$OUT_PWD/../dataclass/ -ldataclass
+
+INCLUDEPATH += $$PWD/../dataclass
+DEPENDPATH += $$PWD/../dataclass
 
 unix|win32: LIBS += -lbotan-2

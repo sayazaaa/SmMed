@@ -6,17 +6,18 @@
 #include <QSystemTrayIcon>
 #include <QCloseEvent>
 #include <QMenu>
-#include <QAction>
 #include<QTimer>
 #include<QDateTime>
 //自定义弹窗
 #include "mymessagebox.h"
+#include "framelesswidget.h"
+#include"information.h"
 
 namespace Ui {
 class Widget;
 }
 
-class Widget : public QWidget
+class Widget : public FramelessWidget
 {
     Q_OBJECT
 
@@ -59,7 +60,7 @@ private slots:
 
     void on_btn_menu_item_4_clicked();
 
-    void on_btn_menu_item_6_clicked();
+    void on_btn_menu_item_5_clicked();
 
 private:
     Ui::Widget *ui;
@@ -79,5 +80,7 @@ private:
     void initMember();      //成员变量初始化函数
     void littleShow();      //最小化显示函数
 };
+
+QString convertDayToChinese(const QString& day);
 
 #endif // WIDGET_H

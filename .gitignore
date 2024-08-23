@@ -53,6 +53,6 @@ compile_commands.json
 
 *_qmlcache.qrc
 
-*/build/*
+**/build/*
 .DS_Store
-*/.vscode/**
+.vscode/*

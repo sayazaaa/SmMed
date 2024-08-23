@@ -26,6 +26,9 @@ win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../shared/release/ -ls
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../shared/debug/ -lshared
 else:unix: LIBS += -L$$OUT_PWD/../shared/ -lshared
 
-INCLUDEPATH += $$PWD/../shared
-DEPENDPATH += $$PWD/../shared
+INCLUDEPATH += $$PWD/../shared \
+DEPENDPATH += $$PWD/../shared \
+
+QMAKE_RPATHDIR += $$OUT_PWD/../shared
+QMAKE_RPATHDIR += $$OUT_PWD/../dataclass
 
