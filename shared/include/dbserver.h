@@ -21,11 +21,16 @@ public:
     /****************************************************/
     QSharedPointer<QJsonDocument> set_userpassword(QString id , QString password);
     QSharedPointer<QJsonDocument> verify_userpassword(QString id, QString password);
-    QSharedPointer<QJsonDocument> set_docpassword(QString id, QString password);
-    QSharedPointer<QJsonDocument> verify_docpassword(QString id, QString password);
-    QSharedPointer<QJsonDocument> store_file(QByteArray& file);
+    QSharedPointer<QJsonDocument> set_doctorpassword(QString id, QString password);
+    QSharedPointer<QJsonDocument> verify_doctorpassword(QString id, QString password);
+    QSharedPointer<QJsonDocument> store_file(QString doctorname, QString patient, QString oname, QByteArray& file);
+    QSharedPointer<QJsonDocument> query_doctorinfo(QString id);
+    QSharedPointer<QJsonDocument> query_userinfo(QString id);
+    QSharedPointer<QJsonDocument> query_patientinfo(QString id);
+    QSharedPointer<QJsonDocument> list_doctorinfo(unsigned int officeid);
+//    QSharedPointer<QJsonDocument>
     /****************************************************/
-    void sqlquery(QString *sql, QJsonDocument res, int col);
+    void sqlquery(std::string * sql, QSharedPointer<QJsonDocument> &res);
     bool store_message(QString fromid, QString toid, QString text);
 protected:
     virtual mysqlpp::Connection* create();

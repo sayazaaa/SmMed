@@ -1,4 +1,5 @@
-QT += core
+QT += core gui
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TEMPLATE = lib
 DEFINES += SHARED_LIBRARY
@@ -10,17 +11,20 @@ CONFIG += c++11
 # depend on your compiler). Please consult the documentation of the
 # deprecated API in order to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
-INCLUDEPATH += include \
-                /usr/include/mysql \
-                /usr/include/c++/7
+INCLUDEPATH +=  include \
+                /usr/include/mysql  \
+                /usr/include/botan-2 \
+                /usr/include/botan
 
 # You can also make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 SOURCES +=  shared.cpp \
-            $$files(src/*.cpp)
+            $$files(src/*.cpp) \
+            src/StringFactory.cpp
 HEADERS +=  shared.h \
+            include/StringFactory.h \
             shared_global.h \
             $$files(include/*.h)
 
@@ -31,3 +35,5 @@ unix {
 !isEmpty(target.path): INSTALLS += target
 
 unix|win32: LIBS += -lmysqlpp
+
+unix|win32: LIBS += -lbotan-2
