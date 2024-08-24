@@ -110,12 +110,83 @@ void Widget::changeMboxReturn(int num)
 
 void Widget::on_btn_main_item_1_clicked()
 {
+    //显示page
     ui->sw_main->setCurrentIndex(2*choice_state-1);
+    //预约挂号
+    if(choice_state == 2)
+    {
+        //填写日期
+        ui->date_3->setDisplayFormat("yyyy/MM/dd");
+        ui->date_3->setDate(QDate::currentDate());
+        ui->date_3->setMinimumDate(QDate::currentDate());
+        ui->date_3->setMaximumDate(QDate::currentDate().addDays(10));
+        ui->date_3->setCalendarPopup(true);
+
+        //填写表格
+        //设置表头内容
+        QStringList header;
+        header<<"医生姓名"<<"性别"<<"科室"<<"预约";
+        ui->table_3->setHorizontalHeaderLabels(header);
+
+        //设置表头充满表格的宽度
+        ui->table_3->horizontalHeader()->setStretchLastSection(true);
+
+        //设置表格内容不可编辑
+        ui->table_3->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+        //get data
+        QString data = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+        //添加数据
+        for (int row = 0; row < 15; ++row) {
+            for (int column = 0; column < 4; ++column) {
+                QTableWidgetItem *item = new QTableWidgetItem(data.mid(row+column,1));
+                printf("%d %d",row,column);
+                ui->table_3->setItem(row, column, item);
+            }
+        }
+
+    }
 }
 
 void Widget::on_btn_main_item_2_clicked()
 {
     ui->sw_main->setCurrentIndex(2*choice_state);
+
+    //我的预约
+    if(choice_state == 2)
+    {
+        //填写日期
+        ui->date_3->setDisplayFormat("yyyy/MM/dd");
+        ui->date_3->setDate(QDate::currentDate());
+        ui->date_3->setCalendarPopup(true);
+
+        //填写表格
+        //设置表头内容
+        QStringList header;
+        header<<"患者姓名"<<"性别"<<"科室"<<"医生"<<"预约日期"<<"预约时段"<<"当日预约号码"<<"诊断状态"<<"诊断结果";
+        ui->table_3->setHorizontalHeaderLabels(header);
+
+        //设置表头充满表格的宽度
+        ui->table_3->horizontalHeader()->setStretchLastSection(true);
+
+        //设置表格内容不可编辑
+        ui->table_3->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+        //get data
+        QString data = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+        //添加数据
+        for (int row = 0; row < 15; ++row) {
+            for (int column = 0; column < 4; ++column) {
+                QTableWidgetItem *item = new QTableWidgetItem(data.mid(row+column,1));
+                printf("%d %d",row,column);
+                ui->table_3->setItem(row, column, item);
+            }
+        }
+
+    }
+
 }
 
 void Widget::on_btn_main_item_3_clicked()
@@ -150,15 +221,7 @@ void Widget::on_btn_mine_clicked()
 }
 
 
-void Widget::on_btn_menu_item_1_clicked()
-{
-    choice_state=1;
-    btn_hide();
-    ui->btn_main_item_1->setText("最近一年");
-    ui->btn_main_item_2->setText("更早");
-    ui->btn_main_item_1->show();
-    ui->btn_main_item_2->show();
-}
+
 
 void Widget::timerUpdate(void)
 {
@@ -183,20 +246,33 @@ void Widget::btn_hide()
     ui->btn_main_item_4->hide();
 }
 
-void Widget::on_btn_menu_item_3_clicked()
+void Widget::on_btn_menu_item_1_clicked()
+{
+    choice_state=1;
+    ui->sw_main->setCurrentIndex(0);
+    btn_hide();
+    ui->btn_main_item_1->setText("最近一年");
+    ui->btn_main_item_2->setText("更早");
+    ui->btn_main_item_1->show();
+    ui->btn_main_item_2->show();
+}
+
+void Widget::on_btn_menu_item_2_clicked()
 {
     choice_state=2;
+    ui->sw_main->setCurrentIndex(0);
     btn_hide();
-    ui->btn_main_item_1->setText("挂号预约");
-    ui->btn_main_item_2->setText("预约信息");
+    ui->btn_main_item_1->setText("预约挂号");
+    ui->btn_main_item_2->setText("我的预约");
     ui->btn_main_item_1->show();
     ui->btn_main_item_2->show();
 }
 
 
-void Widget::on_btn_menu_item_2_clicked()
+void Widget::on_btn_menu_item_3_clicked()
 {
     choice_state=3;
+    ui->sw_main->setCurrentIndex(0);
     btn_hide();
     ui->btn_main_item_1->setText("当日在班医生");
     ui->btn_main_item_2->setText("本周可预约医生");
@@ -208,9 +284,20 @@ void Widget::on_btn_menu_item_2_clicked()
 void Widget::on_btn_menu_item_4_clicked()
 {
     choice_state=4;
+    ui->sw_main->setCurrentIndex(0);
     btn_hide();
     ui->btn_main_item_1->setText("医生列表");
     ui->btn_main_item_2->setText("询问历史");
+    ui->btn_main_item_1->show();
+    ui->btn_main_item_2->show();
+}
+void Widget::on_btn_menu_item_5_clicked()
+{
+    choice_state=5;
+    ui->sw_main->setCurrentIndex(0);
+    btn_hide();
+    ui->btn_main_item_1->setText("健康评估");
+    ui->btn_main_item_2->setText("评估历史");
     ui->btn_main_item_1->show();
     ui->btn_main_item_2->show();
 }
@@ -218,7 +305,8 @@ void Widget::on_btn_menu_item_4_clicked()
 
 void Widget::on_btn_menu_item_6_clicked()
 {
-    choice_state=5;
+    choice_state=6;
+    ui->sw_main->setCurrentIndex(0);
     btn_hide();
     ui->btn_main_item_1->setText("研发人员");
     ui->btn_main_item_2->setText("意见反馈");
@@ -226,5 +314,104 @@ void Widget::on_btn_menu_item_6_clicked()
     ui->btn_main_item_1->show();
     ui->btn_main_item_2->show();
     ui->btn_main_item_3->show();
+}
+
+
+
+
+
+void Widget::on_combo_depart_3_activated(const QString &department)
+{
+    int rC = ui->table_3->rowCount();//获得行数
+    if ("all" == department)
+    {
+        //显示所有行
+        for (int i = 0; i < rC; i++) {
+            ui->table_3->setRowHidden(i, false);
+        }
+    }
+    else
+    {
+        //获取符合条件的cell索引
+        QList <QTableWidgetItem *> item = ui->table_3->findItems(department, Qt::MatchContains);
+//        QDate selected_date = ui->date_3->date();
+//        QList <QTableWidgetItem *> item2 = ui->table_3->findItems(selected_date.toString(), Qt::MatchContains);
+//        QList <QTableWidgetItem *> items = item.toSet().intersect(item2.toSet()).toList();
+        //隐藏所有行
+        for (int i = 0; i < rC; i++)
+        {
+            ui->table_3->setRowHidden(i, true);
+        }
+        //显示符合条件行
+        if (!item.isEmpty() )
+        {
+            for (int i = 0; i < item.count(); i++)
+            {
+                ui->table_3->setRowHidden(item.at(i)->row(),false);
+            }
+        }
+    }
+}
+
+
+
+void Widget::on_date_3_userDateChanged(const QDate &date)
+{
+    int rC = ui->table_3->rowCount();//获得行数
+    if ("" == date.toString())
+    {
+        //显示所有行
+        for (int i = 0; i < rC; i++) {
+            ui->table_3->setRowHidden(i, false);
+        }
+    }
+    else
+    {
+        //隐藏所有行
+        for (int i = 0; i < rC; i++)
+        {
+            ui->table_3->setRowHidden(i, true);
+        }
+        //获取符合条件的cell索引
+        QList <QTableWidgetItem *> item = ui->table_3->findItems(date.toString(), Qt::MatchContains);
+        QString selectedDepartment = ui->combo_depart_3->currentData().toString();
+        if(selectedDepartment == "all")
+        {
+            QList <QTableWidgetItem *> items = item;
+            //显示符合条件行
+            if (!items.isEmpty() )
+            {
+                for (int i = 0; i < items.count(); i++)
+                {
+                    ui->table_3->setRowHidden(items.at(i)->row(),false);
+                }
+            }
+        }
+        else
+        {
+            QList <QTableWidgetItem *> item2 = ui->table_3->findItems(selectedDepartment, Qt::MatchContains);
+            QList <QTableWidgetItem *> items = item.toSet().intersect(item2.toSet()).toList();
+            //显示符合条件行
+            if (!items.isEmpty() )
+            {
+                for (int i = 0; i < items.count(); i++)
+                {
+                    ui->table_3->setRowHidden(items.at(i)->row(),false);
+                }
+            }
+        }
+    }
+}
+
+
+void Widget::on_table_3_cellClicked(int row, int column)
+{
+    if(column == 3)
+    {
+        Widget *w=new Widget;
+        w->show();
+        //添加预约
+
+    }
 }
 

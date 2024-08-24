@@ -18,6 +18,15 @@ login::~login()
 
 void login::on_pushButton_clicked()
 {
+
+
+    //test
+    this->close();
+    Widget *w=new Widget;
+    w->show();
+
+
+
     if(ui->username->text() == "admin" && ui->password->text() == "114514"){
         this->close();
         Widget *w=new Widget;

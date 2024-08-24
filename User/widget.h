@@ -45,13 +45,13 @@ private slots:
 
     void on_btn_mine_clicked();
 
-    void on_btn_menu_item_1_clicked();
-
     void timerUpdate(void);
 
     void on_btn_home_clicked();
 
     void btn_hide();
+
+    void on_btn_menu_item_1_clicked();
 
     void on_btn_menu_item_3_clicked();
 
@@ -59,7 +59,16 @@ private slots:
 
     void on_btn_menu_item_4_clicked();
 
+    void on_btn_menu_item_5_clicked();
+
     void on_btn_menu_item_6_clicked();
+
+
+    void on_combo_depart_3_activated(const QString &arg1);
+
+    void on_table_3_cellClicked(int row, int column);
+
+    void on_date_3_userDateChanged(const QDate &date);
 
 private:
     Ui::Widget *ui;
