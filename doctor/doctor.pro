@@ -1,6 +1,7 @@
-QT       += core gui
+QT       += core gui network widgets
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+TEMPLATE = app
+TARGET = doctor
 
 CONFIG += c++11
 
@@ -29,3 +30,25 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+
+
+
+unix:!macx: LIBS += -L$$OUT_PWD/../dataclass/ -ldataclass
+
+INCLUDEPATH += $$PWD/../dataclass
+DEPENDPATH += $$PWD/../dataclass
+
+
+
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../shared/release/ -lshared
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../shared/debug/ -lshared
+else:unix: LIBS += -L$$OUT_PWD/../shared/ -lshared
+
+INCLUDEPATH += $$PWD/../shared
+DEPENDPATH += $$PWD/../shared
+
+unix:!macx: LIBS += -L$$OUT_PWD/../shared/ -lshared
+
+INCLUDEPATH += $$PWD/../shared/include
+DEPENDPATH += $$PWD/../shared/include

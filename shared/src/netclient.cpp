@@ -1,6 +1,6 @@
 #include "netclient.h"
 
-
+#include <QDebug>
 NetClient::NetClient() {
     manager = QSharedPointer<QNetworkAccessManager>::create();
 }
@@ -15,6 +15,7 @@ void NetClient::send_post_request(const QUrl& url, const QJsonObject& json) cons
     QNetworkRequest request(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
     QNetworkReply* reply = manager->post(request, QJsonDocument(json).toJson());
+    qDebug() << "sendpostrequest : " << url;
     connect(reply, &QNetworkReply::finished, this, &NetClient::handle_reply_json);
 }
 
@@ -36,6 +37,7 @@ void NetClient::handle_reply_json() {
     QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
     if (reply) {
         if (reply->error() == QNetworkReply::NoError) {
+            qDebug() << "handle reply json";
             QByteArray response = reply->readAll();
             QJsonDocument jsonDoc = QJsonDocument::fromJson(response);
             if (jsonDoc.isObject()) {

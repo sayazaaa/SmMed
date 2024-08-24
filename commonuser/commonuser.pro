@@ -4,13 +4,16 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
+CONFIG += c++9
+
+
 RC_ICONS = logo.ico
 
-TARGET = PeachDemo
+TARGET = commonuser
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -25,31 +28,35 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 
-SOURCES += \
-    aboutjson.cpp \
-    framelesswidget.cpp \
-    information.cpp \
-    login.cpp \
-        main.cpp \
-    user_register.cpp \
-        widget.cpp \
-    mymessagebox.cpp
+SOURCES += $$files(./*.cpp)
 
-HEADERS += \
-    aboutjson.h \
-    framelesswidget.h \
-    information.h \
-    login.h \
-    user_register.h \
-        widget.h \
-    mymessagebox.h
+HEADERS += $$files(./*.h)
 
-FORMS += \
-    information.ui \
-    login.ui \
-    user_register.ui \
-        widget.ui \
-    mymessagebox.ui
+FORMS += $$files(./*.ui)
+
+INCLUDEPATH += $$PWD
+
+qnx: target.path = /tmp/$${TARGET}/bin
+else: unix:!android: target.path = /opt/$${TARGET}/bin
+!isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
     qss.qrc
+
+unix:!macx: LIBS += -L$$OUT_PWD/../dataclass/ -ldataclass
+
+INCLUDEPATH += $$PWD/../dataclass
+DEPENDPATH += $$PWD/../dataclass
+
+
+
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../shared/release/ -lshared
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../shared/debug/ -lshared
+else:unix: LIBS += -L$$OUT_PWD/../shared/ -lshared
+
+INCLUDEPATH += $$PWD/../shared/include/ \
+                $$PWD/../shared/
+DEPENDPATH += $$PWD/../shared/include/ \
+                $$PWD/../shared/
+
+
