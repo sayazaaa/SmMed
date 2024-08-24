@@ -2,6 +2,8 @@
 #define USER_REGISTER_H
 
 #include <QDialog>
+
+#include "sharedglobal.h"
 #include "netclient.h"
 #include "netloader.h"
 
