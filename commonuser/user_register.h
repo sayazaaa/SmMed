@@ -3,9 +3,9 @@
 
 #include <QDialog>
 
-#include "sharedglobal.h"
-#include "netclient.h"
-#include "netloader.h"
+//#include "sharedglobal.h"
+//#include "netclient.h"
+//#include "netloader.h"
 
 namespace Ui {
 class user_register;
