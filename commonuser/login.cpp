@@ -26,6 +26,8 @@ void login::on_pushButton_clicked()
     Widget *w=new Widget;
     w->show();
 
+//    little_appointment *aaa=new little_appointment;
+//    aaa->show();
 
 
     if(ui->username->text() == "admin" && ui->password->text() == "114514"){

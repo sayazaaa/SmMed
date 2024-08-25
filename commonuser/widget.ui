@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1133</width>
-    <height>687</height>
+    <height>739</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -24,7 +24,7 @@
   </property>
   <property name="maximumSize">
    <size>
-    <width>1133</width>
+    <width>16777215</width>
     <height>16777215</height>
    </size>
   </property>
@@ -935,301 +935,390 @@
             </layout>
            </widget>
            <widget class="QWidget" name="page_3">
-            <widget class="QTableWidget" name="table_3">
-             <property name="geometry">
-              <rect>
-               <x>10</x>
-               <y>70</y>
-               <width>821</width>
-               <height>531</height>
-              </rect>
-             </property>
-             <property name="rowCount">
-              <number>15</number>
-             </property>
-             <property name="columnCount">
-              <number>4</number>
-             </property>
-             <row/>
-             <row/>
-             <row/>
-             <row/>
-             <row/>
-             <row/>
-             <row/>
-             <row/>
-             <row/>
-             <row/>
-             <row/>
-             <row/>
-             <row/>
-             <row/>
-             <row/>
-             <column/>
-             <column/>
-             <column/>
-             <column/>
-            </widget>
-            <widget class="QComboBox" name="combo_depart_3">
-             <property name="geometry">
-              <rect>
-               <x>130</x>
-               <y>10</y>
-               <width>101</width>
-               <height>41</height>
-              </rect>
-             </property>
+            <layout class="QVBoxLayout" name="verticalLayout_3" stretch="2,7,2">
              <item>
-              <property name="text">
-               <string>naoke</string>
-              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_7">
+               <item>
+                <widget class="QLabel" name="label_depart_3">
+                 <property name="text">
+                  <string>请选择科室</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="combo_depart_3">
+                 <item>
+                  <property name="text">
+                   <string>naoke</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>a</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>M</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>c</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>all</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>耳鼻喉科</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>bilibili</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>黑神话科</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_date_3">
+                 <property name="text">
+                  <string>请选择预约日期</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDateEdit" name="date_3"/>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_docname_3">
+                 <property name="text">
+                  <string>查询医生姓名</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLineEdit" name="lineEdit_docname_3"/>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_doc_gender_3">
+                 <property name="text">
+                  <string>选择医生性别</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="combo_gender_3">
+                 <item>
+                  <property name="text">
+                   <string>全部</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>男</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>女</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="btn_confirm_3">
+                 <property name="text">
+                  <string>确认</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
              <item>
-              <property name="text">
-               <string>a</string>
-              </property>
+              <widget class="adjustedListWidget" name="listWidget_3"/>
              </item>
              <item>
-              <property name="text">
-               <string>M</string>
-              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_6">
+               <item>
+                <widget class="QLabel" name="label_data_num_text_3">
+                 <property name="text">
+                  <string>共有996项数据</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_3">
+                 <item>
+                  <widget class="QPushButton" name="btn_page_left_3">
+                   <property name="text">
+                    <string>&lt;</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btn_page_1_3">
+                   <property name="text">
+                    <string>1</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btn_page_2_3">
+                   <property name="text">
+                    <string>...</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btn_page_now_3">
+                   <property name="text">
+                    <string>5</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btn_page_3_3">
+                   <property name="text">
+                    <string>...</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btn_page_4_3">
+                   <property name="text">
+                    <string>98</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btn_page_right_3">
+                   <property name="text">
+                    <string>&gt;</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
              </item>
-             <item>
-              <property name="text">
-               <string>c</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>all</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>耳鼻喉科</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>bilibili</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>黑神话科</string>
-              </property>
-             </item>
-            </widget>
-            <widget class="QLabel" name="label_depart_3">
-             <property name="geometry">
-              <rect>
-               <x>30</x>
-               <y>10</y>
-               <width>121</width>
-               <height>41</height>
-              </rect>
-             </property>
-             <property name="text">
-              <string>请选择科室</string>
-             </property>
-            </widget>
-            <widget class="QLabel" name="label_date_3">
-             <property name="geometry">
-              <rect>
-               <x>270</x>
-               <y>20</y>
-               <width>111</width>
-               <height>23</height>
-              </rect>
-             </property>
-             <property name="text">
-              <string>请选择预约日期</string>
-             </property>
-            </widget>
-            <widget class="QDateEdit" name="date_3">
-             <property name="geometry">
-              <rect>
-               <x>400</x>
-               <y>20</y>
-               <width>110</width>
-               <height>26</height>
-              </rect>
-             </property>
-            </widget>
-            <widget class="QLabel" name="label_time_3">
-             <property name="geometry">
-              <rect>
-               <x>540</x>
-               <y>20</y>
-               <width>111</width>
-               <height>23</height>
-              </rect>
-             </property>
-             <property name="text">
-              <string>请选择预约时段</string>
-             </property>
-            </widget>
-            <widget class="QComboBox" name="combo_time_3">
-             <property name="geometry">
-              <rect>
-               <x>670</x>
-               <y>20</y>
-               <width>86</width>
-               <height>25</height>
-              </rect>
-             </property>
-             <item>
-              <property name="text">
-               <string>上午</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>下午</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>晚上</string>
-              </property>
-             </item>
-            </widget>
+            </layout>
            </widget>
            <widget class="QWidget" name="page_4">
-            <widget class="QTableWidget" name="table_4">
-             <property name="geometry">
-              <rect>
-               <x>10</x>
-               <y>70</y>
-               <width>811</width>
-               <height>511</height>
-              </rect>
-             </property>
-            </widget>
-            <widget class="QComboBox" name="combo_time_4">
-             <property name="geometry">
-              <rect>
-               <x>680</x>
-               <y>10</y>
-               <width>86</width>
-               <height>25</height>
-              </rect>
-             </property>
+            <layout class="QVBoxLayout" name="verticalLayout_7" stretch="2,7,2">
              <item>
-              <property name="text">
-               <string>上午</string>
-              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_10">
+               <item>
+                <widget class="QLabel" name="label_depart_4">
+                 <property name="text">
+                  <string>请选择科室</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="combo_depart_4">
+                 <item>
+                  <property name="text">
+                   <string>naoke</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>a</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>M</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>c</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>all</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>耳鼻喉科</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>bilibili</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>黑神话科</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_date_4">
+                 <property name="text">
+                  <string>请选择预约日期</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDateEdit" name="date_4"/>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_docname_4">
+                 <property name="text">
+                  <string>查询医生姓名</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLineEdit" name="lineEdit_docname_4"/>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_doc_gender_4">
+                 <property name="text">
+                  <string>选择医生性别</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="combo_gender_4">
+                 <item>
+                  <property name="text">
+                   <string>全部</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>男</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>女</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="btn_confirm_4">
+                 <property name="text">
+                  <string>确认</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
              <item>
-              <property name="text">
-               <string>下午</string>
-              </property>
+              <widget class="QListWidget" name="listWidget_4"/>
              </item>
              <item>
-              <property name="text">
-               <string>晚上</string>
-              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_8">
+               <item>
+                <widget class="QLabel" name="label_data_num_text_4">
+                 <property name="text">
+                  <string>共有996项数据</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_9">
+                 <item>
+                  <widget class="QPushButton" name="btn_page_left_4">
+                   <property name="text">
+                    <string>&lt;</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btn_page_1_4">
+                   <property name="text">
+                    <string>1</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btn_page_2_4">
+                   <property name="text">
+                    <string>...</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btn_page_3_4">
+                   <property name="text">
+                    <string>3</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btn_page_4_4">
+                   <property name="text">
+                    <string>4</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btn_page_5_4">
+                   <property name="text">
+                    <string>5</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btn_page_6_4">
+                   <property name="text">
+                    <string>6</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btn_page_7_4">
+                   <property name="text">
+                    <string>7</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btn_page_8_4">
+                   <property name="text">
+                    <string>...</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btn_page_9_4">
+                   <property name="text">
+                    <string>98</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btn_page_right_4">
+                   <property name="text">
+                    <string>&gt;</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
              </item>
-            </widget>
-            <widget class="QDateEdit" name="date_4">
-             <property name="geometry">
-              <rect>
-               <x>410</x>
-               <y>10</y>
-               <width>110</width>
-               <height>26</height>
-              </rect>
-             </property>
-            </widget>
-            <widget class="QLabel" name="label_date_4">
-             <property name="geometry">
-              <rect>
-               <x>280</x>
-               <y>10</y>
-               <width>111</width>
-               <height>23</height>
-              </rect>
-             </property>
-             <property name="text">
-              <string>请选择预约日期</string>
-             </property>
-            </widget>
-            <widget class="QLabel" name="label_depart_4">
-             <property name="geometry">
-              <rect>
-               <x>40</x>
-               <y>0</y>
-               <width>121</width>
-               <height>41</height>
-              </rect>
-             </property>
-             <property name="text">
-              <string>请选择科室</string>
-             </property>
-            </widget>
-            <widget class="QComboBox" name="combo_depart_4">
-             <property name="geometry">
-              <rect>
-               <x>140</x>
-               <y>0</y>
-               <width>101</width>
-               <height>41</height>
-              </rect>
-             </property>
-             <item>
-              <property name="text">
-               <string>naoke</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>a</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>M</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>c</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>all</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>耳鼻喉科</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>bilibili</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>黑神话科</string>
-              </property>
-             </item>
-            </widget>
-            <widget class="QLabel" name="label_time_4">
-             <property name="geometry">
-              <rect>
-               <x>550</x>
-               <y>10</y>
-               <width>111</width>
-               <height>23</height>
-              </rect>
-             </property>
-             <property name="text">
-              <string>请选择预约时段</string>
-             </property>
-            </widget>
+            </layout>
            </widget>
            <widget class="QWidget" name="page_5">
             <property name="minimumSize">
@@ -1362,6 +1451,13 @@
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>adjustedListWidget</class>
+   <extends>QListWidget</extends>
+   <header>adjustedlistwidget.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="qss.qrc"/>
  </resources>

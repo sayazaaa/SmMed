@@ -119,9 +119,9 @@
   <widget class="QLabel" name="label_doc_gender">
    <property name="geometry">
     <rect>
-     <x>190</x>
+     <x>170</x>
      <y>140</y>
-     <width>111</width>
+     <width>41</width>
      <height>31</height>
     </rect>
    </property>
@@ -205,19 +205,32 @@
    </property>
    <item>
     <property name="text">
-     <string>上午</string>
+     <string>小明</string>
     </property>
    </item>
    <item>
     <property name="text">
-     <string>下午</string>
+     <string>西</string>
     </property>
    </item>
    <item>
     <property name="text">
-     <string>晚上</string>
+     <string>哈哈哈</string>
     </property>
    </item>
+  </widget>
+  <widget class="QPushButton" name="Btn_add_user">
+   <property name="geometry">
+    <rect>
+     <x>360</x>
+     <y>300</y>
+     <width>89</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>添加就诊人</string>
+   </property>
   </widget>
  </widget>
  <resources/>
