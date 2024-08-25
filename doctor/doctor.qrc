@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icons/add_link.svg</file>
+        <file>icons/add_photo.svg</file>
+        <file>icons/format_bold.svg</file>
+        <file>icons/format_italic.svg</file>
+        <file>icons/format_strikethrough.svg</file>
+        <file>icons/format_underlined.svg</file>
+        <file>icons/redo.svg</file>
+        <file>icons/text_decrease.svg</file>
+        <file>icons/text_increase.svg</file>
+        <file>icons/undo.svg</file>
+    </qresource>
+</RCC>
