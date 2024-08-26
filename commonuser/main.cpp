@@ -3,6 +3,7 @@
 #include <QApplication>
 #include <QFile>
 #include <QFont>
+#include "chat_box.h"
 
 int main(int argc, char *argv[])
 {
@@ -20,6 +21,8 @@ int main(int argc, char *argv[])
     QFont font("Arial", 10);
     a.setFont(font);
 
+    chat_box *p = new chat_box;
+    p->show();
     login *l=new login;
     l->show();
     return a.exec();

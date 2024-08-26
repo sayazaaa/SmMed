@@ -371,7 +371,7 @@ void Widget::btn_hide()
 void Widget::on_btn_menu_item_1_clicked()
 {
     choice_state=1;
-    ui->sw_main->setCurrentIndex(0);
+    ui->sw_main->setCurrentIndex(1);
     btn_hide();
     ui->btn_main_item_1->setText("最近一年");
     ui->btn_main_item_2->setText("更早");
@@ -382,7 +382,7 @@ void Widget::on_btn_menu_item_1_clicked()
 void Widget::on_btn_menu_item_2_clicked()
 {
     choice_state=2;
-    ui->sw_main->setCurrentIndex(0);
+    ui->sw_main->setCurrentIndex(3);
     btn_hide();
     ui->btn_main_item_1->setText("预约挂号");
     ui->btn_main_item_2->setText("我的预约");
@@ -393,7 +393,7 @@ void Widget::on_btn_menu_item_2_clicked()
 void Widget::on_btn_menu_item_3_clicked()
 {
     choice_state=3;
-    ui->sw_main->setCurrentIndex(0);
+    ui->sw_main->setCurrentIndex(5);
     btn_hide();
     ui->btn_main_item_1->setText("当日在班医生");
     ui->btn_main_item_2->setText("本周可预约医生");
@@ -404,7 +404,7 @@ void Widget::on_btn_menu_item_3_clicked()
 void Widget::on_btn_menu_item_4_clicked()
 {
     choice_state=4;
-    ui->sw_main->setCurrentIndex(0);
+    ui->sw_main->setCurrentIndex(7);
     btn_hide();
     ui->btn_main_item_1->setText("医生列表");
     ui->btn_main_item_2->setText("询问历史");
@@ -415,7 +415,7 @@ void Widget::on_btn_menu_item_4_clicked()
 void Widget::on_btn_menu_item_5_clicked()
 {
     choice_state=5;
-    ui->sw_main->setCurrentIndex(0);
+    ui->sw_main->setCurrentIndex(9);
     btn_hide();
     ui->btn_main_item_1->setText("健康评估");
     ui->btn_main_item_2->setText("评估历史");
@@ -426,7 +426,7 @@ void Widget::on_btn_menu_item_5_clicked()
 void Widget::on_btn_menu_item_6_clicked()
 {
     choice_state=6;
-    ui->sw_main->setCurrentIndex(0);
+    ui->sw_main->setCurrentIndex(11);
     btn_hide();
     ui->btn_main_item_1->setText("研发人员");
     ui->btn_main_item_2->setText("意见反馈");
