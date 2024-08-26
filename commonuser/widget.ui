@@ -463,13 +463,13 @@
              </item>
             </layout>
            </widget>
-           <widget class="QWidget" name="layoutWidget">
+           <widget class="QWidget" name="">
             <property name="geometry">
              <rect>
               <x>0</x>
-              <y>40</y>
+              <y>30</y>
               <width>224</width>
-              <height>148</height>
+              <height>224</height>
              </rect>
             </property>
             <layout class="QGridLayout" name="gridLayout">
@@ -632,7 +632,7 @@
                 <cursorShape>PointingHandCursor</cursorShape>
                </property>
                <property name="text">
-                <string>健康评估</string>
+                <string>治乎</string>
                </property>
                <property name="icon">
                 <iconset resource="qss.qrc">
@@ -666,6 +666,40 @@
                 <cursorShape>PointingHandCursor</cursorShape>
                </property>
                <property name="text">
+                <string>健康评估</string>
+               </property>
+               <property name="icon">
+                <iconset resource="qss.qrc">
+                 <normaloff>:/icons/check.png</normaloff>:/icons/check.png</iconset>
+               </property>
+               <property name="toolButtonStyle">
+                <enum>Qt::ToolButtonTextUnderIcon</enum>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QToolButton" name="btn_menu_item_7">
+               <property name="minimumSize">
+                <size>
+                 <width>70</width>
+                 <height>70</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>70</width>
+                 <height>70</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>7</pointsize>
+                </font>
+               </property>
+               <property name="cursor">
+                <cursorShape>PointingHandCursor</cursorShape>
+               </property>
+               <property name="text">
                 <string>关于我们</string>
                </property>
                <property name="toolButtonStyle">
@@ -678,6 +712,7 @@
            <zorder>layoutWidget</zorder>
            <zorder>layoutWidget</zorder>
            <zorder>lab_title</zorder>
+           <zorder>btn_menu_item_6</zorder>
           </widget>
          </item>
         </layout>
@@ -850,7 +885,7 @@
          <item>
           <widget class="QStackedWidget" name="sw_main">
            <property name="currentIndex">
-            <number>11</number>
+            <number>1</number>
            </property>
            <widget class="QWidget" name="page_0">
             <widget class="QWidget" name="layoutWidget">
@@ -1710,19 +1745,25 @@
             </layout>
            </widget>
            <widget class="QWidget" name="page_9">
-            <widget class="QLabel" name="label_7">
-             <property name="geometry">
-              <rect>
-               <x>20</x>
-               <y>30</y>
-               <width>711</width>
-               <height>451</height>
-              </rect>
-             </property>
-             <property name="text">
-              <string>999999999999999健康评估</string>
-             </property>
-            </widget>
+            <layout class="QVBoxLayout" name="verticalLayout_14">
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_18">
+               <item>
+                <widget class="QLineEdit" name="lineEdit_search_9"/>
+               </item>
+               <item>
+                <widget class="QPushButton" name="btn_search_9">
+                 <property name="text">
+                  <string>搜索</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="zhihuListWidget" name="listWidget_9"/>
+             </item>
+            </layout>
            </widget>
            <widget class="QWidget" name="page_10">
             <widget class="QLabel" name="label_8">
@@ -1779,6 +1820,11 @@
    <extends>QWidget</extends>
    <header>chat_box.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>zhihuListWidget</class>
+   <extends>QListWidget</extends>
+   <header>zhihulistwidget.h</header>
   </customwidget>
  </customwidgets>
  <resources>
