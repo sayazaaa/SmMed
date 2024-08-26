@@ -25,6 +25,8 @@
 #include <QNetworkRequest>
 #include <QNetworkReply>
 #include <QTextDocumentWriter>
+#include <QInputDialog>
+#include <QTextDocumentFragment>
 
 #define FONT_SIZE 16
 
@@ -65,6 +67,7 @@ private:
     QAction *decreaseTextSizeAction;
     QAction *undoAction;
     QAction *redoAction;
+    QAction *insertTableAction;
     QAction *insertImageAction;
     QAction *saveAction;
 

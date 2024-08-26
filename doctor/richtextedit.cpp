@@ -1,4 +1,5 @@
 #include "richtextedit.h"
+#include "tabletoolbarpopup.h"
 
 #include<qdebug.h>
 RichTextEdit::RichTextEdit(QWidget* parent) {
@@ -192,6 +193,29 @@ void RichTextEdit::addToolBarActions() {
         textEdit->redo();
         });
 
+    insertTableAction = toolBar->addAction(QIcon(":/icons/table.svg"), "插入表格", [this]() {
+        // TableToolBarPopup* popup = new TableToolBarPopup(this);
+        // connect(popup, &TableToolBarPopup::accepted, [this, popup]() {
+        //     int rows = popup->rows();
+        //     int columns = popup->columns();
+        //     QTextCursor cursor = textEdit->textCursor();
+        //     cursor.insertTable(rows, columns);
+        //     popup->deleteLater();
+        //     });
+        // connect(popup, &TableToolBarPopup::rejected, [popup]() {
+        //     popup->deleteLater();
+        //     });
+
+        // // 显示弹出框
+        // popup->setWindowFlags(Qt::Popup);
+        // popup->setAttribute(Qt::WA_DeleteOnClose);
+        // popup->move(QCursor::pos());
+        // popup->show();
+
+        QTextCursor cursor = textEdit->textCursor();
+        cursor.insertTable(2, 2);
+        });
+
     insertImageAction = toolBar->addAction(QIcon(":icons/add_photo.svg"), "插入图片", [this]() {
         QString fileName = QFileDialog::getOpenFileName(this, "选择图片", "", "Images (*.png *.jpg *.jpeg *.bmp)");
         if (!fileName.isEmpty()) {
@@ -215,7 +239,6 @@ bool RichTextEdit::checkBold() {
     if (!cursor.hasSelection()) {
         return false;
     }
-
     QTextCursor tempCursor = cursor;
     tempCursor.setPosition(cursor.selectionStart());
     while (tempCursor.position() < cursor.selectionEnd()) {
@@ -280,7 +303,7 @@ bool RichTextEdit::checkStrikeOut() {
 
 void RichTextEdit::checkFontSize() {
     QTextCursor cursor = textEdit->textCursor();
-    if(cursor.charFormat().fontPointSize() == 0) {
+    if (cursor.charFormat().fontPointSize() == 0) {
         QTextCharFormat format = cursor.charFormat();
         format.setFontPointSize(FONT_SIZE);
         cursor.setCharFormat(format);
@@ -340,7 +363,7 @@ bool RichTextEdit::save(QUrl saveUrl) {
     QString tempDirPath = tempDir.path();
     qDebug() << "tempDirPath: " << tempDirPath;
 
-    QTextDocument *copyDocument = new QTextDocument();
+    QTextDocument* copyDocument = new QTextDocument();
     copyDocument->setHtml(textEdit->document()->toHtml());
 
     // 保存图片到临时目录
@@ -388,10 +411,10 @@ bool RichTextEdit::save(QUrl saveUrl) {
 
 //slots
 void RichTextEdit::onTextChanged() {
-        checkFontSize();
 }
 
 void RichTextEdit::onCursorPositionChanged() {
+    checkFontSize();
 }
 
 void RichTextEdit::onSelectionChanged() {
@@ -400,3 +423,7 @@ void RichTextEdit::onSelectionChanged() {
     underlineAction->setChecked(checkUnderline());
     strikeOutAction->setChecked(checkStrikeOut());
 }
+
+
+
+
