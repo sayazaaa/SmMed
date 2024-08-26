@@ -31,5 +31,8 @@
         <file>icons/register.png</file>
         <file>icons/doctor.png</file>
         <file>icons/bit.png</file>
+        <file>img/loading4.gif</file>
+        <file>img/CustomerService.png</file>
+        <file>img/Customer Copy.png</file>
     </qresource>
 </RCC>
