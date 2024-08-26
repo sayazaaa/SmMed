@@ -1,9 +1,5 @@
 #ifndef RICHTEXTEDIT_H
 #define RICHTEXTEDIT_H
-/**
- * 拖拽: 1. 拖拽文件到文本框中，显示图片
- * 
- */
 
 #include <QObject>
 #include <QWidget>
@@ -21,6 +17,14 @@
 #include <QAction>
 #include <QMenu>
 #include <QFileDialog>
+#include <QTemporaryDir>
+#include <QTemporaryFile>
+#include <QProcess>
+#include <QHttpMultiPart>
+#include <QNetworkAccessManager>
+#include <QNetworkRequest>
+#include <QNetworkReply>
+#include <QTextDocumentWriter>
 
 #define FONT_SIZE 16
 
@@ -46,6 +50,7 @@ private:
     bool checkStrikeOut();
     void adjustSize();
     void checkFontSize();
+    bool save(QUrl url);
     QImage fitImage(const QImage &image);
 
 
@@ -61,6 +66,7 @@ private:
     QAction *undoAction;
     QAction *redoAction;
     QAction *insertImageAction;
+    QAction *saveAction;
 
     bool isUpdatingText = false;
     int previousTextLength = 0;

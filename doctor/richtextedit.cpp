@@ -199,6 +199,14 @@ void RichTextEdit::addToolBarActions() {
             addPicture(image);
         }
         });
+
+    saveAction = toolBar->addAction(QIcon(":/icons/save.svg"), "保存", [this]() {
+        QUrl saveUrl = QFileDialog::getSaveFileUrl(this, "保存文件", QUrl(), "ZIP Files (*.zip)");
+        qDebug() << "saveUrl: " << saveUrl;
+        if (!saveUrl.isEmpty()) {
+            save(saveUrl);
+        }
+        });
 }
 
 
@@ -319,6 +327,63 @@ void RichTextEdit::adjustSize() {
         }
         block = block.next();
     }
+}
+
+
+
+bool RichTextEdit::save(QUrl saveUrl) {
+    QTemporaryDir tempDir;
+    if (!tempDir.isValid()) {
+        return false;
+    }
+
+    QString tempDirPath = tempDir.path();
+    qDebug() << "tempDirPath: " << tempDirPath;
+
+    QTextDocument *copyDocument = new QTextDocument();
+    copyDocument->setHtml(textEdit->document()->toHtml());
+
+    // 保存图片到临时目录
+    QTextDocument* document = textEdit->document();
+    QTextBlock block = document->begin();
+    int imageIndex = 0;
+    while (block.isValid()) {
+        for (auto i = block.begin(); i != block.end(); ++i) {
+            QTextFragment fragment = i.fragment();
+            QTextFormat format = i.fragment().charFormat();
+            if (format.isImageFormat()) {
+                QTextImageFormat imageFormat = format.toImageFormat();
+                QImage image = document->resource(QTextDocument::ImageResource, imageFormat.name()).value<QImage>();
+                QString imagePath = tempDirPath + QString("/image%1.png").arg(imageIndex++);
+                image.save(imagePath);
+
+                // 更新图片引用
+                imageFormat.setName("image" + QString::number(imageIndex - 1) + ".png");
+                QTextCursor cursor(copyDocument);
+                cursor.setPosition(fragment.position());
+                cursor.setPosition(fragment.position() + fragment.length(), QTextCursor::KeepAnchor);
+                cursor.setCharFormat(imageFormat);
+            }
+        }
+        block = block.next();
+    }
+
+    // 保存文档为 HTML 文件
+    QTextDocumentWriter writer(tempDirPath + "/main.html", "HTML");
+    writer.write(copyDocument);
+
+    // 打包 HTML 文件和图片
+    QProcess process;
+    process.setProgram("zip");
+    QStringList arguments;
+    arguments << "-j" << saveUrl.toLocalFile() << tempDirPath + "/main.html";
+    for (int i = 0; i < imageIndex; ++i) {
+        arguments << tempDirPath + QString("/image%1.png").arg(i);
+    }
+    process.setArguments(arguments);
+    process.start();
+    process.waitForFinished();
+    return process.exitCode() == 0;
 }
 
 //slots
