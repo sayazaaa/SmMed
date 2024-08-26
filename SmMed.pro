@@ -1,15 +1,12 @@
 TEMPLATE = subdirs
 
 SUBDIRS += \
-    commonuser
-
-#SUBDIRS += \
-#    commonuser \
-#    dataclass \
-#    dbclient \
-#    doctor \
-#    server \
-#    shared
+    commonuser \
+    dataclass \
+    dbclient \
+    doctor \
+    server \
+    shared
 
 # shared.depends = dataclass
 
