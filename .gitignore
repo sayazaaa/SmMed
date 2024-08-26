@@ -55,4 +55,5 @@ compile_commands.json
 
 **/build/*
 .DS_Store
+*/.DS_Store
 .vscode/*
