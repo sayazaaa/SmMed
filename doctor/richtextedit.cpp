@@ -194,26 +194,24 @@ void RichTextEdit::addToolBarActions() {
         });
 
     insertTableAction = toolBar->addAction(QIcon(":/icons/table.svg"), "插入表格", [this]() {
-        // TableToolBarPopup* popup = new TableToolBarPopup(this);
-        // connect(popup, &TableToolBarPopup::accepted, [this, popup]() {
-        //     int rows = popup->rows();
-        //     int columns = popup->columns();
-        //     QTextCursor cursor = textEdit->textCursor();
-        //     cursor.insertTable(rows, columns);
-        //     popup->deleteLater();
-        //     });
-        // connect(popup, &TableToolBarPopup::rejected, [popup]() {
-        //     popup->deleteLater();
-        //     });
+        TableToolBarPopup* popup = new TableToolBarPopup(this);
+        connect(popup, &TableToolBarPopup::accepted, [this, popup]() {
+            int rows = popup->rows();
+            int columns = popup->columns();
+            QTextCursor cursor = textEdit->textCursor();
+            cursor.insertTable(rows, columns);
+            popup->deleteLater();
+            });
+        connect(popup, &TableToolBarPopup::rejected, [popup]() {
+            popup->deleteLater();
+            });
 
-        // // 显示弹出框
-        // popup->setWindowFlags(Qt::Popup);
-        // popup->setAttribute(Qt::WA_DeleteOnClose);
-        // popup->move(QCursor::pos());
-        // popup->show();
+        // 显示弹出框
+        popup->setWindowFlags(Qt::Popup);
+        popup->setAttribute(Qt::WA_DeleteOnClose);
+        popup->move(QCursor::pos());
+        popup->show();
 
-        QTextCursor cursor = textEdit->textCursor();
-        cursor.insertTable(2, 2);
         });
 
     insertImageAction = toolBar->addAction(QIcon(":icons/add_photo.svg"), "插入图片", [this]() {
