@@ -4,6 +4,7 @@
 #include "myappointment.h"
 #include "little_doctor.h"
 #include "little_history.h"
+#include "little_zhihu.h"
 #include <QMessageBox>
 #include <QGraphicsDropShadowEffect>
 #include <QString>
@@ -180,6 +181,14 @@ void Widget::on_btn_main_item_1_clicked()
         search_5();
     }
 
+    //zhihu
+    if(choice_state == 5)
+    {
+        //显示page
+        ui->sw_main->setCurrentIndex(2*choice_state-1);
+
+        search_9();
+    }
 }
 
 void Widget::on_btn_main_item_2_clicked()
@@ -368,16 +377,25 @@ void Widget::on_btn_menu_item_5_clicked()
     choice_state=5;
     ui->sw_main->setCurrentIndex(9);
     btn_hide();
-    ui->btn_main_item_1->setText("健康评估");
-    ui->btn_main_item_2->setText("评估历史");
+    ui->btn_main_item_1->setText("治乎主页");
     ui->btn_main_item_1->show();
-    ui->btn_main_item_2->show();
 }
 
 void Widget::on_btn_menu_item_6_clicked()
 {
     choice_state=6;
     ui->sw_main->setCurrentIndex(11);
+    btn_hide();
+    ui->btn_main_item_1->setText("健康评估");
+    ui->btn_main_item_2->setText("评估历史");
+    ui->btn_main_item_1->show();
+    ui->btn_main_item_2->show();
+}
+
+void Widget::on_btn_menu_item_7_clicked()
+{
+    choice_state=7;
+    ui->sw_main->setCurrentIndex(13);
     btn_hide();
     ui->btn_main_item_1->setText("研发人员");
     ui->btn_main_item_2->setText("意见反馈");
@@ -1259,6 +1277,83 @@ void Widget::on_btn_confirm_8_clicked()
 
 }
 
+
+
+void Widget::delete_9()
+{
+    //清空QlistWidget
+    int n=ui->listWidget_9->count();//获取item的总数
+//    删去所有item
+    for(int i=0;i<n;i++)
+    {
+        QListWidgetItem *item = ui->listWidget_9->takeItem(0);
+        delete item;
+    }
+}
+
+void Widget::putin_9()
+{
+    //通过 医生序号doc_id[] 当前页数 page_now
+    //获得 姓名doc_name[] 性别doc_gender[] 科室doc_apartment[]
+    //填写QlistWidget
+
+    //假定数据
+    QString doc_name="abcdefghijskdscsdfacs";
+
+
+    //创建item
+//    myAppointment *w = new myAppointment;
+    little_zhihu *w = new little_zhihu;
+
+    QListWidgetItem* pItem = new QListWidgetItem;
+
+    //填入数据
+    w->set_label_user_name("zzt");
+    w->set_label_user_context("12345677890asdfghjkk");
+    w->set_label_answernum("98");
+
+//    pItem->setBackground(QColor("green"));
+    //设置item大小
+    pItem->setSizeHint(QSize(ui->listWidget_9->width(),ui->listWidget_5->height()/5 ));
+    //添加进QlistWidget
+    ui->listWidget_9->addItem(pItem);
+    ui->listWidget_9->setItemWidget(pItem, w);
+    //不可被选中
+    pItem->setFlags(pItem->flags() & ~Qt::ItemIsEnabled & ~Qt::ItemIsSelectable);
+}
+
+void Widget::search_9()
+{
+    //get data()
+    //通过 科室apartment 日期date 姓名searched_name 性别doc_gender
+    //得到 数据总量data_num 总页数page_num 医生序号doc_id[] 当前页数page_now
+    int data_num=99;
+
+    int doc_id[6]={1,2,3,4,5,6};
+
+    //填写总数据量
+//    ui->label_data_num_text_9->setText("共有"+QString::number(data_num)+"项数据");
+    //删除数据
+    delete_9();
+    //填入数据
+    for(int i=0;i<data_num;i++)
+    {
+        putin_9();//缺少参数
+    }
+
+
+
+}
+
+void Widget::on_btn_confirm_9_clicked()
+{
+//    获取需要查询的 科室apartment 日期date 姓名doc_name 性别gender
+    QString search = ui->lineEdit_search_9->text();
+
+//    查询
+    search_9();//参数未填充
+
+}
 
 
 

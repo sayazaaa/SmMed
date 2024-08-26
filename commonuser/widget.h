@@ -66,6 +66,8 @@ private slots:
 
     void on_btn_menu_item_6_clicked();
 
+    void on_btn_menu_item_7_clicked();
+
     void on_btn_confirm_1_clicked();
 
     void on_btn_page_left_1_clicked();
@@ -132,6 +134,8 @@ private slots:
 
     void on_btn_confirm_8_clicked();
 
+    void on_btn_confirm_9_clicked();
+
     void onItemClicked_8(QListWidgetItem *item);
 
 private:
@@ -167,6 +171,9 @@ private:
     void search_8();
     void putin_8();
     void delete_8();
+    void search_9();
+    void putin_9();
+    void delete_9();
 };
 QString convertDayToChinese(const QString& day);
 #endif // WIDGET_H
