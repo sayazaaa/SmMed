@@ -26,19 +26,18 @@ void login::on_pushButton_clicked()
     Widget *w=new Widget;
     w->show();
 
-//    little_appointment *aaa=new little_appointment;
-//    aaa->show();
 
 
-    if(ui->username->text() == "admin" && ui->password->text() == "114514"){
-        this->close();
-        Widget *w=new Widget;
-        w->show();
-    }else{
-        QMessageBox::warning(this,tr("登录失败"),tr("账号或密码错误，请检查后重试"),QMessageBox::Ok);
-        ui->password->clear();
-        ui->username->setFocus();//如果登录失败就标红账号并清空密码要求重试
-    }
+
+//    if(ui->username->text() == "admin" && ui->password->text() == "114514"){
+//        this->close();
+//        Widget *w=new Widget;
+//        w->show();
+//    }else{
+//        QMessageBox::warning(this,tr("登录失败"),tr("账号或密码错误，请检查后重试"),QMessageBox::Ok);
+//        ui->password->clear();
+//        ui->username->setFocus();//如果登录失败就标红账号并清空密码要求重试
+//    }
 }
 
 

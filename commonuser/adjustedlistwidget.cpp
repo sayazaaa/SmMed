@@ -17,8 +17,19 @@ adjustedListWidget::adjustedListWidget(QWidget *parent) : QListWidget(parent)
 }
 void adjustedListWidget::resizeEvent(QResizeEvent *event)
 {
-    int itemWidth = event->size().width() / 3-10; // 计算每个item的宽度
-    int itemHeight = event->size().height() / 3; // 计算每个item的高度
+    int itemWidth =0;
+    int itemHeight =0;
+    if(count()==1)
+    {
+        itemWidth = event->size().width() ; // 计算每个item的宽度
+        itemHeight = event->size().height() ; // 计算每个item的高度
+    }
+    else
+    {
+        itemWidth = event->size().width() / 3-10; // 计算每个item的宽度
+        itemHeight = event->size().height() / 3; // 计算每个item的高度
+    }
+
     int n=count();
     for(int i=0;i<n;i++)
     {
