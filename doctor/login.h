@@ -5,6 +5,7 @@
 #include"information.h"
 #include "user_register.h"
 #include<QMessageBox>
+#include "apikey.h"
 
 namespace Ui {
 class login;

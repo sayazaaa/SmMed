@@ -166,6 +166,6 @@ int main(int argc, char * argv[])
        return 1;
    }
 
-   qDebug() << "talk Server started on port" << server.serverPort();
+   qDebug() << "talk Server started on port" << "8081";
     return a.exec();
 }

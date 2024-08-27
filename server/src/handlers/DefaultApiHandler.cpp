@@ -31,6 +31,7 @@ DefaultApiHandler::~DefaultApiHandler(){
 void DefaultApiHandler::loginPost(QString id, QString password, bool usertype, QString apikey, Object body) {
     Q_UNUSED(apikey);
     Q_UNUSED(body);
+    qDebug() << "default api handler login post:" << usertype;
     auto reqObj = qobject_cast<DefaultApiRequest*>(sender());
     if( reqObj != nullptr )
     {

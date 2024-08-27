@@ -11,6 +11,8 @@
 #include <QTcpSocket>
 #include <QDialog>
 #include <QMessageBox>
+#include "messages.h"
+#include "apikey.h"
 
 #define SERVER_URL "http://0.0.0.0:8080"
 
@@ -34,14 +36,16 @@ public:
     (const QUrl& url, const QJsonObject& json) const;
     void send_delete_request
     (const QUrl& url) const;
+    void send_socket_apikey_request(QString apikey) const;
 
-    void send_socket_request(QString msg) const;
-    void send_socket_request(QByteArray msg) const;
+    void send_socket_request(Message& msg,std::function<void(bool)> callback) const;
 signals:
     void received_json(const QJsonObject& json);
+    void write_msg(std::function<void(bool)> callback) const;
 
 private slots:
     void handle_reply_json();
+    void handle_socket_read();
 };
 
 #endif // NETCLIENT_H
