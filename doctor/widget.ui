@@ -1,0 +1,1640 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Widget</class>
+ <widget class="QWidget" name="Widget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1133</width>
+    <height>739</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1133</width>
+    <height>687</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>16777215</width>
+    <height>16777215</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Widget</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_2">
+   <property name="leftMargin">
+    <number>9</number>
+   </property>
+   <property name="topMargin">
+    <number>9</number>
+   </property>
+   <property name="rightMargin">
+    <number>9</number>
+   </property>
+   <property name="bottomMargin">
+    <number>9</number>
+   </property>
+   <item row="0" column="0">
+    <widget class="QWidget" name="w_bg" native="true">
+     <layout class="QHBoxLayout" name="lay_bg" stretch="1,3">
+      <property name="spacing">
+       <number>6</number>
+      </property>
+      <property name="leftMargin">
+       <number>4</number>
+      </property>
+      <property name="topMargin">
+       <number>4</number>
+      </property>
+      <property name="rightMargin">
+       <number>4</number>
+      </property>
+      <property name="bottomMargin">
+       <number>4</number>
+      </property>
+      <item>
+       <widget class="QWidget" name="w_menu" native="true">
+        <property name="minimumSize">
+         <size>
+          <width>200</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>252</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,1">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <property name="leftMargin">
+          <number>14</number>
+         </property>
+         <property name="topMargin">
+          <number>12</number>
+         </property>
+         <property name="rightMargin">
+          <number>14</number>
+         </property>
+         <property name="bottomMargin">
+          <number>12</number>
+         </property>
+         <item>
+          <widget class="QWidget" name="widget_2" native="true">
+           <layout class="QVBoxLayout" name="verticalLayout_4">
+            <property name="spacing">
+             <number>8</number>
+            </property>
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout">
+              <property name="spacing">
+               <number>9</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="lab_logo">
+                <property name="minimumSize">
+                 <size>
+                  <width>30</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>30</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="scaledContents">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="label">
+                <property name="font">
+                 <font>
+                  <pointsize>10</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>BIT SMS</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QPushButton" name="btn_setting">
+                <property name="minimumSize">
+                 <size>
+                  <width>30</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>30</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="cursor">
+                 <cursorShape>PointingHandCursor</cursorShape>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset resource="../commonuser/qss.qrc">
+                  <normaloff>:/icons/setting.png</normaloff>:/icons/setting.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>20</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="btn_mine">
+                <property name="minimumSize">
+                 <size>
+                  <width>30</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>30</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="cursor">
+                 <cursorShape>PointingHandCursor</cursorShape>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset resource="../commonuser/qss.qrc">
+                  <normaloff>:/icons/doctor.png</normaloff>:/icons/doctor.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>20</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <widget class="QWidget" name="widget_3" native="true">
+              <layout class="QVBoxLayout" name="verticalLayout_6">
+               <property name="leftMargin">
+                <number>10</number>
+               </property>
+               <property name="rightMargin">
+                <number>10</number>
+               </property>
+               <item>
+                <widget class="Line" name="line">
+                 <property name="font">
+                  <font>
+                   <pointsize>9</pointsize>
+                   <weight>50</weight>
+                   <bold>false</bold>
+                  </font>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true"/>
+                 </property>
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="time_block">
+                 <property name="minimumSize">
+                  <size>
+                   <width>150</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QWidget" name="w_item_02" native="true">
+              <layout class="QHBoxLayout" name="horizontalLayout_4">
+               <property name="spacing">
+                <number>10</number>
+               </property>
+               <property name="topMargin">
+                <number>9</number>
+               </property>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QWidget" name="widget" native="true">
+           <widget class="QLabel" name="lab_title">
+            <property name="geometry">
+             <rect>
+              <x>0</x>
+              <y>0</y>
+              <width>71</width>
+              <height>30</height>
+             </rect>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>功能</string>
+            </property>
+           </widget>
+           <widget class="QWidget" name="layoutWidget">
+            <property name="geometry">
+             <rect>
+              <x>0</x>
+              <y>280</y>
+              <width>224</width>
+              <height>37</height>
+             </rect>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,0,2,0,2,0,1">
+             <item>
+              <spacer name="horizontalSpacer_4">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QPushButton" name="btn_littleshow">
+               <property name="minimumSize">
+                <size>
+                 <width>35</width>
+                 <height>35</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>35</width>
+                 <height>35</height>
+                </size>
+               </property>
+               <property name="cursor">
+                <cursorShape>PointingHandCursor</cursorShape>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="icon">
+                <iconset resource="../commonuser/qss.qrc">
+                 <normaloff>:/icons/mini.png</normaloff>:/icons/mini.png</iconset>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_2">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QPushButton" name="btn_home">
+               <property name="minimumSize">
+                <size>
+                 <width>35</width>
+                 <height>35</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>35</width>
+                 <height>35</height>
+                </size>
+               </property>
+               <property name="cursor">
+                <cursorShape>PointingHandCursor</cursorShape>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="icon">
+                <iconset resource="../commonuser/qss.qrc">
+                 <normaloff>:/icons/home.png</normaloff>:/icons/home.png</iconset>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_3">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QPushButton" name="btn_logout">
+               <property name="minimumSize">
+                <size>
+                 <width>35</width>
+                 <height>35</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>35</width>
+                 <height>35</height>
+                </size>
+               </property>
+               <property name="cursor">
+                <cursorShape>PointingHandCursor</cursorShape>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="icon">
+                <iconset resource="../commonuser/qss.qrc">
+                 <normaloff>:/icons/logout.png</normaloff>:/icons/logout.png</iconset>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_5">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="layoutWidget">
+            <property name="geometry">
+             <rect>
+              <x>0</x>
+              <y>40</y>
+              <width>224</width>
+              <height>148</height>
+             </rect>
+            </property>
+            <layout class="QGridLayout" name="gridLayout">
+             <item row="0" column="0">
+              <widget class="QToolButton" name="btn_menu_item_1">
+               <property name="minimumSize">
+                <size>
+                 <width>70</width>
+                 <height>70</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>70</width>
+                 <height>70</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>7</pointsize>
+                </font>
+               </property>
+               <property name="cursor">
+                <cursorShape>PointingHandCursor</cursorShape>
+               </property>
+               <property name="text">
+                <string>过往看诊</string>
+               </property>
+               <property name="icon">
+                <iconset resource="../commonuser/qss.qrc">
+                 <normaloff>:/icons/list.png</normaloff>:/icons/list.png</iconset>
+               </property>
+               <property name="toolButtonStyle">
+                <enum>Qt::ToolButtonTextUnderIcon</enum>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QToolButton" name="btn_menu_item_2">
+               <property name="minimumSize">
+                <size>
+                 <width>70</width>
+                 <height>70</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>70</width>
+                 <height>70</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>7</pointsize>
+                </font>
+               </property>
+               <property name="cursor">
+                <cursorShape>PointingHandCursor</cursorShape>
+               </property>
+               <property name="text">
+                <string>今日看诊</string>
+               </property>
+               <property name="icon">
+                <iconset resource="../commonuser/qss.qrc">
+                 <normaloff>:/icons/register.png</normaloff>:/icons/register.png</iconset>
+               </property>
+               <property name="toolButtonStyle">
+                <enum>Qt::ToolButtonTextUnderIcon</enum>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QToolButton" name="btn_menu_item_3">
+               <property name="minimumSize">
+                <size>
+                 <width>70</width>
+                 <height>70</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>70</width>
+                 <height>70</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>7</pointsize>
+                </font>
+               </property>
+               <property name="cursor">
+                <cursorShape>PointingHandCursor</cursorShape>
+               </property>
+               <property name="text">
+                <string>我的预约</string>
+               </property>
+               <property name="icon">
+                <iconset resource="../commonuser/qss.qrc">
+                 <normaloff>:/icons/check.png</normaloff>:/icons/check.png</iconset>
+               </property>
+               <property name="toolButtonStyle">
+                <enum>Qt::ToolButtonTextUnderIcon</enum>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QToolButton" name="btn_menu_item_4">
+               <property name="minimumSize">
+                <size>
+                 <width>70</width>
+                 <height>70</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>70</width>
+                 <height>70</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>7</pointsize>
+                </font>
+               </property>
+               <property name="cursor">
+                <cursorShape>PointingHandCursor</cursorShape>
+               </property>
+               <property name="text">
+                <string>医患沟通</string>
+               </property>
+               <property name="icon">
+                <iconset resource="../commonuser/qss.qrc">
+                 <normaloff>:/icons/message.png</normaloff>:/icons/message.png</iconset>
+               </property>
+               <property name="toolButtonStyle">
+                <enum>Qt::ToolButtonTextUnderIcon</enum>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QToolButton" name="btn_menu_item_5">
+               <property name="minimumSize">
+                <size>
+                 <width>70</width>
+                 <height>70</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>70</width>
+                 <height>70</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>7</pointsize>
+                </font>
+               </property>
+               <property name="cursor">
+                <cursorShape>PointingHandCursor</cursorShape>
+               </property>
+               <property name="text">
+                <string>治乎</string>
+               </property>
+               <property name="icon">
+                <iconset resource="../commonuser/qss.qrc">
+                 <normaloff>:/icons/check.png</normaloff>:/icons/check.png</iconset>
+               </property>
+               <property name="toolButtonStyle">
+                <enum>Qt::ToolButtonTextUnderIcon</enum>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="2">
+              <widget class="QToolButton" name="btn_menu_item_6">
+               <property name="minimumSize">
+                <size>
+                 <width>70</width>
+                 <height>70</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>70</width>
+                 <height>70</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>7</pointsize>
+                </font>
+               </property>
+               <property name="cursor">
+                <cursorShape>PointingHandCursor</cursorShape>
+               </property>
+               <property name="text">
+                <string>关于我们</string>
+               </property>
+               <property name="toolButtonStyle">
+                <enum>Qt::ToolButtonTextUnderIcon</enum>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+           <zorder>layoutWidget</zorder>
+           <zorder>layoutWidget</zorder>
+           <zorder>lab_title</zorder>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QWidget" name="w_main" native="true">
+        <layout class="QVBoxLayout" name="verticalLayout_5" stretch="0,0">
+         <property name="spacing">
+          <number>19</number>
+         </property>
+         <property name="topMargin">
+          <number>10</number>
+         </property>
+         <property name="bottomMargin">
+          <number>6</number>
+         </property>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_5">
+           <property name="spacing">
+            <number>40</number>
+           </property>
+           <item>
+            <spacer name="horizontalSpacer_8">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QPushButton" name="btn_main_item_1">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>120</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>100</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>9</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="cursor">
+              <cursorShape>PointingHandCursor</cursorShape>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="btn_main_item_2">
+             <property name="minimumSize">
+              <size>
+               <width>120</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>100</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>9</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="cursor">
+              <cursorShape>PointingHandCursor</cursorShape>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="btn_main_item_3">
+             <property name="minimumSize">
+              <size>
+               <width>120</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>100</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>9</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="cursor">
+              <cursorShape>PointingHandCursor</cursorShape>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="btn_main_item_4">
+             <property name="minimumSize">
+              <size>
+               <width>120</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>100</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>9</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="cursor">
+              <cursorShape>PointingHandCursor</cursorShape>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_9">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QStackedWidget" name="sw_main">
+           <property name="currentIndex">
+            <number>9</number>
+           </property>
+           <widget class="QWidget" name="page_0">
+            <widget class="QWidget" name="layoutWidget">
+             <property name="geometry">
+              <rect>
+               <x>60</x>
+               <y>110</y>
+               <width>722</width>
+               <height>300</height>
+              </rect>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout">
+              <item alignment="Qt::AlignHCenter">
+               <widget class="QLabel" name="label_4">
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="pixmap">
+                 <pixmap resource="../commonuser/qss.qrc">:/icons/ambulance.png</pixmap>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_3">
+                <property name="text">
+                 <string>北京理工大学附属医院，也称为北京理工大学社区卫生服务中心，是一家位于北京市海淀区的一级甲等综合医院。该医院坐落于白石桥路7号，提供24小时医疗服务，主要服务于北京理工大学的师生、员工及其家属。作为医保定点单位，医院设有多个科室，配备有60张床位，并采用了先进的技术如与天坛医院合作推出的中文数字放射科医生“小君”，以提高诊疗效率和准确性。联系电话为010-68913910。</string>
+                </property>
+                <property name="wordWrap">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </widget>
+           <widget class="QWidget" name="page_1">
+            <layout class="QVBoxLayout" name="verticalLayout_8">
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_16">
+               <item>
+                <widget class="QLabel" name="label_date_text_1">
+                 <property name="text">
+                  <string>就诊日期</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDateEdit" name="date_1"/>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_time_text_1">
+                 <property name="text">
+                  <string>就诊时间</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="combo_time_1">
+                 <item>
+                  <property name="text">
+                   <string>上午</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>下午</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>晚上</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_user_name_text_1">
+                 <property name="text">
+                  <string>患者姓名</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLineEdit" name="lineEdit_user_name_1"/>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_age_text_1">
+                 <property name="text">
+                  <string>年龄</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLineEdit" name="lineEdit_age_1"/>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_gender_text_1">
+                 <property name="text">
+                  <string>性别</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="comboBox_gender_1">
+                 <item>
+                  <property name="text">
+                   <string>全部</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>男</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>女</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="btn_confirm_1">
+                 <property name="text">
+                  <string>查询</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="adjustedListWidget" name="listWidget_1"/>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_14">
+               <item>
+                <widget class="QLabel" name="label_data_num_text_1">
+                 <property name="text">
+                  <string>共有996项数据</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_15">
+                 <item>
+                  <widget class="QPushButton" name="btn_page_left_1">
+                   <property name="text">
+                    <string>&lt;</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btn_page_1_1">
+                   <property name="text">
+                    <string>1</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btn_page_2_1">
+                   <property name="text">
+                    <string>...</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btn_page_now_1">
+                   <property name="text">
+                    <string>5</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btn_page_3_1">
+                   <property name="text">
+                    <string>...</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btn_page_4_1">
+                   <property name="text">
+                    <string>98</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btn_page_right_1">
+                   <property name="text">
+                    <string>&gt;</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="page_2">
+            <layout class="QVBoxLayout" name="verticalLayout_9">
+             <item>
+              <widget class="QLabel" name="lab_mess_2">
+               <property name="font">
+                <font>
+                 <pointsize>20</pointsize>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="layoutDirection">
+                <enum>Qt::LeftToRight</enum>
+               </property>
+               <property name="text">
+                <string>History2222222222222222222222222222</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="page_3">
+            <layout class="QVBoxLayout" name="verticalLayout_3" stretch="2,7,2">
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_7">
+               <item>
+                <widget class="QLabel" name="label_date_text_3">
+                 <property name="text">
+                  <string>当前日期</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDateEdit" name="date_3"/>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_time_text_3">
+                 <property name="text">
+                  <string>当前时间</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_time_3">
+                 <property name="text">
+                  <string>上午</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="adjustedListWidget" name="listWidget_3"/>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_6">
+               <item>
+                <widget class="QLabel" name="label_data_num_text_3">
+                 <property name="text">
+                  <string>共有996项数据</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_3">
+                 <item>
+                  <widget class="QPushButton" name="btn_page_left_3">
+                   <property name="text">
+                    <string>&lt;</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btn_page_1_3">
+                   <property name="text">
+                    <string>1</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btn_page_2_3">
+                   <property name="text">
+                    <string>...</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btn_page_now_3">
+                   <property name="text">
+                    <string>5</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btn_page_3_3">
+                   <property name="text">
+                    <string>...</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btn_page_4_3">
+                   <property name="text">
+                    <string>98</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btn_page_right_3">
+                   <property name="text">
+                    <string>&gt;</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="page_4">
+            <layout class="QVBoxLayout" name="verticalLayout_7">
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_10">
+               <item>
+                <widget class="QLabel" name="label_date_text_4">
+                 <property name="text">
+                  <string>预约日期</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDateEdit" name="date_4">
+                 <property name="tabletTracking">
+                  <bool>false</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_time_text_4">
+                 <property name="text">
+                  <string>预约时间</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="combo_time_4">
+                 <item>
+                  <property name="text">
+                   <string>naoke</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>a</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>M</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>c</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>all</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>耳鼻喉科</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>bilibili</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>黑神话科</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="btn_confirm_4">
+                 <property name="text">
+                  <string>查询</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="adjustedListWidget" name="listWidget_4"/>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_8">
+               <item>
+                <widget class="QLabel" name="label_data_num_text_4">
+                 <property name="text">
+                  <string>共有996项数据</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_9">
+                 <item>
+                  <widget class="QPushButton" name="btn_page_left_4">
+                   <property name="text">
+                    <string>&lt;</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btn_page_1_4">
+                   <property name="text">
+                    <string>1</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btn_page_2_4">
+                   <property name="text">
+                    <string>...</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btn_page_now_4">
+                   <property name="text">
+                    <string>5</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btn_page_3_4">
+                   <property name="text">
+                    <string>...</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btn_page_4_4">
+                   <property name="text">
+                    <string>98</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btn_page_right_4">
+                   <property name="text">
+                    <string>&gt;</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="page_5">
+            <property name="minimumSize">
+             <size>
+              <width>831</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>548</height>
+             </size>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_10">
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_11">
+               <item>
+                <widget class="QLabel" name="label_date_5">
+                 <property name="text">
+                  <string>当前日期</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDateEdit" name="date_5"/>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_depart_5">
+                 <property name="text">
+                  <string>科室</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="combo_depart_5">
+                 <item>
+                  <property name="text">
+                   <string>naoke</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>a</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>M</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>c</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>all</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>耳鼻喉科</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>bilibili</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>黑神话科</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_docname_5">
+                 <property name="text">
+                  <string>医生姓名</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLineEdit" name="lineEdit_docname_5"/>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_doc_gender_5">
+                 <property name="text">
+                  <string>医生性别</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="combo_gender_5">
+                 <item>
+                  <property name="text">
+                   <string>全部</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>男</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>女</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="btn_confirm_5">
+                 <property name="text">
+                  <string>查询</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="adjustedListWidget" name="listWidget_5"/>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_12">
+               <item>
+                <widget class="QLabel" name="label_data_num_text_5">
+                 <property name="text">
+                  <string>共有996项数据</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_13">
+                 <item>
+                  <widget class="QPushButton" name="btn_page_left_5">
+                   <property name="text">
+                    <string>&lt;</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btn_page_1_5">
+                   <property name="text">
+                    <string>1</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btn_page_2_5">
+                   <property name="text">
+                    <string>...</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btn_page_now_5">
+                   <property name="text">
+                    <string>5</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btn_page_3_5">
+                   <property name="text">
+                    <string>...</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btn_page_4_5">
+                   <property name="text">
+                    <string>98</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btn_page_right_5">
+                   <property name="text">
+                    <string>&gt;</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="page_6">
+            <layout class="QVBoxLayout" name="verticalLayout_11"/>
+           </widget>
+           <widget class="QWidget" name="page_7">
+            <layout class="QVBoxLayout" name="verticalLayout_12"/>
+           </widget>
+           <widget class="QWidget" name="page_8">
+            <layout class="QHBoxLayout" name="horizontalLayout_17" stretch="1,3">
+             <item>
+              <layout class="QGridLayout" name="gridLayout_3">
+               <item row="0" column="0">
+                <widget class="QLineEdit" name="lineEdit_search_8"/>
+               </item>
+               <item row="0" column="1">
+                <widget class="QPushButton" name="btn_confirm_8">
+                 <property name="text">
+                  <string>查询</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0" colspan="2">
+                <widget class="QListWidget" name="listWidget_8"/>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_13" stretch="1,10">
+               <item>
+                <widget class="QLabel" name="label_docname_8">
+                 <property name="text">
+                  <string>患者姓名</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="chat_box" name="widget_chat_box_8" native="true"/>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="page_9">
+            <layout class="QVBoxLayout" name="verticalLayout_14">
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_18">
+               <item>
+                <widget class="QLineEdit" name="lineEdit_search_9"/>
+               </item>
+               <item>
+                <widget class="QPushButton" name="btn_search_9">
+                 <property name="text">
+                  <string>搜索</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="zhihuListWidget" name="listWidget_9"/>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="page_10">
+            <widget class="QLabel" name="label_8">
+             <property name="geometry">
+              <rect>
+               <x>10</x>
+               <y>10</y>
+               <width>761</width>
+               <height>531</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>101010101010评估历史</string>
+             </property>
+            </widget>
+           </widget>
+           <widget class="QWidget" name="page_12">
+            <widget class="QLabel" name="email">
+             <property name="geometry">
+              <rect>
+               <x>300</x>
+               <y>130</y>
+               <width>67</width>
+               <height>17</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>balabala</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </widget>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>adjustedListWidget</class>
+   <extends>QListWidget</extends>
+   <header>adjustedlistwidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>chat_box</class>
+   <extends>QWidget</extends>
+   <header>chat_box.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>zhihuListWidget</class>
+   <extends>QListWidget</extends>
+   <header>zhihulistwidget.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

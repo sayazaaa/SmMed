@@ -3,6 +3,7 @@
 #include <QApplication>
 #include <QFile>
 #include <QFont>
+#include "chat_box.h"
 
 int main(int argc, char *argv[])
 {

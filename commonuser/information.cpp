@@ -20,6 +20,8 @@ void information::on_confirm_clicked()
     QString idNumber=ui->id->text();
     bool ok;
     QRegExp validLastChar("[0-9]|X");
+    QChar genderChar = idNumber[16]; // 第17位字符
+    int genderInt = genderChar.digitValue(); // 将 QChar 转换成 int
     //检查身份证号码长度
     if(idNumber.length() != 18)
     {
@@ -34,9 +36,10 @@ void information::on_confirm_clicked()
     {
         QMessageBox::warning(this,tr("身份证非法"),tr("最后一位可以是字母X大写或者数字，请检查后重试"),QMessageBox::Ok);
         ui->id->setFocus();
-    }
-    else
-    {
+    }else if((genderInt%2 == 0 && ui->gender->currentText() == "男")||(genderInt%2 == 1 && ui->gender->currentText() == "女")){
+        QMessageBox::warning(this,tr("身份证非法"),tr("性别和身份证号无法对应，请检查后重试"),QMessageBox::Ok);
+        ui->id->setFocus();
+    }else{
         //获取出生年月日
         int year = idNumber.mid(6, 4).toInt();
         int month = idNumber.mid(10, 2).toInt();

@@ -30,8 +30,8 @@ QGroupBox { border: 1px solid #DCDFE6; border-radius: 6px; font-size: 13px; marg
 QGroupBox::title { subcontrol-origin: margin; subcontrol-position: top center; padding: 0px 5px 3px; }
 #w_bg,#inf { background-color: #f2f1f5; border-radius: 22px; }
 #w_menu { background-color: #f8f8f8; border-radius: 16px; }
-#btn_menu_item_1, #btn_menu_item_2, #btn_menu_item_3, #btn_menu_item_4, #btn_menu_item_5{ background-color: #ffffff; border-radius: 5px; padding: 12px 0 0; }
-#btn_menu_item_1:hover, #btn_menu_item_2:hover, #btn_menu_item_3:hover, #btn_menu_item_4:hover, #btn_menu_item_5:hover{ background-color: #f8f8f8; border: 1px solid #f0f0f0; }
+#btn_menu_item_1, #btn_menu_item_2, #btn_menu_item_3, #btn_menu_item_4, #btn_menu_item_5, #btn_menu_item_6,#btn_menu_item_7{ background-color: #ffffff; border-radius: 5px; padding: 12px 0 0; }
+#btn_menu_item_1:hover, #btn_menu_item_2:hover, #btn_menu_item_3:hover, #btn_menu_item_4:hover, #btn_menu_item_5:hover, #btn_menu_item_6:hover, #btn_menu_item_7:hover{ background-color: #f8f8f8; border: 1px solid #f0f0f0; }
 #lab_title { padding: 0 10px; }
 #btn_main_item_1, #btn_main_item_2, #btn_main_item_3, #btn_main_item_4 { padding: 8px 12px; color: #909399; border: none; }
 #btn_main_item_1:hover, #btn_main_item_2:hover, #btn_main_item_3:hover, #btn_main_item_4:hover { background-color: #ffffff; border-radius: 15px; color: #3d4150; }

@@ -14,6 +14,7 @@ INCLUDEPATH +=  include \
                 /usr/include/mysql  \
                 /usr/include/botan-2 \
                 /usr/include/botan \
+                /usr/include/botan-2/botan \
                 /usr/include/c++/9 \
                 /usr/include/c++/7
 
