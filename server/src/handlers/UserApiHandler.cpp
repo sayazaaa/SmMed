@@ -43,7 +43,7 @@ void UserApiHandler::userPost(Inline_object inline_object) {
             Inline_response_200_1 res;
             qDebug() << errortext;
             QByteArray bytearray;
-            reqObj->userPostError(res,QNetworkReply::NetworkError::RecodeNotFound,errortext);
+            reqObj->userPostError(res,QNetworkReply::NetworkError::UnknownNetworkError,errortext);
             qDebug() << errortext;
             return;
         }

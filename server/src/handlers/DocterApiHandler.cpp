@@ -43,7 +43,7 @@ void DocterApiHandler::doctorPost(QString apikey, Inline_object_1 inline_object_
             Inline_response_200_2 res;
             qDebug() << errortext;
             QByteArray bytearray;
-            reqObj->doctorPostError(res,QNetworkReply::NetworkError::RecodeNotFound,errortext);
+            reqObj->doctorPostError(res,QNetworkReply::NetworkError::UnknownNetworkError,errortext);
             qDebug() << errortext;
             return;
         }

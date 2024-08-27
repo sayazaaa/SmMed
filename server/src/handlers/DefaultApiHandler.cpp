@@ -40,7 +40,7 @@ void DefaultApiHandler::loginPost(QString id, QString password, bool usertype, Q
             jsondoc = usertype?dbserver->verify_userpassword(id,password):dbserver->verify_doctorpassword(id,password);
         } catch (std::exception e) {
             QString error_str = "login failed!";
-            reqObj->loginPostError(res,QNetworkReply::NetworkError::RecodeNotFound,error_str);
+            reqObj->loginPostError(res,QNetworkReply::NetworkError::UnknownNetworkError,error_str);
             return;
         }
         qDebug() << "going to send result...";
@@ -75,7 +75,7 @@ void DefaultApiHandler::sqlGet(QString sql, QString apikey, QString id, bool use
         if(reqObj != nullptr){
             Object res;
             QString error_str = "SQL ERROR!";
-            reqObj->sqlGetError(res,QNetworkReply::NetworkError::RecodeNotFound,error_str);
+            reqObj->sqlGetError(res,QNetworkReply::NetworkError::UnknownNetworkError,error_str);
         }
 
         return;
