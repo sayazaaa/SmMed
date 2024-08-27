@@ -18,14 +18,15 @@
 #include <QLabel>
 #include <QDebug>
 
-QNChatMessage::QNChatMessage(QWidget* parent) : QWidget(parent) {
+QNChatMessage::QNChatMessage(QWidget *parent) : QWidget(parent)
+{
     QFont te_font = this->font();
     te_font.setFamily("MicrosoftYaHei");
     te_font.setPointSize(12);
-    //    te_font.setWordSpacing(0);
-    //    te_font.setLetterSpacing(QFont::PercentageSpacing,0);
-    //    te_font.setLetterSpacing(QFont::PercentageSpacing, 100);          //300%,100为默认  //设置字间距%
-    //    te_font.setLetterSpacing(QFont::AbsoluteSpacing, 0);             //设置字间距为3像素 //设置字间距像素值
+//    te_font.setWordSpacing(0);
+//    te_font.setLetterSpacing(QFont::PercentageSpacing,0);
+//    te_font.setLetterSpacing(QFont::PercentageSpacing, 100);          //300%,100为默认  //设置字间距%
+//    te_font.setLetterSpacing(QFont::AbsoluteSpacing, 0);             //设置字间距为3像素 //设置字间距像素值
     this->setFont(te_font);
     m_leftPixmap = QPixmap(":/img/Customer Copy.png");
     m_rightPixmap = QPixmap(":/img/CustomerService.png");
@@ -34,49 +35,51 @@ QNChatMessage::QNChatMessage(QWidget* parent) : QWidget(parent) {
     m_loadingMovie->setFileName(":/img/loading4.gif");
     m_loading = new QLabel(this);
     m_loading->setMovie(m_loadingMovie);
-    m_loading->resize(16, 16);
-    m_loading->setAttribute(Qt::WA_TranslucentBackground, true);
+    m_loading->resize(16,16);
+    m_loading->setAttribute(Qt::WA_TranslucentBackground , true);
     m_loading->setAutoFillBackground(false);
 }
 
-void QNChatMessage::setTextSuccess() {
+void QNChatMessage::setTextSuccess()
+{
     m_loading->hide();
     m_loadingMovie->stop();
     m_isSending = true;
 }
 
-void QNChatMessage::setText(QString text, QString time, QSize allSize, QNChatMessage::User_Type userType) {
+void QNChatMessage::setText(QString text, QString time, QSize allSize, QNChatMessage::User_Type userType)
+{
     m_msg = text;
     m_userType = userType;
     m_time = time;
     m_curTime = QDateTime::fromTime_t(time.toInt()).toString("hh:mm");
     m_allSize = allSize;
-    if (userType == User_Me) {
-        if (!m_isSending) {
-            m_loading->move(m_kuangRightRect.x() - m_loading->width() - 10, m_kuangRightRect.y() + m_kuangRightRect.height() / 2 - m_loading->height() / 2);
+    if(userType == User_Me) {
+        if(!m_isSending) {
+            m_loading->move(m_kuangRightRect.x() - m_loading->width() - 10, m_kuangRightRect.y()+m_kuangRightRect.height()/2- m_loading->height()/2);
             m_loading->show();
             m_loadingMovie->start();
         }
-    }
-    else {
+    } else {
         m_loading->hide();
     }
 
     this->update();
 }
 
-QSize QNChatMessage::fontRect(QString str) {
+QSize QNChatMessage::fontRect(QString str)
+{
     m_msg = str;
-    double minHei = 30;
-    double iconWH = 40;
-    double iconSpaceW = 20;
-    double iconRectW = 5;
-    double iconTMPH = 10;
-    double sanJiaoW = 6;
-    double kuangTMP = 20;
-    double textSpaceRect = 10;
-    m_kuangWidth = this->width() - kuangTMP - 2 * (iconWH + iconSpaceW + iconRectW);
-    m_textWidth = m_kuangWidth - 2 * textSpaceRect;
+    int minHei = 30;
+    int iconWH = 40;
+    int iconSpaceW = 20;
+    int iconRectW = 5;
+    int iconTMPH = 10;
+    int sanJiaoW = 6;
+    int kuangTMP = 20;
+    int textSpaceRect = 12;
+    m_kuangWidth = this->width() - kuangTMP - 2*(iconWH+iconSpaceW+iconRectW);
+    m_textWidth = m_kuangWidth - 2*textSpaceRect;
     m_spaceWid = this->width() - m_textWidth;
     m_iconLeftRect = QRect(iconSpaceW, iconTMPH, iconWH, iconWH);
     m_iconRightRect = QRect(this->width() - iconSpaceW - iconWH, iconTMPH, iconWH, iconWH);
@@ -84,72 +87,72 @@ QSize QNChatMessage::fontRect(QString str) {
     QSize size = getRealString(m_msg); // 整个的size
 
     qDebug() << "fontRect Size:" << size;
-    double hei = size.height() < minHei ? minHei : size.height();
+    int hei = size.height() < minHei ? minHei : size.height();
 
-    m_sanjiaoLeftRect = QRect(iconWH + iconSpaceW + iconRectW, m_lineHeight / 2, sanJiaoW, hei - m_lineHeight);
-    m_sanjiaoRightRect = QRect(this->width() - iconRectW - iconWH - iconSpaceW - sanJiaoW, m_lineHeight / 2, sanJiaoW, hei - m_lineHeight);
+    m_sanjiaoLeftRect = QRect(iconWH+iconSpaceW+iconRectW, m_lineHeight/2, sanJiaoW, hei - m_lineHeight);
+    m_sanjiaoRightRect = QRect(this->width() - iconRectW - iconWH - iconSpaceW - sanJiaoW, m_lineHeight/2, sanJiaoW, hei - m_lineHeight);
 
-    if (size.width() < (m_textWidth + m_spaceWid)) {
-        m_kuangLeftRect.setRect(m_sanjiaoLeftRect.x() + m_sanjiaoLeftRect.width(), m_lineHeight / 4 * 3, size.width() - m_spaceWid + 2 * textSpaceRect, hei - m_lineHeight);
-        m_kuangRightRect.setRect(this->width() - size.width() + m_spaceWid - 2 * textSpaceRect - iconWH - iconSpaceW - iconRectW - sanJiaoW,
-            m_lineHeight / 4 * 3, size.width() - m_spaceWid + 2 * textSpaceRect, hei - m_lineHeight);
+    if(size.width() < (m_textWidth+m_spaceWid)) {
+        m_kuangLeftRect.setRect(m_sanjiaoLeftRect.x()+m_sanjiaoLeftRect.width(), m_lineHeight/4*3, size.width()-m_spaceWid+2*textSpaceRect, hei-m_lineHeight);
+        m_kuangRightRect.setRect(this->width() - size.width() + m_spaceWid - 2*textSpaceRect - iconWH - iconSpaceW - iconRectW - sanJiaoW,
+                                 m_lineHeight/4*3, size.width()-m_spaceWid+2*textSpaceRect, hei-m_lineHeight);
+    } else {
+        m_kuangLeftRect.setRect(m_sanjiaoLeftRect.x()+m_sanjiaoLeftRect.width(), m_lineHeight/4*3, m_kuangWidth, hei-m_lineHeight);
+        m_kuangRightRect.setRect(iconWH + kuangTMP + iconSpaceW + iconRectW - sanJiaoW, m_lineHeight/4*3, m_kuangWidth, hei-m_lineHeight);
     }
-    else {
-        m_kuangLeftRect.setRect(m_sanjiaoLeftRect.x() + m_sanjiaoLeftRect.width(), m_lineHeight / 4 * 3, m_kuangWidth, hei - m_lineHeight);
-        m_kuangRightRect.setRect(iconWH + kuangTMP + iconSpaceW + iconRectW - sanJiaoW, m_lineHeight / 4 * 3, m_kuangWidth, hei - m_lineHeight);
-    }
-    m_textLeftRect.setRect(m_kuangLeftRect.x() + textSpaceRect, m_kuangLeftRect.y() + iconTMPH,
-        m_kuangLeftRect.width() - 2 * textSpaceRect, m_kuangLeftRect.height() - 2 * iconTMPH);
-    m_textRightRect.setRect(m_kuangRightRect.x() + textSpaceRect, m_kuangRightRect.y() + iconTMPH,
-        m_kuangRightRect.width() - 2 * textSpaceRect, m_kuangRightRect.height() - 2 * iconTMPH);
+    m_textLeftRect.setRect(m_kuangLeftRect.x()+textSpaceRect,m_kuangLeftRect.y()+iconTMPH,
+                           m_kuangLeftRect.width()-2*textSpaceRect,m_kuangLeftRect.height()-2*iconTMPH);
+    m_textRightRect.setRect(m_kuangRightRect.x()+textSpaceRect,m_kuangRightRect.y()+iconTMPH,
+                            m_kuangRightRect.width()-2*textSpaceRect,m_kuangRightRect.height()-2*iconTMPH);
 
     return QSize(size.width(), hei);
 }
 
-QSize QNChatMessage::getRealString(QString src) {
+QSize QNChatMessage::getRealString(QString src)
+{
     QFontMetricsF fm(this->font());
     m_lineHeight = fm.lineSpacing();
-    double nCount = src.count("\n");
-    double nMaxWidth = 0;
-    if (nCount == 0) {
+    int nCount = src.count("\n");
+    int nMaxWidth = 0;
+    if(nCount == 0) {
         nMaxWidth = fm.width(src);
         QString value = src;
-        if (nMaxWidth > m_textWidth) {
+        if(nMaxWidth > m_textWidth) {
             nMaxWidth = m_textWidth;
-            double size = m_textWidth / fm.width(" ");
-            double num = fm.width(value) / m_textWidth;
-            double ttmp = num * fm.width(" ");
-            num = (fm.width(value)) / m_textWidth;
+            int size = m_textWidth / fm.width(" ");
+            int num = fm.width(value) / m_textWidth;
+            int ttmp = num*fm.width(" ");
+            num = ( fm.width(value) ) / m_textWidth;
             nCount += num;
             QString temp = "";
-            for (int i = 0; i < num; i++) {
-                temp += value.mid(i * size, (i + 1) * size) + "\n";
+            for(int i = 0; i < num; i++) {
+                temp += value.mid(i*size, (i+1)*size) + "\n";
             }
             src.replace(value, temp);
         }
-    }
-    else {
-        for (int i = 0; i < (nCount + 1); i++) {
+    } else {
+        for(int i = 0; i < (nCount + 1); i++) {
             QString value = src.split("\n").at(i);
             nMaxWidth = fm.width(value) > nMaxWidth ? fm.width(value) : nMaxWidth;
-            if (fm.width(value) > m_textWidth) {
+            if(fm.width(value) > m_textWidth) {
                 nMaxWidth = m_textWidth;
-                double size = m_textWidth / fm.width(" ");
-                double num = fm.width(value) / m_textWidth;
-                num = ((i + num) * fm.width(" ") + fm.width(value)) / m_textWidth;
+                int size = m_textWidth / fm.width(" ");
+                int num = fm.width(value) / m_textWidth;
+                num = ((i+num)*fm.width(" ") + fm.width(value)) / m_textWidth;
                 nCount += num;
                 QString temp = "";
-                for (int i = 0; i < num; i++) {
-                    temp += value.mid(i * size, (i + 1) * size) + "\n";
+                for(int i = 0; i < num; i++) {
+                    temp += value.mid(i*size, (i+1)*size) + "\n";
                 }
                 src.replace(value, temp);
             }
         }
     }
-    return QSize(nMaxWidth + m_spaceWid + 5, (nCount + 1) * m_lineHeight + 2 * m_lineHeight);
+    return QSize(nMaxWidth+m_spaceWid+1, (nCount + 1) * m_lineHeight+2*m_lineHeight);
 }
 
-void QNChatMessage::paintEvent(QPaintEvent* event) {
+void QNChatMessage::paintEvent(QPaintEvent *event)
+{
     Q_UNUSED(event);
 
     QPainter painter(this);
@@ -157,7 +160,7 @@ void QNChatMessage::paintEvent(QPaintEvent* event) {
     painter.setPen(Qt::NoPen);
     painter.setBrush(QBrush(Qt::gray));
 
-    if (m_userType == User_Type::User_She) { // 用户
+    if(m_userType == User_Type::User_She) { // 用户
         //头像
 //        painter.drawRoundedRect(m_iconLeftRect,m_iconLeftRect.width(),m_iconLeftRect.height());
         painter.drawPixmap(m_iconLeftRect, m_leftPixmap);
@@ -165,17 +168,17 @@ void QNChatMessage::paintEvent(QPaintEvent* event) {
         //框加边
         QColor col_KuangB(234, 234, 234);
         painter.setBrush(QBrush(col_KuangB));
-        painter.drawRoundedRect(m_kuangLeftRect.x() - 1, m_kuangLeftRect.y() - 1, m_kuangLeftRect.width() + 2, m_kuangLeftRect.height() + 2, 4, 4);
+        painter.drawRoundedRect(m_kuangLeftRect.x()-1,m_kuangLeftRect.y()-1,m_kuangLeftRect.width()+2,m_kuangLeftRect.height()+2,4,4);
         //框QImage Message_image;
-        QColor col_Kuang(255, 255, 255);
+        QColor col_Kuang(255,255,255);
         painter.setBrush(QBrush(col_Kuang));
-        painter.drawRoundedRect(m_kuangLeftRect, 4, 4);
+        painter.drawRoundedRect(m_kuangLeftRect,4,4);
 
         //三角
         QPointF points[3] = {
             QPointF(m_sanjiaoLeftRect.x(), 30),
-            QPointF(m_sanjiaoLeftRect.x() + m_sanjiaoLeftRect.width(), 25),
-            QPointF(m_sanjiaoLeftRect.x() + m_sanjiaoLeftRect.width(), 35),
+            QPointF(m_sanjiaoLeftRect.x()+m_sanjiaoLeftRect.width(), 25),
+            QPointF(m_sanjiaoLeftRect.x()+m_sanjiaoLeftRect.width(), 35),
         };
         QPen pen;
         pen.setColor(col_Kuang);
@@ -186,8 +189,8 @@ void QNChatMessage::paintEvent(QPaintEvent* event) {
         QPen penSanJiaoBian;
         penSanJiaoBian.setColor(col_KuangB);
         painter.setPen(penSanJiaoBian);
-        painter.drawLine(QPointF(m_sanjiaoLeftRect.x() - 1, 30), QPointF(m_sanjiaoLeftRect.x() + m_sanjiaoLeftRect.width(), 24));
-        painter.drawLine(QPointF(m_sanjiaoLeftRect.x() - 1, 30), QPointF(m_sanjiaoLeftRect.x() + m_sanjiaoLeftRect.width(), 36));
+        painter.drawLine(QPointF(m_sanjiaoLeftRect.x() - 1, 30), QPointF(m_sanjiaoLeftRect.x()+m_sanjiaoLeftRect.width(), 24));
+        painter.drawLine(QPointF(m_sanjiaoLeftRect.x() - 1, 30), QPointF(m_sanjiaoLeftRect.x()+m_sanjiaoLeftRect.width(), 36));
 
         //内容
         if(!Message_image.isNull())// 绘制背景图片
@@ -199,50 +202,19 @@ void QNChatMessage::paintEvent(QPaintEvent* event) {
         option.setWrapMode(QTextOption::WrapAtWordBoundaryOrAnywhere);
         painter.setFont(this->font());
         painter.drawText(m_textLeftRect, m_msg,option);
-        // QTextEdit* textEdit = new QTextEdit(this);
-        // textEdit->setReadOnly(true);  // 使 QTextEdit 只读，避免用户编辑
-        // textEdit->setFrameStyle(QFrame::NoFrame);  // 移除 QTextEdit 的边框
-        // textEdit->setGeometry(m_textLeftRect);  // 设置 QTextEdit 的位置和大小
-
-        // // 设置文本内容和样式
-        // QTextCursor cursor = textEdit->textCursor();
-        // cursor.movePosition(QTextCursor::Start);
-
-        // QTextBlockFormat blockFormat;
-        // blockFormat.setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-        // cursor.setBlockFormat(blockFormat);
-
-        // // 设置字体和颜色
-        // QTextCharFormat charFormat;
-        // charFormat.setFont(this->font());
-        // charFormat.setForeground(QColor(51, 51, 51));  // 设置字体颜色
-
-        // // 插入文本
-        // cursor.insertText(m_msg, charFormat);
-
-
-        // // 如果你希望 QTextEdit 自适应内容高度
-        // textEdit->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
-        // textEdit->setWordWrapMode(QTextOption::WrapAtWordBoundaryOrAnywhere);
-        // textEdit->adjustSize();
-
-        // // 设置文本换行模式
-        // textEdit->setWordWrapMode(QTextOption::WrapAtWordBoundaryOrAnywhere);
-
-    }
-    else if (m_userType == User_Type::User_Me) { // 自己
+    }  else if(m_userType == User_Type::User_Me) { // 自己
         //头像
 //        painter.drawRoundedRect(m_iconRightRect,m_iconRightRect.width(),m_iconRightRect.height());
         painter.drawPixmap(m_iconRightRect, m_rightPixmap);
 
         //框
-        QColor col_Kuang(75, 164, 242);
+        QColor col_Kuang(75,164,242);
         painter.setBrush(QBrush(col_Kuang));
-        painter.drawRoundedRect(m_kuangRightRect, 4, 4);
+        painter.drawRoundedRect(m_kuangRightRect,4,4);
 
         //三角
         QPointF points[3] = {
-            QPointF(m_sanjiaoRightRect.x() + m_sanjiaoRightRect.width(), 30),
+            QPointF(m_sanjiaoRightRect.x()+m_sanjiaoRightRect.width(), 30),
             QPointF(m_sanjiaoRightRect.x(), 25),
             QPointF(m_sanjiaoRightRect.x(), 35),
         };
@@ -252,49 +224,18 @@ void QNChatMessage::paintEvent(QPaintEvent* event) {
         painter.drawPolygon(points, 3);
 
         //内容
-        if (!Message_image.isNull())// 绘制背景图片
-            painter.drawImage(this->width() - Message_image.width() - 50, 50, Message_image);
+        if(!Message_image.isNull())// 绘制背景图片
+            painter.drawImage(this->width()-Message_image.width()-50, 50, Message_image);
         QPen penText;
         penText.setColor(Qt::white);
         painter.setPen(penText);
         QTextOption option(Qt::AlignLeft | Qt::AlignVCenter);
         option.setWrapMode(QTextOption::WrapAtWordBoundaryOrAnywhere);
         painter.setFont(this->font());
-        painter.drawText(m_textRightRect, m_msg, option);
-
-        // QTextEdit* textEdit = new QTextEdit(this);
-        // textEdit->setReadOnly(true);  // 使 QTextEdit 只读，避免用户编辑
-        // textEdit->setFrameStyle(QFrame::NoFrame);  // 移除 QTextEdit 的边框
-        // textEdit->setGeometry(m_textLeftRect);  // 设置 QTextEdit 的位置和大小
-
-        // // 设置文本内容和样式
-        // QTextCursor cursor = textEdit->textCursor();
-        // cursor.movePosition(QTextCursor::Start);
-
-        // QTextBlockFormat blockFormat;
-        // blockFormat.setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-        // cursor.setBlockFormat(blockFormat);
-
-        // // 设置字体和颜色
-        // QTextCharFormat charFormat;
-        // charFormat.setFont(this->font());
-        // charFormat.setForeground(QColor(51, 51, 51));  // 设置字体颜色
-
-        // // 插入文本
-        // cursor.insertText(m_msg);
-
-
-        // // // 如果你希望 QTextEdit 自适应内容高度
-        // // textEdit->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
-        // // textEdit->setWordWrapMode(QTextOption::WrapAtWordBoundaryOrAnywhere);
-        // // textEdit->adjustSize();
-
-        // // 设置文本换行模式
-        // textEdit->setWordWrapMode(QTextOption::WrapAtWordBoundaryOrAnywhere);
-    }
-    else if (m_userType == User_Type::User_Time) { // 时间
+        painter.drawText(m_textRightRect,m_msg,option);
+    }  else if(m_userType == User_Type::User_Time) { // 时间
         QPen penText;
-        penText.setColor(QColor(153, 153, 153));
+        penText.setColor(QColor(153,153,153));
         painter.setPen(penText);
         QTextOption option(Qt::AlignCenter);
         option.setWrapMode(QTextOption::WrapAtWordBoundaryOrAnywhere);
@@ -302,10 +243,11 @@ void QNChatMessage::paintEvent(QPaintEvent* event) {
         te_font.setFamily("MicrosoftYaHei");
         te_font.setPointSize(10);
         painter.setFont(te_font);
-        painter.drawText(this->rect(), m_curTime, option);
+        painter.drawText(this->rect(),m_curTime,option);
     }
 }
-void QNChatMessage::setlogoposi() {
+void QNChatMessage::setlogoposi()
+{
     m_iconLeftRect = QRect(20, 10, 40, 40);
     m_iconRightRect = QRect(this->width() - 20 - 40, 10, 40, 40);
 }

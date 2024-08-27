@@ -21,7 +21,6 @@ int main(int argc, char *argv[])
     QFont font("Arial", 10);
     a.setFont(font);
 
-
     login *l=new login;
     l->show();
     return a.exec();
