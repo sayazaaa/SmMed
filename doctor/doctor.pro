@@ -27,11 +27,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-
 SOURCES += $$files(./*.cpp)
 
 HEADERS += $$files(./*.h)
-
 FORMS += $$files(./*.ui)
 
 INCLUDEPATH += $$PWD
@@ -40,38 +38,23 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-
-
-unix:!macx: LIBS += -L$$OUT_PWD/../dataclass/ -ldataclass
-
-INCLUDEPATH += $$PWD/../dataclass
-DEPENDPATH += $$PWD/../dataclass
-
-
-
-win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../shared/release/ -lshared
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../shared/debug/ -lshared
-else:unix: LIBS += -L$$OUT_PWD/../shared/ -lshared
-
-INCLUDEPATH += $$PWD/../shared/include/ \
-                $$PWD/../shared/
-DEPENDPATH += $$PWD/../shared/include/ \
-                $$PWD/../shared/
-
-DISTFILES += \
-    icons/add_link.svg \
-    icons/add_photo.svg \
-    icons/format_bold.svg \
-    icons/format_italic.svg \
-    icons/format_strikethrough.svg \
-    icons/format_underlined.svg \
-    icons/format_underlined_squiggle.svg \
-    icons/redo.svg \
-    icons/text_decrease.svg \
-    icons/text_increase.svg \
-    icons/undo.svg
-
 RESOURCES += \
-    doctor.qrc
+    qss.qrc
+
+#unix:!macx: LIBS += -L$$OUT_PWD/../dataclass/ -ldataclass
+
+#INCLUDEPATH += $$PWD/../dataclass
+#DEPENDPATH += $$PWD/../dataclass
+
+
+
+#win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../shared/release/ -lshared
+#else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../shared/debug/ -lshared
+#else:unix: LIBS += -L$$OUT_PWD/../shared/ -lshared
+
+#INCLUDEPATH += $$PWD/../shared/include/ \
+#                $$PWD/../shared/
+#DEPENDPATH += $$PWD/../shared/include/ \
+#                $$PWD/../shared/
 
 
