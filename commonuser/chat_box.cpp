@@ -1,12 +1,28 @@
 #include "chat_box.h"
 #include "ui_chat_box.h"
-#include <QDateTime>
+
 #include <QDebug>
 
 chat_box::chat_box(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::chat_box)
+    ui(new Ui::chat_box),
+    db(DatabaseManager::getInstance().getDatabase()),
+    netClient(NetClient::getInstance()),
+    sender_id(""),
+    receiver_id("")
 {
+    ui->setupUi(this);
+    resize(600, 800);
+}
+chat_box::chat_box(QString sender_id, QString receiver_id,QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::chat_box),
+    db(DatabaseManager::getInstance().getDatabase()),
+    netClient(NetClient::getInstance()),
+    sender_id(sender_id),
+    receiver_id(receiver_id)
+{
+
     ui->setupUi(this);
     resize(600, 800);
 }
@@ -23,55 +39,30 @@ void chat_box::on_pushButton_clicked()
     QString msg = ui->textEdit->toPlainText();
     ui->textEdit->setText("");
     QString time = QString::number(QDateTime::currentDateTime().toTime_t()); //时间戳
-
-    bool isSending = true; // 发送中
-
-    qDebug()<<"addMessage" << msg << time << ui->listWidget->count();
-    if(ui->listWidget->count()%2) {
-        if(isSending) {
-            dealMessageTime(time);
-
-            QNChatMessage* messageW = new QNChatMessage(ui->listWidget->parentWidget());messageW->setStyleSheet("background-color:black;");
-            QListWidgetItem* item = new QListWidgetItem(ui->listWidget);
-            dealMessage(messageW, item, msg, time, QNChatMessage::User_Me);
-
+    QNChatMessage* messageW = dealMessage(msg, time, QNChatMessage::User_Me);
+    net_send_msg(msg, [this, messageW](bool success) {
+        if(success) {
+            messageW->setTextSuccess();
         } else {
-            bool isOver = true;
-            for(int i = ui->listWidget->count() - 1; i > 0; i--) {
-                QNChatMessage* messageW = (QNChatMessage*)ui->listWidget->itemWidget(ui->listWidget->item(i));
-                if(messageW->text() == msg) {
-                    isOver = false;
-                    messageW->setTextSuccess();
-                }
-            }
-            if(isOver) {
-                dealMessageTime(time);
-
-                QNChatMessage* messageW = new QNChatMessage(ui->listWidget->parentWidget());
-                QListWidgetItem* item = new QListWidgetItem(ui->listWidget);
-                dealMessage(messageW, item, msg, time, QNChatMessage::User_Me);
-                messageW->setTextSuccess();
-            }
+            qDebug() << "发送失败";
         }
-    } else {
-        if(msg != "") {
-            dealMessageTime(time);
-
-            QNChatMessage* messageW = new QNChatMessage(ui->listWidget->parentWidget());
-            QListWidgetItem* item = new QListWidgetItem(ui->listWidget);
-            dealMessage(messageW, item, msg, time, QNChatMessage::User_Me);
-        }
-    }
+    });
+    qDebug()<<"addMessage" << msg << time << ui->listWidget->count();
+           
     ui->listWidget->setCurrentRow(ui->listWidget->count()-1);
 }
 
-void chat_box::dealMessage(QNChatMessage *messageW, QListWidgetItem *item, QString text, QString time,  QNChatMessage::User_Type type)
+QNChatMessage* chat_box::dealMessage(QString text, QString time,  QNChatMessage::User_Type type)
 {
+    dealMessageTime(time);
+    QNChatMessage* messageW = new QNChatMessage(ui->listWidget->parentWidget());
+    QListWidgetItem* item = new QListWidgetItem(ui->listWidget);
     messageW->setFixedWidth(this->width());
     QSize size = messageW->fontRect(text);
     item->setSizeHint(size);
     messageW->setText(text, time, size, type);
     ui->listWidget->setItemWidget(item, messageW);
+    return messageW;
 }
 
 void chat_box::dealMessageTime(QString curMsgTime)
@@ -118,7 +109,7 @@ void chat_box::resizeEvent(QResizeEvent *event)
         QNChatMessage* messageW = (QNChatMessage*)ui->listWidget->itemWidget(ui->listWidget->item(i));
         QListWidgetItem* item = ui->listWidget->item(i);
 
-        dealMessage(messageW, item, messageW->text(), messageW->time(), messageW->userType());
+        dealMessage(messageW->text(), messageW->time(), messageW->userType());
     }
 }
 
@@ -187,5 +178,20 @@ void chat_box::on_pushButton_2_clicked()
             }
         }
         ui->listWidget->setCurrentRow(ui->listWidget->count()-1);
+}
+
+void chat_box::net_send_msg(const QString &msg, std::function<void(bool)> callback)
+{
+    // 模拟网络发送消息
+    QTimer::singleShot(1000, [callback]() {
+        bool success = true; // 模拟发送成功
+        callback(success);
+    });
+}
+
+void chat_box::net_send_pic(QImage image)
+{
+    //TODO APIKEY
+    NetLoader::send_picture(sender_id, receiver_id, image, API_KEY, netClient);
 }
 

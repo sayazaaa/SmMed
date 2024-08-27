@@ -13,6 +13,8 @@
 #define QNCHATMESSAGE_H
 
 #include <QWidget>
+#include <QTextEdit>
+
 
 class QPaintEvent;
 class QPainter;
