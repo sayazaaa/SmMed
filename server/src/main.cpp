@@ -160,12 +160,12 @@ int main(int argc, char * argv[])
         qCritical("Unable to listen on the specified port.");
         return 1;
     }
-//    MyServer talkserver;
-//    if (!talkserver.listen(address,port)) {
-//        qDebug() << "talk Server could not start!";
-//        return 1;
-//    }
+   MyServer talkserver;
+   if (!talkserver.listen(address,8081)) {
+       qDebug() << "talk Server could not start!";
+       return 1;
+   }
 
-//    qDebug() << "talk Server started on port" << server.serverPort();
+   qDebug() << "talk Server started on port" << server.serverPort();
     return a.exec();
 }

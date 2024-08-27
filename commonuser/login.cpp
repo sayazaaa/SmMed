@@ -76,6 +76,7 @@ void login::handle_reply_json(const QJsonObject &json)
     qDebug() << "handle reply json apikey:" << json["apikey"].toString();
     if(json["apikey"].toString() != "") {
         API_KEY = json["apikey"].toString();
+        USER_ID = ui->username->text();
     }
 
     disconnect(&NetClient::getInstance(), &NetClient::received_json, this, &login::handle_reply_json);
