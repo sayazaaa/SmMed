@@ -30,7 +30,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += $$files(./*.cpp)
 
 HEADERS += $$files(./*.h)
-
 FORMS += $$files(./*.ui)
 
 INCLUDEPATH += $$PWD
