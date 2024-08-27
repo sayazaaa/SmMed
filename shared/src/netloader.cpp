@@ -8,21 +8,26 @@
 void NetLoader::post_create_doctor(HttpServer::Doctor doctor ,const NetClient& client){
     QUrl url(SERVER_URL);
     url.setPath("/doctor");
-    QJsonObject json = doctor.asJsonObject();
+    QJsonObject json = QJsonObject();
+    json.insert("id", doctor.getId());
+    json.insert("password", doctor.getPassword());
+    json.insert("apikey","");
     client.send_post_request(url, json);
 }
 
 void NetLoader::post_create_user(HttpServer::User user ,const NetClient& client){
     QUrl url(SERVER_URL);
     url.setPath("/user");
-    QJsonObject json = user.asJsonObject();
+    QJsonObject json = QJsonObject();
+    json.insert("id", user.getId());
+    json.insert("password", user.getPassword());
     client.send_post_request(url, json);
 }
 
-void NetLoader::post_login(QString id, QString password,bool usertype,QString apikey ,const NetClient& client){
+void NetLoader::post_login(QString id, QString password,bool usertype, const NetClient& client){
     QUrl url(SERVER_URL);
     url.setPath("/login");
-    url.setQuery("id=" + id + "&password=" + password + "usertype" + usertype + "&apikey=" + apikey);
+    url.setQuery("id=" + id + "&password=" + password + "&usertype=" + usertype + "&apikey=");
     client.send_post_request(url,QJsonObject());
 }
 

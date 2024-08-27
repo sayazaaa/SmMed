@@ -58,4 +58,8 @@ INCLUDEPATH += $$PWD/../shared/include/ \
 DEPENDPATH += $$PWD/../shared/include/ \
                $$PWD/../shared/
 
+INCLUDEPATH += /usr/include/botan-2
+
+LIBS += -lbotan-2
+
 
