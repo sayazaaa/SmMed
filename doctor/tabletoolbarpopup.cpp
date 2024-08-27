@@ -1,4 +1,4 @@
-#include "TableToolbarPopup.h"
+#include "tabletoolbarpopup.h"
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QLabel>

@@ -42,17 +42,17 @@ void Inline_object_1::initializeModel() {
     m_name_isSet = false;
     m_name_isValid = false;
 
-    m_age_isSet = false;
-    m_age_isValid = false;
-
     m_gender_isSet = false;
     m_gender_isValid = false;
 
-    m_phone_isSet = false;
-    m_phone_isValid = false;
+    m_office_isSet = false;
+    m_office_isValid = false;
 
-    m_address_isSet = false;
-    m_address_isValid = false;
+    m_zc_isSet = false;
+    m_zc_isValid = false;
+
+    m_describe_isSet = false;
+    m_describe_isValid = false;
 }
 
 void Inline_object_1::fromJson(QString jsonString) {
@@ -73,17 +73,17 @@ void Inline_object_1::fromJsonObject(QJsonObject json) {
     m_name_isValid = ::HttpServer::fromJsonValue(name, json[QString("name")]);
     m_name_isSet = !json[QString("name")].isNull() && m_name_isValid;
 
-    m_age_isValid = ::HttpServer::fromJsonValue(age, json[QString("age")]);
-    m_age_isSet = !json[QString("age")].isNull() && m_age_isValid;
-
     m_gender_isValid = ::HttpServer::fromJsonValue(gender, json[QString("gender")]);
     m_gender_isSet = !json[QString("gender")].isNull() && m_gender_isValid;
 
-    m_phone_isValid = ::HttpServer::fromJsonValue(phone, json[QString("phone")]);
-    m_phone_isSet = !json[QString("phone")].isNull() && m_phone_isValid;
+    m_office_isValid = ::HttpServer::fromJsonValue(office, json[QString("office")]);
+    m_office_isSet = !json[QString("office")].isNull() && m_office_isValid;
 
-    m_address_isValid = ::HttpServer::fromJsonValue(address, json[QString("address")]);
-    m_address_isSet = !json[QString("address")].isNull() && m_address_isValid;
+    m_zc_isValid = ::HttpServer::fromJsonValue(zc, json[QString("zc")]);
+    m_zc_isSet = !json[QString("zc")].isNull() && m_zc_isValid;
+
+    m_describe_isValid = ::HttpServer::fromJsonValue(describe, json[QString("describe")]);
+    m_describe_isSet = !json[QString("describe")].isNull() && m_describe_isValid;
 }
 
 QString Inline_object_1::asJson() const {
@@ -104,17 +104,17 @@ QJsonObject Inline_object_1::asJsonObject() const {
     if (m_name_isSet) {
         obj.insert(QString("name"), ::HttpServer::toJsonValue(name));
     }
-    if (m_age_isSet) {
-        obj.insert(QString("age"), ::HttpServer::toJsonValue(age));
-    }
     if (m_gender_isSet) {
         obj.insert(QString("gender"), ::HttpServer::toJsonValue(gender));
     }
-    if (m_phone_isSet) {
-        obj.insert(QString("phone"), ::HttpServer::toJsonValue(phone));
+    if (m_office_isSet) {
+        obj.insert(QString("office"), ::HttpServer::toJsonValue(office));
     }
-    if (m_address_isSet) {
-        obj.insert(QString("address"), ::HttpServer::toJsonValue(address));
+    if (m_zc_isSet) {
+        obj.insert(QString("zc"), ::HttpServer::toJsonValue(zc));
+    }
+    if (m_describe_isSet) {
+        obj.insert(QString("describe"), ::HttpServer::toJsonValue(describe));
     }
     return obj;
 }
@@ -167,22 +167,6 @@ bool Inline_object_1::is_name_Valid() const{
     return m_name_isValid;
 }
 
-QString Inline_object_1::getAge() const {
-    return age;
-}
-void Inline_object_1::setAge(const QString &age) {
-    this->age = age;
-    this->m_age_isSet = true;
-}
-
-bool Inline_object_1::is_age_Set() const{
-    return m_age_isSet;
-}
-
-bool Inline_object_1::is_age_Valid() const{
-    return m_age_isValid;
-}
-
 QString Inline_object_1::getGender() const {
     return gender;
 }
@@ -199,36 +183,52 @@ bool Inline_object_1::is_gender_Valid() const{
     return m_gender_isValid;
 }
 
-QString Inline_object_1::getPhone() const {
-    return phone;
+QString Inline_object_1::getOffice() const {
+    return office;
 }
-void Inline_object_1::setPhone(const QString &phone) {
-    this->phone = phone;
-    this->m_phone_isSet = true;
-}
-
-bool Inline_object_1::is_phone_Set() const{
-    return m_phone_isSet;
+void Inline_object_1::setOffice(const QString &office) {
+    this->office = office;
+    this->m_office_isSet = true;
 }
 
-bool Inline_object_1::is_phone_Valid() const{
-    return m_phone_isValid;
+bool Inline_object_1::is_office_Set() const{
+    return m_office_isSet;
 }
 
-QString Inline_object_1::getAddress() const {
-    return address;
-}
-void Inline_object_1::setAddress(const QString &address) {
-    this->address = address;
-    this->m_address_isSet = true;
+bool Inline_object_1::is_office_Valid() const{
+    return m_office_isValid;
 }
 
-bool Inline_object_1::is_address_Set() const{
-    return m_address_isSet;
+QString Inline_object_1::getZc() const {
+    return zc;
+}
+void Inline_object_1::setZc(const QString &zc) {
+    this->zc = zc;
+    this->m_zc_isSet = true;
 }
 
-bool Inline_object_1::is_address_Valid() const{
-    return m_address_isValid;
+bool Inline_object_1::is_zc_Set() const{
+    return m_zc_isSet;
+}
+
+bool Inline_object_1::is_zc_Valid() const{
+    return m_zc_isValid;
+}
+
+QString Inline_object_1::getDescribe() const {
+    return describe;
+}
+void Inline_object_1::setDescribe(const QString &describe) {
+    this->describe = describe;
+    this->m_describe_isSet = true;
+}
+
+bool Inline_object_1::is_describe_Set() const{
+    return m_describe_isSet;
+}
+
+bool Inline_object_1::is_describe_Valid() const{
+    return m_describe_isValid;
 }
 
 bool Inline_object_1::isSet() const {
@@ -249,22 +249,22 @@ bool Inline_object_1::isSet() const {
             break;
         }
 
-        if (m_age_isSet) {
-            isObjectUpdated = true;
-            break;
-        }
-
         if (m_gender_isSet) {
             isObjectUpdated = true;
             break;
         }
 
-        if (m_phone_isSet) {
+        if (m_office_isSet) {
             isObjectUpdated = true;
             break;
         }
 
-        if (m_address_isSet) {
+        if (m_zc_isSet) {
+            isObjectUpdated = true;
+            break;
+        }
+
+        if (m_describe_isSet) {
             isObjectUpdated = true;
             break;
         }
@@ -274,7 +274,7 @@ bool Inline_object_1::isSet() const {
 
 bool Inline_object_1::isValid() const {
     // only required properties are required for the object to be considered valid
-    return m_id_isValid && m_password_isValid && m_name_isValid && m_age_isValid && m_gender_isValid && m_phone_isValid && true;
+    return m_id_isValid && m_password_isValid && m_name_isValid && m_gender_isValid && m_office_isValid && m_zc_isValid && m_describe_isValid && true;
 }
 
 } // namespace HttpServer

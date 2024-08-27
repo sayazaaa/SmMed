@@ -20,8 +20,7 @@
 
 #include <QJsonObject>
 
-#include "Inline_response_200_data.h"
-#include <QList>
+#include <QString>
 
 #include "Enum.h"
 #include "Object.h"
@@ -39,15 +38,10 @@ public:
     void fromJsonObject(QJsonObject json) override;
     void fromJson(QString jsonString) override;
 
-    qint32 getTotal() const;
-    void setTotal(const qint32 &total);
-    bool is_total_Set() const;
-    bool is_total_Valid() const;
-
-    QList<Inline_response_200_data> getData() const;
-    void setData(const QList<Inline_response_200_data> &data);
-    bool is_data_Set() const;
-    bool is_data_Valid() const;
+    QString getApikey() const;
+    void setApikey(const QString &apikey);
+    bool is_apikey_Set() const;
+    bool is_apikey_Valid() const;
 
     virtual bool isSet() const override;
     virtual bool isValid() const override;
@@ -55,13 +49,9 @@ public:
 private:
     void initializeModel();
 
-    qint32 total;
-    bool m_total_isSet;
-    bool m_total_isValid;
-
-    QList<Inline_response_200_data> data;
-    bool m_data_isSet;
-    bool m_data_isValid;
+    QString apikey;
+    bool m_apikey_isSet;
+    bool m_apikey_isValid;
 };
 
 } // namespace HttpServer

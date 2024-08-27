@@ -20,10 +20,8 @@
 
 #include <qhttpengine/socket.h>
 #include "Inline_object.h"
-#include "Inline_object_1.h"
-#include "Inline_response_200_3.h"
-#include "Inline_response_200_5.h"
-#include "Inline_response_200_6.h"
+#include "Inline_response_200_1.h"
+#include "Object.h"
 #include <QString>
 #include "UserApiHandler.h"
 
@@ -37,19 +35,13 @@ public:
     UserApiRequest(QHttpEngine::Socket *s, QSharedPointer<UserApiHandler> handler);
     virtual ~UserApiRequest();
 
-    void userIdGetRequest(const QString& id);
     void userPostRequest();
-    void userPutRequest();
     
 
-    void userIdGetResponse(const Inline_response_200_3& res);
-    void userPostResponse(const Inline_response_200_6& res);
-    void userPutResponse(const Inline_response_200_5& res);
+    void userPostResponse(const Inline_response_200_1& res);
     
 
-    void userIdGetError(const Inline_response_200_3& res, QNetworkReply::NetworkError error_type, QString& error_str);
-    void userPostError(const Inline_response_200_6& res, QNetworkReply::NetworkError error_type, QString& error_str);
-    void userPutError(const Inline_response_200_5& res, QNetworkReply::NetworkError error_type, QString& error_str);
+    void userPostError(const Inline_response_200_1& res, QNetworkReply::NetworkError error_type, QString& error_str);
     
 
     void sendCustomResponse(QByteArray & res, QNetworkReply::NetworkError error_type);
@@ -63,9 +55,7 @@ public:
     void setResponseHeaders(const QMultiMap<QString,QString>& headers);
 
 signals:
-    void userIdGet(QString id);
-    void userPost(Inline_object_1 inline_object_1);
-    void userPut(Inline_object inline_object);
+    void userPost(Inline_object inline_object);
     
 
 private:

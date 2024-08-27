@@ -15,10 +15,7 @@
 #include <QObject>
 
 #include "Inline_response_200.h"
-#include "Inline_response_200_2.h"
-#include "Inline_response_200_4.h"
 #include "Inline_response_404.h"
-#include "Inline_response_404_1.h"
 #include "Object.h"
 #include <QString>
 
@@ -34,9 +31,8 @@ public:
 
 
 public slots:
-    virtual void loginPost(QString id, QString password, Object body);
-    virtual void notificationsGet(QString date);
-    virtual void officeIdGet(qint32 id);
+    virtual void loginPost(QString id, QString password, bool usertype, QString apikey, Object body);
+    virtual void sqlGet(QString sql, QString apikey, QString id, bool usertype);
     
 
 };

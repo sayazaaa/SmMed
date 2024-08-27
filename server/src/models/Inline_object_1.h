@@ -53,25 +53,25 @@ public:
     bool is_name_Set() const;
     bool is_name_Valid() const;
 
-    QString getAge() const;
-    void setAge(const QString &age);
-    bool is_age_Set() const;
-    bool is_age_Valid() const;
-
     QString getGender() const;
     void setGender(const QString &gender);
     bool is_gender_Set() const;
     bool is_gender_Valid() const;
 
-    QString getPhone() const;
-    void setPhone(const QString &phone);
-    bool is_phone_Set() const;
-    bool is_phone_Valid() const;
+    QString getOffice() const;
+    void setOffice(const QString &office);
+    bool is_office_Set() const;
+    bool is_office_Valid() const;
 
-    QString getAddress() const;
-    void setAddress(const QString &address);
-    bool is_address_Set() const;
-    bool is_address_Valid() const;
+    QString getZc() const;
+    void setZc(const QString &zc);
+    bool is_zc_Set() const;
+    bool is_zc_Valid() const;
+
+    QString getDescribe() const;
+    void setDescribe(const QString &describe);
+    bool is_describe_Set() const;
+    bool is_describe_Valid() const;
 
     virtual bool isSet() const override;
     virtual bool isValid() const override;
@@ -91,21 +91,21 @@ private:
     bool m_name_isSet;
     bool m_name_isValid;
 
-    QString age;
-    bool m_age_isSet;
-    bool m_age_isValid;
-
     QString gender;
     bool m_gender_isSet;
     bool m_gender_isValid;
 
-    QString phone;
-    bool m_phone_isSet;
-    bool m_phone_isValid;
+    QString office;
+    bool m_office_isSet;
+    bool m_office_isValid;
 
-    QString address;
-    bool m_address_isSet;
-    bool m_address_isValid;
+    QString zc;
+    bool m_zc_isSet;
+    bool m_zc_isValid;
+
+    QString describe;
+    bool m_describe_isSet;
+    bool m_describe_isValid;
 };
 
 } // namespace HttpServer

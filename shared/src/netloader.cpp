@@ -12,6 +12,11 @@ void NetLoader::post_create_doctor(HttpServer::Doctor doctor ,const NetClient& c
     json.insert("id", doctor.getId());
     json.insert("password", doctor.getPassword());
     json.insert("apikey","");
+    json.insert("name","");
+    json.insert("gender","");
+    json.insert("office","");
+    json.insert("zc","");
+    json.insert("describe","");
     client.send_post_request(url, json);
 }
 
@@ -21,6 +26,11 @@ void NetLoader::post_create_user(HttpServer::User user ,const NetClient& client)
     QJsonObject json = QJsonObject();
     json.insert("id", user.getId());
     json.insert("password", user.getPassword());
+    json.insert("name","");
+    json.insert("age","");
+    json.insert("gender","");
+    json.insert("phone","");
+    json.insert("address","");
     client.send_post_request(url, json);
 }
 

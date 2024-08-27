@@ -16,11 +16,9 @@
 
 
 #include "ApiRouter.h"
-#include "AppointmentApiRequest.h"
 #include "DefaultApiRequest.h"
 #include "DocterApiRequest.h"
 #include "FileApiRequest.h"
-#include "PatientApiRequest.h"
 #include "UserApiRequest.h"
 
 
@@ -35,18 +33,13 @@ ApiRouter::~ApiRouter(){
 }
 
 void ApiRouter::createApiHandlers() { 
-    mAppointmentApiHandler = QSharedPointer<AppointmentApiHandler>::create();
     mDefaultApiHandler = QSharedPointer<DefaultApiHandler>::create();
     mDocterApiHandler = QSharedPointer<DocterApiHandler>::create();
     mFileApiHandler = QSharedPointer<FileApiHandler>::create();
-    mPatientApiHandler = QSharedPointer<PatientApiHandler>::create();
     mUserApiHandler = QSharedPointer<UserApiHandler>::create();
 }
 
 
-void ApiRouter::setAppointmentApiHandler(QSharedPointer<AppointmentApiHandler> handler){
-    mAppointmentApiHandler = handler;
-}
 void ApiRouter::setDefaultApiHandler(QSharedPointer<DefaultApiHandler> handler){
     mDefaultApiHandler = handler;
 }
@@ -56,84 +49,47 @@ void ApiRouter::setDocterApiHandler(QSharedPointer<DocterApiHandler> handler){
 void ApiRouter::setFileApiHandler(QSharedPointer<FileApiHandler> handler){
     mFileApiHandler = handler;
 }
-void ApiRouter::setPatientApiHandler(QSharedPointer<PatientApiHandler> handler){
-    mPatientApiHandler = handler;
-}
 void ApiRouter::setUserApiHandler(QSharedPointer<UserApiHandler> handler){
     mUserApiHandler = handler;
 }
 
 void ApiRouter::setUpRoutes() {
     
-    Routes.insert(QString("%1 %2").arg("GET").arg("/appointment/doctor").toLower(), [this](QHttpEngine::Socket *socket) {
-            auto reqObj = new AppointmentApiRequest(socket, mAppointmentApiHandler);
-            reqObj->appointmentDoctorGetRequest();
-    });
-    Routes.insert(QString("%1 %2").arg("GET").arg("/appointment/patient").toLower(), [this](QHttpEngine::Socket *socket) {
-            auto reqObj = new AppointmentApiRequest(socket, mAppointmentApiHandler);
-            reqObj->appointmentPatientGetRequest();
-    });
-    Routes.insert(QString("%1 %2").arg("POST").arg("/appointment").toLower(), [this](QHttpEngine::Socket *socket) {
-            auto reqObj = new AppointmentApiRequest(socket, mAppointmentApiHandler);
-            reqObj->appointmentPostRequest();
-    });
     Routes.insert(QString("%1 %2").arg("POST").arg("/login").toLower(), [this](QHttpEngine::Socket *socket) {
             auto reqObj = new DefaultApiRequest(socket, mDefaultApiHandler);
             reqObj->loginPostRequest();
     });
-    Routes.insert(QString("%1 %2").arg("GET").arg("/notifications").toLower(), [this](QHttpEngine::Socket *socket) {
+    Routes.insert(QString("%1 %2").arg("GET").arg("/sql").toLower(), [this](QHttpEngine::Socket *socket) {
             auto reqObj = new DefaultApiRequest(socket, mDefaultApiHandler);
-            reqObj->notificationsGetRequest();
-    });
-    Routes.insert(QString("%1 %2").arg("GET").arg("/doctor").toLower(), [this](QHttpEngine::Socket *socket) {
-            auto reqObj = new DocterApiRequest(socket, mDocterApiHandler);
-            reqObj->doctorGetRequest();
+            reqObj->sqlGetRequest();
     });
     Routes.insert(QString("%1 %2").arg("POST").arg("/doctor").toLower(), [this](QHttpEngine::Socket *socket) {
             auto reqObj = new DocterApiRequest(socket, mDocterApiHandler);
             reqObj->doctorPostRequest();
     });
-    Routes.insert(QString("%1 %2").arg("PUT").arg("/doctor").toLower(), [this](QHttpEngine::Socket *socket) {
-            auto reqObj = new DocterApiRequest(socket, mDocterApiHandler);
-            reqObj->doctorPutRequest();
-    });
-    Routes.insert(QString("%1 %2").arg("GET").arg("/file/docter").toLower(), [this](QHttpEngine::Socket *socket) {
-            auto reqObj = new FileApiRequest(socket, mFileApiHandler);
-            reqObj->fileDocterGetRequest();
-    });
     Routes.insert(QString("%1 %2").arg("GET").arg("/file").toLower(), [this](QHttpEngine::Socket *socket) {
             auto reqObj = new FileApiRequest(socket, mFileApiHandler);
             reqObj->fileGetRequest();
-    });
-    Routes.insert(QString("%1 %2").arg("GET").arg("/file/patient").toLower(), [this](QHttpEngine::Socket *socket) {
-            auto reqObj = new FileApiRequest(socket, mFileApiHandler);
-            reqObj->filePatientGetRequest();
     });
     Routes.insert(QString("%1 %2").arg("POST").arg("/file").toLower(), [this](QHttpEngine::Socket *socket) {
             auto reqObj = new FileApiRequest(socket, mFileApiHandler);
             reqObj->filePostRequest();
     });
-    Routes.insert(QString("%1 %2").arg("POST").arg("/patient").toLower(), [this](QHttpEngine::Socket *socket) {
-            auto reqObj = new PatientApiRequest(socket, mPatientApiHandler);
-            reqObj->patientPostRequest();
-    });
     Routes.insert(QString("%1 %2").arg("POST").arg("/user").toLower(), [this](QHttpEngine::Socket *socket) {
             auto reqObj = new UserApiRequest(socket, mUserApiHandler);
             reqObj->userPostRequest();
     });
-    Routes.insert(QString("%1 %2").arg("PUT").arg("/user").toLower(), [this](QHttpEngine::Socket *socket) {
-            auto reqObj = new UserApiRequest(socket, mUserApiHandler);
-            reqObj->userPutRequest();
-    });
 }
 
 void ApiRouter::processRequest(QHttpEngine::Socket *socket){
+    qDebug() << "processing...";
     if( handleRequest(socket) ){
         return;
     }
     if( handleRequestAndExtractPathParam(socket) ){
         return;
     }
+    qDebug() << "closing";
     socket->setStatusCode(QHttpEngine::Socket::NotFound);
     if(socket->isOpen()){
         socket->writeHeaders();
@@ -152,54 +108,6 @@ bool ApiRouter::handleRequest(QHttpEngine::Socket *socket){
 
 bool ApiRouter::handleRequestAndExtractPathParam(QHttpEngine::Socket *socket){
     auto reqPath = QString("%1 %2").arg(fromQHttpEngineMethod(socket->method())).arg(socket->path()).toLower();
-    {
-        auto completePath = QString("%1 %2").arg("DELETE").arg("/appointment/{id}").toLower();
-        if ( reqPath.startsWith(completePath.leftRef( completePath.indexOf(QString("/{")))) ) {
-            QRegularExpressionMatch match = getRequestMatch( completePath, reqPath );
-            if ( match.hasMatch() ){
-                QString id = match.captured(QString("id").toLower());
-                auto reqObj = new AppointmentApiRequest(socket, mAppointmentApiHandler);
-                reqObj->appointmentIdDeleteRequest(id);
-                return true;
-            }
-        }
-    }
-    {
-        auto completePath = QString("%1 %2").arg("GET").arg("/office/{id}").toLower();
-        if ( reqPath.startsWith(completePath.leftRef( completePath.indexOf(QString("/{")))) ) {
-            QRegularExpressionMatch match = getRequestMatch( completePath, reqPath );
-            if ( match.hasMatch() ){
-                QString id = match.captured(QString("id").toLower());
-                auto reqObj = new DefaultApiRequest(socket, mDefaultApiHandler);
-                reqObj->officeIdGetRequest(id);
-                return true;
-            }
-        }
-    }
-    {
-        auto completePath = QString("%1 %2").arg("GET").arg("/doctor/{id}").toLower();
-        if ( reqPath.startsWith(completePath.leftRef( completePath.indexOf(QString("/{")))) ) {
-            QRegularExpressionMatch match = getRequestMatch( completePath, reqPath );
-            if ( match.hasMatch() ){
-                QString id = match.captured(QString("id").toLower());
-                auto reqObj = new DocterApiRequest(socket, mDocterApiHandler);
-                reqObj->doctorIdGetRequest(id);
-                return true;
-            }
-        }
-    }
-    {
-        auto completePath = QString("%1 %2").arg("GET").arg("/user/{id}").toLower();
-        if ( reqPath.startsWith(completePath.leftRef( completePath.indexOf(QString("/{")))) ) {
-            QRegularExpressionMatch match = getRequestMatch( completePath, reqPath );
-            if ( match.hasMatch() ){
-                QString id = match.captured(QString("id").toLower());
-                auto reqObj = new UserApiRequest(socket, mUserApiHandler);
-                reqObj->userIdGetRequest(id);
-                return true;
-            }
-        }
-    }
     return false;
 }
 

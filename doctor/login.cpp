@@ -57,6 +57,20 @@ void login::on_pushButton_clicked()
     disconnect(&NetClient::getInstance(), &NetClient::received_json, this, &login::handle_reply_json);
     connect(&NetClient::getInstance(), &NetClient::received_json, this, &login::handle_reply_json);
     NetLoader::post_login(username, QString(hexHash.c_str()),0, client);
+//    NetClient &client = NetClient::getInstance();
+//    HttpServer::Doctor doctor;
+//    qDebug() << "username:" << username;
+//    qDebug() << "password:" << password;
+//    doctor.setId(username);
+//    std::unique_ptr<Botan::HashFunction> hashFunction(Botan::HashFunction::create("SHA-256"));
+//    hashFunction->update(password.toStdString());
+//    Botan::secure_vector<uint8_t> hashValue = hashFunction->final();
+//    std::string hexHash = Botan::hex_encode(hashValue);
+//    doctor.setPassword(QString(hexHash.c_str()));
+//    qDebug() << doctor.getId() << "  " << doctor.getPassword();
+//    disconnect(&client, &NetClient::received_json, this, &user_register::handle_reply_json);
+//    connect(&client, &NetClient::received_json, this, &user_register::handle_reply_json);
+//    NetLoader::post_create_doctor(doctor, client);
 
 }
 

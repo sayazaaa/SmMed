@@ -28,20 +28,11 @@ FileApiHandler::~FileApiHandler(){
 
 }
 
-void FileApiHandler::fileDocterGet(QString doctor_id, qint32 type) {
-    Q_UNUSED(doctor_id);
-    Q_UNUSED(type);
-    auto reqObj = qobject_cast<FileApiRequest*>(sender());
-    if( reqObj != nullptr ) 
-    { 
-        Inline_response_200_10 res;
-        reqObj->fileDocterGetResponse(res);
-    }    
-}
-void FileApiHandler::fileGet(qint32 id, QString doctor_id, qint32 patient_id) {
+void FileApiHandler::fileGet(qint32 id, QString doctor_id, qint32 patient_id, QString apikey) {
     Q_UNUSED(id);
     Q_UNUSED(doctor_id);
     Q_UNUSED(patient_id);
+    Q_UNUSED(apikey);
     auto reqObj = qobject_cast<FileApiRequest*>(sender());
     if( reqObj != nullptr ) 
     { 
@@ -49,27 +40,18 @@ void FileApiHandler::fileGet(qint32 id, QString doctor_id, qint32 patient_id) {
         reqObj->fileGetResponse(res);
     }    
 }
-void FileApiHandler::filePatientGet(qint32 patient_id, qint32 type) {
-    Q_UNUSED(patient_id);
-    Q_UNUSED(type);
-    auto reqObj = qobject_cast<FileApiRequest*>(sender());
-    if( reqObj != nullptr ) 
-    { 
-        Inline_response_200_10 res;
-        reqObj->filePatientGetResponse(res);
-    }    
-}
-void FileApiHandler::filePost(qint32 id, QString name, QString doctor_id, QString patient_id, qint32 type, HttpFileElement body) {
+void FileApiHandler::filePost(qint32 id, QString name, QString doctor_id, QString patient_id, qint32 type, QString apikey, HttpFileElement body) {
     Q_UNUSED(id);
     Q_UNUSED(name);
     Q_UNUSED(doctor_id);
     Q_UNUSED(patient_id);
     Q_UNUSED(type);
+    Q_UNUSED(apikey);
     Q_UNUSED(body);
     auto reqObj = qobject_cast<FileApiRequest*>(sender());
     if( reqObj != nullptr ) 
     { 
-        Inline_response_200_9 res;
+        Inline_response_200_3 res;
         reqObj->filePostResponse(res);
     }    
 }

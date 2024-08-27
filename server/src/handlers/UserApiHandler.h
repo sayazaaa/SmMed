@@ -15,10 +15,8 @@
 #include <QObject>
 
 #include "Inline_object.h"
-#include "Inline_object_1.h"
-#include "Inline_response_200_3.h"
-#include "Inline_response_200_5.h"
-#include "Inline_response_200_6.h"
+#include "Inline_response_200_1.h"
+#include "Object.h"
 #include <QString>
 
 namespace HttpServer {
@@ -33,9 +31,7 @@ public:
 
 
 public slots:
-    virtual void userIdGet(QString id);
-    virtual void userPost(Inline_object_1 inline_object_1);
-    virtual void userPut(Inline_object inline_object);
+    virtual void userPost(Inline_object inline_object);
     
 
 };

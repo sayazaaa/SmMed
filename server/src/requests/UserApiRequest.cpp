@@ -49,40 +49,9 @@ QHttpEngine::Socket* UserApiRequest::getRawSocket(){
 }
 
 
-void UserApiRequest::userIdGetRequest(const QString& idstr){
-    qDebug() << "/user/{id}";
-    connect(this, &UserApiRequest::userIdGet, handler.data(), &UserApiHandler::userIdGet);
-
-    
-    QString id;
-    fromStringValue(idstr, id);
-    
-
-    emit userIdGet(id);
-}
-
-
 void UserApiRequest::userPostRequest(){
     qDebug() << "/user";
     connect(this, &UserApiRequest::userPost, handler.data(), &UserApiHandler::userPost);
-
-    
- 
-    
-    QJsonDocument doc;
-    socket->readJson(doc);
-    QJsonObject obj = doc.object();
-    Inline_object_1 inline_object_1;
-    ::HttpServer::fromJsonValue(inline_object_1, obj);
-    
-
-    emit userPost(inline_object_1);
-}
-
-
-void UserApiRequest::userPutRequest(){
-    qDebug() << "/user";
-    connect(this, &UserApiRequest::userPut, handler.data(), &UserApiHandler::userPut);
 
     
  
@@ -94,30 +63,12 @@ void UserApiRequest::userPutRequest(){
     ::HttpServer::fromJsonValue(inline_object, obj);
     
 
-    emit userPut(inline_object);
+    emit userPost(inline_object);
 }
 
 
 
-void UserApiRequest::userIdGetResponse(const Inline_response_200_3& res){
-    writeResponseHeaders();
-    QJsonDocument resDoc(::HttpServer::toJsonValue(res).toObject());
-    socket->writeJson(resDoc);
-    if(socket->isOpen()){
-        socket->close();
-    }
-}
-
-void UserApiRequest::userPostResponse(const Inline_response_200_6& res){
-    writeResponseHeaders();
-    QJsonDocument resDoc(::HttpServer::toJsonValue(res).toObject());
-    socket->writeJson(resDoc);
-    if(socket->isOpen()){
-        socket->close();
-    }
-}
-
-void UserApiRequest::userPutResponse(const Inline_response_200_5& res){
+void UserApiRequest::userPostResponse(const Inline_response_200_1& res){
     writeResponseHeaders();
     QJsonDocument resDoc(::HttpServer::toJsonValue(res).toObject());
     socket->writeJson(resDoc);
@@ -127,34 +78,10 @@ void UserApiRequest::userPutResponse(const Inline_response_200_5& res){
 }
 
 
-void UserApiRequest::userIdGetError(const Inline_response_200_3& res, QNetworkReply::NetworkError error_type, QString& error_str){
-    Q_UNUSED(error_type); // TODO: Remap error_type to QHttpEngine::Socket errors
-    writeResponseHeaders();
-    Q_UNUSED(error_str);  // response will be used instead of error string
-    QJsonDocument resDoc(::HttpServer::toJsonValue(res).toObject());
-    socket->writeJson(resDoc);
-    if(socket->isOpen()){
-        socket->close();
-    }
-}
-
-void UserApiRequest::userPostError(const Inline_response_200_6& res, QNetworkReply::NetworkError error_type, QString& error_str){
-    Q_UNUSED(error_type); // TODO: Remap error_type to QHttpEngine::Socket errors
-    writeResponseHeaders();
-    Q_UNUSED(error_str);  // response will be used instead of error string
-    QJsonDocument resDoc(::HttpServer::toJsonValue(res).toObject());
-    socket->writeJson(resDoc);
-    if(socket->isOpen()){
-        socket->close();
-    }
-}
-
-void UserApiRequest::userPutError(const Inline_response_200_5& res, QNetworkReply::NetworkError error_type, QString& error_str){
-    Q_UNUSED(error_type); // TODO: Remap error_type to QHttpEngine::Socket errors
-    writeResponseHeaders();
-    Q_UNUSED(error_str);  // response will be used instead of error string
-    QJsonDocument resDoc(::HttpServer::toJsonValue(res).toObject());
-    socket->writeJson(resDoc);
+void UserApiRequest::userPostError(const Inline_response_200_1& res, QNetworkReply::NetworkError error_type, QString& error_str){
+    Q_UNUSED(error_type);
+    Q_UNUSED(res);
+    socket->writeError(404,error_str.toStdString().c_str());
     if(socket->isOpen()){
         socket->close();
     }

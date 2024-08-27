@@ -20,7 +20,6 @@
 
 #include <QJsonObject>
 
-#include <QString>
 
 #include "Enum.h"
 #include "Object.h"
@@ -38,40 +37,10 @@ public:
     void fromJsonObject(QJsonObject json) override;
     void fromJson(QString jsonString) override;
 
-    QString getId() const;
-    void setId(const QString &id);
+    qint32 getId() const;
+    void setId(const qint32 &id);
     bool is_id_Set() const;
     bool is_id_Valid() const;
-
-    QString getPassword() const;
-    void setPassword(const QString &password);
-    bool is_password_Set() const;
-    bool is_password_Valid() const;
-
-    QString getName() const;
-    void setName(const QString &name);
-    bool is_name_Set() const;
-    bool is_name_Valid() const;
-
-    QString getAge() const;
-    void setAge(const QString &age);
-    bool is_age_Set() const;
-    bool is_age_Valid() const;
-
-    QString getGender() const;
-    void setGender(const QString &gender);
-    bool is_gender_Set() const;
-    bool is_gender_Valid() const;
-
-    QString getPhone() const;
-    void setPhone(const QString &phone);
-    bool is_phone_Set() const;
-    bool is_phone_Valid() const;
-
-    QString getAddress() const;
-    void setAddress(const QString &address);
-    bool is_address_Set() const;
-    bool is_address_Valid() const;
 
     virtual bool isSet() const override;
     virtual bool isValid() const override;
@@ -79,33 +48,9 @@ public:
 private:
     void initializeModel();
 
-    QString id;
+    qint32 id;
     bool m_id_isSet;
     bool m_id_isValid;
-
-    QString password;
-    bool m_password_isSet;
-    bool m_password_isValid;
-
-    QString name;
-    bool m_name_isSet;
-    bool m_name_isValid;
-
-    QString age;
-    bool m_age_isSet;
-    bool m_age_isValid;
-
-    QString gender;
-    bool m_gender_isSet;
-    bool m_gender_isValid;
-
-    QString phone;
-    bool m_phone_isSet;
-    bool m_phone_isValid;
-
-    QString address;
-    bool m_address_isSet;
-    bool m_address_isValid;
 };
 
 } // namespace HttpServer

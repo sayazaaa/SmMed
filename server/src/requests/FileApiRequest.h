@@ -20,8 +20,7 @@
 
 #include <qhttpengine/socket.h>
 #include "HttpFileElement.h"
-#include "Inline_response_200_10.h"
-#include "Inline_response_200_9.h"
+#include "Inline_response_200_3.h"
 #include "Object.h"
 #include <QString>
 #include "FileApiHandler.h"
@@ -36,22 +35,16 @@ public:
     FileApiRequest(QHttpEngine::Socket *s, QSharedPointer<FileApiHandler> handler);
     virtual ~FileApiRequest();
 
-    void fileDocterGetRequest();
     void fileGetRequest();
-    void filePatientGetRequest();
     void filePostRequest();
     
 
-    void fileDocterGetResponse(const Inline_response_200_10& res);
     void fileGetResponse(const Object& res);
-    void filePatientGetResponse(const Inline_response_200_10& res);
-    void filePostResponse(const Inline_response_200_9& res);
+    void filePostResponse(const Inline_response_200_3& res);
     
 
-    void fileDocterGetError(const Inline_response_200_10& res, QNetworkReply::NetworkError error_type, QString& error_str);
     void fileGetError(const Object& res, QNetworkReply::NetworkError error_type, QString& error_str);
-    void filePatientGetError(const Inline_response_200_10& res, QNetworkReply::NetworkError error_type, QString& error_str);
-    void filePostError(const Inline_response_200_9& res, QNetworkReply::NetworkError error_type, QString& error_str);
+    void filePostError(const Inline_response_200_3& res, QNetworkReply::NetworkError error_type, QString& error_str);
     
 
     void sendCustomResponse(QByteArray & res, QNetworkReply::NetworkError error_type);
@@ -65,10 +58,8 @@ public:
     void setResponseHeaders(const QMultiMap<QString,QString>& headers);
 
 signals:
-    void fileDocterGet(QString doctor_id, qint32 type);
-    void fileGet(qint32 id, QString doctor_id, qint32 patient_id);
-    void filePatientGet(qint32 patient_id, qint32 type);
-    void filePost(qint32 id, QString name, QString doctor_id, QString patient_id, qint32 type, HttpFileElement body);
+    void fileGet(qint32 id, QString doctor_id, qint32 patient_id, QString apikey);
+    void filePost(qint32 id, QString name, QString doctor_id, QString patient_id, qint32 type, QString apikey, HttpFileElement body);
     
 
 private:

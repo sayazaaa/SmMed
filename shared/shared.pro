@@ -14,9 +14,9 @@ INCLUDEPATH +=  include \
                 /usr/include/mysql  \
                 /usr/include/botan-2 \
                 /usr/include/botan \
-                /usr/include/botan-2/botan \
                 /usr/include/c++/9 \
-                /usr/include/c++/7
+                /usr/include/c++/7 \
+                /usr/include/uuid
 
 # You can also make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.

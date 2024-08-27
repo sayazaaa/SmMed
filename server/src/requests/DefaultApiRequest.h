@@ -20,10 +20,7 @@
 
 #include <qhttpengine/socket.h>
 #include "Inline_response_200.h"
-#include "Inline_response_200_2.h"
-#include "Inline_response_200_4.h"
 #include "Inline_response_404.h"
-#include "Inline_response_404_1.h"
 #include "Object.h"
 #include <QString>
 #include "DefaultApiHandler.h"
@@ -39,18 +36,15 @@ public:
     virtual ~DefaultApiRequest();
 
     void loginPostRequest();
-    void notificationsGetRequest();
-    void officeIdGetRequest(const QString& id);
+    void sqlGetRequest();
     
 
-    void loginPostResponse(const Inline_response_200_2& res);
-    void notificationsGetResponse(const Inline_response_200& res);
-    void officeIdGetResponse(const Inline_response_200_4& res);
+    void loginPostResponse(const Inline_response_200& res);
+    void sqlGetResponse(const QJsonDocument& jsondoc);
     
 
-    void loginPostError(const Inline_response_200_2& res, QNetworkReply::NetworkError error_type, QString& error_str);
-    void notificationsGetError(const Inline_response_200& res, QNetworkReply::NetworkError error_type, QString& error_str);
-    void officeIdGetError(const Inline_response_200_4& res, QNetworkReply::NetworkError error_type, QString& error_str);
+    void loginPostError(const Inline_response_200& res, QNetworkReply::NetworkError error_type, QString& error_str);
+    void sqlGetError(const Object& res, QNetworkReply::NetworkError error_type, QString& error_str);
     
 
     void sendCustomResponse(QByteArray & res, QNetworkReply::NetworkError error_type);
@@ -64,9 +58,8 @@ public:
     void setResponseHeaders(const QMultiMap<QString,QString>& headers);
 
 signals:
-    void loginPost(QString id, QString password, Object body);
-    void notificationsGet(QString date);
-    void officeIdGet(qint32 id);
+    void loginPost(QString id, QString password, bool usertype, QString apikey, Object body);
+    void sqlGet(QString sql, QString apikey, QString id, bool usertype);
     
 
 private:

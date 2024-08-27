@@ -17,7 +17,7 @@
 
 #include "DefaultApiHandler.h"
 #include "DefaultApiRequest.h"
-
+#include "global.h"
 namespace HttpServer {
 
 DefaultApiHandler::DefaultApiHandler(){
@@ -28,33 +28,65 @@ DefaultApiHandler::~DefaultApiHandler(){
 
 }
 
-void DefaultApiHandler::loginPost(QString id, QString password, Object body) {
-    Q_UNUSED(id);
-    Q_UNUSED(password);
+void DefaultApiHandler::loginPost(QString id, QString password, bool usertype, QString apikey, Object body) {
+    Q_UNUSED(apikey);
     Q_UNUSED(body);
     auto reqObj = qobject_cast<DefaultApiRequest*>(sender());
-    if( reqObj != nullptr ) 
-    { 
-        Inline_response_200_2 res;
-        reqObj->loginPostResponse(res);
-    }    
-}
-void DefaultApiHandler::notificationsGet(QString date) {
-    Q_UNUSED(date);
-    auto reqObj = qobject_cast<DefaultApiRequest*>(sender());
-    if( reqObj != nullptr ) 
-    { 
+    if( reqObj != nullptr )
+    {
+        QSharedPointer<QJsonDocument> jsondoc;
         Inline_response_200 res;
-        reqObj->notificationsGetResponse(res);
-    }    
+        try {
+            jsondoc = usertype?dbserver->verify_userpassword(id,password):dbserver->verify_doctorpassword(id,password);
+        } catch (std::exception e) {
+            QString error_str = "login failed!";
+            reqObj->loginPostError(res,QNetworkReply::NetworkError::RecodeNotFound,error_str);
+            return;
+        }
+        qDebug() << "going to send result...";
+        //res.fromJson(jsondoc->toJson());
+        res = Inline_response_200(jsondoc->toJson());
+        reqObj->loginPostResponse(res);
+        qDebug() << "send succeed";
+    }
 }
-void DefaultApiHandler::officeIdGet(qint32 id) {
-    Q_UNUSED(id);
+void DefaultApiHandler::sqlGet(QString sql, QString apikey, QString id, bool usertype) {
+    Q_UNUSED(usertype)
+    qDebug() << "get sql query!" << endl << sql;
     auto reqObj = qobject_cast<DefaultApiRequest*>(sender());
+    QSharedPointer<QJsonDocument> resjson;
+    try {
+        if(apiVerifyMap[apikey].first != id){
+            std::exception e;
+            throw e;
+        }
+        std::string sqlstd = sql.toStdString();
+        dbserver->sqlquery(&sqlstd,resjson);
+        std::string s = sqlstd.substr(0,6);
+        for(size_t i = 0; i < s.length();i++)s[i] = toupper(s[i]);
+        if(s != "SELECT"){
+            QJsonObject obj = resjson->object();
+            if(!obj["id"].toString().size()){
+                obj["id"] = id;
+            }
+            resjson = QSharedPointer<QJsonDocument>(new QJsonDocument(obj));
+        }
+    } catch (std::exception e) {
+        if(reqObj != nullptr){
+            Object res;
+            QString error_str = "SQL ERROR!";
+            reqObj->sqlGetError(res,QNetworkReply::NetworkError::RecodeNotFound,error_str);
+        }
+
+        return;
+    }
+
     if( reqObj != nullptr ) 
     { 
-        Inline_response_200_4 res;
-        reqObj->officeIdGetResponse(res);
+        qDebug() << "going to send result...";
+        qDebug() << (*resjson);
+        reqObj->sqlGetResponse(*resjson);
+        qDebug() << "send succeed!";
     }    
 }
 

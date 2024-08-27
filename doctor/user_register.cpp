@@ -10,7 +10,7 @@ user_register::user_register(QWidget *parent) :
     ui->setupUi(this);
     setWindowTitle("注册");
     ui->password->setEchoMode(QLineEdit::Password);
-    
+    ui->password_confirm->setEchoMode(QLineEdit::Password);
     
 }
 

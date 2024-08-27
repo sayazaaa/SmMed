@@ -19,9 +19,9 @@ void NetClient::send_post_request(const QUrl& url, const QJsonObject& json) cons
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
     request.setRawHeader("Accept", "*/*");
     request.setRawHeader("Connection", "close");
-    request.setRawHeader("Host", "62.234.161.235:8080");
+    //request.setRawHeader("Host", "62.234.161.235:8080");
     qDebug() << "sendpostrequest : " << json;
-
+    qDebug() << QJsonDocument(json).toJson();
     QNetworkReply* reply = manager->post(request, QJsonDocument(json).toJson());
     connect(reply, &QNetworkReply::finished, this, &NetClient::handle_reply_json);
     qDebug() << "sendpostrequest : " << url;
@@ -64,13 +64,9 @@ void NetClient::handle_reply_json() {
         else {
             qDebug() << reply->error();
             qDebug() << reply->errorString();
-            if (reply->error() == QNetworkReply::ProtocolInvalidOperationError) {
-                emit received_json(QJsonObject());
-                return;
-            }
 
             QMessageBox msgBox;
-            msgBox.setText("注册失败" + reply->errorString());
+            msgBox.setText("失败" + reply->errorString());
             msgBox.exec();
         }
     }

@@ -19,12 +19,8 @@
 #include <QSharedPointer>
 
 #include <qhttpengine/socket.h>
-#include "Inline_object_2.h"
-#include "Inline_object_3.h"
-#include "Inline_response_200_1.h"
-#include "Inline_response_200_5.h"
-#include "Inline_response_200_7.h"
-#include "Inline_response_200_8.h"
+#include "Inline_object_1.h"
+#include "Inline_response_200_2.h"
 #include "Object.h"
 #include <QString>
 #include "DocterApiHandler.h"
@@ -39,22 +35,13 @@ public:
     DocterApiRequest(QHttpEngine::Socket *s, QSharedPointer<DocterApiHandler> handler);
     virtual ~DocterApiRequest();
 
-    void doctorGetRequest();
-    void doctorIdGetRequest(const QString& id);
     void doctorPostRequest();
-    void doctorPutRequest();
     
 
-    void doctorGetResponse(const Inline_response_200_7& res);
-    void doctorIdGetResponse(const Inline_response_200_1& res);
-    void doctorPostResponse(const Inline_response_200_8& res);
-    void doctorPutResponse(const Inline_response_200_5& res);
+    void doctorPostResponse(const Inline_response_200_2& res);
     
 
-    void doctorGetError(const Inline_response_200_7& res, QNetworkReply::NetworkError error_type, QString& error_str);
-    void doctorIdGetError(const Inline_response_200_1& res, QNetworkReply::NetworkError error_type, QString& error_str);
-    void doctorPostError(const Inline_response_200_8& res, QNetworkReply::NetworkError error_type, QString& error_str);
-    void doctorPutError(const Inline_response_200_5& res, QNetworkReply::NetworkError error_type, QString& error_str);
+    void doctorPostError(const Inline_response_200_2& res, QNetworkReply::NetworkError error_type, QString& error_str);
     
 
     void sendCustomResponse(QByteArray & res, QNetworkReply::NetworkError error_type);
@@ -68,10 +55,7 @@ public:
     void setResponseHeaders(const QMultiMap<QString,QString>& headers);
 
 signals:
-    void doctorGet(qint32 office);
-    void doctorIdGet(QString id);
-    void doctorPost(Inline_object_3 inline_object_3);
-    void doctorPut(Inline_object_2 inline_object_2);
+    void doctorPost(QString apikey, Inline_object_1 inline_object_1);
     
 
 private:

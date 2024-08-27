@@ -49,27 +49,6 @@ QHttpEngine::Socket* FileApiRequest::getRawSocket(){
 }
 
 
-void FileApiRequest::fileDocterGetRequest(){
-    qDebug() << "/file/docter";
-    connect(this, &FileApiRequest::fileDocterGet, handler.data(), &FileApiHandler::fileDocterGet);
-
-    
-    QString doctor_id;
-    if(socket->queryString().keys().contains("doctor_id")){
-        fromStringValue(socket->queryString().value("doctor_id"), doctor_id);
-    }
-    
-    qint32 type;
-    if(socket->queryString().keys().contains("type")){
-        fromStringValue(socket->queryString().value("type"), type);
-    }
-    
-
-
-    emit fileDocterGet(doctor_id, type);
-}
-
-
 void FileApiRequest::fileGetRequest(){
     qDebug() << "/file";
     connect(this, &FileApiRequest::fileGet, handler.data(), &FileApiHandler::fileGet);
@@ -90,30 +69,14 @@ void FileApiRequest::fileGetRequest(){
         fromStringValue(socket->queryString().value("patient_id"), patient_id);
     }
     
-
-
-    emit fileGet(id, doctor_id, patient_id);
-}
-
-
-void FileApiRequest::filePatientGetRequest(){
-    qDebug() << "/file/patient";
-    connect(this, &FileApiRequest::filePatientGet, handler.data(), &FileApiHandler::filePatientGet);
-
-    
-    qint32 patient_id;
-    if(socket->queryString().keys().contains("patient_id")){
-        fromStringValue(socket->queryString().value("patient_id"), patient_id);
-    }
-    
-    qint32 type;
-    if(socket->queryString().keys().contains("type")){
-        fromStringValue(socket->queryString().value("type"), type);
+    QString apikey;
+    if(socket->queryString().keys().contains("apikey")){
+        fromStringValue(socket->queryString().value("apikey"), apikey);
     }
     
 
 
-    emit filePatientGet(patient_id, type);
+    emit fileGet(id, doctor_id, patient_id, apikey);
 }
 
 
@@ -147,6 +110,11 @@ void FileApiRequest::filePostRequest(){
         fromStringValue(socket->queryString().value("type"), type);
     }
     
+    QString apikey;
+    if(socket->queryString().keys().contains("apikey")){
+        fromStringValue(socket->queryString().value("apikey"), apikey);
+    }
+    
  
     
     HttpFileElement body;
@@ -154,19 +122,10 @@ void FileApiRequest::filePostRequest(){
     
     
 
-    emit filePost(id, name, doctor_id, patient_id, type, body);
+    emit filePost(id, name, doctor_id, patient_id, type, apikey, body);
 }
 
 
-
-void FileApiRequest::fileDocterGetResponse(const Inline_response_200_10& res){
-    writeResponseHeaders();
-    QJsonDocument resDoc(::HttpServer::toJsonValue(res).toObject());
-    socket->writeJson(resDoc);
-    if(socket->isOpen()){
-        socket->close();
-    }
-}
 
 void FileApiRequest::fileGetResponse(const Object& res){
     writeResponseHeaders();
@@ -177,7 +136,7 @@ void FileApiRequest::fileGetResponse(const Object& res){
     }
 }
 
-void FileApiRequest::filePatientGetResponse(const Inline_response_200_10& res){
+void FileApiRequest::filePostResponse(const Inline_response_200_3& res){
     writeResponseHeaders();
     QJsonDocument resDoc(::HttpServer::toJsonValue(res).toObject());
     socket->writeJson(resDoc);
@@ -186,55 +145,20 @@ void FileApiRequest::filePatientGetResponse(const Inline_response_200_10& res){
     }
 }
 
-void FileApiRequest::filePostResponse(const Inline_response_200_9& res){
-    writeResponseHeaders();
-    QJsonDocument resDoc(::HttpServer::toJsonValue(res).toObject());
-    socket->writeJson(resDoc);
-    if(socket->isOpen()){
-        socket->close();
-    }
-}
-
-
-void FileApiRequest::fileDocterGetError(const Inline_response_200_10& res, QNetworkReply::NetworkError error_type, QString& error_str){
-    Q_UNUSED(error_type); // TODO: Remap error_type to QHttpEngine::Socket errors
-    writeResponseHeaders();
-    Q_UNUSED(error_str);  // response will be used instead of error string
-    QJsonDocument resDoc(::HttpServer::toJsonValue(res).toObject());
-    socket->writeJson(resDoc);
-    if(socket->isOpen()){
-        socket->close();
-    }
-}
 
 void FileApiRequest::fileGetError(const Object& res, QNetworkReply::NetworkError error_type, QString& error_str){
-    Q_UNUSED(error_type); // TODO: Remap error_type to QHttpEngine::Socket errors
-    writeResponseHeaders();
-    Q_UNUSED(error_str);  // response will be used instead of error string
-    QJsonDocument resDoc(::HttpServer::toJsonValue(res).toObject());
-    socket->writeJson(resDoc);
+    Q_UNUSED(error_type);
+    Q_UNUSED(res);
+    socket->writeError(404,error_str.toStdString().c_str());
     if(socket->isOpen()){
         socket->close();
     }
 }
 
-void FileApiRequest::filePatientGetError(const Inline_response_200_10& res, QNetworkReply::NetworkError error_type, QString& error_str){
-    Q_UNUSED(error_type); // TODO: Remap error_type to QHttpEngine::Socket errors
-    writeResponseHeaders();
-    Q_UNUSED(error_str);  // response will be used instead of error string
-    QJsonDocument resDoc(::HttpServer::toJsonValue(res).toObject());
-    socket->writeJson(resDoc);
-    if(socket->isOpen()){
-        socket->close();
-    }
-}
-
-void FileApiRequest::filePostError(const Inline_response_200_9& res, QNetworkReply::NetworkError error_type, QString& error_str){
-    Q_UNUSED(error_type); // TODO: Remap error_type to QHttpEngine::Socket errors
-    writeResponseHeaders();
-    Q_UNUSED(error_str);  // response will be used instead of error string
-    QJsonDocument resDoc(::HttpServer::toJsonValue(res).toObject());
-    socket->writeJson(resDoc);
+void FileApiRequest::filePostError(const Inline_response_200_3& res, QNetworkReply::NetworkError error_type, QString& error_str){
+    Q_UNUSED(error_type);
+    Q_UNUSED(res);
+    socket->writeError(404,error_str.toStdString().c_str());
     if(socket->isOpen()){
         socket->close();
     }

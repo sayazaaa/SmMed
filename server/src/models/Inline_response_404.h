@@ -20,6 +20,7 @@
 
 #include <QJsonObject>
 
+#include <QString>
 
 #include "Enum.h"
 #include "Object.h"
@@ -37,10 +38,10 @@ public:
     void fromJsonObject(QJsonObject json) override;
     void fromJson(QString jsonString) override;
 
-    qint32 getId() const;
-    void setId(const qint32 &id);
-    bool is_id_Set() const;
-    bool is_id_Valid() const;
+    QString getApikey() const;
+    void setApikey(const QString &apikey);
+    bool is_apikey_Set() const;
+    bool is_apikey_Valid() const;
 
     virtual bool isSet() const override;
     virtual bool isValid() const override;
@@ -48,9 +49,9 @@ public:
 private:
     void initializeModel();
 
-    qint32 id;
-    bool m_id_isSet;
-    bool m_id_isValid;
+    QString apikey;
+    bool m_apikey_isSet;
+    bool m_apikey_isValid;
 };
 
 } // namespace HttpServer
