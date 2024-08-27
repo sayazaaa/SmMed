@@ -3,6 +3,9 @@
 #include <QDebug>
 NetClient::NetClient() {
     manager = QSharedPointer<QNetworkAccessManager>::create();
+    socket = QSharedPointer<QTcpSocket>::create();
+    socket->connectToHost("localhost", 8080);
+
 }
 
 void NetClient::send_get_request(const QUrl& url) const{
@@ -30,6 +33,14 @@ void NetClient::send_delete_request(const QUrl& url) const{
     QNetworkRequest request(url);
     QNetworkReply* reply = manager->deleteResource(request);
     connect(reply, &QNetworkReply::finished, this, &NetClient::handle_reply_json);
+}
+
+void NetClient::send_socket_request(QString msg) const{
+    socket->write(msg.toUtf8());
+}
+
+void NetClient::send_socket_request(QByteArray msg) const{
+    socket->write(msg);
 }
 
 // slot

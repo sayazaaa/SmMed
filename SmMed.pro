@@ -7,10 +7,9 @@ SUBDIRS += \
     doctor \
     shared
 
-# shared.depends = dataclass
+shared.depends = dataclass
 
-# commonuser.depends = shared dataclass
-# dbclient.depends = shared
-# doctor.depends = shared
-# server.depends = shared
+commonuser.depends = shared
+dbclient.depends = shared
+doctor.depends = shared
 

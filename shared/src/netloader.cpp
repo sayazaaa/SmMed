@@ -1,6 +1,6 @@
 #include "netloader.h"
 
-#define SERVER_URL "http://0.0.0.0:8080"
+
 
 #include <QDebug>
 
@@ -33,6 +33,17 @@ void NetLoader::get_sql(QString sql, QString id, bool usertype, QString apikey,c
     client.send_get_request(url);
 }
 
+void NetLoader::send_message(QString sender_id, QString receiver_id, QString message, QString apikey,const NetClient &client){
+    client.send_socket_request("message:" + sender_id + ":" + receiver_id + ":" + message + ":" + apikey);
+}
+
+void NetLoader::send_picture(QString sender_id, QString receiver_id, QImage image, QString apikey,const NetClient &client){
+    QByteArray byteArray;
+    QBuffer buffer(&byteArray);
+    buffer.open(QIODevice::WriteOnly);
+    image.save(&buffer, "PNG");
+    client.send_socket_request("picture:" + sender_id + ":" + receiver_id + ":" + byteArray + ":" + apikey);
+}
 
 // void NetLoader::get_single_doctor(QString id,QString apikey ,const NetClient& client){
 //     QUrl url(SERVER_URL);
