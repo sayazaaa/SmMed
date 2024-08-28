@@ -22,7 +22,7 @@ chat_box::chat_box(QString sender_id, QString receiver_id, QWidget* parent) :
     receiver_id(receiver_id) {
     ui->setupUi(this);
     resize(600, 800);
-    connect(&netClient, &NetClient::received_msg, this, [this, sender_id,receiver_id](QSharedPointer<Message> message) {
+    connect(&netClient, &NetClient::received_msg, this, [this, sender_id, receiver_id](QSharedPointer<Message> message) {
         QString type = message->get_type();
         if (type == "text") {
             qDebug() << "Received text message" << QString::fromUtf8(*(message->get_data()));
@@ -37,6 +37,22 @@ chat_box::chat_box(QString sender_id, QString receiver_id, QWidget* parent) :
             }
         }
         else if (type == "picture") {
+            qDebug() << "Received picture message";
+            if (message->get_recipient() == this->sender_id) {
+                QString time = QString::number(QDateTime::currentDateTime().toTime_t()); //时间戳
+                QString msg = "";
+                qDebug() << ui->listWidget->count();
+                dealMessageTime(time);
+                QNChatMessage* messageW = new QNChatMessage(ui->listWidget->parentWidget());
+                QListWidgetItem* item = new QListWidgetItem(ui->listWidget);
+                QImage image = QImage::fromData(*(message->get_data()));
+                messageW->Message_image = image;
+                messageW->setFixedWidth(this->width());
+                messageW->setlogoposi();
+                item->setSizeHint(QSize(image.width() + 50, image.height() + 50));
+                messageW->setText(msg, time, QSize(image.width() + 50, image.height() + 50), QNChatMessage::User_She);
+                ui->listWidget->setItemWidget(item, messageW);
+            }
 
         }
         else {
@@ -135,16 +151,13 @@ void chat_box::on_pushButton_2_clicked() {
         this,
         tr("Select an image"),
         ".", // 默认打开的目录
-        tr("Image Files (*.bmp *.jpg *.jpeg *.gif *.png)"));
+        tr("Image Files (*.bmp *.jpg *.jpeg *.png)"));
     QImage image = QImageReader(file).read();
-
     QString time = QString::number(QDateTime::currentDateTime().toTime_t()); //时间戳
-
     QString msg = "";
     bool isSending = true; // 发送中
     qDebug() << ui->listWidget->count();
-    if (ui->listWidget->count() % 2) {
-        if (isSending) {
+    
             dealMessageTime(time);
 
             QNChatMessage* messageW = new QNChatMessage(ui->listWidget->parentWidget());
@@ -155,45 +168,16 @@ void chat_box::on_pushButton_2_clicked() {
             item->setSizeHint(QSize(image.width() + 50, image.height() + 50));
             messageW->setText(msg, time, QSize(image.width() + 50, image.height() + 50), QNChatMessage::User_Me);
             ui->listWidget->setItemWidget(item, messageW);
+        
+    net_send_pic(image, [this, messageW](bool success) {
+        if (success) {
+            messageW->setTextSuccess();
         }
         else {
-            bool isOver = true;
-            for (int i = ui->listWidget->count() - 1; i > 0; i--) {
-                QNChatMessage* messageW = (QNChatMessage*)ui->listWidget->itemWidget(ui->listWidget->item(i));
-                if (messageW->text() == msg) {
-                    isOver = false;
-                    messageW->setTextSuccess();
-                }
-            }
-            if (isOver) {
-                dealMessageTime(time);
-
-                QNChatMessage* messageW = new QNChatMessage(ui->listWidget->parentWidget());
-                QListWidgetItem* item = new QListWidgetItem(ui->listWidget);
-                messageW->Message_image = image;
-                messageW->setFixedWidth(this->width());
-                messageW->setlogoposi();
-                item->setSizeHint(QSize(image.width() + 50, image.height() + 50));
-                messageW->setText(msg, time, QSize(image.width() + 50, image.height() + 50), QNChatMessage::User_Me);
-                ui->listWidget->setItemWidget(item, messageW);
-                messageW->setTextSuccess();
-            }
+            qDebug() << "发送失败";
         }
-    }
-    else {
-        if (msg != "" || !image.isNull()) {
-            dealMessageTime(time);
+        });
 
-            QNChatMessage* messageW = new QNChatMessage(ui->listWidget->parentWidget());
-            QListWidgetItem* item = new QListWidgetItem(ui->listWidget);
-            messageW->Message_image = image;
-            messageW->setFixedWidth(this->width());
-            messageW->setlogoposi();
-            item->setSizeHint(QSize(image.width() + 50, image.height() + 50));
-            messageW->setText(msg, time, QSize(image.width() + 50, image.height() + 50), QNChatMessage::User_She);
-            ui->listWidget->setItemWidget(item, messageW);
-        }
-    }
     ui->listWidget->setCurrentRow(ui->listWidget->count() - 1);
 }
 
@@ -201,8 +185,7 @@ void chat_box::net_send_msg(const QString& msg, std::function<void(bool)> callba
     NetLoader::send_message(sender_id, receiver_id, msg, API_KEY, netClient, callback);
 }
 
-void chat_box::net_send_pic(QImage image) {
-    //TODO APIKEY
-    NetLoader::send_picture(sender_id, receiver_id, image, API_KEY, netClient);
+void chat_box::net_send_pic(QImage image, std::function<void(bool)> callback) {
+    NetLoader::send_picture(sender_id, receiver_id, image, API_KEY, netClient, callback);
 }
 
