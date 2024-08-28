@@ -1,5 +1,7 @@
 #include "nowdiagnose.h"
 #include "ui_nowdiagnose.h"
+#include "netloader.h"
+#include "netclient.h"
 
 nowDiagnose::nowDiagnose(QWidget *parent) :
     QWidget(parent),
@@ -44,13 +46,39 @@ void nowDiagnose::on_btn_start_clicked()
 }
 
 
-void nowDiagnose::on_btn_push_clicked()
+
+void nowDiagnose::on_btn_push_1_clicked()
 {
-    //提交
+    QString apikey;
+    NetClient client;
+    //通过 日期 患者姓名 医生id 富文本编辑器 增加：诊断报告
+    QString sql="";
+    NetLoader::get_sql(sql , *doctor_id , 0 , apikey , client );
+    ui->btn_push_1->setText("已提交诊断报告");
+    ui->btn_push_1->setDisabled(true);
+}
 
 
-    ui->btn_push->setText("已提交");
-    ui->btn_start->setText("已结束诊断");
-    ui->btn_push->setDisabled(true);
+void nowDiagnose::on_btn_push_2_clicked()
+{
+    QString apikey;
+    NetClient client;
+    //通过 日期 患者姓名 医生id 富文本编辑器 增加：处方
+    QString sql="";
+    NetLoader::get_sql(sql , *doctor_id , 0 , apikey , client );
+    ui->btn_push_1->setText("已提交处方");
+    ui->btn_push_1->setDisabled(true);
+}
+
+
+void nowDiagnose::on_btn_push_3_clicked()
+{
+    QString apikey;
+    NetClient client;
+    //通过 日期 患者姓名 医生id 富文本编辑器 增加：医嘱
+    QString sql="";
+    NetLoader::get_sql(sql , *doctor_id , 0 , apikey , client );
+    ui->btn_push_1->setText("已提交医嘱");
+    ui->btn_push_1->setDisabled(true);
 }
 

@@ -72,14 +72,7 @@
        </property>
       </widget>
      </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="label_date_text">
-       <property name="text">
-        <string>就诊日期</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1">
+     <item row="2" column="3">
       <widget class="QLabel" name="label_date">
        <property name="text">
         <string>1999/9/9</string>
@@ -87,16 +80,16 @@
       </widget>
      </item>
      <item row="2" column="2">
-      <widget class="QLabel" name="label_time_text">
+      <widget class="QLabel" name="label_date_text">
        <property name="text">
-        <string>就诊时间</string>
+        <string>就诊日期</string>
        </property>
       </widget>
      </item>
-     <item row="2" column="3">
-      <widget class="QLabel" name="label_time">
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_which">
        <property name="text">
-        <string>上午</string>
+        <string>TextLabel</string>
        </property>
       </widget>
      </item>

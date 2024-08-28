@@ -23,9 +23,9 @@ void little_history::set_label_date(const QString &text)
 {
     ui->label_date->setText(text);
 }
-void little_history::set_label_time(const QString &text)
+void little_history::set_label_which(const QString &text)
 {
-    ui->label_time->setText(text);
+    ui->label_which->setText(text);
 }
 void little_history::set_label_doc_name(const QString &text)
 {

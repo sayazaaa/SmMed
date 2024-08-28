@@ -1,5 +1,11 @@
 TEMPLATE = subdirs
 
+#SUBDIRS += \
+#    commonuser \
+#    doctor \
+#    shared \
+#    dataclass
+
 SUBDIRS += \
     commonuser \
     dataclass \
