@@ -350,8 +350,8 @@ void RichTextEdit::adjustSize() {
     }
 }
 
-void RichTextEdit::readonly(bool b){
-   textEdit->setReadOnly(b);
+void RichTextEdit::readonly(bool b) {
+    textEdit->setReadOnly(b);
 }
 
 
@@ -409,6 +409,37 @@ bool RichTextEdit::save(QUrl saveUrl) {
     process.waitForFinished();
     return process.exitCode() == 0;
 }
+
+bool RichTextEdit::load(QUrl url) {
+    QTemporaryDir tempDir;
+    if (!tempDir.isValid()) {
+        return false;
+    }
+
+    QString tempDirPath = tempDir.path();
+    qDebug() << "tempDirPath: " << tempDirPath;
+
+    QProcess process;
+    process.setProgram("unzip");
+    QStringList arguments;
+    arguments << "-d" << tempDirPath << url.toLocalFile();
+    process.setArguments(arguments);
+    process.start();
+    process.waitForFinished();
+    if (process.exitCode() != 0) {
+        return false;
+    }
+
+    QFile file(tempDirPath + "/main.html");
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        return false;
+    }
+
+    QTextDocumentWriter writer(tempDirPath + "/main.html", "HTML");
+    writer.write(textEdit->document());
+    return true;
+}
+
 
 //slots
 void RichTextEdit::onTextChanged() {

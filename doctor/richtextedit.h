@@ -36,6 +36,8 @@ class RichTextEdit : public QWidget
 public:
     RichTextEdit(QWidget *parent = nullptr);
     void readonly(bool b);
+    bool save(QUrl url);
+    bool load(QUrl url);
 
 protected:
     void dragEnterEvent(QDragEnterEvent *event) override;
@@ -53,7 +55,7 @@ private:
     bool checkStrikeOut();
     void adjustSize();
     void checkFontSize();
-    bool save(QUrl url);
+    
     QImage fitImage(const QImage &image);
 
 
@@ -82,4 +84,4 @@ private slots:
 
 };
 
-#endif // RICHTEXTEDIT_H
+#endif // RICHTEXTED

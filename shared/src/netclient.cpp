@@ -55,21 +55,21 @@ void NetClient::get_file_request(const QUrl& url) const {
     connect(reply, &QNetworkReply::finished, this, &NetClient::handle_reply_file);
 }
 
-void NetClient::send_socket_request(Message& msg, std::function<void(bool)> callback) const{
+void NetClient::send_socket_request(Message& msg, std::function<void(bool)> callback) const {
     send_message(*socket, msg);
     connect(this, &NetClient::write_msg, this, [this, callback]() {
         socket->flush();
         callback(true);
-    });
+        });
     emit write_msg(callback);
 }
 
-void NetClient::send_socket_apikey_request(QString apikey) const{
+void NetClient::send_socket_apikey_request(QString apikey) const {
 
-        socket->connectToHost("0.0.0.0", 8081);
-        qDebug() << API_KEY;
-        socket->write(API_KEY.toStdString().c_str());
-        socket->write("\n");
+    socket->connectToHost("0.0.0.0", 8081);
+    qDebug() << API_KEY;
+    socket->write(API_KEY.toStdString().c_str());
+    socket->write("\n");
 }
 
 
@@ -110,12 +110,16 @@ void NetClient::handle_reply_file() {
     QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
     if (reply) {
         if (reply->error() == QNetworkReply::NoError) {
+
             qDebug() << "handle reply file";
             QByteArray response = reply->readAll();
-            QFile file("file");
+            QString path = QDir::cleanPath(QApplication::applicationDirPath() + QDir::separator());
+            QString filename = QTime::currentTime().toString("yyyyMMddhhmmss") + ".zip";
+            QFile file(path + filename);
             file.open(QIODevice::WriteOnly);
             file.write(response);
             file.close();
+            emit received_file(path + filename);
         }
         else {
             qDebug() << reply->error();

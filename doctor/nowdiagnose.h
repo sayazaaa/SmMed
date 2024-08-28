@@ -3,6 +3,14 @@
 
 #include <QWidget>
 #include <QDir>
+#include <QFile>
+#include <QTextStream>
+#include <QDebug>
+#include <QDateTime>
+#include <QApplication>
+#include <QTextDocument>
+#include <QTime>
+#include <QTimer>
 
 namespace Ui {
 class nowDiagnose;
@@ -20,6 +28,7 @@ public:
     void set_label_user_gender(const QString &text);
     void set_label_age(const QString &text);
     void set_label_id(const QString &text);
+    void set_appointment_id(const QString &text);
 
     explicit nowDiagnose(QWidget *parent = nullptr);
     ~nowDiagnose();
@@ -39,6 +48,7 @@ private slots:
 
 private:
     Ui::nowDiagnose *ui;
+    QString appointment_id;
 };
 
 #endif // NOWDIAGNOSE_H
