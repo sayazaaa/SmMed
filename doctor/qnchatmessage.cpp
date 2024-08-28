@@ -165,6 +165,7 @@ void QNChatMessage::paintEvent(QPaintEvent *event)
 //        painter.drawRoundedRect(m_iconLeftRect,m_iconLeftRect.width(),m_iconLeftRect.height());
         painter.drawPixmap(m_iconLeftRect, m_leftPixmap);
 
+        if (Message_image.isNull()){
         //框加边
         QColor col_KuangB(234, 234, 234);
         painter.setBrush(QBrush(col_KuangB));
@@ -192,6 +193,9 @@ void QNChatMessage::paintEvent(QPaintEvent *event)
         painter.drawLine(QPointF(m_sanjiaoLeftRect.x() - 1, 30), QPointF(m_sanjiaoLeftRect.x()+m_sanjiaoLeftRect.width(), 24));
         painter.drawLine(QPointF(m_sanjiaoLeftRect.x() - 1, 30), QPointF(m_sanjiaoLeftRect.x()+m_sanjiaoLeftRect.width(), 36));
 
+        }
+
+
         //内容
         if(!Message_image.isNull())// 绘制背景图片
             painter.drawImage(50, 50, Message_image);
@@ -206,7 +210,8 @@ void QNChatMessage::paintEvent(QPaintEvent *event)
         //头像
 //        painter.drawRoundedRect(m_iconRightRect,m_iconRightRect.width(),m_iconRightRect.height());
         painter.drawPixmap(m_iconRightRect, m_rightPixmap);
-
+        if (Message_image.isNull())
+        {
         //框
         QColor col_Kuang(75,164,242);
         painter.setBrush(QBrush(col_Kuang));
@@ -222,6 +227,9 @@ void QNChatMessage::paintEvent(QPaintEvent *event)
         pen.setColor(col_Kuang);
         painter.setPen(pen);
         painter.drawPolygon(points, 3);
+        }
+        
+       
 
         //内容
         if(!Message_image.isNull())// 绘制背景图片

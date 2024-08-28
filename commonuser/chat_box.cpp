@@ -140,9 +140,17 @@ void chat_box::resizeEvent(QResizeEvent* event) {
     for (int i = 0; i < ui->listWidget->count(); i++) {
         QNChatMessage* messageW = (QNChatMessage*)ui->listWidget->itemWidget(ui->listWidget->item(i));
         QListWidgetItem* item = ui->listWidget->item(i);
-
+        
+        if (!messageW->Message_image.isNull()) {
+            item->setSizeHint(QSize(messageW->Message_image.width() + 50, messageW->Message_image.height() + 50));
+            messageW->setlogoposi();
+            messageW->setText(messageW->text(), messageW->time(), QSize(messageW->Message_image.width() + 50, messageW->Message_image.height() + 50), messageW->userType());
+            ui->listWidget->setItemWidget(item, messageW);
+        }
+        else {
         dealMessage(messageW, item, messageW->text(), messageW->time(), messageW->userType());
     }
+}
 }
 
 void chat_box::on_pushButton_2_clicked() {
@@ -153,6 +161,9 @@ void chat_box::on_pushButton_2_clicked() {
         ".", // 默认打开的目录
         tr("Image Files (*.bmp *.jpg *.jpeg *.png)"));
     QImage image = QImageReader(file).read();
+    if (image.isNull()) {
+        return;
+    }
     QString time = QString::number(QDateTime::currentDateTime().toTime_t()); //时间戳
     QString msg = "";
     bool isSending = true; // 发送中
@@ -162,6 +173,7 @@ void chat_box::on_pushButton_2_clicked() {
 
             QNChatMessage* messageW = new QNChatMessage(ui->listWidget->parentWidget());
             QListWidgetItem* item = new QListWidgetItem(ui->listWidget);
+    image = image.scaled(this->width() / 2, this->height() / 2, Qt::KeepAspectRatio);
             messageW->Message_image = image;
             messageW->setFixedWidth(this->width());
             messageW->setlogoposi();
