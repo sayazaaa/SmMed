@@ -119,9 +119,9 @@ QSize QNChatMessage::getRealString(QString src)
         QString value = src;
         if(nMaxWidth > m_textWidth) {
             nMaxWidth = m_textWidth;
-            int size = m_textWidth / fm.width(" ");
-            int num = fm.width(value) / m_textWidth;
-            int ttmp = num*fm.width(" ");
+            double size = m_textWidth / fm.width(" ");
+            double num = fm.width(value) / m_textWidth;
+            double ttmp = num*fm.width(" ");
             num = ( fm.width(value) ) / m_textWidth;
             nCount += num;
             QString temp = "";
@@ -136,8 +136,8 @@ QSize QNChatMessage::getRealString(QString src)
             nMaxWidth = fm.width(value) > nMaxWidth ? fm.width(value) : nMaxWidth;
             if(fm.width(value) > m_textWidth) {
                 nMaxWidth = m_textWidth;
-                int size = m_textWidth / fm.width(" ");
-                int num = fm.width(value) / m_textWidth;
+                double size = m_textWidth / fm.width(" ");
+                double num = fm.width(value) / m_textWidth;
                 num = ((i+num)*fm.width(" ") + fm.width(value)) / m_textWidth;
                 nCount += num;
                 QString temp = "";
@@ -165,7 +165,8 @@ void QNChatMessage::paintEvent(QPaintEvent *event)
 //        painter.drawRoundedRect(m_iconLeftRect,m_iconLeftRect.width(),m_iconLeftRect.height());
         painter.drawPixmap(m_iconLeftRect, m_leftPixmap);
 
-        //框加边
+        if (Message_image.isNull()){
+            //框加边
         QColor col_KuangB(234, 234, 234);
         painter.setBrush(QBrush(col_KuangB));
         painter.drawRoundedRect(m_kuangLeftRect.x()-1,m_kuangLeftRect.y()-1,m_kuangLeftRect.width()+2,m_kuangLeftRect.height()+2,4,4);
@@ -192,6 +193,9 @@ void QNChatMessage::paintEvent(QPaintEvent *event)
         painter.drawLine(QPointF(m_sanjiaoLeftRect.x() - 1, 30), QPointF(m_sanjiaoLeftRect.x()+m_sanjiaoLeftRect.width(), 24));
         painter.drawLine(QPointF(m_sanjiaoLeftRect.x() - 1, 30), QPointF(m_sanjiaoLeftRect.x()+m_sanjiaoLeftRect.width(), 36));
 
+        }
+
+        
         //内容
         if(!Message_image.isNull())// 绘制背景图片
             painter.drawImage(50, 50, Message_image);
@@ -206,8 +210,9 @@ void QNChatMessage::paintEvent(QPaintEvent *event)
         //头像
 //        painter.drawRoundedRect(m_iconRightRect,m_iconRightRect.width(),m_iconRightRect.height());
         painter.drawPixmap(m_iconRightRect, m_rightPixmap);
-
-        //框
+        if (Message_image.isNull())
+        {
+         //框
         QColor col_Kuang(75,164,242);
         painter.setBrush(QBrush(col_Kuang));
         painter.drawRoundedRect(m_kuangRightRect,4,4);
@@ -222,6 +227,9 @@ void QNChatMessage::paintEvent(QPaintEvent *event)
         pen.setColor(col_Kuang);
         painter.setPen(pen);
         painter.drawPolygon(points, 3);
+        }
+        
+       
 
         //内容
         if(!Message_image.isNull())// 绘制背景图片

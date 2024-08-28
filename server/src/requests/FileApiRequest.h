@@ -58,8 +58,8 @@ public:
     void setResponseHeaders(const QMultiMap<QString,QString>& headers);
 
 signals:
-    void fileGet(qint32 id, QString doctor_id, qint32 patient_id, QString apikey);
-    void filePost(qint32 id, QString name, QString doctor_id, QString patient_id, qint32 type, QString apikey, HttpFileElement body);
+    void fileGet(QString uuid, QString apikey);
+    void filePost(QString name, QString doctor_id, QString patient_id, QString type, QString apikey, QString appointment_id, HttpFileElement body);
     
 
 private:

@@ -21,10 +21,10 @@ void NetClient::send_post_request(const QUrl& url, const QJsonObject& json) cons
     request.setRawHeader("Connection", "close");
     //request.setRawHeader("Host", "62.234.161.235:8080");
     qDebug() << "sendpostrequest : " << json;
+    qDebug() << "sendurl" << url;
     qDebug() << QJsonDocument(json).toJson();
     QNetworkReply* reply = manager->post(request, QJsonDocument(json).toJson());
     connect(reply, &QNetworkReply::finished, this, &NetClient::handle_reply_json);
-    qDebug() << "sendpostrequest : " << url;
 }
 
 void NetClient::send_put_request(const QUrl& url, const QJsonObject& json) const {
@@ -42,11 +42,11 @@ void NetClient::send_delete_request(const QUrl& url) const {
 
 void NetClient::send_socket_request(Message& msg, std::function<void(bool)> callback) const{
     send_message(*socket, msg);
-    emit write_msg(callback);
     connect(this, &NetClient::write_msg, this, [this, callback]() {
+        socket->flush();
         callback(true);
     });
-    
+    emit write_msg(callback);
 }
 
 void NetClient::send_socket_apikey_request(QString apikey) const{
@@ -86,7 +86,7 @@ void NetClient::handle_reply_json() {
 
 
 void NetClient::handle_socket_read() {
-    qDebug() << "socket read";
-    QByteArray response = socket->readAll();
-    qDebug() << "socket res:" <<response;
+    QSharedPointer<Message> msg = receive_message(*socket);
+    emit received_msg(msg);
+    qDebug() << "NetClient::handle_socket_read" << "emit received_msg" << msg->get_type();
 }

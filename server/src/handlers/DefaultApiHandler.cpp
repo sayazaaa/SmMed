@@ -82,13 +82,14 @@ void DefaultApiHandler::sqlGet(QString sql, QString apikey, QString id, bool use
         return;
     }
 
-    if( reqObj != nullptr ) 
-    { 
+    if( reqObj != nullptr )
+    {
         qDebug() << "going to send result...";
         qDebug() << (*resjson);
-        reqObj->sqlGetResponse(*resjson);
+        Object obj(resjson->toJson());
+        reqObj->sqlGetResponse(obj);
         qDebug() << "send succeed!";
-    }    
+    }
 }
 
 

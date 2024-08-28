@@ -31,7 +31,7 @@ namespace  NetLoader {
         const NetClient& client, 
         std::function<void(bool)> callback
         );
-    void send_picture(QString sender_id, QString receiver_id, QImage image, QString apikey, const NetClient& client);
+    void send_picture(QString sender_id, QString receiver_id, QImage image, QString apikey, const NetClient& client,std::function<void(bool)> callback);
 
 }
 

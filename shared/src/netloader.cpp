@@ -66,8 +66,17 @@ void NetLoader::send_message(QString sender_id, QString receiver_id, QString mes
     client.send_socket_request(msg, callback);
 }
 
-void NetLoader::send_picture(QString sender_id, QString receiver_id, QImage image, QString apikey, const NetClient& client) {
-
+void NetLoader::send_picture(QString sender_id, QString receiver_id, QImage image, QString apikey, const NetClient& client, std::function<void(bool)> callback) {
+    PictureMessage msg;
+    msg.set_apikey(API_KEY);
+    msg.set_sender(sender_id);
+    msg.set_recipient(receiver_id);
+    QByteArray byteArray;
+    QBuffer buffer(&byteArray);
+    buffer.open(QIODevice::WriteOnly);
+    image.save(&buffer, "PNG");
+    msg.set_data(byteArray);
+    client.send_socket_request(msg, callback);
 }
 
 // void NetLoader::get_single_doctor(QString id,QString apikey ,const NetClient& client){

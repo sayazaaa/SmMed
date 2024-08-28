@@ -42,6 +42,7 @@ public:
 signals:
     void received_json(const QJsonObject& json);
     void write_msg(std::function<void(bool)> callback) const;
+    void received_msg(QSharedPointer<Message> msg);
 
 private slots:
     void handle_reply_json();

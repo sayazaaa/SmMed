@@ -82,14 +82,12 @@ void ApiRouter::setUpRoutes() {
 }
 
 void ApiRouter::processRequest(QHttpEngine::Socket *socket){
-    qDebug() << "processing...";
     if( handleRequest(socket) ){
         return;
     }
     if( handleRequestAndExtractPathParam(socket) ){
         return;
     }
-    qDebug() << "closing";
     socket->setStatusCode(QHttpEngine::Socket::NotFound);
     if(socket->isOpen()){
         socket->writeHeaders();
