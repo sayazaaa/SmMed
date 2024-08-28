@@ -84,6 +84,11 @@ void Widget::initUi()
 
     btn_hide();
     ui->sw_main->setCurrentIndex(0);
+    void setToolTip(const QString &);
+    ui->btn_mine->setToolTip("个人信息和添加就诊人");
+    ui->btn_home->setToolTip("返回主页");
+    ui->btn_littleshow->setToolTip("最小化窗口");
+    ui->btn_logout->setToolTip("退出应用或者最小化到托盘");
 
 }
 
@@ -973,7 +978,7 @@ void Widget::delete_3()
     }
 }
 
-void Widget::putin_3()
+void Widget::putin_3(int i)
 {
 
     page_hide_3();
@@ -1026,13 +1031,13 @@ void Widget::putin_3()
     QListWidgetItem* pItem = new QListWidgetItem;
 
     //填入数据
-    w->set_label_doc_name( *(doctor_name+page_now*9-9) );
-    w->set_label_gender( *(doctor_gender+page_now*9-9) );
-    w->set_label_apartment( *(office_name+page_now*9-9) );
-    w->set_label_describe( *(doctor_describe+page_now*9-9) );
+    w->set_label_doc_name( *(doctor_name+page_now*9-9+i) );
+    w->set_label_gender( *(doctor_gender+page_now*9-9+i) );
+    w->set_label_apartment( *(office_name+page_now*9-9+i) );
+    w->set_label_describe( *(doctor_describe+page_now*9-9+i) );
     w->adate_now = ui->date_3->date().toString();
-    w->doctor_id = doctor_id+page_now*9-9;
-    w->patient_name = patient_name;
+    w->doctor_id = doctor_id+page_now*9-9+i;
+    w->patient_name = patient_name+page_now*9-9+i;
     //设置item大小
     pItem->setSizeHint(QSize(ui->listWidget_3->width()/3-10,ui->listWidget_3->height()/3 ));
     //添加进QlistWidget
@@ -1074,14 +1079,14 @@ void Widget::search_3()
     {
         for(int i=0;i<9;i++)
         {
-            putin_3();//缺少参数
+            putin_3(i);//缺少参数
         }
     }
     else
     {
         for(int i=0;i<data_num;i++)
         {
-            putin_3();//缺少参数
+            putin_3(i);//缺少参数
         }
     }
 
@@ -1103,7 +1108,7 @@ void Widget::on_btn_page_left_3_clicked()
         delete_3();
         for(int i=0;i<9;i++)
         {
-            putin_3();//缺少参数
+            putin_3(i);//缺少参数
         }
     }
 }
@@ -1116,7 +1121,7 @@ void Widget::on_btn_page_right_3_clicked()
         delete_3();
         for(int i=0;i<9;i++)
         {
-            putin_3();//缺少参数
+            putin_3(i);//缺少参数
         }
     }
 }
@@ -1127,7 +1132,7 @@ void Widget::on_btn_page_1_3_clicked()
     delete_3();
     for(int i=0;i<9;i++)
     {
-        putin_3();//缺少参数
+        putin_3(i);//缺少参数
     }
 }
 
@@ -1137,7 +1142,7 @@ void Widget::on_btn_page_2_3_clicked()
     delete_3();
     for(int i=0;i<9;i++)
     {
-        putin_3();//缺少参数
+        putin_3(i);//缺少参数
     }
 
 }
@@ -1148,7 +1153,7 @@ void Widget::on_btn_page_3_3_clicked()
     delete_3();
     for(int i=0;i<9;i++)
     {
-        putin_3();//缺少参数
+        putin_3(i);//缺少参数
     }
 }
 
@@ -1158,7 +1163,7 @@ void Widget::on_btn_page_4_3_clicked()
     delete_3();
     for(int i=0;i<9;i++)
     {
-        putin_3();//缺少参数
+        putin_3(i);//缺少参数
     }
 }
 
@@ -1182,7 +1187,7 @@ void Widget::delete_4()
     }
 }
 
-void Widget::putin_4()
+void Widget::putin_4(int i)
 {
     page_hide_4();
     //填写页数
@@ -1234,12 +1239,12 @@ void Widget::putin_4()
     myAppointment *w = new myAppointment;
     QListWidgetItem* pItem = new QListWidgetItem;
     //填入数据
-    w->set_label_user_name(*(patient_name+page_now-1));
-    w->set_label_date(*(appointment_date+page_now-1));
-    w->set_label_time(*(appointment_time+page_now-1));
-    w->set_label_doc_name(  *(doctor_name+page_now-1)  );
-    w->set_label_apartment(*(office_name+page_now-1));
-    w->set_label_id(*(appointment_id+page_now-1));
+    w->set_label_user_name(*(patient_name+page_now*9-9+i));
+    w->set_label_date(*(appointment_date+page_now*9-9+i));
+    w->set_label_time(*(appointment_time+page_now*9-9+i));
+    w->set_label_doc_name(  *(doctor_name+page_now*9-9+i)  );
+    w->set_label_apartment(*(office_name+page_now*9-9+i));
+    w->set_label_id(*(appointment_id+page_now*9-9+i));
 
     //设置item大小
     pItem->setSizeHint(QSize(ui->listWidget_4->width()/3-10,ui->listWidget_4->height()/3 ));
@@ -1287,14 +1292,14 @@ void Widget::search_4()
     {
         for(int i=0;i<9;i++)
         {
-            putin_4();//缺少参数
+            putin_4(i);//缺少参数
         }
     }
     else
     {
         for(int i=0;i<data_num;i++)
         {
-            putin_4();//缺少参数
+            putin_4(i);//缺少参数
         }
     }
 
@@ -1317,7 +1322,7 @@ void Widget::on_btn_page_left_4_clicked()
         delete_4();
         for(int i=0;i<9;i++)
         {
-            putin_4();//缺少参数
+            putin_4(i);//缺少参数
         }
     }
 }
@@ -1330,7 +1335,7 @@ void Widget::on_btn_page_right_4_clicked()
         delete_4();
         for(int i=0;i<9;i++)
         {
-            putin_4();//缺少参数
+            putin_4(i);//缺少参数
         }
     }
 }
@@ -1341,7 +1346,7 @@ void Widget::on_btn_page_1_4_clicked()
     delete_4();
     for(int i=0;i<9;i++)
     {
-        putin_4();//缺少参数
+        putin_4(i);//缺少参数
     }
 }
 
@@ -1351,7 +1356,7 @@ void Widget::on_btn_page_2_4_clicked()
     delete_4();
     for(int i=0;i<9;i++)
     {
-        putin_4();//缺少参数
+        putin_4(i);//缺少参数
     }
 
 }
@@ -1362,7 +1367,7 @@ void Widget::on_btn_page_3_4_clicked()
     delete_4();
     for(int i=0;i<9;i++)
     {
-        putin_4();//缺少参数
+        putin_4(i);//缺少参数
     }
 }
 
@@ -1372,7 +1377,7 @@ void Widget::on_btn_page_4_4_clicked()
     delete_4();
     for(int i=0;i<9;i++)
     {
-        putin_4();//缺少参数
+        putin_4(i);//缺少参数
     }
 }
 
@@ -1396,7 +1401,7 @@ void Widget::delete_5()
     }
 }
 
-void Widget::putin_5()
+void Widget::putin_5(int i)
 {
 
 
@@ -1449,10 +1454,10 @@ void Widget::putin_5()
     little_doctor *w = new little_doctor;
     QListWidgetItem* pItem = new QListWidgetItem;
     //填入数据
-    w->set_label_name(  *(doctor_name+page_now-1)  );
-    w->set_label_gender( *(doctor_gender+page_now-1) );
-    w->set_label_apartment( *(office_name+page_now-1) );
-    w->set_label_introduce( *(doctor_describe+page_now-1) );
+    w->set_label_name(  *(doctor_name+page_now*9-9+i)  );
+    w->set_label_gender( *(doctor_gender+page_now*9-9+i) );
+    w->set_label_apartment( *(office_name+page_now*9-9+i) );
+    w->set_label_introduce( *(doctor_describe+page_now*9-9+i) );
     w->doc_id=doctor_id;
     if(choice_state==3)
     {
@@ -1506,14 +1511,14 @@ void Widget::search_5()
     {
         for(int i=0;i<9;i++)
         {
-            putin_5();//缺少参数
+            putin_5(i);//缺少参数
         }
     }
     else
     {
         for(int i=0;i<data_num;i++)
         {
-            putin_5();//缺少参数
+            putin_5(i);//缺少参数
         }
     }
 
@@ -1535,7 +1540,7 @@ void Widget::on_btn_page_left_5_clicked()
         delete_5();
         for(int i=0;i<9;i++)
         {
-            putin_5();//缺少参数
+            putin_5(i);//缺少参数
         }
     }
 }
@@ -1548,7 +1553,7 @@ void Widget::on_btn_page_right_5_clicked()
         delete_5();
         for(int i=0;i<9;i++)
         {
-            putin_5();//缺少参数
+            putin_5(i);//缺少参数
         }
     }
 }
@@ -1559,7 +1564,7 @@ void Widget::on_btn_page_1_5_clicked()
     delete_5();
     for(int i=0;i<9;i++)
     {
-        putin_5();//缺少参数
+        putin_5(i);//缺少参数
     }
 }
 
@@ -1569,7 +1574,7 @@ void Widget::on_btn_page_2_5_clicked()
     delete_5();
     for(int i=0;i<9;i++)
     {
-        putin_5();//缺少参数
+        putin_5(i);//缺少参数
     }
 
 }
@@ -1580,7 +1585,7 @@ void Widget::on_btn_page_3_5_clicked()
     delete_5();
     for(int i=0;i<9;i++)
     {
-        putin_5();//缺少参数
+        putin_5(i);//缺少参数
     }
 }
 
@@ -1590,7 +1595,7 @@ void Widget::on_btn_page_4_5_clicked()
     delete_5();
     for(int i=0;i<9;i++)
     {
-        putin_5();//缺少参数
+        putin_5(i);//缺少参数
     }
 }
 

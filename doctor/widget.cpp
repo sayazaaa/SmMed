@@ -961,7 +961,7 @@ void Widget::delete_4()
     }
 }
 
-void Widget::putin_4()
+void Widget::putin_4(int i)
 {
     page_hide_4();
     //填写页数
@@ -1012,10 +1012,10 @@ void Widget::putin_4()
     myAppointment *w = new myAppointment;
     QListWidgetItem* pItem = new QListWidgetItem;
     //填入数据
-    w->set_label_user_name(  *(patient_name+page_now-1) );
+    w->set_label_user_name(  *(patient_name+page_now*9-9+i) );
     w->set_label_user_age( "28" );
-    w->set_label_user_gender( *(patient_name+page_now-1) );
-    w->set_label_time( *(appointment_time+page_now-1) );
+    w->set_label_user_gender( *(patient_name+page_now*9-9+i) );
+    w->set_label_time( *(appointment_time+page_now*9-9+i) );
 
     //设置item大小
     pItem->setSizeHint(QSize(ui->listWidget_4->width()/3-10,ui->listWidget_4->height()/3 ));
@@ -1058,14 +1058,14 @@ void Widget::search_4()
     {
         for(int i=0;i<9;i++)
         {
-            putin_4();//缺少参数
+            putin_4(i);//缺少参数
         }
     }
     else
     {
         for(int i=0;i<all_num;i++)
         {
-            putin_4();//缺少参数
+            putin_4(i);//缺少参数
         }
     }
 
@@ -1085,7 +1085,7 @@ void Widget::on_btn_page_left_4_clicked()
         delete_4();
         for(int i=0;i<9;i++)
         {
-            putin_4();//缺少参数
+            putin_4(i);//缺少参数
         }
     }
 }
@@ -1098,7 +1098,7 @@ void Widget::on_btn_page_right_4_clicked()
         delete_4();
         for(int i=0;i<9;i++)
         {
-            putin_4();//缺少参数
+            putin_4(i);//缺少参数
         }
     }
 }
@@ -1109,7 +1109,7 @@ void Widget::on_btn_page_1_4_clicked()
     delete_4();
     for(int i=0;i<9;i++)
     {
-        putin_4();//缺少参数
+        putin_4(i);//缺少参数
     }
 }
 
@@ -1119,7 +1119,7 @@ void Widget::on_btn_page_2_4_clicked()
     delete_4();
     for(int i=0;i<9;i++)
     {
-        putin_4();//缺少参数
+        putin_4(i);//缺少参数
     }
 
 }
@@ -1130,7 +1130,7 @@ void Widget::on_btn_page_3_4_clicked()
     delete_4();
     for(int i=0;i<9;i++)
     {
-        putin_4();//缺少参数
+        putin_4(i);//缺少参数
     }
 }
 
@@ -1140,7 +1140,7 @@ void Widget::on_btn_page_4_4_clicked()
     delete_4();
     for(int i=0;i<9;i++)
     {
-        putin_4();//缺少参数
+        putin_4(i);//缺少参数
     }
 }
 
