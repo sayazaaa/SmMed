@@ -185,13 +185,13 @@ private:
     void putin_1();
     void delete_1();
     void search_3();
-    void putin_3();
+    void putin_3(int i);
     void delete_3();
     void search_4();
-    void putin_4();
+    void putin_4(int i);
     void delete_4();
     void search_5();
-    void putin_5();
+    void putin_5(int i);
     void delete_5();
     void search_8();
     void putin_8();
