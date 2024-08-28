@@ -24,6 +24,7 @@
 #include "Object.h"
 #include <QString>
 #include "FileApiHandler.h"
+#include <QThread>
 
 namespace HttpServer {
 
@@ -39,7 +40,8 @@ public:
     void filePostRequest();
     
 
-    void fileGetResponse(const Object& res);
+    // void fileGetResponse(const Object& res);
+    void fileGetResponse(const QByteArray& res);
     void filePostResponse(const Inline_response_200_3& res);
     
 

@@ -15,7 +15,7 @@
 #include "messages.h"
 #include "apikey.h"
 
-#define SERVER_URL "http://62.234.161.235:8080"
+#define SERVER_URL "http://0.0.0.0:8080"
 
 class NetClient : public QObject {
     Q_OBJECT
@@ -37,7 +37,7 @@ public:
     (const QUrl& url, const QJsonObject& json) const;
     void send_delete_request
     (const QUrl& url) const;
-    void send_file_request(const QUrl& url, QFile& file) const;
+    void send_file_request(const QUrl& url, QString filepath) const;
     void get_file_request(const QUrl& url) const;
     void send_socket_apikey_request(QString apikey) const;
 

@@ -6,6 +6,7 @@
 #include "user_register.h"
 #include<QMessageBox>
 #include "apikey.h"
+#include <QDir>
 
 namespace Ui {
 class login;

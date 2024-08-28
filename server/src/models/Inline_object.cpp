@@ -33,26 +33,26 @@ Inline_object::~Inline_object() {}
 
 void Inline_object::initializeModel() {
 
-    m_id_isSet = false;
-    m_id_isValid = false;
+    m_id_isSet = true;
+    m_id_isValid = true;
 
-    m_password_isSet = false;
-    m_password_isValid = false;
+    m_password_isSet = true;
+    m_password_isValid = true;
 
-    m_name_isSet = false;
-    m_name_isValid = false;
+    m_name_isSet = true;
+    m_name_isValid = true;
 
-    m_age_isSet = false;
-    m_age_isValid = false;
+    m_age_isSet = true;
+    m_age_isValid = true;
 
-    m_gender_isSet = false;
-    m_gender_isValid = false;
+    m_gender_isSet = true;
+    m_gender_isValid = true;
 
-    m_phone_isSet = false;
-    m_phone_isValid = false;
+    m_phone_isSet = true;
+    m_phone_isValid = true;
 
-    m_address_isSet = false;
-    m_address_isValid = false;
+    m_address_isSet = true;
+    m_address_isValid = true;
 }
 
 void Inline_object::fromJson(QString jsonString) {

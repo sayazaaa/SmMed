@@ -40,10 +40,12 @@ void NetClient::send_delete_request(const QUrl& url) const {
     connect(reply, &QNetworkReply::finished, this, &NetClient::handle_reply_json);
 }
 
-void NetClient::send_file_request(const QUrl& url, QFile& file) const {
+void NetClient::send_file_request(const QUrl& url, QString filepath) const {
     QNetworkRequest request(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/octet-stream");
-    QNetworkReply* reply = manager->put(request, &file);
+    QFile file(filepath);
+    QNetworkReply* reply = manager->put(request, file.readAll());
+    qDebug() << "send file request";
     connect(reply, &QNetworkReply::finished, this, &NetClient::handle_reply_json);
 }
 

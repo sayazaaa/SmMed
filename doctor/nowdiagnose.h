@@ -2,6 +2,7 @@
 #define NOWDIAGNOSE_H
 
 #include <QWidget>
+#include <QDir>
 
 namespace Ui {
 class nowDiagnose;

@@ -34,7 +34,9 @@ void FileApiHandler::fileGet(QString uuid, QString apikey) {
     auto reqObj = qobject_cast<FileApiRequest*>(sender());
     try {
         if(!apiVerifyMap.contains(apikey))throw std::exception();
+        qDebug() << "fileget: receive uuid:" << uuid;
         resbyte = dbserver->get_file(uuid);
+        qDebug() << "resbytesize" << resbyte->size();
     } catch (std::exception e) {
         QString errorstr = QString::fromUtf8("get file failed!");
         if(reqObj != nullptr)
@@ -44,8 +46,9 @@ void FileApiHandler::fileGet(QString uuid, QString apikey) {
 
     if(reqObj != nullptr)
     {
-        Object res(*resbyte);
-        reqObj->fileGetResponse(res);
+        // Object res(*resbyte);
+        // reqObj->fileGetResponse(res);
+        reqObj->fileGetResponse(*resbyte);
     }
 }
 void FileApiHandler::filePost(QString name, QString doctor_id, QString patient_id, QString type, QString apikey, QString appointment_id, HttpFileElement body) {
@@ -53,10 +56,11 @@ void FileApiHandler::filePost(QString name, QString doctor_id, QString patient_i
     QSharedPointer<QJsonDocument> resjsondoc;
     Inline_response_200_3 res;
     auto reqObj = qobject_cast<FileApiRequest*>(sender());
+
     try {
         if(!apiVerifyMap.contains(apikey))throw std::exception();
-        qDebug() << "filepost:verify succeed!";
-        resjsondoc = dbserver->store_file(doctor_id,patient_id,name,type,body.asByteArray(),appointment_id.toInt());
+        qDebug() << "filepost:verify succeed! filesize:" << body.bytearray.size();
+        resjsondoc = dbserver->store_file(doctor_id,patient_id,name,type,body.bytearray,appointment_id.toInt());
     } catch (std::exception e) {
         if(reqObj != nullptr){
             QString errstr = QString::fromUtf8("upload failed!");

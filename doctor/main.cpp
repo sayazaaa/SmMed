@@ -25,7 +25,6 @@ int main(int argc, char *argv[])
     login *l=new login;
     l->show();
 
-//    chat_box *c=new chat_box("cccc","aaaa");
-//    c->show();
+    
     return a.exec();
 }

@@ -49,16 +49,27 @@ void nowDiagnose::on_btn_start_clicked()
 
 void nowDiagnose::on_btn_push_1_clicked()
 {
-    //TODO
-//    ui->thewidget
+   
+    // RichTextEdit *textEdit = ui->thewidget;
+    // QString path = QDir::cleanPath(QApplication::applicationDirPath() + QDir::separator() + "file" + QDir::separator())
+    // QFile file(path + "/report.txt");
+    // if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+    // {
+    //     qDebug() << "Could not open file for writing";
+    //     return;
+    // }
+    // QTextStream out(&file);
+    // out << "dsadasdsa";
+    // file.close();TODO
 
 
 
-    QString apikey;
-    NetClient client;
-    //通过 日期 患者姓名 医生id 富文本编辑器 增加：诊断报告
-    QString sql="INSERT INTO inspreport (doctor_id , patient_id , date)  VALUES( '"+ USER_ID +"','"+ *patient_id +"','"+ date +" )";
-    NetLoader::get_sql(sql , USER_ID , 0 , API_KEY , client );
+
+    // // QString apikey;
+    // NetClient &client = NetClient::getInstance();
+    // //通过 日期 患者姓名 医生id 富文本编辑器 增加：诊断报告
+    // QString sql="INSERT INTO inspreport (doctor_id , patient_id , date)  VALUES( '"+ USER_ID +"','"+ *patient_id +"','"+ date +" )";
+    // NetLoader::get_sql(sql , USER_ID , 0 , API_KEY , client );
     ui->btn_push_1->setText("已提交诊断报告");
     ui->btn_push_1->setDisabled(true);
 }
