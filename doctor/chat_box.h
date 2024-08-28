@@ -39,7 +39,7 @@ private slots:
 
 private:
     void net_send_msg(const QString &msg, std::function<void(bool)> callback);
-    void net_send_pic(QImage image);
+    void net_send_pic(QImage image, std::function<void(bool)> callback);
     Ui::chat_box *ui;
     QSqlDatabase& db;
     NetClient& netClient;

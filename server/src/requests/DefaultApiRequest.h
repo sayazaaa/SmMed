@@ -40,7 +40,7 @@ public:
     
 
     void loginPostResponse(const Inline_response_200& res);
-    void sqlGetResponse(const QJsonDocument& jsondoc);
+    void sqlGetResponse(const Object& res);
     
 
     void loginPostError(const Inline_response_200& res, QNetworkReply::NetworkError error_type, QString& error_str);

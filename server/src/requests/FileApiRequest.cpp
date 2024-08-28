@@ -54,19 +54,9 @@ void FileApiRequest::fileGetRequest(){
     connect(this, &FileApiRequest::fileGet, handler.data(), &FileApiHandler::fileGet);
 
     
-    qint32 id;
-    if(socket->queryString().keys().contains("id")){
-        fromStringValue(socket->queryString().value("id"), id);
-    }
-    
-    QString doctor_id;
-    if(socket->queryString().keys().contains("doctor_id")){
-        fromStringValue(socket->queryString().value("doctor_id"), doctor_id);
-    }
-    
-    qint32 patient_id;
-    if(socket->queryString().keys().contains("patient_id")){
-        fromStringValue(socket->queryString().value("patient_id"), patient_id);
+    QString uuid;
+    if(socket->queryString().keys().contains("uuid")){
+        fromStringValue(socket->queryString().value("uuid"), uuid);
     }
     
     QString apikey;
@@ -76,7 +66,7 @@ void FileApiRequest::fileGetRequest(){
     
 
 
-    emit fileGet(id, doctor_id, patient_id, apikey);
+    emit fileGet(uuid, apikey);
 }
 
 
@@ -84,11 +74,6 @@ void FileApiRequest::filePostRequest(){
     qDebug() << "/file";
     connect(this, &FileApiRequest::filePost, handler.data(), &FileApiHandler::filePost);
 
-    
-    qint32 id;
-    if(socket->queryString().keys().contains("id")){
-        fromStringValue(socket->queryString().value("id"), id);
-    }
     
     QString name;
     if(socket->queryString().keys().contains("name")){
@@ -105,7 +90,7 @@ void FileApiRequest::filePostRequest(){
         fromStringValue(socket->queryString().value("patient_id"), patient_id);
     }
     
-    qint32 type;
+    QString type;
     if(socket->queryString().keys().contains("type")){
         fromStringValue(socket->queryString().value("type"), type);
     }
@@ -115,6 +100,11 @@ void FileApiRequest::filePostRequest(){
         fromStringValue(socket->queryString().value("apikey"), apikey);
     }
     
+    QString appointment_id;
+    if(socket->queryString().keys().contains("appointment_id")){
+        fromStringValue(socket->queryString().value("appointment_id"), appointment_id);
+    }
+    
  
     
     HttpFileElement body;
@@ -122,7 +112,7 @@ void FileApiRequest::filePostRequest(){
     
     
 
-    emit filePost(id, name, doctor_id, patient_id, type, apikey, body);
+    emit filePost(name, doctor_id, patient_id, type, apikey, appointment_id, body);
 }
 
 

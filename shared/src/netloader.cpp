@@ -57,6 +57,23 @@ void NetLoader::get_sql(QString sql, QString id, bool usertype, QString apikey, 
     client.send_get_request(url);
 }
 
+void NetLoader::post_file(QFile file,QString name, QString doctor_id, QString patient_id, QString type, QString apikey,QString appointment_id, const NetClient& client){
+    QUrl url(SERVER_URL);
+    url.setPath("/file");
+    url.setQuery("name=" + name + "&doctor_id=" + doctor_id + "&patient_id=" + patient_id + "&type=" + type + "&apikey=" + apikey + "&appointment_id=" + appointment_id);
+    
+    client.send_file_request(url, file);
+}
+
+void NetLoader::get_file(QString file_id, QString apikey, const NetClient& client){
+    QUrl url(SERVER_URL);
+    url.setPath("/file/" + file_id);
+    url.setQuery("apikey=" + apikey);
+    client.send_get_request(url);
+}
+
+
+
 void NetLoader::send_message(QString sender_id, QString receiver_id, QString message, QString apikey, const NetClient& client, std::function<void(bool)> callback) {
     TextMessage msg;
     msg.set_apikey(API_KEY);
@@ -66,8 +83,17 @@ void NetLoader::send_message(QString sender_id, QString receiver_id, QString mes
     client.send_socket_request(msg, callback);
 }
 
-void NetLoader::send_picture(QString sender_id, QString receiver_id, QImage image, QString apikey, const NetClient& client) {
-
+void NetLoader::send_picture(QString sender_id, QString receiver_id, QImage image, QString apikey, const NetClient& client, std::function<void(bool)> callback) {
+    PictureMessage msg;
+    msg.set_apikey(API_KEY);
+    msg.set_sender(sender_id);
+    msg.set_recipient(receiver_id);
+    QByteArray byteArray;
+    QBuffer buffer(&byteArray);
+    buffer.open(QIODevice::WriteOnly);
+    image.save(&buffer, "PNG");
+    msg.set_data(byteArray);
+    client.send_socket_request(msg, callback);
 }
 
 // void NetLoader::get_single_doctor(QString id,QString apikey ,const NetClient& client){

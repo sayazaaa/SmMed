@@ -15,7 +15,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QMetaType>
-#include<QDebug>
+
 namespace HttpServer {
 
 class Object {
@@ -39,9 +39,7 @@ public:
 
     virtual void fromJson(QString jsonString) {
         QJsonDocument doc = QJsonDocument::fromJson(jsonString.toUtf8());
-        qDebug() << doc;
         jObj = doc.object();
-        qDebug() << jObj;
     }
 
     virtual void fromJsonObject(QJsonObject json) {

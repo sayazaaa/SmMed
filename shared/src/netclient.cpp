@@ -21,10 +21,10 @@ void NetClient::send_post_request(const QUrl& url, const QJsonObject& json) cons
     request.setRawHeader("Connection", "close");
     //request.setRawHeader("Host", "62.234.161.235:8080");
     qDebug() << "sendpostrequest : " << json;
+    qDebug() << "sendurl" << url;
     qDebug() << QJsonDocument(json).toJson();
     QNetworkReply* reply = manager->post(request, QJsonDocument(json).toJson());
     connect(reply, &QNetworkReply::finished, this, &NetClient::handle_reply_json);
-    qDebug() << "sendpostrequest : " << url;
 }
 
 void NetClient::send_put_request(const QUrl& url, const QJsonObject& json) const {
@@ -40,13 +40,26 @@ void NetClient::send_delete_request(const QUrl& url) const {
     connect(reply, &QNetworkReply::finished, this, &NetClient::handle_reply_json);
 }
 
+void NetClient::send_file_request(const QUrl& url, QFile& file) const {
+    QNetworkRequest request(url);
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/octet-stream");
+    QNetworkReply* reply = manager->put(request, &file);
+    connect(reply, &QNetworkReply::finished, this, &NetClient::handle_reply_json);
+}
+
+void NetClient::get_file_request(const QUrl& url) const {
+    QNetworkRequest request(url);
+    QNetworkReply* reply = manager->get(request);
+    connect(reply, &QNetworkReply::finished, this, &NetClient::handle_reply_file);
+}
+
 void NetClient::send_socket_request(Message& msg, std::function<void(bool)> callback) const{
     send_message(*socket, msg);
-    emit write_msg(callback);
     connect(this, &NetClient::write_msg, this, [this, callback]() {
+        socket->flush();
         callback(true);
     });
-    
+    emit write_msg(callback);
 }
 
 void NetClient::send_socket_apikey_request(QString apikey) const{
@@ -86,7 +99,29 @@ void NetClient::handle_reply_json() {
 
 
 void NetClient::handle_socket_read() {
-    qDebug() << "socket read";
-    QByteArray response = socket->readAll();
-    qDebug() << "socket res:" <<response;
+    QSharedPointer<Message> msg = receive_message(*socket);
+    emit received_msg(msg);
+    qDebug() << "NetClient::handle_socket_read" << "emit received_msg" << msg->get_type();
+}
+
+void NetClient::handle_reply_file() {
+    QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
+    if (reply) {
+        if (reply->error() == QNetworkReply::NoError) {
+            qDebug() << "handle reply file";
+            QByteArray response = reply->readAll();
+            QFile file("file");
+            file.open(QIODevice::WriteOnly);
+            file.write(response);
+            file.close();
+        }
+        else {
+            qDebug() << reply->error();
+            qDebug() << reply->errorString();
+
+            QMessageBox msgBox;
+            msgBox.setText("失败" + reply->errorString());
+            msgBox.exec();
+        }
+    }
 }

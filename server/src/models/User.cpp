@@ -274,7 +274,7 @@ bool User::isSet() const {
 
 bool User::isValid() const {
     // only required properties are required for the object to be considered valid
-    return m_id_isValid && m_password_isValid && m_name_isValid && m_age_isValid && m_gender_isValid && m_phone_isValid && true;
+    return m_id_isValid && m_password_isValid && true;
 }
 
 } // namespace HttpServer
