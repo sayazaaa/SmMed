@@ -72,7 +72,7 @@
         </property>
         <property name="maximumSize">
          <size>
-          <width>252</width>
+          <width>16777215</width>
           <height>16777215</height>
          </size>
         </property>
@@ -94,7 +94,7 @@
          </property>
          <item>
           <widget class="QWidget" name="widget_2" native="true">
-           <layout class="QVBoxLayout" name="verticalLayout_4">
+           <layout class="QVBoxLayout" name="verticalLayout_4" stretch="1,1,1">
             <property name="spacing">
              <number>8</number>
             </property>
@@ -296,446 +296,423 @@
          </item>
          <item>
           <widget class="QWidget" name="widget" native="true">
-           <widget class="QLabel" name="lab_title">
-            <property name="geometry">
-             <rect>
-              <x>0</x>
-              <y>0</y>
-              <width>71</width>
-              <height>30</height>
-             </rect>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>30</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <weight>75</weight>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string>功能</string>
-            </property>
-           </widget>
-           <widget class="QWidget" name="layoutWidget">
-            <property name="geometry">
-             <rect>
-              <x>0</x>
-              <y>280</y>
-              <width>224</width>
-              <height>37</height>
-             </rect>
-            </property>
-            <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,0,2,0,2,0,1">
-             <item>
-              <spacer name="horizontalSpacer_4">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>40</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item>
-              <widget class="QPushButton" name="btn_littleshow">
-               <property name="minimumSize">
-                <size>
-                 <width>35</width>
-                 <height>35</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>35</width>
-                 <height>35</height>
-                </size>
-               </property>
-               <property name="cursor">
-                <cursorShape>PointingHandCursor</cursorShape>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-               <property name="icon">
-                <iconset resource="qss.qrc">
-                 <normaloff>:/icons/mini.png</normaloff>:/icons/mini.png</iconset>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <spacer name="horizontalSpacer_2">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>40</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item>
-              <widget class="QPushButton" name="btn_home">
-               <property name="minimumSize">
-                <size>
-                 <width>35</width>
-                 <height>35</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>35</width>
-                 <height>35</height>
-                </size>
-               </property>
-               <property name="cursor">
-                <cursorShape>PointingHandCursor</cursorShape>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-               <property name="icon">
-                <iconset resource="qss.qrc">
-                 <normaloff>:/icons/home.png</normaloff>:/icons/home.png</iconset>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <spacer name="horizontalSpacer_3">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>40</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item>
-              <widget class="QPushButton" name="btn_logout">
-               <property name="minimumSize">
-                <size>
-                 <width>35</width>
-                 <height>35</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>35</width>
-                 <height>35</height>
-                </size>
-               </property>
-               <property name="cursor">
-                <cursorShape>PointingHandCursor</cursorShape>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-               <property name="icon">
-                <iconset resource="qss.qrc">
-                 <normaloff>:/icons/logout.png</normaloff>:/icons/logout.png</iconset>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <spacer name="horizontalSpacer_5">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>40</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-            </layout>
-           </widget>
-           <widget class="QWidget" name="layoutWidget">
-            <property name="geometry">
-             <rect>
-              <x>0</x>
-              <y>30</y>
-              <width>224</width>
-              <height>224</height>
-             </rect>
-            </property>
-            <layout class="QGridLayout" name="gridLayout">
-             <item row="0" column="0">
-              <widget class="QToolButton" name="btn_menu_item_1">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>70</width>
-                 <height>70</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>7</pointsize>
-                </font>
-               </property>
-               <property name="cursor">
-                <cursorShape>PointingHandCursor</cursorShape>
-               </property>
-               <property name="text">
-                <string>过往病史</string>
-               </property>
-               <property name="icon">
-                <iconset resource="qss.qrc">
-                 <normaloff>:/icons/list.png</normaloff>:/icons/list.png</iconset>
-               </property>
-               <property name="toolButtonStyle">
-                <enum>Qt::ToolButtonTextUnderIcon</enum>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QToolButton" name="btn_menu_item_2">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>70</width>
-                 <height>70</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>7</pointsize>
-                </font>
-               </property>
-               <property name="cursor">
-                <cursorShape>PointingHandCursor</cursorShape>
-               </property>
-               <property name="text">
-                <string>挂号预约</string>
-               </property>
-               <property name="icon">
-                <iconset resource="qss.qrc">
-                 <normaloff>:/icons/register.png</normaloff>:/icons/register.png</iconset>
-               </property>
-               <property name="toolButtonStyle">
-                <enum>Qt::ToolButtonTextUnderIcon</enum>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="2">
-              <widget class="QToolButton" name="btn_menu_item_3">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>70</width>
-                 <height>70</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>7</pointsize>
-                </font>
-               </property>
-               <property name="cursor">
-                <cursorShape>PointingHandCursor</cursorShape>
-               </property>
-               <property name="text">
-                <string>医生一览</string>
-               </property>
-               <property name="icon">
-                <iconset resource="qss.qrc">
-                 <normaloff>:/icons/check.png</normaloff>:/icons/check.png</iconset>
-               </property>
-               <property name="toolButtonStyle">
-                <enum>Qt::ToolButtonTextUnderIcon</enum>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QToolButton" name="btn_menu_item_4">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>70</width>
-                 <height>70</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>7</pointsize>
-                </font>
-               </property>
-               <property name="cursor">
-                <cursorShape>PointingHandCursor</cursorShape>
-               </property>
-               <property name="text">
-                <string>医患沟通</string>
-               </property>
-               <property name="icon">
-                <iconset resource="qss.qrc">
-                 <normaloff>:/icons/message.png</normaloff>:/icons/message.png</iconset>
-               </property>
-               <property name="toolButtonStyle">
-                <enum>Qt::ToolButtonTextUnderIcon</enum>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QToolButton" name="btn_menu_item_5">
-               <property name="minimumSize">
-                <size>
-                 <width>70</width>
-                 <height>70</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>70</width>
-                 <height>70</height>
-                </size>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>7</pointsize>
-                </font>
-               </property>
-               <property name="cursor">
-                <cursorShape>PointingHandCursor</cursorShape>
-               </property>
-               <property name="text">
-                <string>治乎</string>
-               </property>
-               <property name="icon">
-                <iconset resource="qss.qrc">
-                 <normaloff>:/icons/check.png</normaloff>:/icons/check.png</iconset>
-               </property>
-               <property name="toolButtonStyle">
-                <enum>Qt::ToolButtonTextUnderIcon</enum>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="2">
-              <widget class="QToolButton" name="btn_menu_item_6">
-               <property name="minimumSize">
-                <size>
-                 <width>70</width>
-                 <height>70</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>70</width>
-                 <height>70</height>
-                </size>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>7</pointsize>
-                </font>
-               </property>
-               <property name="cursor">
-                <cursorShape>PointingHandCursor</cursorShape>
-               </property>
-               <property name="text">
-                <string>健康评估</string>
-               </property>
-               <property name="icon">
-                <iconset resource="qss.qrc">
-                 <normaloff>:/icons/check.png</normaloff>:/icons/check.png</iconset>
-               </property>
-               <property name="toolButtonStyle">
-                <enum>Qt::ToolButtonTextUnderIcon</enum>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QToolButton" name="btn_menu_item_7">
-               <property name="minimumSize">
-                <size>
-                 <width>70</width>
-                 <height>70</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>70</width>
-                 <height>70</height>
-                </size>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>7</pointsize>
-                </font>
-               </property>
-               <property name="cursor">
-                <cursorShape>PointingHandCursor</cursorShape>
-               </property>
-               <property name="text">
-                <string>关于我们</string>
-               </property>
-               <property name="toolButtonStyle">
-                <enum>Qt::ToolButtonTextUnderIcon</enum>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-           <zorder>layoutWidget</zorder>
-           <zorder>layoutWidget</zorder>
-           <zorder>lab_title</zorder>
+           <layout class="QVBoxLayout" name="verticalLayout_9" stretch="1,6,1">
+            <item>
+             <widget class="QLabel" name="lab_title">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>功能</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <layout class="QGridLayout" name="gridLayout">
+              <item row="0" column="0">
+               <widget class="QToolButton" name="btn_menu_item_1">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>70</width>
+                  <height>70</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>7</pointsize>
+                 </font>
+                </property>
+                <property name="cursor">
+                 <cursorShape>PointingHandCursor</cursorShape>
+                </property>
+                <property name="text">
+                 <string>过往病史</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="qss.qrc">
+                  <normaloff>:/icons/list.png</normaloff>:/icons/list.png</iconset>
+                </property>
+                <property name="toolButtonStyle">
+                 <enum>Qt::ToolButtonTextUnderIcon</enum>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QToolButton" name="btn_menu_item_2">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>70</width>
+                  <height>70</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>7</pointsize>
+                 </font>
+                </property>
+                <property name="cursor">
+                 <cursorShape>PointingHandCursor</cursorShape>
+                </property>
+                <property name="text">
+                 <string>挂号预约</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="qss.qrc">
+                  <normaloff>:/icons/register.png</normaloff>:/icons/register.png</iconset>
+                </property>
+                <property name="toolButtonStyle">
+                 <enum>Qt::ToolButtonTextUnderIcon</enum>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2">
+               <widget class="QToolButton" name="btn_menu_item_3">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>70</width>
+                  <height>70</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>7</pointsize>
+                 </font>
+                </property>
+                <property name="cursor">
+                 <cursorShape>PointingHandCursor</cursorShape>
+                </property>
+                <property name="text">
+                 <string>医生一览</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="qss.qrc">
+                  <normaloff>:/icons/check.png</normaloff>:/icons/check.png</iconset>
+                </property>
+                <property name="toolButtonStyle">
+                 <enum>Qt::ToolButtonTextUnderIcon</enum>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QToolButton" name="btn_menu_item_4">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>70</width>
+                  <height>70</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>7</pointsize>
+                 </font>
+                </property>
+                <property name="cursor">
+                 <cursorShape>PointingHandCursor</cursorShape>
+                </property>
+                <property name="text">
+                 <string>医患沟通</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="qss.qrc">
+                  <normaloff>:/icons/message.png</normaloff>:/icons/message.png</iconset>
+                </property>
+                <property name="toolButtonStyle">
+                 <enum>Qt::ToolButtonTextUnderIcon</enum>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QToolButton" name="btn_menu_item_5">
+                <property name="minimumSize">
+                 <size>
+                  <width>70</width>
+                  <height>70</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>7</pointsize>
+                 </font>
+                </property>
+                <property name="cursor">
+                 <cursorShape>PointingHandCursor</cursorShape>
+                </property>
+                <property name="text">
+                 <string>治乎</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="qss.qrc">
+                  <normaloff>:/icons/check.png</normaloff>:/icons/check.png</iconset>
+                </property>
+                <property name="toolButtonStyle">
+                 <enum>Qt::ToolButtonTextUnderIcon</enum>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="2">
+               <widget class="QToolButton" name="btn_menu_item_6">
+                <property name="minimumSize">
+                 <size>
+                  <width>70</width>
+                  <height>70</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>7</pointsize>
+                 </font>
+                </property>
+                <property name="cursor">
+                 <cursorShape>PointingHandCursor</cursorShape>
+                </property>
+                <property name="text">
+                 <string>健康评估</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="qss.qrc">
+                  <normaloff>:/icons/check.png</normaloff>:/icons/check.png</iconset>
+                </property>
+                <property name="toolButtonStyle">
+                 <enum>Qt::ToolButtonTextUnderIcon</enum>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QToolButton" name="btn_menu_item_7">
+                <property name="minimumSize">
+                 <size>
+                  <width>70</width>
+                  <height>70</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>7</pointsize>
+                 </font>
+                </property>
+                <property name="cursor">
+                 <cursorShape>PointingHandCursor</cursorShape>
+                </property>
+                <property name="text">
+                 <string>关于我们</string>
+                </property>
+                <property name="toolButtonStyle">
+                 <enum>Qt::ToolButtonTextUnderIcon</enum>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,0,2,0,2,0,1">
+              <item>
+               <spacer name="horizontalSpacer_4">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QPushButton" name="btn_littleshow">
+                <property name="minimumSize">
+                 <size>
+                  <width>35</width>
+                  <height>35</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>35</width>
+                  <height>35</height>
+                 </size>
+                </property>
+                <property name="cursor">
+                 <cursorShape>PointingHandCursor</cursorShape>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset resource="qss.qrc">
+                  <normaloff>:/icons/mini.png</normaloff>:/icons/mini.png</iconset>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_2">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QPushButton" name="btn_home">
+                <property name="minimumSize">
+                 <size>
+                  <width>35</width>
+                  <height>35</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>35</width>
+                  <height>35</height>
+                 </size>
+                </property>
+                <property name="cursor">
+                 <cursorShape>PointingHandCursor</cursorShape>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset resource="qss.qrc">
+                  <normaloff>:/icons/home.png</normaloff>:/icons/home.png</iconset>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_3">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QPushButton" name="btn_logout">
+                <property name="minimumSize">
+                 <size>
+                  <width>35</width>
+                  <height>35</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>35</width>
+                  <height>35</height>
+                 </size>
+                </property>
+                <property name="cursor">
+                 <cursorShape>PointingHandCursor</cursorShape>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset resource="qss.qrc">
+                  <normaloff>:/icons/logout.png</normaloff>:/icons/logout.png</iconset>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_5">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+           </layout>
           </widget>
          </item>
         </layout>
@@ -743,7 +720,7 @@
       </item>
       <item>
        <widget class="QWidget" name="w_main" native="true">
-        <layout class="QVBoxLayout" name="verticalLayout_5" stretch="0,0">
+        <layout class="QVBoxLayout" name="verticalLayout_5" stretch="1,10">
          <property name="spacing">
           <number>19</number>
          </property>
@@ -908,7 +885,7 @@
          <item>
           <widget class="QStackedWidget" name="sw_main">
            <property name="currentIndex">
-            <number>8</number>
+            <number>1</number>
            </property>
            <widget class="QWidget" name="page_0">
             <widget class="QWidget" name="layoutWidget">
@@ -977,42 +954,32 @@
                   <widget class="QComboBox" name="combo_depart_1">
                    <item>
                     <property name="text">
-                     <string>naoke</string>
+                     <string>放射科</string>
                     </property>
                    </item>
                    <item>
                     <property name="text">
-                     <string>a</string>
+                     <string>内科</string>
                     </property>
                    </item>
                    <item>
                     <property name="text">
-                     <string>M</string>
+                     <string>耳鼻喉</string>
                     </property>
                    </item>
                    <item>
                     <property name="text">
-                     <string>c</string>
+                     <string>儿科</string>
                     </property>
                    </item>
                    <item>
                     <property name="text">
-                     <string>all</string>
+                     <string>急诊科</string>
                     </property>
                    </item>
                    <item>
                     <property name="text">
-                     <string>耳鼻喉科</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>bilibili</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>黑神话科</string>
+                     <string>外科</string>
                     </property>
                    </item>
                   </widget>
@@ -1151,42 +1118,32 @@
                 <widget class="QComboBox" name="combo_depart_3">
                  <item>
                   <property name="text">
-                   <string>naoke</string>
+                   <string>放射科</string>
                   </property>
                  </item>
                  <item>
                   <property name="text">
-                   <string>a</string>
+                   <string>外科</string>
                   </property>
                  </item>
                  <item>
                   <property name="text">
-                   <string>M</string>
+                   <string>内科</string>
                   </property>
                  </item>
                  <item>
                   <property name="text">
-                   <string>c</string>
+                   <string>耳鼻喉</string>
                   </property>
                  </item>
                  <item>
                   <property name="text">
-                   <string>all</string>
+                   <string>儿科</string>
                   </property>
                  </item>
                  <item>
                   <property name="text">
-                   <string>耳鼻喉科</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>bilibili</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>黑神话科</string>
+                   <string>急诊科</string>
                   </property>
                  </item>
                 </widget>
@@ -1370,42 +1327,32 @@
                 <widget class="QComboBox" name="combo_depart_4">
                  <item>
                   <property name="text">
-                   <string>naoke</string>
+                   <string>放射科</string>
                   </property>
                  </item>
                  <item>
                   <property name="text">
-                   <string>a</string>
+                   <string>外科</string>
                   </property>
                  </item>
                  <item>
                   <property name="text">
-                   <string>M</string>
+                   <string>内科</string>
                   </property>
                  </item>
                  <item>
                   <property name="text">
-                   <string>c</string>
+                   <string>耳鼻喉</string>
                   </property>
                  </item>
                  <item>
                   <property name="text">
-                   <string>all</string>
+                   <string>儿科</string>
                   </property>
                  </item>
                  <item>
                   <property name="text">
-                   <string>耳鼻喉科</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>bilibili</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>黑神话科</string>
+                   <string>急诊科</string>
                   </property>
                  </item>
                 </widget>
@@ -1561,42 +1508,32 @@
                 <widget class="QComboBox" name="combo_depart_5">
                  <item>
                   <property name="text">
-                   <string>naoke</string>
+                   <string>放射科</string>
                   </property>
                  </item>
                  <item>
                   <property name="text">
-                   <string>a</string>
+                   <string>内科</string>
                   </property>
                  </item>
                  <item>
                   <property name="text">
-                   <string>M</string>
+                   <string>外科</string>
                   </property>
                  </item>
                  <item>
                   <property name="text">
-                   <string>c</string>
+                   <string>耳鼻喉</string>
                   </property>
                  </item>
                  <item>
                   <property name="text">
-                   <string>all</string>
+                   <string>儿科</string>
                   </property>
                  </item>
                  <item>
                   <property name="text">
-                   <string>耳鼻喉科</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>bilibili</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>黑神话科</string>
+                   <string>急诊科</string>
                   </property>
                  </item>
                 </widget>
@@ -1775,22 +1712,62 @@
              <item>
               <widget class="zhihuListWidget" name="listWidget_9"/>
              </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_19">
+               <item>
+                <spacer name="horizontalSpacer_10">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QPushButton" name="btn_refresh_9">
+                 <property name="text">
+                  <string>换一批</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
             </layout>
            </widget>
            <widget class="QWidget" name="page_10">
-            <widget class="QLabel" name="label_8">
-             <property name="geometry">
-              <rect>
-               <x>10</x>
-               <y>10</y>
-               <width>761</width>
-               <height>531</height>
-              </rect>
-             </property>
-             <property name="text">
-              <string>101010101010评估历史</string>
-             </property>
-            </widget>
+            <layout class="QVBoxLayout" name="verticalLayout_16">
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_20">
+               <item>
+                <spacer name="horizontalSpacer_6">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QPushButton" name="btn_ques_10">
+                 <property name="text">
+                  <string>发表提问</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="QTextEdit" name="textEdit_10"/>
+             </item>
+            </layout>
            </widget>
            <widget class="QWidget" name="page_11">
             <layout class="QGridLayout" name="gridLayout_4">

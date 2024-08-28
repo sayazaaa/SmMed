@@ -26,6 +26,9 @@ QString* appointment_id =0, *appointment_date =0, *appointment_num=0 , *appointm
 QString* notifications_id =0,* notifications_title =0,* notifications_time=0 ,* notifications_enddate=0 , *notifications_content=0;
 QString* diagnosis_id =0, *diagnosis_title=0 , *diagnosis_filepath=0 , *diagnosis_date=0;
 QString* prescription_id =0,* prescription_title=0 , *prescription_filepath =0, *prescription_date=0;
+QString* tiezi_id =0,* tiezi_text=0 , *tiezi_date =0 , *tiezi_num=0;
+QString* huifu_id =0,* huifu_text=0 , *huifu_time =0;
+
 int all_num=0;
 
 int page_state=1;
@@ -311,8 +314,37 @@ void Widget::handleJsonReceived(const QJsonObject &mainsource)
 //        else prescription_filepath=0;
 
         if(source.contains("prescription_date"))
-            *(prescription_date+n++)=source.value("prescription_date").toString();
+            *(prescription_date+n)=source.value("prescription_date").toString();
 //        else prescription_date=0;
+
+        if(source.contains("tiezi_id"))
+            *(tiezi_id+n)=source.value("tiezi_id").toString();
+//        else prescripdate=0;
+
+        if(source.contains("tiezi_text"))
+            *(tiezi_text+n)=source.value("tiezi_text").toString();
+//        else prescription_date=0;
+
+        if(source.contains("tiezi_date"))
+            *(tiezi_date+n)=source.value("tiezi_date").toString();
+//        else prescription_date=0;
+
+        if(source.contains("tiezi_num"))
+            *(tiezi_num+n)=source.value("tiezi_num").toString();
+//        else prescription_date=0;
+
+        if(source.contains("huifu_id"))
+            *(huifu_id+n)=source.value("huifu_id").toString();
+//        else prescription_date=0;
+
+        if(source.contains("huifu_time"))
+            *(huifu_time+n)=source.value("huifu_time").toString();
+//        else prescription_date=0;
+
+        if(source.contains("huifu_text"))
+            *(huifu_text+n++)=source.value("huifu_text").toString();
+//        else prescription_date=0;
+
 
     }
     all_num=n;
@@ -405,7 +437,8 @@ void Widget::on_btn_main_item_1_clicked()
         //显示page
         ui->sw_main->setCurrentIndex(2*choice_state-1);
         search_9();
-    }else if(choice_state == 6){
+    }
+    else if(choice_state == 6){
         ui->sw_main->setCurrentIndex(11);
     }
 }
@@ -462,6 +495,14 @@ void Widget::on_btn_main_item_2_clicked()
         ui->sw_main->setCurrentIndex(2*choice_state);
 
         search_8();
+    }
+
+    //zhihu提问
+    else if(choice_state == 5)
+    {
+        ui->sw_main->setCurrentIndex(2*choice_state);
+
+//        search_10();
     }
 
 }
@@ -595,8 +636,10 @@ void Widget::on_btn_menu_item_5_clicked()
     choice_state=5;
     ui->sw_main->setCurrentIndex(9);
     btn_hide();
-    ui->btn_main_item_1->setText("治乎主页");
+    ui->btn_main_item_1->setText("主页");
+    ui->btn_main_item_2->setText("提问");
     ui->btn_main_item_1->show();
+    ui->btn_main_item_2->show();
 }
 
 void Widget::on_btn_menu_item_6_clicked()
@@ -605,9 +648,9 @@ void Widget::on_btn_menu_item_6_clicked()
     ui->sw_main->setCurrentIndex(11);
     btn_hide();
     ui->btn_main_item_1->setText("健康评估");
-    ui->btn_main_item_2->setText("评估历史");
+//    ui->btn_main_item_2->setText("评估历史");
     ui->btn_main_item_1->show();
-    ui->btn_main_item_2->show();
+//    ui->btn_main_item_2->show();
 }
 
 void Widget::on_btn_menu_item_7_clicked()
@@ -1659,28 +1702,40 @@ void Widget::delete_9()
 
 void Widget::putin_9()
 {
-    //通过 医生序号doc_id[] 当前页数 page_now
-    //获得 姓名doc_name[] 性别doc_gender[] 科室doc_apartment[]
-    //填写QlistWidget
 
-    //假定数据
-    QString doc_name="abcdefghijskdscsdfacs";
+    QString sql= R"(
+    SELECT
+        huifu.text AS huifu_text,
+        doctor.name AS doctor_name,
+        huifu.time AS huifu_time
+    FROM
+        user , tiezi , doctor , huifu
+    WHERE
+        tiezi.id = '%)"+ *(tiezi_id+page_now) +R"(%'
+    )";
 
+    NetLoader::get_sql(sql , USER_ID , 1 , API_KEY , client );
 
     //创建item
-//    myAppointment *w = new myAppointment;
     little_zhihu *w = new little_zhihu;
 
     QListWidgetItem* pItem = new QListWidgetItem;
 
     //填入数据
-    w->set_label_user_name("zzt");
-    w->set_label_user_context("12345677890asdfghjkk");
-    w->set_label_answernum("98");
+    w->set_label_user_name(*(user_name+page_now-1));
+    w->set_label_user_context(*(tiezi_text+page_now-1));
+    w->set_label_answernum(*(tiezi_num+page_now-1));
+    w->tiezi_id = *(tiezi_id+page_now-1);
+    w->allnum=all_num;
+    w->now=page_now;
+    w->huifutext=huifu_text;
+    w->huifutime=huifu_time;
+    w->doctorname=doctor_name;
+//    w->tiezi_id=tiezi_id;
 
 //    pItem->setBackground(QColor("green"));
     //设置item大小
-    pItem->setSizeHint(QSize(ui->listWidget_9->width(),ui->listWidget_5->height()/5 ));
+    pItem->setSizeHint(QSize(ui->listWidget_9->width(),ui->listWidget_9->height()/5 ));
     //添加进QlistWidget
     ui->listWidget_9->addItem(pItem);
     ui->listWidget_9->setItemWidget(pItem, w);
@@ -1690,36 +1745,79 @@ void Widget::putin_9()
 
 void Widget::search_9()
 {
-    //get data()
-    //通过 科室apartment 日期date 姓名searched_name 性别doc_gender
-    //得到 数据总量data_num 总页数page_num 医生序号doc_id[] 当前页数page_now
-    int data_num=99;
 
-    int doc_id[6]={1,2,3,4,5,6};
+    QString sql= R"(
+    SELECT
+        tiezi.text AS tizi_text,
+        tiezi.date AS tiezi_date,
+        tiezi.id AS tiezi_id,
+        tiezi.num AS tiezi_num,
+        user.name AS user_name
+    FROM
+        user , tiezi
+    WHERE
+        tiezi.text like '%)"+ ui->lineEdit_search_9->text() +R"(%'
+    )";
+
+//    qDebug()<<"666";
+    NetLoader::get_sql(sql , USER_ID , 1 , API_KEY , client );
+
+    int data_num=all_num;
 
     //填写总数据量
 //    ui->label_data_num_text_9->setText("共有"+QString::number(data_num)+"项数据");
     //删除数据
     delete_9();
-    //填入数据
-    for(int i=0;i<data_num;i++)
+    if(all_num>50)
     {
-        putin_9();//缺少参数
+        //填入数据
+        for(int i=0;i<50;i++)
+        {
+            putin_9();//缺少参数
+        }
     }
+    else if(all_num>0)
+    {
+        //填入数据
+        for(int i=0;i<data_num;i++)
+        {
+            putin_9();//缺少参数
+        }
+    }
+
 
 
 }
 
 void Widget::on_btn_confirm_9_clicked()
 {
-//    获取需要查询的 科室apartment 日期date 姓名doc_name 性别gender
-    QString search = ui->lineEdit_search_9->text();
-
-//    查询
     search_9();//参数未填充
-
 }
 
 
 
+
+
+void Widget::on_btn_ques_10_clicked()
+{
+    QString sql = " INSERT INTO tiezi (text, date , num , user_id ) VALUES ( '"+ui->textEdit_10->toPlainText()+"' , '"+ QDate::currentDate().toString("yyMMdd") +"', 0, '"+ USER_ID +"'); ";
+//    QString sql= R"(
+//    SELECT
+//        tiezi.text AS tizi_text,
+//        tiezi.date AS tiezi_date,
+//        tiezi.id AS tiezi_id,
+//        tiezi.num AS tiezi_num,
+//        user.name AS user_name
+//    FROM
+//        user , tiezi
+//    WHERE
+//        tiezi.text like '%)"+ ui->lineEdit_search_9->text() +R"(%'
+//    )";
+
+//    qDebug()<<"666";
+    NetLoader::get_sql(sql , USER_ID , 1 , API_KEY , client );
+
+    ui->textEdit_10->setText("提交成功");
+
+}
 

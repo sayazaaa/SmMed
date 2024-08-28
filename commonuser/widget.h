@@ -160,6 +160,8 @@ private slots:
 
     void on_date_1_userDateChanged(const QDate &date);
 
+    void on_btn_ques_10_clicked();
+
 private:
     Ui::Widget *ui;
 

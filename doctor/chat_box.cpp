@@ -70,6 +70,15 @@ chat_box::~chat_box() {
     delete ui;
 }
 
+void chat_box:: set_sender_id(const QString s_id)
+{
+    sender_id = s_id;
+}
+void chat_box:: set_receiver_id(const QString r_id)
+{
+    receiver_id = r_id;
+}
+
 
 
 void chat_box::on_pushButton_clicked() {

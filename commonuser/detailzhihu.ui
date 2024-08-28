@@ -109,6 +109,9 @@ QListWidget::item:selected:!active{border: 1px solid  rgb(247, 247, 247); backgr
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
       </widget>
       <widget class="QPushButton" name="pushButton">
        <property name="geometry">

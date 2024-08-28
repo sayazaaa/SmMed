@@ -23,7 +23,8 @@ DatabaseManager::DatabaseManager() {
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             sender_id VARCHAR(128) NOT NULL,
             receiver_id VARCHAR(128) NOT NULL,
-            message TEXT NOT NULL,
+            message BLOB NOT NULL,
+            ispicture BOOL NOT NULL,
             timestamp TEXT NOT NULL
         )
     )";
