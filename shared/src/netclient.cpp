@@ -4,7 +4,6 @@
 NetClient::NetClient() {
     manager = QSharedPointer<QNetworkAccessManager>::create();
     socket = QSharedPointer<QTcpSocket>::create();
-    socket->connectToHost("0.0.0.0", 8081);
 
     connect(socket.get(), &QTcpSocket::readyRead, this, &NetClient::handle_socket_read);
 }
@@ -50,6 +49,9 @@ void NetClient::send_socket_request(Message& msg, std::function<void(bool)> call
 }
 
 void NetClient::send_socket_apikey_request(QString apikey) const{
+
+        socket->connectToHost("0.0.0.0", 8081);
+        qDebug() << API_KEY;
         socket->write(API_KEY.toStdString().c_str());
         socket->write("\n");
 }

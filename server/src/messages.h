@@ -2,6 +2,8 @@
 #define MESSAGES_H
 #include<qstring.h>
 #include"qtcpsocket.h"
+#include"qdatastream.h"
+#include<qsharedpointer.h>
 class Message
 {
 public:
@@ -67,8 +69,11 @@ private:
     QByteArray data;
 };
 
+//void send_message(QTcpSocket& socket, Message& mes);
+//QSharedPointer<Message> receive_message(QTcpSocket& socket);
+//void sendLargeData(QTcpSocket *socket, const QByteArray &data);
+//void receiveLargeData(QTcpSocket *socket);
 void send_message(QTcpSocket& socket, Message& mes);
+
 QSharedPointer<Message> receive_message(QTcpSocket& socket);
-void sendLargeData(QTcpSocket *socket, const QByteArray &data);
-void receiveLargeData(QTcpSocket *socket);
 #endif // MESSAGES_H

@@ -1,4 +1,4 @@
-prefix=/media/psf/Linux/QT/SmMed/server/external
+prefix=/home/ikklo/文档/proj/SmMed/server/external
 libdir=${prefix}/lib
 includedir=${prefix}/include
 

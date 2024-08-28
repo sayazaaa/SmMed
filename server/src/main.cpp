@@ -34,7 +34,11 @@ DbServer * dbserver = nullptr;
 QMap<QString,QPair<QString,QString>> apiVerifyMap;
 QMap<QString,QString> lastApiMap;
 QMap<QString,QString> lastApiMapDoc;
-QMap<QString,QSharedPointer<QTcpSocket>> api_socket;
+QMap<QString,QTcpSocket*> api_socket;
+QString get_api(QString id, QString type){
+    if(type == "doctor")return lastApiMapDoc[id];
+    else return lastApiMap[id];
+}
 void catchUnixSignals(QList<int> quitSignals) {
     auto handler = [](int sig) -> void {
         // blocking and not aysnc-signal-safe func are valid
@@ -160,12 +164,12 @@ int main(int argc, char * argv[])
         qCritical("Unable to listen on the specified port.");
         return 1;
     }
-   MyServer talkserver;
+   TServer talkserver;
    if (!talkserver.listen(address,8081)) {
        qDebug() << "talk Server could not start!";
        return 1;
    }
 
-   qDebug() << "talk Server started on port" << "8081";
+   qDebug() << "talk Server started on port" << talkserver.serverPort();
     return a.exec();
 }
