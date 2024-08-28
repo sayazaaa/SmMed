@@ -24,11 +24,9 @@
 #include <qhttpengine/handler.h>
 #include <qhttpengine/qobjecthandler.h>
 
-#include "AppointmentApiHandler.h"
 #include "DefaultApiHandler.h"
 #include "DocterApiHandler.h"
 #include "FileApiHandler.h"
-#include "PatientApiHandler.h"
 #include "UserApiHandler.h"
 
 
@@ -57,11 +55,9 @@ public:
     void setUpRoutes();
     void processRequest(QHttpEngine::Socket *socket);
     
-    void setAppointmentApiHandler(QSharedPointer<AppointmentApiHandler> handler);
     void setDefaultApiHandler(QSharedPointer<DefaultApiHandler> handler);
     void setDocterApiHandler(QSharedPointer<DocterApiHandler> handler);
     void setFileApiHandler(QSharedPointer<FileApiHandler> handler);
-    void setPatientApiHandler(QSharedPointer<PatientApiHandler> handler);
     void setUserApiHandler(QSharedPointer<UserApiHandler> handler);
 private:
     QMap<QString, std::function<void(QHttpEngine::Socket *)>> Routes;
@@ -71,11 +67,9 @@ private:
     bool handleRequestAndExtractPathParam(QHttpEngine::Socket *socket);
 
     
-    QSharedPointer<AppointmentApiHandler> mAppointmentApiHandler;
     QSharedPointer<DefaultApiHandler> mDefaultApiHandler;
     QSharedPointer<DocterApiHandler> mDocterApiHandler;
     QSharedPointer<FileApiHandler> mFileApiHandler;
-    QSharedPointer<PatientApiHandler> mPatientApiHandler;
     QSharedPointer<UserApiHandler> mUserApiHandler;
 protected:
     // override this method to provide custom class derived from ApiHandler classes

@@ -49,148 +49,44 @@ QHttpEngine::Socket* DocterApiRequest::getRawSocket(){
 }
 
 
-void DocterApiRequest::doctorGetRequest(){
-    qDebug() << "/doctor";
-    connect(this, &DocterApiRequest::doctorGet, handler.data(), &DocterApiHandler::doctorGet);
-
-    
-    qint32 office;
-    if(socket->queryString().keys().contains("office")){
-        fromStringValue(socket->queryString().value("office"), office);
-    }
-    
-
-
-    emit doctorGet(office);
-}
-
-
-void DocterApiRequest::doctorIdGetRequest(const QString& idstr){
-    qDebug() << "/doctor/{id}";
-    connect(this, &DocterApiRequest::doctorIdGet, handler.data(), &DocterApiHandler::doctorIdGet);
-
-    
-    QString id;
-    fromStringValue(idstr, id);
-    
-
-    emit doctorIdGet(id);
-}
-
-
 void DocterApiRequest::doctorPostRequest(){
     qDebug() << "/doctor";
     connect(this, &DocterApiRequest::doctorPost, handler.data(), &DocterApiHandler::doctorPost);
 
     
- 
-    
-    QJsonDocument doc;
-    socket->readJson(doc);
-    QJsonObject obj = doc.object();
-    Inline_object_3 inline_object_3;
-    ::HttpServer::fromJsonValue(inline_object_3, obj);
-    
-
-    emit doctorPost(inline_object_3);
-}
-
-
-void DocterApiRequest::doctorPutRequest(){
-    qDebug() << "/doctor";
-    connect(this, &DocterApiRequest::doctorPut, handler.data(), &DocterApiHandler::doctorPut);
-
+    QString apikey;
+    if(socket->queryString().keys().contains("apikey")){
+        fromStringValue(socket->queryString().value("apikey"), apikey);
+    }
     
  
     
     QJsonDocument doc;
     socket->readJson(doc);
     QJsonObject obj = doc.object();
-    Inline_object_2 inline_object_2;
-    ::HttpServer::fromJsonValue(inline_object_2, obj);
+    Inline_object_1 inline_object_1;
+    ::HttpServer::fromJsonValue(inline_object_1, obj);
     
 
-    emit doctorPut(inline_object_2);
+    emit doctorPost(apikey, inline_object_1);
 }
 
 
 
-void DocterApiRequest::doctorGetResponse(const Inline_response_200_7& res){
+void DocterApiRequest::doctorPostResponse(const Inline_response_200_2& res){
     writeResponseHeaders();
     QJsonDocument resDoc(::HttpServer::toJsonValue(res).toObject());
     socket->writeJson(resDoc);
     if(socket->isOpen()){
-        socket->close();
-    }
-}
-
-void DocterApiRequest::doctorIdGetResponse(const Inline_response_200_1& res){
-    writeResponseHeaders();
-    QJsonDocument resDoc(::HttpServer::toJsonValue(res).toObject());
-    socket->writeJson(resDoc);
-    if(socket->isOpen()){
-        socket->close();
-    }
-}
-
-void DocterApiRequest::doctorPostResponse(const Inline_response_200_8& res){
-    writeResponseHeaders();
-    QJsonDocument resDoc(::HttpServer::toJsonValue(res).toObject());
-    socket->writeJson(resDoc);
-    if(socket->isOpen()){
-        socket->close();
-    }
-}
-
-void DocterApiRequest::doctorPutResponse(const Inline_response_200_5& res){
-    writeResponseHeaders();
-    QJsonDocument resDoc(::HttpServer::toJsonValue(res).toObject());
-    socket->writeJson(resDoc);
-    if(socket->isOpen()){
-        socket->close();
+       socket->close();
     }
 }
 
 
-void DocterApiRequest::doctorGetError(const Inline_response_200_7& res, QNetworkReply::NetworkError error_type, QString& error_str){
-    Q_UNUSED(error_type); // TODO: Remap error_type to QHttpEngine::Socket errors
-    writeResponseHeaders();
-    Q_UNUSED(error_str);  // response will be used instead of error string
-    QJsonDocument resDoc(::HttpServer::toJsonValue(res).toObject());
-    socket->writeJson(resDoc);
-    if(socket->isOpen()){
-        socket->close();
-    }
-}
-
-void DocterApiRequest::doctorIdGetError(const Inline_response_200_1& res, QNetworkReply::NetworkError error_type, QString& error_str){
-    Q_UNUSED(error_type); // TODO: Remap error_type to QHttpEngine::Socket errors
-    writeResponseHeaders();
-    Q_UNUSED(error_str);  // response will be used instead of error string
-    QJsonDocument resDoc(::HttpServer::toJsonValue(res).toObject());
-    socket->writeJson(resDoc);
-    if(socket->isOpen()){
-        socket->close();
-    }
-}
-
-void DocterApiRequest::doctorPostError(const Inline_response_200_8& res, QNetworkReply::NetworkError error_type, QString& error_str){
-    Q_UNUSED(error_type); // TODO: Remap error_type to QHttpEngine::Socket errors
-    writeResponseHeaders();
-    Q_UNUSED(error_str);  // response will be used instead of error string
-    QJsonDocument resDoc(::HttpServer::toJsonValue(res).toObject());
-    socket->writeJson(resDoc);
-    if(socket->isOpen()){
-        socket->close();
-    }
-}
-
-void DocterApiRequest::doctorPutError(const Inline_response_200_5& res, QNetworkReply::NetworkError error_type, QString& error_str){
-    Q_UNUSED(error_type); // TODO: Remap error_type to QHttpEngine::Socket errors
-    writeResponseHeaders();
-    Q_UNUSED(error_str);  // response will be used instead of error string
-    QJsonDocument resDoc(::HttpServer::toJsonValue(res).toObject());
-    socket->writeJson(resDoc);
+void DocterApiRequest::doctorPostError(const Inline_response_200_2& res, QNetworkReply::NetworkError error_type, QString& error_str){
+    Q_UNUSED(error_type);
+    Q_UNUSED(res);
+    socket->writeError(404,error_str.toStdString().c_str());
     if(socket->isOpen()){
         socket->close();
     }

@@ -142,25 +142,7 @@
            </layout>
           </item>
           <item row="6" column="0">
-           <layout class="QHBoxLayout" name="horizontalLayout">
-            <item alignment="Qt::AlignRight">
-             <widget class="QLabel" name="code">
-              <property name="text">
-               <string>密码:</string>
-              </property>
-             </widget>
-            </item>
-            <item alignment="Qt::AlignLeft">
-             <widget class="QLineEdit" name="code_2">
-              <property name="minimumSize">
-               <size>
-                <width>200</width>
-                <height>0</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-           </layout>
+           <layout class="QHBoxLayout" name="horizontalLayout"/>
           </item>
           <item row="3" column="0">
            <layout class="QHBoxLayout" name="horizontalLayout_4">

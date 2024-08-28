@@ -15,8 +15,7 @@
 #include <QObject>
 
 #include "HttpFileElement.h"
-#include "Inline_response_200_10.h"
-#include "Inline_response_200_9.h"
+#include "Inline_response_200_3.h"
 #include "Object.h"
 #include <QString>
 
@@ -32,10 +31,8 @@ public:
 
 
 public slots:
-    virtual void fileDocterGet(QString doctor_id, qint32 type);
-    virtual void fileGet(qint32 id, QString doctor_id, qint32 patient_id);
-    virtual void filePatientGet(qint32 patient_id, qint32 type);
-    virtual void filePost(qint32 id, QString name, QString doctor_id, QString patient_id, qint32 type, HttpFileElement body);
+    virtual void fileGet(qint32 id, QString doctor_id, qint32 patient_id, QString apikey);
+    virtual void filePost(qint32 id, QString name, QString doctor_id, QString patient_id, qint32 type, QString apikey, HttpFileElement body);
     
 
 };

@@ -395,8 +395,9 @@ void Widget::on_btn_main_item_1_clicked()
     {
         //显示page
         ui->sw_main->setCurrentIndex(2*choice_state-1);
-
         search_9();
+    }else if(choice_state == 6){
+        ui->sw_main->setCurrentIndex(11);
     }
 }
 

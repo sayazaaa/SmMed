@@ -14,12 +14,8 @@
 
 #include <QObject>
 
-#include "Inline_object_2.h"
-#include "Inline_object_3.h"
-#include "Inline_response_200_1.h"
-#include "Inline_response_200_5.h"
-#include "Inline_response_200_7.h"
-#include "Inline_response_200_8.h"
+#include "Inline_object_1.h"
+#include "Inline_response_200_2.h"
 #include "Object.h"
 #include <QString>
 
@@ -35,10 +31,7 @@ public:
 
 
 public slots:
-    virtual void doctorGet(qint32 office);
-    virtual void doctorIdGet(QString id);
-    virtual void doctorPost(Inline_object_3 inline_object_3);
-    virtual void doctorPut(Inline_object_2 inline_object_2);
+    virtual void doctorPost(QString apikey, Inline_object_1 inline_object_1);
     
 
 };

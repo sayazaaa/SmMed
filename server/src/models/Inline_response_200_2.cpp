@@ -35,6 +35,12 @@ void Inline_response_200_2::initializeModel() {
 
     m_apikey_isSet = false;
     m_apikey_isValid = false;
+
+    m_id_isSet = false;
+    m_id_isValid = false;
+
+    m_date_isSet = false;
+    m_date_isValid = false;
 }
 
 void Inline_response_200_2::fromJson(QString jsonString) {
@@ -48,6 +54,12 @@ void Inline_response_200_2::fromJsonObject(QJsonObject json) {
 
     m_apikey_isValid = ::HttpServer::fromJsonValue(apikey, json[QString("apikey")]);
     m_apikey_isSet = !json[QString("apikey")].isNull() && m_apikey_isValid;
+
+    m_id_isValid = ::HttpServer::fromJsonValue(id, json[QString("id")]);
+    m_id_isSet = !json[QString("id")].isNull() && m_id_isValid;
+
+    m_date_isValid = ::HttpServer::fromJsonValue(date, json[QString("date")]);
+    m_date_isSet = !json[QString("date")].isNull() && m_date_isValid;
 }
 
 QString Inline_response_200_2::asJson() const {
@@ -61,6 +73,12 @@ QJsonObject Inline_response_200_2::asJsonObject() const {
     QJsonObject obj;
     if (m_apikey_isSet) {
         obj.insert(QString("apikey"), ::HttpServer::toJsonValue(apikey));
+    }
+    if (m_id_isSet) {
+        obj.insert(QString("id"), ::HttpServer::toJsonValue(id));
+    }
+    if (m_date_isSet) {
+        obj.insert(QString("date"), ::HttpServer::toJsonValue(date));
     }
     return obj;
 }
@@ -81,10 +99,52 @@ bool Inline_response_200_2::is_apikey_Valid() const{
     return m_apikey_isValid;
 }
 
+QString Inline_response_200_2::getId() const {
+    return id;
+}
+void Inline_response_200_2::setId(const QString &id) {
+    this->id = id;
+    this->m_id_isSet = true;
+}
+
+bool Inline_response_200_2::is_id_Set() const{
+    return m_id_isSet;
+}
+
+bool Inline_response_200_2::is_id_Valid() const{
+    return m_id_isValid;
+}
+
+QString Inline_response_200_2::getDate() const {
+    return date;
+}
+void Inline_response_200_2::setDate(const QString &date) {
+    this->date = date;
+    this->m_date_isSet = true;
+}
+
+bool Inline_response_200_2::is_date_Set() const{
+    return m_date_isSet;
+}
+
+bool Inline_response_200_2::is_date_Valid() const{
+    return m_date_isValid;
+}
+
 bool Inline_response_200_2::isSet() const {
     bool isObjectUpdated = false;
     do {
         if (m_apikey_isSet) {
+            isObjectUpdated = true;
+            break;
+        }
+
+        if (m_id_isSet) {
+            isObjectUpdated = true;
+            break;
+        }
+
+        if (m_date_isSet) {
             isObjectUpdated = true;
             break;
         }
@@ -94,7 +154,7 @@ bool Inline_response_200_2::isSet() const {
 
 bool Inline_response_200_2::isValid() const {
     // only required properties are required for the object to be considered valid
-    return m_apikey_isValid && true;
+    return m_apikey_isValid && m_id_isValid && m_date_isValid && true;
 }
 
 } // namespace HttpServer

@@ -64,6 +64,16 @@ void DefaultApiRequest::loginPostRequest(){
         fromStringValue(socket->queryString().value("password"), password);
     }
     
+    bool usertype;
+    if(socket->queryString().keys().contains("usertype")){
+        fromStringValue(socket->queryString().value("usertype"), usertype);
+    }
+    
+    QString apikey;
+    if(socket->queryString().keys().contains("apikey")){
+        fromStringValue(socket->queryString().value("apikey"), apikey);
+    }
+    
  
     
     Object body;
@@ -71,41 +81,43 @@ void DefaultApiRequest::loginPostRequest(){
     ::HttpServer::fromJsonValue(body, resObject.object());
     
 
-    emit loginPost(id, password, body);
+    emit loginPost(id, password, usertype, apikey, body);
 }
 
 
-void DefaultApiRequest::notificationsGetRequest(){
-    qDebug() << "/notifications";
-    connect(this, &DefaultApiRequest::notificationsGet, handler.data(), &DefaultApiHandler::notificationsGet);
+void DefaultApiRequest::sqlGetRequest(){
+    qDebug() << "/sql";
+    connect(this, &DefaultApiRequest::sqlGet, handler.data(), &DefaultApiHandler::sqlGet);
 
     
-
-    QString date;
-    if(socket->headers().keys().contains("date")){
-        fromStringValue(socket->queryString().value("date"), date);
+    QString sql;
+    if(socket->queryString().keys().contains("sql")){
+        fromStringValue(socket->queryString().value("sql"), sql);
+    }
+    
+    QString apikey;
+    if(socket->queryString().keys().contains("apikey")){
+        fromStringValue(socket->queryString().value("apikey"), apikey);
+    }
+    
+    QString id;
+    if(socket->queryString().keys().contains("id")){
+        fromStringValue(socket->queryString().value("id"), id);
+    }
+    
+    bool usertype;
+    if(socket->queryString().keys().contains("usertype")){
+        fromStringValue(socket->queryString().value("usertype"), usertype);
     }
     
 
-    emit notificationsGet(date);
-}
 
-
-void DefaultApiRequest::officeIdGetRequest(const QString& idstr){
-    qDebug() << "/office/{id}";
-    connect(this, &DefaultApiRequest::officeIdGet, handler.data(), &DefaultApiHandler::officeIdGet);
-
-    
-    qint32 id;
-    fromStringValue(idstr, id);
-    
-
-    emit officeIdGet(id);
+    emit sqlGet(sql, apikey, id, usertype);
 }
 
 
 
-void DefaultApiRequest::loginPostResponse(const Inline_response_200_2& res){
+void DefaultApiRequest::loginPostResponse(const Inline_response_200& res){
     writeResponseHeaders();
     QJsonDocument resDoc(::HttpServer::toJsonValue(res).toObject());
     socket->writeJson(resDoc);
@@ -114,53 +126,33 @@ void DefaultApiRequest::loginPostResponse(const Inline_response_200_2& res){
     }
 }
 
-void DefaultApiRequest::notificationsGetResponse(const Inline_response_200& res){
+void DefaultApiRequest::sqlGetResponse(const QJsonDocument& doc){
     writeResponseHeaders();
-    QJsonDocument resDoc(::HttpServer::toJsonValue(res).toObject());
-    socket->writeJson(resDoc);
-    if(socket->isOpen()){
-        socket->close();
-    }
-}
-
-void DefaultApiRequest::officeIdGetResponse(const Inline_response_200_4& res){
-    writeResponseHeaders();
-    QJsonDocument resDoc(::HttpServer::toJsonValue(res).toObject());
-    socket->writeJson(resDoc);
+    socket->writeJson(doc);
     if(socket->isOpen()){
         socket->close();
     }
 }
 
 
-void DefaultApiRequest::loginPostError(const Inline_response_200_2& res, QNetworkReply::NetworkError error_type, QString& error_str){
-    Q_UNUSED(error_type); // TODO: Remap error_type to QHttpEngine::Socket errors
-    writeResponseHeaders();
-    Q_UNUSED(error_str);  // response will be used instead of error string
-    QJsonDocument resDoc(::HttpServer::toJsonValue(res).toObject());
-    socket->writeJson(resDoc);
+void DefaultApiRequest::loginPostError(const Inline_response_200& res, QNetworkReply::NetworkError error_type, QString& error_str){
+     // TODO: Remap error_type to QHttpEngine::Socket errors
+//    writeResponseHeaders();
+     // response will be used instead of error string
+//    QJsonDocument resDoc(::HttpServer::toJsonValue(res).toObject());
+//    socket->writeJson(resDoc);
+    Q_UNUSED(error_type);
+    Q_UNUSED(res);
+    socket->writeError(404,error_str.toStdString().c_str());
     if(socket->isOpen()){
         socket->close();
     }
 }
 
-void DefaultApiRequest::notificationsGetError(const Inline_response_200& res, QNetworkReply::NetworkError error_type, QString& error_str){
-    Q_UNUSED(error_type); // TODO: Remap error_type to QHttpEngine::Socket errors
-    writeResponseHeaders();
-    Q_UNUSED(error_str);  // response will be used instead of error string
-    QJsonDocument resDoc(::HttpServer::toJsonValue(res).toObject());
-    socket->writeJson(resDoc);
-    if(socket->isOpen()){
-        socket->close();
-    }
-}
-
-void DefaultApiRequest::officeIdGetError(const Inline_response_200_4& res, QNetworkReply::NetworkError error_type, QString& error_str){
-    Q_UNUSED(error_type); // TODO: Remap error_type to QHttpEngine::Socket errors
-    writeResponseHeaders();
-    Q_UNUSED(error_str);  // response will be used instead of error string
-    QJsonDocument resDoc(::HttpServer::toJsonValue(res).toObject());
-    socket->writeJson(resDoc);
+void DefaultApiRequest::sqlGetError(const Object& res, QNetworkReply::NetworkError error_type, QString& error_str){
+    Q_UNUSED(error_type);
+    Q_UNUSED(res);
+    socket->writeError(404,error_str.toStdString().c_str());
     if(socket->isOpen()){
         socket->close();
     }

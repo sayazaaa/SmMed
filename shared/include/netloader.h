@@ -23,7 +23,14 @@ namespace  NetLoader {
     void post_login(QString id, QString password,bool usertype,const NetClient& client);
     void get_sql(QString sql, QString id, bool usertype, QString apikey, const NetClient& client);
 
-    void send_message(QString sender_id, QString receiver_id, QString message, QString apikey, const NetClient& client);
+    void send_message(
+        QString sender_id, 
+        QString receiver_id, 
+        QString message, 
+        QString apikey, 
+        const NetClient& client, 
+        std::function<void(bool)> callback
+        );
     void send_picture(QString sender_id, QString receiver_id, QImage image, QString apikey, const NetClient& client);
 
 }

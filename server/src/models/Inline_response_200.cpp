@@ -33,11 +33,8 @@ Inline_response_200::~Inline_response_200() {}
 
 void Inline_response_200::initializeModel() {
 
-    m_total_isSet = false;
-    m_total_isValid = false;
-
-    m_data_isSet = false;
-    m_data_isValid = false;
+    m_apikey_isSet = false;
+    m_apikey_isValid = false;
 }
 
 void Inline_response_200::fromJson(QString jsonString) {
@@ -49,11 +46,8 @@ void Inline_response_200::fromJson(QString jsonString) {
 
 void Inline_response_200::fromJsonObject(QJsonObject json) {
 
-    m_total_isValid = ::HttpServer::fromJsonValue(total, json[QString("total")]);
-    m_total_isSet = !json[QString("total")].isNull() && m_total_isValid;
-
-    m_data_isValid = ::HttpServer::fromJsonValue(data, json[QString("data")]);
-    m_data_isSet = !json[QString("data")].isNull() && m_data_isValid;
+    m_apikey_isValid = ::HttpServer::fromJsonValue(apikey, json[QString("apikey")]);
+    m_apikey_isSet = !json[QString("apikey")].isNull() && m_apikey_isValid;
 }
 
 QString Inline_response_200::asJson() const {
@@ -65,56 +59,32 @@ QString Inline_response_200::asJson() const {
 
 QJsonObject Inline_response_200::asJsonObject() const {
     QJsonObject obj;
-    if (m_total_isSet) {
-        obj.insert(QString("total"), ::HttpServer::toJsonValue(total));
-    }
-    if (data.size() > 0) {
-        obj.insert(QString("data"), ::HttpServer::toJsonValue(data));
+    if (m_apikey_isSet) {
+        obj.insert(QString("apikey"), ::HttpServer::toJsonValue(apikey));
     }
     return obj;
 }
 
-qint32 Inline_response_200::getTotal() const {
-    return total;
+QString Inline_response_200::getApikey() const {
+    return apikey;
 }
-void Inline_response_200::setTotal(const qint32 &total) {
-    this->total = total;
-    this->m_total_isSet = true;
-}
-
-bool Inline_response_200::is_total_Set() const{
-    return m_total_isSet;
+void Inline_response_200::setApikey(const QString &apikey) {
+    this->apikey = apikey;
+    this->m_apikey_isSet = true;
 }
 
-bool Inline_response_200::is_total_Valid() const{
-    return m_total_isValid;
+bool Inline_response_200::is_apikey_Set() const{
+    return m_apikey_isSet;
 }
 
-QList<Inline_response_200_data> Inline_response_200::getData() const {
-    return data;
-}
-void Inline_response_200::setData(const QList<Inline_response_200_data> &data) {
-    this->data = data;
-    this->m_data_isSet = true;
-}
-
-bool Inline_response_200::is_data_Set() const{
-    return m_data_isSet;
-}
-
-bool Inline_response_200::is_data_Valid() const{
-    return m_data_isValid;
+bool Inline_response_200::is_apikey_Valid() const{
+    return m_apikey_isValid;
 }
 
 bool Inline_response_200::isSet() const {
     bool isObjectUpdated = false;
     do {
-        if (m_total_isSet) {
-            isObjectUpdated = true;
-            break;
-        }
-
-        if (data.size() > 0) {
+        if (m_apikey_isSet) {
             isObjectUpdated = true;
             break;
         }
@@ -124,7 +94,7 @@ bool Inline_response_200::isSet() const {
 
 bool Inline_response_200::isValid() const {
     // only required properties are required for the object to be considered valid
-    return m_total_isValid && m_data_isValid && true;
+    return m_apikey_isValid && true;
 }
 
 } // namespace HttpServer

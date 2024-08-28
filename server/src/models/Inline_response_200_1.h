@@ -38,40 +38,20 @@ public:
     void fromJsonObject(QJsonObject json) override;
     void fromJson(QString jsonString) override;
 
+    QString getApikey() const;
+    void setApikey(const QString &apikey);
+    bool is_apikey_Set() const;
+    bool is_apikey_Valid() const;
+
     QString getId() const;
     void setId(const QString &id);
     bool is_id_Set() const;
     bool is_id_Valid() const;
 
-    QString getPassword() const;
-    void setPassword(const QString &password);
-    bool is_password_Set() const;
-    bool is_password_Valid() const;
-
-    QString getName() const;
-    void setName(const QString &name);
-    bool is_name_Set() const;
-    bool is_name_Valid() const;
-
-    QString getGender() const;
-    void setGender(const QString &gender);
-    bool is_gender_Set() const;
-    bool is_gender_Valid() const;
-
-    QString getOffice() const;
-    void setOffice(const QString &office);
-    bool is_office_Set() const;
-    bool is_office_Valid() const;
-
-    QString getZc() const;
-    void setZc(const QString &zc);
-    bool is_zc_Set() const;
-    bool is_zc_Valid() const;
-
-    QString getDescribe() const;
-    void setDescribe(const QString &describe);
-    bool is_describe_Set() const;
-    bool is_describe_Valid() const;
+    QString getDate() const;
+    void setDate(const QString &date);
+    bool is_date_Set() const;
+    bool is_date_Valid() const;
 
     virtual bool isSet() const override;
     virtual bool isValid() const override;
@@ -79,33 +59,17 @@ public:
 private:
     void initializeModel();
 
+    QString apikey;
+    bool m_apikey_isSet;
+    bool m_apikey_isValid;
+
     QString id;
     bool m_id_isSet;
     bool m_id_isValid;
 
-    QString password;
-    bool m_password_isSet;
-    bool m_password_isValid;
-
-    QString name;
-    bool m_name_isSet;
-    bool m_name_isValid;
-
-    QString gender;
-    bool m_gender_isSet;
-    bool m_gender_isValid;
-
-    QString office;
-    bool m_office_isSet;
-    bool m_office_isValid;
-
-    QString zc;
-    bool m_zc_isSet;
-    bool m_zc_isValid;
-
-    QString describe;
-    bool m_describe_isSet;
-    bool m_describe_isValid;
+    QString date;
+    bool m_date_isSet;
+    bool m_date_isValid;
 };
 
 } // namespace HttpServer

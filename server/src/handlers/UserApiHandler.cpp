@@ -17,7 +17,7 @@
 
 #include "UserApiHandler.h"
 #include "UserApiRequest.h"
-
+#include"global.h"
 namespace HttpServer {
 
 UserApiHandler::UserApiHandler(){
@@ -28,32 +28,30 @@ UserApiHandler::~UserApiHandler(){
 
 }
 
-void UserApiHandler::userIdGet(QString id) {
-    Q_UNUSED(id);
-    auto reqObj = qobject_cast<UserApiRequest*>(sender());
-    if( reqObj != nullptr ) 
-    { 
-        Inline_response_200_3 res;
-        reqObj->userIdGetResponse(res);
-    }    
-}
-void UserApiHandler::userPost(Inline_object_1 inline_object_1) {
-    Q_UNUSED(inline_object_1);
-    auto reqObj = qobject_cast<UserApiRequest*>(sender());
-    if( reqObj != nullptr ) 
-    { 
-        Inline_response_200_6 res;
-        reqObj->userPostResponse(res);
-    }    
-}
-void UserApiHandler::userPut(Inline_object inline_object) {
+void UserApiHandler::userPost(Inline_object inline_object) {
+    QString id = inline_object.getId();
+    QString password = inline_object.getPassword();
     Q_UNUSED(inline_object);
     auto reqObj = qobject_cast<UserApiRequest*>(sender());
-    if( reqObj != nullptr ) 
-    { 
-        Inline_response_200_5 res;
-        reqObj->userPutResponse(res);
-    }    
+    if( reqObj != nullptr )
+    {
+        QSharedPointer<QJsonDocument> jsondoc;
+        try {
+            jsondoc = dbserver->set_userpassword(id,password);
+        } catch (std::exception e) {
+            QString errortext = "register failed!";
+            Inline_response_200_1 res;
+            qDebug() << errortext;
+            QByteArray bytearray;
+            reqObj->userPostError(res,QNetworkReply::NetworkError::UnknownNetworkError,errortext);
+            qDebug() << errortext;
+            return;
+        }
+        QString resstr = QString(jsondoc->toJson());
+        qDebug() << resstr;
+        Inline_response_200_1 res(resstr);
+        reqObj->userPostResponse(res);
+    }
 }
 
 

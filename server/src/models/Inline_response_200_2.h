@@ -43,6 +43,16 @@ public:
     bool is_apikey_Set() const;
     bool is_apikey_Valid() const;
 
+    QString getId() const;
+    void setId(const QString &id);
+    bool is_id_Set() const;
+    bool is_id_Valid() const;
+
+    QString getDate() const;
+    void setDate(const QString &date);
+    bool is_date_Set() const;
+    bool is_date_Valid() const;
+
     virtual bool isSet() const override;
     virtual bool isValid() const override;
 
@@ -52,6 +62,14 @@ private:
     QString apikey;
     bool m_apikey_isSet;
     bool m_apikey_isValid;
+
+    QString id;
+    bool m_id_isSet;
+    bool m_id_isValid;
+
+    QString date;
+    bool m_date_isSet;
+    bool m_date_isValid;
 };
 
 } // namespace HttpServer

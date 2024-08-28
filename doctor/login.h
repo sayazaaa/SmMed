@@ -3,6 +3,9 @@
 #include "widget.h"
 #include <QDialog>
 #include"information.h"
+#include "user_register.h"
+#include<QMessageBox>
+#include "apikey.h"
 
 namespace Ui {
 class login;
@@ -25,6 +28,8 @@ private slots:
 
 
     void on_pushButton_2_clicked();
+
+    void handle_reply_json(const QJsonObject& json);
 
 private:
     Ui::login *ui;

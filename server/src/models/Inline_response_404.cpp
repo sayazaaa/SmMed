@@ -33,8 +33,8 @@ Inline_response_404::~Inline_response_404() {}
 
 void Inline_response_404::initializeModel() {
 
-    m_id_isSet = false;
-    m_id_isValid = false;
+    m_apikey_isSet = false;
+    m_apikey_isValid = false;
 }
 
 void Inline_response_404::fromJson(QString jsonString) {
@@ -46,8 +46,8 @@ void Inline_response_404::fromJson(QString jsonString) {
 
 void Inline_response_404::fromJsonObject(QJsonObject json) {
 
-    m_id_isValid = ::HttpServer::fromJsonValue(id, json[QString("id")]);
-    m_id_isSet = !json[QString("id")].isNull() && m_id_isValid;
+    m_apikey_isValid = ::HttpServer::fromJsonValue(apikey, json[QString("apikey")]);
+    m_apikey_isSet = !json[QString("apikey")].isNull() && m_apikey_isValid;
 }
 
 QString Inline_response_404::asJson() const {
@@ -59,32 +59,32 @@ QString Inline_response_404::asJson() const {
 
 QJsonObject Inline_response_404::asJsonObject() const {
     QJsonObject obj;
-    if (m_id_isSet) {
-        obj.insert(QString("id"), ::HttpServer::toJsonValue(id));
+    if (m_apikey_isSet) {
+        obj.insert(QString("apikey"), ::HttpServer::toJsonValue(apikey));
     }
     return obj;
 }
 
-qint32 Inline_response_404::getId() const {
-    return id;
+QString Inline_response_404::getApikey() const {
+    return apikey;
 }
-void Inline_response_404::setId(const qint32 &id) {
-    this->id = id;
-    this->m_id_isSet = true;
-}
-
-bool Inline_response_404::is_id_Set() const{
-    return m_id_isSet;
+void Inline_response_404::setApikey(const QString &apikey) {
+    this->apikey = apikey;
+    this->m_apikey_isSet = true;
 }
 
-bool Inline_response_404::is_id_Valid() const{
-    return m_id_isValid;
+bool Inline_response_404::is_apikey_Set() const{
+    return m_apikey_isSet;
+}
+
+bool Inline_response_404::is_apikey_Valid() const{
+    return m_apikey_isValid;
 }
 
 bool Inline_response_404::isSet() const {
     bool isObjectUpdated = false;
     do {
-        if (m_id_isSet) {
+        if (m_apikey_isSet) {
             isObjectUpdated = true;
             break;
         }
@@ -94,7 +94,7 @@ bool Inline_response_404::isSet() const {
 
 bool Inline_response_404::isValid() const {
     // only required properties are required for the object to be considered valid
-    return m_id_isValid && true;
+    return m_apikey_isValid && true;
 }
 
 } // namespace HttpServer

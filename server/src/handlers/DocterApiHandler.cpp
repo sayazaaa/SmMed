@@ -17,7 +17,7 @@
 
 #include "DocterApiHandler.h"
 #include "DocterApiRequest.h"
-
+#include "global.h"
 namespace HttpServer {
 
 DocterApiHandler::DocterApiHandler(){
@@ -28,41 +28,30 @@ DocterApiHandler::~DocterApiHandler(){
 
 }
 
-void DocterApiHandler::doctorGet(qint32 office) {
-    Q_UNUSED(office);
+void DocterApiHandler::doctorPost(QString apikey, Inline_object_1 inline_object_1) {
+    Q_UNUSED(apikey);
+    QString id = inline_object_1.getId();
+    QString password = inline_object_1.getPassword();
     auto reqObj = qobject_cast<DocterApiRequest*>(sender());
-    if( reqObj != nullptr ) 
-    { 
-        Inline_response_200_7 res;
-        reqObj->doctorGetResponse(res);
-    }    
-}
-void DocterApiHandler::doctorIdGet(QString id) {
-    Q_UNUSED(id);
-    auto reqObj = qobject_cast<DocterApiRequest*>(sender());
-    if( reqObj != nullptr ) 
-    { 
-        Inline_response_200_1 res;
-        reqObj->doctorIdGetResponse(res);
-    }    
-}
-void DocterApiHandler::doctorPost(Inline_object_3 inline_object_3) {
-    Q_UNUSED(inline_object_3);
-    auto reqObj = qobject_cast<DocterApiRequest*>(sender());
-    if( reqObj != nullptr ) 
-    { 
-        Inline_response_200_8 res;
+    if( reqObj != nullptr )
+    {
+        QSharedPointer<QJsonDocument> jsondoc;
+        try {
+            jsondoc = dbserver->set_doctorpassword(id,password);
+        } catch (std::exception e) {
+            QString errortext = "register failed!";
+            Inline_response_200_2 res;
+            qDebug() << errortext;
+            QByteArray bytearray;
+            reqObj->doctorPostError(res,QNetworkReply::NetworkError::UnknownNetworkError,errortext);
+            qDebug() << errortext;
+            return;
+        }
+        QString resstr = QString(jsondoc->toJson());
+        qDebug() << resstr;
+        Inline_response_200_2 res(resstr);
         reqObj->doctorPostResponse(res);
-    }    
-}
-void DocterApiHandler::doctorPut(Inline_object_2 inline_object_2) {
-    Q_UNUSED(inline_object_2);
-    auto reqObj = qobject_cast<DocterApiRequest*>(sender());
-    if( reqObj != nullptr ) 
-    { 
-        Inline_response_200_5 res;
-        reqObj->doctorPutResponse(res);
-    }    
+    }
 }
 
 

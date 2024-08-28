@@ -16,7 +16,8 @@ INCLUDEPATH +=  include \
                 /usr/include/botan \
                 /usr/include/uuid \
                 /usr/include/c++/9 \
-                /usr/include/c++/7
+                /usr/include/c++/7 \
+                /usr/include/uuid
 
 # You can also make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.

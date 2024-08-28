@@ -33,26 +33,14 @@ Inline_response_200_1::~Inline_response_200_1() {}
 
 void Inline_response_200_1::initializeModel() {
 
+    m_apikey_isSet = false;
+    m_apikey_isValid = false;
+
     m_id_isSet = false;
     m_id_isValid = false;
 
-    m_password_isSet = false;
-    m_password_isValid = false;
-
-    m_name_isSet = false;
-    m_name_isValid = false;
-
-    m_gender_isSet = false;
-    m_gender_isValid = false;
-
-    m_office_isSet = false;
-    m_office_isValid = false;
-
-    m_zc_isSet = false;
-    m_zc_isValid = false;
-
-    m_describe_isSet = false;
-    m_describe_isValid = false;
+    m_date_isSet = false;
+    m_date_isValid = false;
 }
 
 void Inline_response_200_1::fromJson(QString jsonString) {
@@ -64,26 +52,14 @@ void Inline_response_200_1::fromJson(QString jsonString) {
 
 void Inline_response_200_1::fromJsonObject(QJsonObject json) {
 
+    m_apikey_isValid = ::HttpServer::fromJsonValue(apikey, json[QString("apikey")]);
+    m_apikey_isSet = !json[QString("apikey")].isNull() && m_apikey_isValid;
+
     m_id_isValid = ::HttpServer::fromJsonValue(id, json[QString("id")]);
     m_id_isSet = !json[QString("id")].isNull() && m_id_isValid;
 
-    m_password_isValid = ::HttpServer::fromJsonValue(password, json[QString("password")]);
-    m_password_isSet = !json[QString("password")].isNull() && m_password_isValid;
-
-    m_name_isValid = ::HttpServer::fromJsonValue(name, json[QString("name")]);
-    m_name_isSet = !json[QString("name")].isNull() && m_name_isValid;
-
-    m_gender_isValid = ::HttpServer::fromJsonValue(gender, json[QString("gender")]);
-    m_gender_isSet = !json[QString("gender")].isNull() && m_gender_isValid;
-
-    m_office_isValid = ::HttpServer::fromJsonValue(office, json[QString("office")]);
-    m_office_isSet = !json[QString("office")].isNull() && m_office_isValid;
-
-    m_zc_isValid = ::HttpServer::fromJsonValue(zc, json[QString("zc")]);
-    m_zc_isSet = !json[QString("zc")].isNull() && m_zc_isValid;
-
-    m_describe_isValid = ::HttpServer::fromJsonValue(describe, json[QString("describe")]);
-    m_describe_isSet = !json[QString("describe")].isNull() && m_describe_isValid;
+    m_date_isValid = ::HttpServer::fromJsonValue(date, json[QString("date")]);
+    m_date_isSet = !json[QString("date")].isNull() && m_date_isValid;
 }
 
 QString Inline_response_200_1::asJson() const {
@@ -95,28 +71,32 @@ QString Inline_response_200_1::asJson() const {
 
 QJsonObject Inline_response_200_1::asJsonObject() const {
     QJsonObject obj;
+    if (m_apikey_isSet) {
+        obj.insert(QString("apikey"), ::HttpServer::toJsonValue(apikey));
+    }
     if (m_id_isSet) {
         obj.insert(QString("id"), ::HttpServer::toJsonValue(id));
     }
-    if (m_password_isSet) {
-        obj.insert(QString("password"), ::HttpServer::toJsonValue(password));
-    }
-    if (m_name_isSet) {
-        obj.insert(QString("name"), ::HttpServer::toJsonValue(name));
-    }
-    if (m_gender_isSet) {
-        obj.insert(QString("gender"), ::HttpServer::toJsonValue(gender));
-    }
-    if (m_office_isSet) {
-        obj.insert(QString("office"), ::HttpServer::toJsonValue(office));
-    }
-    if (m_zc_isSet) {
-        obj.insert(QString("zc"), ::HttpServer::toJsonValue(zc));
-    }
-    if (m_describe_isSet) {
-        obj.insert(QString("describe"), ::HttpServer::toJsonValue(describe));
+    if (m_date_isSet) {
+        obj.insert(QString("date"), ::HttpServer::toJsonValue(date));
     }
     return obj;
+}
+
+QString Inline_response_200_1::getApikey() const {
+    return apikey;
+}
+void Inline_response_200_1::setApikey(const QString &apikey) {
+    this->apikey = apikey;
+    this->m_apikey_isSet = true;
+}
+
+bool Inline_response_200_1::is_apikey_Set() const{
+    return m_apikey_isSet;
+}
+
+bool Inline_response_200_1::is_apikey_Valid() const{
+    return m_apikey_isValid;
 }
 
 QString Inline_response_200_1::getId() const {
@@ -135,136 +115,36 @@ bool Inline_response_200_1::is_id_Valid() const{
     return m_id_isValid;
 }
 
-QString Inline_response_200_1::getPassword() const {
-    return password;
+QString Inline_response_200_1::getDate() const {
+    return date;
 }
-void Inline_response_200_1::setPassword(const QString &password) {
-    this->password = password;
-    this->m_password_isSet = true;
-}
-
-bool Inline_response_200_1::is_password_Set() const{
-    return m_password_isSet;
+void Inline_response_200_1::setDate(const QString &date) {
+    this->date = date;
+    this->m_date_isSet = true;
 }
 
-bool Inline_response_200_1::is_password_Valid() const{
-    return m_password_isValid;
+bool Inline_response_200_1::is_date_Set() const{
+    return m_date_isSet;
 }
 
-QString Inline_response_200_1::getName() const {
-    return name;
-}
-void Inline_response_200_1::setName(const QString &name) {
-    this->name = name;
-    this->m_name_isSet = true;
-}
-
-bool Inline_response_200_1::is_name_Set() const{
-    return m_name_isSet;
-}
-
-bool Inline_response_200_1::is_name_Valid() const{
-    return m_name_isValid;
-}
-
-QString Inline_response_200_1::getGender() const {
-    return gender;
-}
-void Inline_response_200_1::setGender(const QString &gender) {
-    this->gender = gender;
-    this->m_gender_isSet = true;
-}
-
-bool Inline_response_200_1::is_gender_Set() const{
-    return m_gender_isSet;
-}
-
-bool Inline_response_200_1::is_gender_Valid() const{
-    return m_gender_isValid;
-}
-
-QString Inline_response_200_1::getOffice() const {
-    return office;
-}
-void Inline_response_200_1::setOffice(const QString &office) {
-    this->office = office;
-    this->m_office_isSet = true;
-}
-
-bool Inline_response_200_1::is_office_Set() const{
-    return m_office_isSet;
-}
-
-bool Inline_response_200_1::is_office_Valid() const{
-    return m_office_isValid;
-}
-
-QString Inline_response_200_1::getZc() const {
-    return zc;
-}
-void Inline_response_200_1::setZc(const QString &zc) {
-    this->zc = zc;
-    this->m_zc_isSet = true;
-}
-
-bool Inline_response_200_1::is_zc_Set() const{
-    return m_zc_isSet;
-}
-
-bool Inline_response_200_1::is_zc_Valid() const{
-    return m_zc_isValid;
-}
-
-QString Inline_response_200_1::getDescribe() const {
-    return describe;
-}
-void Inline_response_200_1::setDescribe(const QString &describe) {
-    this->describe = describe;
-    this->m_describe_isSet = true;
-}
-
-bool Inline_response_200_1::is_describe_Set() const{
-    return m_describe_isSet;
-}
-
-bool Inline_response_200_1::is_describe_Valid() const{
-    return m_describe_isValid;
+bool Inline_response_200_1::is_date_Valid() const{
+    return m_date_isValid;
 }
 
 bool Inline_response_200_1::isSet() const {
     bool isObjectUpdated = false;
     do {
+        if (m_apikey_isSet) {
+            isObjectUpdated = true;
+            break;
+        }
+
         if (m_id_isSet) {
             isObjectUpdated = true;
             break;
         }
 
-        if (m_password_isSet) {
-            isObjectUpdated = true;
-            break;
-        }
-
-        if (m_name_isSet) {
-            isObjectUpdated = true;
-            break;
-        }
-
-        if (m_gender_isSet) {
-            isObjectUpdated = true;
-            break;
-        }
-
-        if (m_office_isSet) {
-            isObjectUpdated = true;
-            break;
-        }
-
-        if (m_zc_isSet) {
-            isObjectUpdated = true;
-            break;
-        }
-
-        if (m_describe_isSet) {
+        if (m_date_isSet) {
             isObjectUpdated = true;
             break;
         }
@@ -274,7 +154,7 @@ bool Inline_response_200_1::isSet() const {
 
 bool Inline_response_200_1::isValid() const {
     // only required properties are required for the object to be considered valid
-    return m_id_isValid && m_password_isValid && m_name_isValid && m_gender_isValid && m_office_isValid && m_zc_isValid && m_describe_isValid && true;
+    return m_apikey_isValid && m_id_isValid && m_date_isValid && true;
 }
 
 } // namespace HttpServer

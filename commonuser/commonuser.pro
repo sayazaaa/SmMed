@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui network
+QT       += core gui network sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -42,10 +42,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 RESOURCES += \
     qss.qrc
 
-unix:!macx: LIBS += -L$$OUT_PWD/../dataclass/ -ldataclass
-
-INCLUDEPATH += $$PWD/../dataclass
-DEPENDPATH += $$PWD/../dataclass
 
 
 
@@ -54,8 +50,18 @@ else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../shared/debug/ -l
 else:unix: LIBS += -L$$OUT_PWD/../shared/ -lshared
 
 INCLUDEPATH += $$PWD/../shared/include/ \
-                $$PWD/../shared/
+               $$PWD/../shared/
 DEPENDPATH += $$PWD/../shared/include/ \
-                $$PWD/../shared/
+               $$PWD/../shared/
 
+INCLUDEPATH += /usr/include/botan-2
+
+LIBS += -lbotan-2
+
+
+
+unix:!macx: LIBS += -L$$OUT_PWD/../dataclass/ -ldataclass
+
+INCLUDEPATH += $$PWD/../dataclass
+DEPENDPATH += $$PWD/../dataclass
 
