@@ -121,8 +121,8 @@ void NetLoader::send_picture(QString sender_id, QString receiver_id, QImage imag
 //     QUrl url(SERVER_URL);
 //     url.setPath("/appointment/patient");
 //     url.setQuery(
-//         "patient_id=" + QString::number(patientId) + 
-//         "&office=" + QString::number(officeId) + 
+//         "patient_id=" + QString::number(patientId) +
+//         "&office=" + QString::number(officeId) +
 //         "&apikey=" + apikey
 //     );
 //     client.send_get_request(url);

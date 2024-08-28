@@ -14,6 +14,7 @@ INCLUDEPATH +=  include \
                 /usr/include/mysql  \
                 /usr/include/botan-2 \
                 /usr/include/botan \
+                /usr/include/uuid \
                 /usr/include/c++/9 \
                 /usr/include/c++/7 \
                 /usr/include/uuid
@@ -35,12 +36,11 @@ unix {
 !isEmpty(target.path): INSTALLS += target
 
 unix|win32: LIBS += -lmysqlpp
+unix|win32: LIBS += -lbotan-2
 
-win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../dataclass/release/ -ldataclass
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../dataclass/debug/ -ldataclass
-else:unix: LIBS += -L$$OUT_PWD/../dataclass/ -ldataclass
+
+
+unix:!macx: LIBS += -L$$OUT_PWD/../dataclass/ -ldataclass
 
 INCLUDEPATH += $$PWD/../dataclass
 DEPENDPATH += $$PWD/../dataclass
-
-unix|win32: LIBS += -lbotan-2

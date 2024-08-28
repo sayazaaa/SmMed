@@ -24,6 +24,7 @@ void NetClient::send_post_request(const QUrl& url, const QJsonObject& json) cons
     qDebug() << QJsonDocument(json).toJson();
     QNetworkReply* reply = manager->post(request, QJsonDocument(json).toJson());
     connect(reply, &QNetworkReply::finished, this, &NetClient::handle_reply_json);
+    qDebug() << "sendpostrequest : " << url;
 }
 
 void NetClient::send_put_request(const QUrl& url, const QJsonObject& json) const {

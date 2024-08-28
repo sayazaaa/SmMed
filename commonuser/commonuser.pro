@@ -45,7 +45,6 @@ RESOURCES += \
 
 
 
-
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../shared/release/ -lshared
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../shared/debug/ -lshared
 else:unix: LIBS += -L$$OUT_PWD/../shared/ -lshared
@@ -65,3 +64,4 @@ unix:!macx: LIBS += -L$$OUT_PWD/../dataclass/ -ldataclass
 
 INCLUDEPATH += $$PWD/../dataclass
 DEPENDPATH += $$PWD/../dataclass
+

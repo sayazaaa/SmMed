@@ -185,7 +185,7 @@
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../commonuser/qss.qrc">
+                 <iconset resource="qss.qrc">
                   <normaloff>:/icons/setting.png</normaloff>:/icons/setting.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -217,7 +217,7 @@
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../commonuser/qss.qrc">
+                 <iconset resource="qss.qrc">
                   <normaloff>:/icons/doctor.png</normaloff>:/icons/doctor.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -365,7 +365,7 @@
                 <string/>
                </property>
                <property name="icon">
-                <iconset resource="../commonuser/qss.qrc">
+                <iconset resource="qss.qrc">
                  <normaloff>:/icons/mini.png</normaloff>:/icons/mini.png</iconset>
                </property>
               </widget>
@@ -404,7 +404,7 @@
                 <string/>
                </property>
                <property name="icon">
-                <iconset resource="../commonuser/qss.qrc">
+                <iconset resource="qss.qrc">
                  <normaloff>:/icons/home.png</normaloff>:/icons/home.png</iconset>
                </property>
               </widget>
@@ -443,7 +443,7 @@
                 <string/>
                </property>
                <property name="icon">
-                <iconset resource="../commonuser/qss.qrc">
+                <iconset resource="qss.qrc">
                  <normaloff>:/icons/logout.png</normaloff>:/icons/logout.png</iconset>
                </property>
               </widget>
@@ -499,7 +499,7 @@
                 <string>过往看诊</string>
                </property>
                <property name="icon">
-                <iconset resource="../commonuser/qss.qrc">
+                <iconset resource="qss.qrc">
                  <normaloff>:/icons/list.png</normaloff>:/icons/list.png</iconset>
                </property>
                <property name="toolButtonStyle">
@@ -533,7 +533,7 @@
                 <string>今日看诊</string>
                </property>
                <property name="icon">
-                <iconset resource="../commonuser/qss.qrc">
+                <iconset resource="qss.qrc">
                  <normaloff>:/icons/register.png</normaloff>:/icons/register.png</iconset>
                </property>
                <property name="toolButtonStyle">
@@ -567,7 +567,7 @@
                 <string>我的预约</string>
                </property>
                <property name="icon">
-                <iconset resource="../commonuser/qss.qrc">
+                <iconset resource="qss.qrc">
                  <normaloff>:/icons/check.png</normaloff>:/icons/check.png</iconset>
                </property>
                <property name="toolButtonStyle">
@@ -601,7 +601,7 @@
                 <string>医患沟通</string>
                </property>
                <property name="icon">
-                <iconset resource="../commonuser/qss.qrc">
+                <iconset resource="qss.qrc">
                  <normaloff>:/icons/message.png</normaloff>:/icons/message.png</iconset>
                </property>
                <property name="toolButtonStyle">
@@ -635,7 +635,7 @@
                 <string>治乎</string>
                </property>
                <property name="icon">
-                <iconset resource="../commonuser/qss.qrc">
+                <iconset resource="qss.qrc">
                  <normaloff>:/icons/check.png</normaloff>:/icons/check.png</iconset>
                </property>
                <property name="toolButtonStyle">
@@ -850,7 +850,7 @@
          <item>
           <widget class="QStackedWidget" name="sw_main">
            <property name="currentIndex">
-            <number>9</number>
+            <number>4</number>
            </property>
            <widget class="QWidget" name="page_0">
             <widget class="QWidget" name="layoutWidget">
@@ -869,7 +869,7 @@
                  <string/>
                 </property>
                 <property name="pixmap">
-                 <pixmap resource="../commonuser/qss.qrc">:/icons/ambulance.png</pixmap>
+                 <pixmap resource="qss.qrc">:/icons/ambulance.png</pixmap>
                 </property>
                </widget>
               </item>
@@ -887,97 +887,57 @@
             </widget>
            </widget>
            <widget class="QWidget" name="page_1">
-            <layout class="QVBoxLayout" name="verticalLayout_8">
+            <layout class="QVBoxLayout" name="verticalLayout_15">
              <item>
               <layout class="QHBoxLayout" name="horizontalLayout_16">
                <item>
-                <widget class="QLabel" name="label_date_text_1">
-                 <property name="text">
-                  <string>就诊日期</string>
-                 </property>
-                </widget>
+                <layout class="QGridLayout" name="gridLayout_4">
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="label_patient_1">
+                   <property name="text">
+                    <string>选择患者</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="0">
+                  <widget class="QLabel" name="label_date_1">
+                   <property name="text">
+                    <string>选择日期</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QComboBox" name="combo_patient_1"/>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QDateEdit" name="date_1"/>
+                 </item>
+                </layout>
                </item>
                <item>
-                <widget class="QDateEdit" name="date_1"/>
-               </item>
-               <item>
-                <widget class="QLabel" name="label_time_text_1">
-                 <property name="text">
-                  <string>就诊时间</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QComboBox" name="combo_time_1">
+                <layout class="QVBoxLayout" name="verticalLayout_8">
                  <item>
-                  <property name="text">
-                   <string>上午</string>
-                  </property>
+                  <widget class="QPushButton" name="btn_report_1">
+                   <property name="text">
+                    <string>查询诊断报告</string>
+                   </property>
+                  </widget>
                  </item>
                  <item>
-                  <property name="text">
-                   <string>下午</string>
-                  </property>
+                  <widget class="QPushButton" name="btn_prescription_1">
+                   <property name="text">
+                    <string>查询处方</string>
+                   </property>
+                  </widget>
                  </item>
                  <item>
-                  <property name="text">
-                   <string>晚上</string>
-                  </property>
+                  <widget class="QPushButton" name="btn_diagnosis_1">
+                   <property name="text">
+                    <string>查询医嘱</string>
+                   </property>
+                  </widget>
                  </item>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="label_user_name_text_1">
-                 <property name="text">
-                  <string>患者姓名</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLineEdit" name="lineEdit_user_name_1"/>
-               </item>
-               <item>
-                <widget class="QLabel" name="label_age_text_1">
-                 <property name="text">
-                  <string>年龄</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLineEdit" name="lineEdit_age_1"/>
-               </item>
-               <item>
-                <widget class="QLabel" name="label_gender_text_1">
-                 <property name="text">
-                  <string>性别</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QComboBox" name="comboBox_gender_1">
-                 <item>
-                  <property name="text">
-                   <string>全部</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>男</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>女</string>
-                  </property>
-                 </item>
-                </widget>
-               </item>
-               <item>
-                <widget class="QPushButton" name="btn_confirm_1">
-                 <property name="text">
-                  <string>查询</string>
-                 </property>
-                </widget>
+                </layout>
                </item>
               </layout>
              </item>
@@ -1051,28 +1011,7 @@
             </layout>
            </widget>
            <widget class="QWidget" name="page_2">
-            <layout class="QVBoxLayout" name="verticalLayout_9">
-             <item>
-              <widget class="QLabel" name="lab_mess_2">
-               <property name="font">
-                <font>
-                 <pointsize>20</pointsize>
-                 <weight>75</weight>
-                 <bold>true</bold>
-                </font>
-               </property>
-               <property name="layoutDirection">
-                <enum>Qt::LeftToRight</enum>
-               </property>
-               <property name="text">
-                <string>History2222222222222222222222222222</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
-            </layout>
+            <layout class="QVBoxLayout" name="verticalLayout_9"/>
            </widget>
            <widget class="QWidget" name="page_3">
             <layout class="QVBoxLayout" name="verticalLayout_3" stretch="2,7,2">
@@ -1119,51 +1058,9 @@
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_3">
                  <item>
-                  <widget class="QPushButton" name="btn_page_left_3">
-                   <property name="text">
-                    <string>&lt;</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QPushButton" name="btn_page_1_3">
-                   <property name="text">
-                    <string>1</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QPushButton" name="btn_page_2_3">
-                   <property name="text">
-                    <string>...</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QPushButton" name="btn_page_now_3">
-                   <property name="text">
-                    <string>5</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QPushButton" name="btn_page_3_3">
-                   <property name="text">
-                    <string>...</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QPushButton" name="btn_page_4_3">
-                   <property name="text">
-                    <string>98</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
                   <widget class="QPushButton" name="btn_page_right_3">
                    <property name="text">
-                    <string>&gt;</string>
+                    <string>诊断完毕</string>
                    </property>
                   </widget>
                  </item>
@@ -1635,6 +1532,8 @@
    <header>zhihulistwidget.h</header>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="qss.qrc"/>
+ </resources>
  <connections/>
 </ui>

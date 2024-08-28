@@ -14,7 +14,7 @@ class little_history : public QWidget
 public:
     void set_label_user_name(const QString &text);
     void set_label_date(const QString &text);
-    void set_label_time(const QString &text);
+    void set_label_which(const QString &text);
     void set_label_doc_name(const QString &text);
     void set_label_apartment(const QString &text);
     explicit little_history(QWidget *parent = nullptr);

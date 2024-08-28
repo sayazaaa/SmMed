@@ -12,7 +12,8 @@ class nowDiagnose : public QWidget
     Q_OBJECT
 
 public:
-
+    QString *doctor_id;
+    QString date;
     void set_label_user_name(const QString &text);
     void set_label_user_gender(const QString &text);
     void set_label_age(const QString &text);
@@ -26,7 +27,13 @@ private slots:
 
     void on_btn_start_clicked();
 
-    void on_btn_push_clicked();
+//    void on_btn_push_clicked();
+
+    void on_btn_push_1_clicked();
+
+    void on_btn_push_2_clicked();
+
+    void on_btn_push_3_clicked();
 
 private:
     Ui::nowDiagnose *ui;
