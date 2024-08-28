@@ -38,6 +38,7 @@ public slots:
 
 private slots:
 
+    void getMessage( );
 
     void closeEvent(QCloseEvent *event);
 
@@ -158,6 +159,8 @@ private slots:
     void on_combo_depart_1_currentIndexChanged(const QString &arg1);
 
     void on_date_1_userDateChanged(const QDate &date);
+
+    void on_btn_ques_10_clicked();
 
 private:
     Ui::Widget *ui;

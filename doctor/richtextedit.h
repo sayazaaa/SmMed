@@ -35,6 +35,7 @@ class RichTextEdit : public QWidget
     Q_OBJECT
 public:
     RichTextEdit(QWidget *parent = nullptr);
+    void readonly(bool b);
 
 protected:
     void dragEnterEvent(QDragEnterEvent *event) override;

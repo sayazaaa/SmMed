@@ -1,3 +1,6 @@
+#ifndef DBMANAGER_H
+#define DBMANAGER_H
+
 #include <QtSql>
 
 class DatabaseManager {
@@ -17,3 +20,4 @@ private:
     QSqlDatabase database;
 };
 
+#endif

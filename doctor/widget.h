@@ -112,21 +112,6 @@ private slots:
 
     void on_btn_page_4_4_clicked();
 
-    void on_btn_confirm_5_clicked();
-
-    void on_btn_page_left_5_clicked();
-
-    void on_btn_page_right_5_clicked();
-
-    void page_hide_5();
-
-    void on_btn_page_1_5_clicked();
-
-    void on_btn_page_2_5_clicked();
-
-    void on_btn_page_3_5_clicked();
-
-    void on_btn_page_4_5_clicked();
 
     void on_btn_confirm_8_clicked();
 
@@ -161,9 +146,6 @@ private:
     void search_4();
     void putin_4();
     void delete_4();
-    void search_5();
-    void putin_5();
-    void delete_5();
     void search_8();
     void putin_8();
     void delete_8();
