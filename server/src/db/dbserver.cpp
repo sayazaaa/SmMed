@@ -299,41 +299,54 @@ void saveDataToFile(const QByteArray &data, const QString &relativeFilePath, con
     QString currentPath = QDir::currentPath();
     qDebug() << "relativefilepath:" << relativeFilePath;
     QDir dir;
-    QString fullFilePath = currentPath + "/" + relativeFilePath + "/" + realFileName;
+    QString fullFilePath = currentPath + "/" + relativeFilePath ;
     qDebug() << "path:"<< fullFilePath;
     if (!dir.exists(fullFilePath)) {
         dir.mkpath(fullFilePath);
     }
-
+    fullFilePath = fullFilePath + "/" + realFileName;
     QFile file(fullFilePath);
     if (!file.open(QIODevice::WriteOnly)) {
         qDebug() << "write: open file failed!" << file.errorString();
         return;
     }
-    QDataStream out(&file);
-    out << data;
-
+    qint64 bytesWritten = file.write(data);
+    if (bytesWritten == -1) {
+        qDebug() << "write: write data failed!" << file.errorString();
+    } else if (bytesWritten != data.size()) {
+        qDebug() << "write: not all data written!" << bytesWritten << "of" << data.size();
+    } else {
+        qDebug() << "file write succeed!" << fullFilePath;
+    }
     file.close();
-    qDebug() << "file write succeed!" << fullFilePath;
+    // QDataStream out(&file);
+    // out << data;
+    // file.close();
 }
 QSharedPointer<QByteArray> getDataFromFile(const QString &relativeFilePath, const QString realFileName){
     QSharedPointer<QByteArray> data = QSharedPointer<QByteArray>(new QByteArray());
     QString currentPath = QDir::currentPath();
     QDir dir;
-    QString filepath = currentPath + "/" + relativeFilePath + "/" + realFileName;
+    QString filepath = currentPath + "/" + relativeFilePath ;
     if(!dir.exists(filepath)){
         dir.mkpath(filepath);
     }
+    filepath = filepath + "/" + realFileName;
     QFile file(filepath);
     if(!file.open(QIODevice::ReadOnly)){
         qDebug() << "read: open file failed!" << file.errorString();
       ////////////////////////////////////////////////////////////////
         return nullptr;
     }
+    *data = file.readAll();
+    file.close();
+    qDebug() <<  filepath << "file read succeed! : " << data->size();
 
-    QDataStream in(&file);
-    in >> (*data);
-    qDebug() << "file read succeed!";
+    
+
+    // QDataStream in(&file);
+    // in >> (*data);
+    // qDebug() <<  filepath << "file read succeed! : " << data->size();
 
     return data;
 }

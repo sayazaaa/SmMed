@@ -11,12 +11,12 @@ void NetLoader::post_create_doctor(HttpServer::Doctor doctor, const NetClient& c
     QJsonObject json = QJsonObject();
     json.insert("id", doctor.getId());
     json.insert("password", doctor.getPassword());
-    json.insert("apikey", "");
-    json.insert("name", "");
-    json.insert("gender", "");
-    json.insert("office", "");
-    json.insert("zc", "");
-    json.insert("describe", "");
+    json.insert("apikey", "und");
+    json.insert("name", "und");
+    json.insert("gender", "und");
+    json.insert("office", "und");
+    json.insert("zc", "und");
+    json.insert("describe", "und");
     client.send_post_request(url, json);
 }
 
@@ -26,11 +26,11 @@ void NetLoader::post_create_user(HttpServer::User user, const NetClient& client)
     QJsonObject json = QJsonObject();
     json.insert("id", user.getId());
     json.insert("password", user.getPassword());
-    json.insert("name", "");
-    json.insert("age", "");
-    json.insert("gender", "");
-    json.insert("phone", "");
-    json.insert("address", "");
+    json.insert("name", "und");
+    json.insert("age", "und");
+    json.insert("gender", "und");
+    json.insert("phone", "und");
+    json.insert("address", "und");
     client.send_post_request(url, json);
 }
 
@@ -39,6 +39,7 @@ void NetLoader::post_login(QString id, QString password, bool usertype, const Ne
     qDebug() << "post_login: " << usertype;
     url.setPath("/login");
     if (usertype) {
+        
         url.setQuery("id=" + id + "&password=" + password + "&usertype=" + "1" +"&apikey=");
     }
     else
@@ -57,7 +58,7 @@ void NetLoader::get_sql(QString sql, QString id, bool usertype, QString apikey, 
     client.send_get_request(url);
 }
 
-void NetLoader::post_file(QFile file,QString name, QString doctor_id, QString patient_id, QString type, QString apikey,QString appointment_id, const NetClient& client){
+void NetLoader::post_file(QString file,QString name, QString doctor_id, QString patient_id, QString type, QString apikey,QString appointment_id, const NetClient& client){
     QUrl url(SERVER_URL);
     url.setPath("/file");
     url.setQuery("name=" + name + "&doctor_id=" + doctor_id + "&patient_id=" + patient_id + "&type=" + type + "&apikey=" + apikey + "&appointment_id=" + appointment_id);

@@ -23,6 +23,7 @@
 #include "Inline_response_200_2.h"
 #include "Object.h"
 #include <QString>
+#include <QThread>
 #include "DocterApiHandler.h"
 
 namespace HttpServer {

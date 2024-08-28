@@ -21,6 +21,7 @@ namespace HttpServer {
 class HttpFileElement {
 
 public:
+    QByteArray bytearray;
     QString variable_name;
     QString local_filename;
     QString request_filename;
