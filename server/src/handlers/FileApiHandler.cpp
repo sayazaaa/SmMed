@@ -17,7 +17,7 @@
 
 #include "FileApiHandler.h"
 #include "FileApiRequest.h"
-
+#include"global.h"
 namespace HttpServer {
 
 FileApiHandler::FileApiHandler(){
@@ -28,32 +28,50 @@ FileApiHandler::~FileApiHandler(){
 
 }
 
-void FileApiHandler::fileGet(qint32 id, QString doctor_id, qint32 patient_id, QString apikey) {
-    Q_UNUSED(id);
-    Q_UNUSED(doctor_id);
-    Q_UNUSED(patient_id);
-    Q_UNUSED(apikey);
+void FileApiHandler::fileGet(QString uuid, QString apikey) {
+    qDebug() << "FileGet:hello";
+    QSharedPointer<QByteArray> resbyte;
     auto reqObj = qobject_cast<FileApiRequest*>(sender());
-    if( reqObj != nullptr ) 
-    { 
-        Object res;
+    try {
+        if(!apiVerifyMap.contains(apikey))throw std::exception();
+        resbyte = dbserver->get_file(uuid);
+    } catch (std::exception e) {
+        QString errorstr = QString::fromUtf8("get file failed!");
+        if(reqObj != nullptr)
+        reqObj->fileGetError(Object(),QNetworkReply::NetworkError::TimeoutError,errorstr);
+        return;
+    }
+
+    if(reqObj != nullptr)
+    {
+        Object res(*resbyte);
         reqObj->fileGetResponse(res);
-    }    
+    }
 }
-void FileApiHandler::filePost(qint32 id, QString name, QString doctor_id, QString patient_id, qint32 type, QString apikey, HttpFileElement body) {
-    Q_UNUSED(id);
-    Q_UNUSED(name);
-    Q_UNUSED(doctor_id);
-    Q_UNUSED(patient_id);
-    Q_UNUSED(type);
-    Q_UNUSED(apikey);
-    Q_UNUSED(body);
+void FileApiHandler::filePost(QString name, QString doctor_id, QString patient_id, QString type, QString apikey, QString appointment_id, HttpFileElement body) {
+    qDebug() << "filePost";
+    QSharedPointer<QJsonDocument> resjsondoc;
+    Inline_response_200_3 res;
     auto reqObj = qobject_cast<FileApiRequest*>(sender());
-    if( reqObj != nullptr ) 
-    { 
-        Inline_response_200_3 res;
+    try {
+        if(!apiVerifyMap.contains(apikey))throw std::exception();
+        qDebug() << "filepost:verify succeed!";
+        resjsondoc = dbserver->store_file(doctor_id,patient_id,name,type,body.asByteArray(),appointment_id.toInt());
+    } catch (std::exception e) {
+        if(reqObj != nullptr){
+            QString errstr = QString::fromUtf8("upload failed!");
+            reqObj->filePostError(res,QNetworkReply::NetworkError::ProtocolFailure,errstr);
+        }
+        return;
+    }
+
+
+    if( reqObj != nullptr )
+    {
+        QString resstr = QString::fromUtf8(resjsondoc->toJson());
+        res = Inline_response_200_3(resstr);
         reqObj->filePostResponse(res);
-    }    
+    }
 }
 
 

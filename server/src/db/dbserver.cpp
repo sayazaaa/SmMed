@@ -5,6 +5,11 @@
 #include<ctime>
 #include<global.h>
 #include<QtDebug>
+#include"qdir.h"
+#include"qtimer.h"
+#include"qdatetime.h"
+#include"qdatastream.h"
+#include"qjsondocument.h"
 void clear_jsonobj(QJsonObject & obj){
     //qDebug() << "clear json obj";
     auto ptr = obj.begin();
@@ -239,96 +244,39 @@ QSharedPointer<QJsonDocument> DbServer::verify_doctorpassword(QString id, QStrin
     throw e;
     return nullptr;
 }
-//QSharedPointer<QJsonDocument> DbServer::update_userinfo(const QJsonObject& newinfo){
-//    QString id = newinfo["id"].toString();
-//    QString password = newinfo["password"].toString();
-//    auto ciphertext = StringFactory::salt_hash(password.toStdString());
-//    QString sql_qstring;
-//    sql_qstring.sprintf("UPDATE user SET password=%s,salt=%s,name=%s,age=%d,gender=%s,phone=%s,address=%s WHERE id=%s",
-//                        ciphertext.first.c_str(),
-//                        ciphertext.second.c_str(),
-//                        newinfo["name"].toString().toStdString().c_str(),
-//                        newinfo["age"].toInt(),
-//                        newinfo["gender"].toString().toStdString().c_str(),
-//                        newinfo["phone"].toString().toStdString().c_str(),
-//                        newinfo["address"].toString().toStdString().c_str(),
-//                        newinfo["id"].toString().toStdString().c_str());
-//    qDebug() << sql_qstring;
-//    QSharedPointer<QJsonDocument> res = nullptr;
-//    try {
-//        std::string sql = sql_qstring.toStdString();
-//        sqlquery(&sql,res);
-//    } catch (std::exception e) {
-//        throw(e);
-//        return res;
-//    }
-//    QJsonObject obj = res->object();
-//    clear_jsonobj(obj);
-//    obj["id"] = id;
-//    qDebug() << "update succeed!" << obj;
-//    res = QSharedPointer<QJsonDocument>(new QJsonDocument(obj));
-//    return res;
-//}
-//QSharedPointer<QJsonDocument> DbServer::update_doctorinfo(const QJsonObject& newinfo){
-//    QString id = newinfo["id"].toString();
-//    QString password = newinfo["password"].toString();
-//    auto ciphertext = StringFactory::salt_hash(password.toStdString());
-//    QString sql_qstring;
-//    sql_qstring.sprintf("UPDATE doctor SET password=%s,salt=%s,name=%s,gender=%s,office=%s,zc=%s,describe=%s WHERE id=%s",
-//                        ciphertext.first.c_str(),
-//                        ciphertext.second.c_str(),
-//                        newinfo["name"].toString().toStdString().c_str(),
-//                        newinfo["gender"].toString().toStdString().c_str(),
-//                        newinfo["office"].toString().toStdString().c_str(),
-//                        newinfo["zc"].toString().toStdString().c_str(),
-//                        newinfo["describe"].toString().toStdString().c_str(),
-//                        newinfo["id"].toString().toStdString().c_str());
-//    qDebug() << sql_qstring;
-//    QSharedPointer<QJsonDocument> res = nullptr;
-//    try {
-//        std::string sql = sql_qstring.toStdString();
-//        sqlquery(&sql,res);
-//    } catch (std::exception e) {
-//        throw(e);
-//        return res;
-//    }
-//    QJsonObject obj = res->object();
-//    clear_jsonobj(obj);
-//    obj["id"] = id;
-//    qDebug() << "update succeed!" << obj;
-//    res = QSharedPointer<QJsonDocument>(new QJsonDocument(obj));
-//    return res;
-//}
-//QSharedPointer<QJsonDocument> DbServer::update_patientinfo(const QJsonObject& newinfo){
-//    QString id = newinfo["id"].toString();
-//    QString password = newinfo["password"].toString();
-//    auto ciphertext = StringFactory::salt_hash(password.toStdString());
-//    QString sql_qstring;
-//    sql_qstring.sprintf("UPDATE doctor SET password=%s,salt=%s,name=%s,gender=%s,office=%s,zc=%s,describe=%s WHERE id=%s",
-//                        ciphertext.first.c_str(),
-//                        ciphertext.second.c_str(),
-//                        newinfo["name"].toString().toStdString().c_str(),
-//                        newinfo["gender"].toString().toStdString().c_str(),
-//                        newinfo["office"].toString().toStdString().c_str(),
-//                        newinfo["zc"].toString().toStdString().c_str(),
-//                        newinfo["describe"].toString().toStdString().c_str(),
-//                        newinfo["id"].toString().toStdString().c_str());
-//    qDebug() << sql_qstring;
-//    QSharedPointer<QJsonDocument> res = nullptr;
-//    try {
-//        std::string sql = sql_qstring.toStdString();
-//        sqlquery(&sql,res);
-//    } catch (std::exception e) {
-//        throw(e);
-//        return res;
-//    }
-//    QJsonObject obj = res->object();
-//    clear_jsonobj(obj);
-//    obj["id"] = id;
-//    qDebug() << "update succeed!" << obj;
-//    res = QSharedPointer<QJsonDocument>(new QJsonDocument(obj));
-//    return res;
-//}
+QSharedPointer<QJsonDocument> DbServer::store_file(QString doctorname,
+                                         QString patient,
+                                         QString oname,
+                                         QString type,
+                                         const QByteArray& file,
+                                         qint32 appointment_id){
+    std::string uuidstd = StringFactory::gen_uuid();
+    QString sqlq;
+    QDateTime currentTime = QDateTime::currentDateTime();
+    QString formattedTime = currentTime.toString("yyyy-MM-dd HH:mm:ss");
+    sqlq.sprintf("INSERT INTO %s(doctor_id,patient_id,filepath,title,date,appointment_id) VALUES('%s','%s','%s','%s','%s',%d)",
+                 type.toStdString().c_str(),
+                 doctorname.toStdString().c_str(),
+                 patient.toStdString().c_str(),
+                 uuidstd.c_str(),
+                 oname.toStdString().c_str(),
+                 formattedTime.toStdString().c_str(),
+                 appointment_id);
+    std::string sql = sqlq.toStdString();
+    QSharedPointer<QJsonDocument> res;
+    try {
+        dbserver->sqlquery(&sql,res);
+        saveDataToFile(file,"userfile",uuidstd.c_str());
+    } catch (std::exception e) {
+        throw(e);
+        return res;
+    }
+
+    return res;
+}
+QSharedPointer<QByteArray> DbServer::get_file(QString uuidq){
+    return getDataFromFile("userfile",uuidq);
+}
 const QString & DbServer::get_user(){
     return this->user;
 }
@@ -346,4 +294,46 @@ const QString & DbServer::get_charset(){
 }
 const int & DbServer::get_port(){
     return this->port;
+}
+void saveDataToFile(const QByteArray &data, const QString &relativeFilePath, const QString & realFileName) {
+    QString currentPath = QDir::currentPath();
+    qDebug() << "relativefilepath:" << relativeFilePath;
+    QDir dir;
+    QString fullFilePath = currentPath + "/" + relativeFilePath + "/" + realFileName;
+    qDebug() << "path:"<< fullFilePath;
+    if (!dir.exists(fullFilePath)) {
+        dir.mkpath(fullFilePath);
+    }
+
+    QFile file(fullFilePath);
+    if (!file.open(QIODevice::WriteOnly)) {
+        qDebug() << "write: open file failed!" << file.errorString();
+        return;
+    }
+    QDataStream out(&file);
+    out << data;
+
+    file.close();
+    qDebug() << "file write succeed!" << fullFilePath;
+}
+QSharedPointer<QByteArray> getDataFromFile(const QString &relativeFilePath, const QString realFileName){
+    QSharedPointer<QByteArray> data = QSharedPointer<QByteArray>(new QByteArray());
+    QString currentPath = QDir::currentPath();
+    QDir dir;
+    QString filepath = currentPath + "/" + relativeFilePath + "/" + realFileName;
+    if(!dir.exists(filepath)){
+        dir.mkpath(filepath);
+    }
+    QFile file(filepath);
+    if(!file.open(QIODevice::ReadOnly)){
+        qDebug() << "read: open file failed!" << file.errorString();
+      ////////////////////////////////////////////////////////////////
+        return nullptr;
+    }
+
+    QDataStream in(&file);
+    in >> (*data);
+    qDebug() << "file read succeed!";
+
+    return data;
 }

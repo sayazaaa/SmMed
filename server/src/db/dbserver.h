@@ -18,20 +18,17 @@ public:
     virtual mysqlpp::Connection* grab();
     virtual void release(const mysqlpp::Connection* pc);
     /****************************************************/
-    QSharedPointer<QJsonDocument> set_userpassword(QString id , QString password);                                      //done
-    QSharedPointer<QJsonDocument> verify_userpassword(QString id, QString password);                                    //done
-    QSharedPointer<QJsonDocument> set_doctorpassword(QString id, QString password);                                     //done
-    QSharedPointer<QJsonDocument> verify_doctorpassword(QString id, QString password);                                  //done
-    QSharedPointer<QJsonDocument> store_file(QString doctorname, QString patient, QString oname, QByteArray& file);
-    QSharedPointer<QJsonDocument> get_file(QString doctorname, QString patient, QString oname);
-//    QSharedPointer<QJsonDocument> query_doctorinfo(QString id);
-//    QSharedPointer<QJsonDocument> query_userinfo(QString id);
-//    QSharedPointer<QJsonDocument> query_patientinfo(QString id);
-//    QSharedPointer<QJsonDocument> update_userinfo(const QJsonObject& newinfo);                                          //done
-//    QSharedPointer<QJsonDocument> update_doctorinfo(const QJsonObject& newinfo);                                        //done
-//    QSharedPointer<QJsonDocument> update_patientinfo(const QJsonObject& newinfo);
-//    QSharedPointer<QJsonDocument> list_doctorinfo(unsigned int officeid);
-//    QSharedPointer<QJsonDocument>
+    QSharedPointer<QJsonDocument> set_userpassword(QString id , QString password);
+    QSharedPointer<QJsonDocument> verify_userpassword(QString id, QString password);
+    QSharedPointer<QJsonDocument> set_doctorpassword(QString id, QString password);
+    QSharedPointer<QJsonDocument> verify_doctorpassword(QString id, QString password);
+    QSharedPointer<QJsonDocument> store_file(QString doctorname,
+                                             QString patient,
+                                             QString oname,
+                                             QString type,
+                                             const QByteArray& file,
+                                             qint32 appointment_id);
+    QSharedPointer<QByteArray> get_file(QString uuid);
     /****************************************************/
     void sqlquery(std::string * sql, QSharedPointer<QJsonDocument> &res);
     bool store_message(QString fromid, QString toid, QString text);
@@ -64,5 +61,6 @@ private:
    std::string m_info;
 
 };
-
+void saveDataToFile(const QByteArray &data, const QString &relativeFilePath, const QString & realFileName);
+QSharedPointer<QByteArray> getDataFromFile(const QString &relativeFilePath, const QString realFileName);
 #endif

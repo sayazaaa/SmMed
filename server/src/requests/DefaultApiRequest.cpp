@@ -126,9 +126,10 @@ void DefaultApiRequest::loginPostResponse(const Inline_response_200& res){
     }
 }
 
-void DefaultApiRequest::sqlGetResponse(const QJsonDocument& doc){
+void DefaultApiRequest::sqlGetResponse(const Object& res){
     writeResponseHeaders();
-    socket->writeJson(doc);
+    QJsonDocument resDoc(::HttpServer::toJsonValue(res).toObject());
+    socket->writeJson(resDoc);
     if(socket->isOpen()){
         socket->close();
     }
@@ -136,11 +137,6 @@ void DefaultApiRequest::sqlGetResponse(const QJsonDocument& doc){
 
 
 void DefaultApiRequest::loginPostError(const Inline_response_200& res, QNetworkReply::NetworkError error_type, QString& error_str){
-     // TODO: Remap error_type to QHttpEngine::Socket errors
-//    writeResponseHeaders();
-     // response will be used instead of error string
-//    QJsonDocument resDoc(::HttpServer::toJsonValue(res).toObject());
-//    socket->writeJson(resDoc);
     Q_UNUSED(error_type);
     Q_UNUSED(res);
     socket->writeError(404,error_str.toStdString().c_str());
