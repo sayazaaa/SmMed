@@ -66,10 +66,9 @@ void NetLoader::post_file(QString file,QString name, QString doctor_id, QString 
     client.send_file_request(url, file);
 }
 
-void NetLoader::get_file(QString file_id, QString apikey, const NetClient& client){
+void NetLoader::get_file(QString uuid, QString apikey, const NetClient& client){
     QUrl url(SERVER_URL);
-    url.setPath("/file/" + file_id);
-    url.setQuery("apikey=" + apikey);
+    url.setQuery("uuid=" + uuid + "&apikey=" + apikey);
     client.send_get_request(url);
 }
 

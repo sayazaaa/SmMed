@@ -63,19 +63,7 @@ void login::handle_reply_json(const QJsonObject& json) {
         USER_ID = ui->username->text();
         NetClient::getInstance().send_socket_apikey_request(API_KEY);
 
-        // //test TODO
-        // QString path = QDir::cleanPath(QApplication::applicationDirPath() + QDir::separator());
-        // QFile f(path + "/report.txt");
-        // if (!f.open(QIODevice::WriteOnly | QIODevice::Text)) {
-        //     qDebug() << "Could not open file for writing: " << f.fileName() << ", error: " << f.errorString() << "path" << path;            return;
-        // }
-        // QTextStream out(&f);
-        // out << "dsadasdsa";
-        // f.close();
-        // if (f.waitForBytesWritten(500)) {
-        //     qDebug() << "write success";
-        //     NetLoader::post_file(path + "/report.txt", "report.txt", "saya", "222222200408082222", "diagnose", API_KEY, "1", NetClient::getInstance());
-        // }
+        
     }
 
     disconnect(&NetClient::getInstance(), &NetClient::received_json, this, &login::handle_reply_json);
