@@ -11,6 +11,7 @@
 #include <QTcpSocket>
 #include <QDialog>
 #include <QMessageBox>
+#include <QFile>
 #include "messages.h"
 #include "apikey.h"
 
@@ -36,6 +37,8 @@ public:
     (const QUrl& url, const QJsonObject& json) const;
     void send_delete_request
     (const QUrl& url) const;
+    void send_file_request(const QUrl& url, QFile& file) const;
+    void get_file_request(const QUrl& url) const;
     void send_socket_apikey_request(QString apikey) const;
 
     void send_socket_request(Message& msg,std::function<void(bool)> callback) const;
@@ -47,6 +50,7 @@ signals:
 private slots:
     void handle_reply_json();
     void handle_socket_read();
+    void handle_reply_file();
 };
 
 #endif // NETCLIENT_H

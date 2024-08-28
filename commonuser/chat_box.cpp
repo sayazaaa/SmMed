@@ -143,6 +143,7 @@ void chat_box::resizeEvent(QResizeEvent* event) {
         
         if (!messageW->Message_image.isNull()) {
             item->setSizeHint(QSize(messageW->Message_image.width() + 50, messageW->Message_image.height() + 50));
+            messageW->setFixedWidth(this->width());
             messageW->setlogoposi();
             messageW->setText(messageW->text(), messageW->time(), QSize(messageW->Message_image.width() + 50, messageW->Message_image.height() + 50), messageW->userType());
             ui->listWidget->setItemWidget(item, messageW);

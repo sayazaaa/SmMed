@@ -113,7 +113,7 @@ QSize QNChatMessage::getRealString(QString src)
     QFontMetricsF fm(this->font());
     m_lineHeight = fm.lineSpacing();
     int nCount = src.count("\n");
-    int nMaxWidth = 0;
+    double nMaxWidth = 0;
     if(nCount == 0) {
         nMaxWidth = fm.width(src);
         QString value = src;
@@ -148,7 +148,7 @@ QSize QNChatMessage::getRealString(QString src)
             }
         }
     }
-    return QSize(nMaxWidth+m_spaceWid+1, (nCount + 1) * m_lineHeight+2*m_lineHeight);
+    return QSize(nMaxWidth+m_spaceWid+5, (nCount + 1) * m_lineHeight+2*m_lineHeight);
 }
 
 void QNChatMessage::paintEvent(QPaintEvent *event)
@@ -210,6 +210,7 @@ void QNChatMessage::paintEvent(QPaintEvent *event)
         //头像
 //        painter.drawRoundedRect(m_iconRightRect,m_iconRightRect.width(),m_iconRightRect.height());
         painter.drawPixmap(m_iconRightRect, m_rightPixmap);
+
         if (Message_image.isNull())
         {
          //框

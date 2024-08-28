@@ -34,6 +34,8 @@ chat_box::chat_box(QString sender_id, QString receiver_id, QWidget* parent) :
                 QListWidgetItem* item = new QListWidgetItem(ui->listWidget);
                 dealMessage(messageW, item, QString::fromUtf8(*(message->get_data())), time, QNChatMessage::User_She);
                 ui->listWidget->setCurrentRow(ui->listWidget->count() - 1);
+
+
             }
         }
         else if (type == "picture") {
@@ -52,6 +54,9 @@ chat_box::chat_box(QString sender_id, QString receiver_id, QWidget* parent) :
                 item->setSizeHint(QSize(image.width() + 50, image.height() + 50));
                 messageW->setText(msg, time, QSize(image.width() + 50, image.height() + 50), QNChatMessage::User_She);
                 ui->listWidget->setItemWidget(item, messageW);
+                ui->listWidget->setCurrentRow(ui->listWidget->count() - 1);
+
+
             }
 
         }
@@ -143,6 +148,7 @@ void chat_box::resizeEvent(QResizeEvent* event) {
         if (!messageW->Message_image.isNull()) {
             item->setSizeHint(QSize(messageW->Message_image.width() + 50, messageW->Message_image.height() + 50));
             messageW->setText(messageW->text(), messageW->time(), QSize(messageW->Message_image.width() + 50, messageW->Message_image.height() + 50), messageW->userType());
+            messageW->setlogoposi();
             ui->listWidget->setItemWidget(item, messageW);
         }
         else {
@@ -193,6 +199,7 @@ void chat_box::on_pushButton_2_clicked() {
 
 void chat_box::net_send_msg(const QString& msg, std::function<void(bool)> callback) {
     NetLoader::send_message(sender_id, receiver_id, msg, API_KEY, netClient, callback);
+    
 }
 
 void chat_box::net_send_pic(QImage image, std::function<void(bool)> callback) {
