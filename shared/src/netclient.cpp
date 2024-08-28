@@ -85,7 +85,7 @@ void NetClient::handle_reply_json() {
 
 
 void NetClient::handle_socket_read() {
-    qDebug() << "socket read";
-    QByteArray response = socket->readAll();
-    qDebug() << "socket res:" <<response;
+    QSharedPointer<Message> msg = receive_message(*socket);
+    emit received_msg(msg);
+    qDebug() << "NetClient::handle_socket_read" << "emit received_msg" << msg->get_type();
 }

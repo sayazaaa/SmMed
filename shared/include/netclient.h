@@ -14,7 +14,7 @@
 #include "messages.h"
 #include "apikey.h"
 
-#define SERVER_URL "http://0.0.0.0:8080"
+#define SERVER_URL "http://62.234.161.235:8080"
 
 class NetClient : public QObject {
     Q_OBJECT
@@ -42,6 +42,7 @@ public:
 signals:
     void received_json(const QJsonObject& json);
     void write_msg(std::function<void(bool)> callback) const;
+    void received_msg(QSharedPointer<Message> msg);
 
 private slots:
     void handle_reply_json();

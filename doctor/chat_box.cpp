@@ -22,6 +22,27 @@ chat_box::chat_box(QString sender_id, QString receiver_id, QWidget* parent) :
     receiver_id(receiver_id) {
     ui->setupUi(this);
     resize(600, 800);
+    connect(&netClient, &NetClient::received_msg, this, [this, sender_id,receiver_id](QSharedPointer<Message> message) {
+        QString type = message->get_type();
+        if (type == "text") {
+            qDebug() << "Received text message" << QString::fromUtf8(*(message->get_data()));
+            qDebug() << "sender_id: " << sender_id << " receiver_id: " << receiver_id;
+            if (message->get_recipient() == this->sender_id) {
+                QString time = QString::number(QDateTime::currentDateTime().toTime_t()); //时间戳
+                dealMessageTime(time);
+                QNChatMessage* messageW = new QNChatMessage(ui->listWidget->parentWidget());
+                QListWidgetItem* item = new QListWidgetItem(ui->listWidget);
+                dealMessage(messageW, item, QString::fromUtf8(*(message->get_data())), time, QNChatMessage::User_She);
+                ui->listWidget->setCurrentRow(ui->listWidget->count() - 1);
+            }
+        }
+        else if (type == "picture") {
+
+        }
+        else {
+            qDebug() << "Unknown message type: " << type;
+        }
+        });
 }
 
 chat_box::~chat_box() {
@@ -56,6 +77,7 @@ QNChatMessage* chat_box::dealMessage(QNChatMessage* messageW, QListWidgetItem* i
     QSize size = messageW->fontRect(text);
     item->setSizeHint(size);
     messageW->setText(text, time, size, type);
+    qDebug() << "dealMessage:" << text << time << size << type;
     ui->listWidget->setItemWidget(item, messageW);
     return messageW;
 }

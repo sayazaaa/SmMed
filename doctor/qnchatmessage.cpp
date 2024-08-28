@@ -119,9 +119,9 @@ QSize QNChatMessage::getRealString(QString src)
         QString value = src;
         if(nMaxWidth > m_textWidth) {
             nMaxWidth = m_textWidth;
-            int size = m_textWidth / fm.width(" ");
-            int num = fm.width(value) / m_textWidth;
-            int ttmp = num*fm.width(" ");
+            double size = m_textWidth / fm.width(" ");
+            double num = fm.width(value) / m_textWidth;
+            double ttmp = num*fm.width(" ");
             num = ( fm.width(value) ) / m_textWidth;
             nCount += num;
             QString temp = "";
@@ -136,8 +136,8 @@ QSize QNChatMessage::getRealString(QString src)
             nMaxWidth = fm.width(value) > nMaxWidth ? fm.width(value) : nMaxWidth;
             if(fm.width(value) > m_textWidth) {
                 nMaxWidth = m_textWidth;
-                int size = m_textWidth / fm.width(" ");
-                int num = fm.width(value) / m_textWidth;
+                double size = m_textWidth / fm.width(" ");
+                double num = fm.width(value) / m_textWidth;
                 num = ((i+num)*fm.width(" ") + fm.width(value)) / m_textWidth;
                 nCount += num;
                 QString temp = "";
