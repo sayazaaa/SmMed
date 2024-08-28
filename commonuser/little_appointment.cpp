@@ -49,7 +49,7 @@ void little_appointment::on_btn_yes_clicked()
     nA->set_gender(ui->label_gender->text());
     nA->set_office(ui->label_apartment->text());
     nA->set_date(adate_now);
-    nA->user_id = user_id;
+    nA->doctor_id = doctor_id;
 
 
 //    将就诊人姓名填入nA的combo

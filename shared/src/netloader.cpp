@@ -51,6 +51,7 @@ void NetLoader::post_login(QString id, QString password, bool usertype, const Ne
 
 void NetLoader::get_sql(QString sql, QString id, bool usertype, QString apikey, const NetClient& client) {
     QUrl url(SERVER_URL);
+    sql=sql.simplified();
     url.setPath("/sql");
     url.setQuery("sql=" + sql + "&id=" + id + "&usertype=" + QString(usertype) + "&apikey=" + apikey);
     client.send_get_request(url);

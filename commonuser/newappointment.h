@@ -14,7 +14,7 @@ class newAppointment : public QWidget
 
 public:
 
-    QString *user_id;
+    QString *doctor_id;
     void set_name(const QString &text);
     void set_gender(const QString &text);
     void set_office(const QString &text);

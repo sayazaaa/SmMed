@@ -274,7 +274,7 @@ bool Inline_object_1::isSet() const {
 
 bool Inline_object_1::isValid() const {
     // only required properties are required for the object to be considered valid
-    return m_id_isValid && m_password_isValid && m_name_isValid && m_gender_isValid && m_office_isValid && m_zc_isValid && m_describe_isValid && true;
+    return m_id_isValid && m_password_isValid && true;
 }
 
 } // namespace HttpServer

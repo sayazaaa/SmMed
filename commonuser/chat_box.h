@@ -22,6 +22,9 @@ class chat_box : public QWidget
     Q_OBJECT
 
 public:
+
+    void set_sender_id(const QString s_id);
+    void set_receiver_id(const QString r_id);
     explicit chat_box(QWidget* parent = nullptr);
     chat_box( QString sender_id, QString receiver_id,QWidget *parent = nullptr);
     ~chat_box();

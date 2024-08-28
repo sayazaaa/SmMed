@@ -18,7 +18,7 @@ DatabaseManager::DatabaseManager() {
     }
 
     QSqlQuery query(database);
-    QString createTableQuery = R"(
+    QString createMsgTableQuery = R"(
         CREATE TABLE IF NOT EXISTS chat_messages (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             sender_id VARCHAR(128) NOT NULL,
@@ -27,7 +27,19 @@ DatabaseManager::DatabaseManager() {
             timestamp TEXT NOT NULL
         )
     )";
-    if (!query.exec(createTableQuery)) {
+    QString createHisTableQuery = R"(
+        CREATE TABLE IF NOT EXISTS chat_history (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            sender_id VARCHAR(128) NOT NULL,
+            receiver_id VARCHAR(128) NOT NULL
+        )
+    )";
+    if (!query.exec(createMsgTableQuery)) {
+        qDebug() << "Failed to create table:" << query.lastError();
+    } else {
+        qDebug() << "Table created successfully or already exists.";
+    }
+    if (!query.exec(createHisTableQuery)) {
         qDebug() << "Failed to create table:" << query.lastError();
     } else {
         qDebug() << "Table created successfully or already exists.";

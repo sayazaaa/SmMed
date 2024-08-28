@@ -908,7 +908,7 @@
          <item>
           <widget class="QStackedWidget" name="sw_main">
            <property name="currentIndex">
-            <number>11</number>
+            <number>8</number>
            </property>
            <widget class="QWidget" name="page_0">
             <widget class="QWidget" name="layoutWidget">
@@ -958,7 +958,13 @@
                   </widget>
                  </item>
                  <item row="0" column="1">
-                  <widget class="QComboBox" name="combo_patient_1"/>
+                  <widget class="QComboBox" name="combo_patient_1">
+                   <item>
+                    <property name="text">
+                     <string>1111</string>
+                    </property>
+                   </item>
+                  </widget>
                  </item>
                  <item row="0" column="2">
                   <widget class="QLabel" name="label_depart_1">

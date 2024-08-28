@@ -21,10 +21,13 @@ int main(int argc, char *argv[])
     QFont font("Arial", 10);
     a.setFont(font);
 
+//    Widget *w=new Widget;
+//    w->show();
+
     login *l=new login;
     l->show();
 
-    chat_box *c=new chat_box("aaaa","cccc");
-    c->show();
+//    chat_box *c=new chat_box("aaaa","cccc");
+//    c->show();
     return a.exec();
 }

@@ -31,8 +31,8 @@ int all_num=0;
 
 int page_state=1;
 QString  my_id="666";
-QString apikey="";
-NetClient client;
+//QString apikey="";
+NetClient &client = NetClient::getInstance();
 
 
 
@@ -552,12 +552,13 @@ void Widget::on_btn_menu_item_2_clicked()
 void Widget::on_btn_menu_item_3_clicked()
 {
     choice_state=3;
-    ui->sw_main->setCurrentIndex(5);
+//    ui->sw_main->setCurrentIndex(5);
     btn_hide();
     ui->btn_main_item_1->setText("我的预约");
 //    ui->btn_main_item_2->setText("本周可预约医生");
     ui->btn_main_item_1->show();
 //    ui->btn_main_item_2->show();
+    on_btn_main_item_1_clicked();
 }
 
 void Widget::on_btn_menu_item_4_clicked()
@@ -576,12 +577,13 @@ void Widget::on_btn_menu_item_4_clicked()
 void Widget::on_btn_menu_item_5_clicked()
 {
     choice_state=5;
-    ui->sw_main->setCurrentIndex(9);
+//    ui->sw_main->setCurrentIndex(9);
     btn_hide();
     ui->btn_main_item_1->setText("zhihu");
 //    ui->btn_main_item_2->setText("评估历史");
     ui->btn_main_item_1->show();
 //    ui->btn_main_item_2->show();
+    on_btn_main_item_1_clicked();
 }
 
 void Widget::on_btn_menu_item_6_clicked()
@@ -669,10 +671,10 @@ void Widget::putin_1()
     little_history *w = new little_history;
     QListWidgetItem* pItem = new QListWidgetItem;
     //填入数据
-//    w->set_label_user_name( *(patient_name +page_now-1) );
-//    w->set_label_date( *(diagnosis_date +page_now-1) );
-//    w->set_label_user_gender( *(patient_gender +page_now-1) );
-//    w->set_label_phone( *(patient_phone +page_now-1) );
+    w->set_label_user_name( *(patient_name +page_now-1) );
+    w->set_label_date( *(diagnosis_date +page_now-1) );
+    w->set_label_user_gender( *(patient_gender +page_now-1) );
+    w->set_label_phone( *(patient_phone +page_now-1) );
     if(three_which==1)
     {
         w->set_label_which("诊断报告");
@@ -706,25 +708,17 @@ void Widget::search_1()
     {
         sql=R"(
         SELECT
-            pa.name AS patient_name,
-            a.date AS appointment_date,
-            o.name AS office_name,
-            d.name AS doctor_name,
-            ir.filepath AS inspreport_filepath
+            patient.name AS patient_name,
+            inspreport.date AS inspreport_date,
+            office.name AS office_name,
+            doctor.name AS doctor_name,
+            inspreport.filepath AS inspreport_filepath
         FROM
-            patient pa
-        JOIN
-            appointment a ON pa.patient_id = a.patient_id
-        JOIN
-            doctor d ON a.doctor_id = d.doctor_id
-        JOIN
-            office o ON d.office_id = o.office_id
-        LEFT JOIN
-            inspreport ir ON pa.patient_id = ir.patient_id AND d.doctor_id = ir.doctor_id
+            patient , inspreport , doctor , office
         WHERE
-            pa.name = ')" + ui->combo_patient_1->currentText()  + R"( ' AND
-            a.date = ')" + ui->date_1->date().toString()  + R"(' AND
-            d.doctor_id = ')" + doctor_id  + R"(';
+            patient.name = ')" + ui->combo_patient_1->currentText()  + R"( ' AND
+            inspreport.date = ')" + ui->date_1->date().toString("yyMMdd")  + R"(' AND
+            doctor.id = ')" + USER_ID  + R"(';
         )";
 
     }
@@ -732,54 +726,38 @@ void Widget::search_1()
     {
         sql=R"(
         SELECT
-            pa.name AS patient_name,
-            a.date AS appointment_date,
-            o.name AS office_name,
-            d.name AS doctor_name,
-            pr.filepath AS prescription_filepath
+            patient.name AS patient_name,
+            prescription.date AS prescription_date,
+            office.name AS office_name,
+            doctor.name AS doctor_name,
+            prescription.filepath AS prescription_filepath
         FROM
-            patient pa
-        JOIN
-            appointment a ON pa.patient_id = a.patient_id
-        JOIN
-            doctor d ON a.doctor_id = d.doctor_id
-        JOIN
-            office o ON d.office_id = o.office_id
-        LEFT JOIN
-            prescription pr ON pa.patient_id = pr.patient_id AND d.doctor_id = pr.doctor_id
+            patient , prescription , doctor , office
         WHERE
-            pa.name = ')" + ui->combo_patient_1->currentText()  + R"( ' AND
-            a.date = ')" + ui->date_1->date().toString()  + R"(' AND
-            d.doctor_id = ')" + doctor_id  + R"(';
+            patient.name = ')" + ui->combo_patient_1->currentText()  + R"( ' AND
+            prescription.date = ')" + ui->date_1->date().toString("yyMMdd")  + R"(' AND
+            doctor.id = ')" + USER_ID  + R"(';
         )";
     }
     else if(three_which==3)
     {
         sql=R"(
         SELECT
-            pa.name AS patient_name,
-            a.date AS appointment_date,
-            o.name AS office_name,
-            d.name AS doctor_name,
-            di.filepath AS diagnosis_filepath
+            patient.name AS patient_name,
+            diagnosis.date AS diagnosis_date,
+            office.name AS office_name,
+            doctor.name AS doctor_name,
+            diagnosis.filepath AS diagnosis_filepath
         FROM
-            patient pa
-        JOIN
-            appointment a ON pa.patient_id = a.patient_id
-        JOIN
-            doctor d ON a.doctor_id = d.doctor_id
-        JOIN
-            office o ON d.office_id = o.office_id
-        LEFT JOIN
-            diagnosis di ON pa.patient_id = di.patient_id AND d.doctor_id = di.doctor_id
+            patient , diagnosis , doctor , office
         WHERE
-            pa.name = ')" + ui->combo_patient_1->currentText()  + R"( ' AND
-            a.date = ')" + ui->date_1->date().toString()  + R"(' AND
-            d.doctor_id = ')" + doctor_id  + R"(';
+            patient.name = ')" + ui->combo_patient_1->currentText()  + R"( ' AND
+            diagnosis.date = ')" + ui->date_1->date().toString("yyMMdd")  + R"(' AND
+            doctor.id = ')" + USER_ID  + R"(';
         )";
     }
 
-//    NetLoader::get_sql(sql , *doctor_id , 0 , apikey , client );
+    NetLoader::get_sql(sql , USER_ID , 0 , API_KEY , client );
 
     int data_num=all_num;
     page_max=data_num;
@@ -790,7 +768,8 @@ void Widget::search_1()
     //删除数据
     delete_1();
     //填入数据
-    putin_1();//缺少参数
+    if(all_num!=0)
+        putin_1();//缺少参数
 
 
 
@@ -888,6 +867,7 @@ void Widget::putin_3()
     w->set_label_age( "18" );
     w->set_label_id(*(patient_id));
     w->doctor_id=doctor_id;
+    w->patient_id = patient_id;
     w->date = ui->date_3->date().toString();
 
     //设置item大小
@@ -901,28 +881,28 @@ void Widget::putin_3()
 
 void Widget::search_3()
 {
+    if(ui->label_time_3->text()=="非工作时间")
+    {
+        return ;
+    }
     //get data()
-    //通过 日期date 医生id 查询： 病人姓名 性别 年龄 预约叫号
+    //通过 日期date 医生id 查询： 病人姓名 性别 年龄 预约叫号 id
     QString sql= R"(
     SELECT
-        pa.name AS patient_name,
-        pa.gender AS patient_gender,
-        u.age AS user_age,
-        a.num AS appointment_num
+        patient.name AS patient_name,
+        patient.gender AS patient_gender,
+        patient.id AS patient_id,
+        appointment.num AS appointment_num
     FROM
-        patient pa
-    JOIN
-        user u ON pa.user_id = u.user_id
-    JOIN
-        appointment a ON pa.patient_id = a.patient_id
+        patient , appointment , doctor
     WHERE
-        a.date = ')" + ui->date_3->date().toString()  + R"(' AND
-        a.doctor_id = ' )" + doctor_id  + R"( ' AND
-        a.time = ')" + ui->label_time_3->text()  + R"(';
+        appointment.date = ')" + ui->date_3->date().toString("yyMMdd")  + R"(' AND
+        appointment.doctor_id = ' )" + USER_ID  + R"( ' AND
+        appointment.time = ')" + ui->label_time_3->text()  + R"(';
     )";
 
 
-//    NetLoader::get_sql(sql , *doctor_id , 0 , apikey , client );
+    NetLoader::get_sql(sql , USER_ID , 0 , API_KEY , client );
 
     int data_num=all_num;
     page_max=data_num;
@@ -968,8 +948,6 @@ void Widget::delete_4()
 
 void Widget::putin_4()
 {
-
-
     page_hide_4();
     //填写页数
     ui->btn_page_now_4->setText(QString::number(page_now));
@@ -1019,10 +997,10 @@ void Widget::putin_4()
     myAppointment *w = new myAppointment;
     QListWidgetItem* pItem = new QListWidgetItem;
     //填入数据
-//    w->set_label_user_name(  *(patient_name+page_now-1) );
-//    w->set_label_user_age( "28" );
-//    w->set_label_user_gender( *(patient_name+page_now-1) );
-//    w->set_label_time( *(appointment_time+page_now-1) );
+    w->set_label_user_name(  *(patient_name+page_now-1) );
+    w->set_label_user_age( "28" );
+    w->set_label_user_gender( *(patient_name+page_now-1) );
+    w->set_label_time( *(appointment_time+page_now-1) );
 
     //设置item大小
     pItem->setSizeHint(QSize(ui->listWidget_4->width()/3-10,ui->listWidget_4->height()/3 ));
@@ -1035,7 +1013,22 @@ void Widget::putin_4()
 
 void Widget::search_4()
 {
-    //通过 日期 时间 医生id 查询：
+    //通过 日期 时间 医生id 查询：姓名 性别 年龄 预约时间
+    QString sql= R"(
+    SELECT
+        patient.name AS patient_name,
+        patient.gender AS patient_gender,
+        appointment.time AS appointment_time
+    FROM
+        patient , appointment , doctor
+    WHERE
+        appointment.date = ')" + ui->date_4->date().toString("yyMMdd")  + R"(' AND
+        appointment.doctor_id = ' )" + USER_ID  + R"( ' AND
+        appointment.time = ')" + ui->combo_time_4->currentText()  + R"(';
+    )";
+
+
+    NetLoader::get_sql(sql , USER_ID , 0 , API_KEY , client );
 
     int data_num=all_num;
     page_max=data_num/9+1;
@@ -1046,10 +1039,21 @@ void Widget::search_4()
     //删除数据
     delete_4();
     //填入数据
-    for(int i=0;i<9;i++)
+    if(all_num>9)
     {
-        putin_4();//缺少参数
+        for(int i=0;i<9;i++)
+        {
+            putin_4();//缺少参数
+        }
     }
+    else
+    {
+        for(int i=0;i<all_num;i++)
+        {
+            putin_4();//缺少参数
+        }
+    }
+
 }
 
 void Widget::on_btn_confirm_4_clicked()

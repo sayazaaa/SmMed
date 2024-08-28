@@ -350,6 +350,9 @@ void RichTextEdit::adjustSize() {
     }
 }
 
+void RichTextEdit::readonly(bool b){
+   textEdit->setReadOnly(b);
+}
 
 
 bool RichTextEdit::save(QUrl saveUrl) {

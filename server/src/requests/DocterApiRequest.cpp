@@ -78,7 +78,7 @@ void DocterApiRequest::doctorPostResponse(const Inline_response_200_2& res){
     QJsonDocument resDoc(::HttpServer::toJsonValue(res).toObject());
     socket->writeJson(resDoc);
     if(socket->isOpen()){
-       socket->close();
+        socket->close();
     }
 }
 
