@@ -6,6 +6,7 @@ little_doctor::little_doctor(QWidget *parent) :
     ui(new Ui::little_doctor)
 {
     ui->setupUi(this);
+    connect(this,SIGNAL(sendMessage()),&w,SLOT(getMessage()));
 }
 
 little_doctor::~little_doctor()
@@ -41,3 +42,21 @@ void little_doctor::set_btn_text(const QString &text)
 {
     ui->btn_ask->setText(text);
 }
+
+void little_doctor::on_btn_ask_clicked()
+{
+    //添加到sqlite：
+//    "insert into chat_messages(sender_id,receiver_id,message,timestamp) value('"+ USER_ID+"', '"+张三+"','"+1+"','"+3+"');";
+
+
+    QString sql = "insert into chat_history(sender_id,receiver_id) value('"+ USER_ID+"', '"+*doc_id+"');";
+
+    DatabaseManager &dbm = DatabaseManager::getInstance();
+    QSqlQuery query(dbm.getDatabase());
+    query.exec(sql);
+
+    //此处为需要发送信号的位置（函数内部）
+    emit sendMessage( );
+
+}
+

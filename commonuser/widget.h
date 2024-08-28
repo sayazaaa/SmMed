@@ -38,6 +38,7 @@ public slots:
 
 private slots:
 
+    void getMessage( );
 
     void closeEvent(QCloseEvent *event);
 
