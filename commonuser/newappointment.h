@@ -14,11 +14,14 @@ class newAppointment : public QWidget
 
 public:
 
-    explicit newAppointment(QWidget *parent = nullptr,
-                            const QString &name="",
-                            const QString &gender="",
-                            const QString &apartment="",
-                            const QDate &date=QDate::fromString("20240101", "yyyyMMdd"));
+    QString *user_id;
+    void set_name(const QString &text);
+    void set_gender(const QString &text);
+    void set_office(const QString &text);
+    void set_date(const QString &text);
+    void set_patient(const QString &text);
+
+    explicit newAppointment(QWidget *parent = nullptr);
     ~newAppointment();
 
 private slots:
@@ -26,6 +29,8 @@ private slots:
     void on_Btn_cancel_clicked();
 
     void on_Btn_yes_clicked();
+
+    void on_Btn_add_user_clicked();
 
 private:
     Ui::newAppointment *ui;

@@ -6,85 +6,82 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>518</height>
+    <width>548</width>
+    <height>521</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0">
-    <widget class="QLabel" name="label_user_text">
-     <property name="text">
-      <string>就诊人</string>
-     </property>
-    </widget>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="0">
+      <widget class="QLabel" name="label_user_text">
+       <property name="text">
+        <string>就诊人</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLabel" name="label_user">
+       <property name="text">
+        <string>zzt</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="2">
+      <widget class="QLabel" name="label_date_text">
+       <property name="text">
+        <string>就诊日期</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="3">
+      <widget class="QLabel" name="label_date">
+       <property name="text">
+        <string>1999/9/9</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_docname_text">
+       <property name="text">
+        <string>医生</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLabel" name="label_docname">
+       <property name="text">
+        <string>saya</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2">
+      <widget class="QLabel" name="label_depart_text">
+       <property name="text">
+        <string>科室</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="3">
+      <widget class="QLabel" name="label_depart">
+       <property name="text">
+        <string>放射科</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0" colspan="2">
+      <widget class="QLabel" name="label_which">
+       <property name="text">
+        <string>诊断报告</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
-   <item row="0" column="1">
-    <widget class="QLabel" name="label_user">
-     <property name="text">
-      <string>zzt</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="0">
-    <widget class="QLabel" name="label_date_text">
-     <property name="text">
-      <string>就诊日期</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="1">
-    <widget class="QLabel" name="label_date">
-     <property name="text">
-      <string>1999/9/9</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="0">
-    <widget class="QLabel" name="label_time_text">
-     <property name="text">
-      <string>就诊时间</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="1">
-    <widget class="QLabel" name="label_time">
-     <property name="text">
-      <string>上午</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="0">
-    <widget class="QLabel" name="label_depart_text">
-     <property name="text">
-      <string>科室</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="1">
-    <widget class="QLabel" name="label_depart">
-     <property name="text">
-      <string>放射科</string>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="0">
-    <widget class="QLabel" name="label_docname_text">
-     <property name="text">
-      <string>医生</string>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="1">
-    <widget class="QLabel" name="label_docname">
-     <property name="text">
-      <string>saya</string>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="0" colspan="2">
+   <item>
     <widget class="RichTextEdit" name="awidget" native="true"/>
    </item>
   </layout>

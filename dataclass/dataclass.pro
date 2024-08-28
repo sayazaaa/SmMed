@@ -13,8 +13,7 @@ SOURCES += \
     $$files(*.cpp) \
 
 HEADERS += \
-    $$files(*.h) \
-    Object.h
+    $$files(*.h)
 
 # Default rules for deployment.
 unix {

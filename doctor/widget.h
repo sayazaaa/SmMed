@@ -16,6 +16,10 @@
 #include "information.h"
 #include "little_appointment.h"
 
+#include<QJsonObject>
+#include<QString>
+#include<QJsonArray>
+
 namespace Ui {
 class Widget;
 }
@@ -26,6 +30,9 @@ class Widget : public FramelessWidget
 public:
     explicit Widget(QWidget *parent = 0);
     ~Widget();
+
+public slots:
+    void handleJsonReceived(const QJsonObject &mainsource);  // 槽函数
 
 private slots:
     void closeEvent(QCloseEvent *event);
@@ -66,7 +73,11 @@ private slots:
 
     void on_btn_menu_item_6_clicked();
 
-    void on_btn_confirm_1_clicked();
+    void on_btn_report_1_clicked();
+
+    void on_btn_prescription_1_clicked();
+
+    void on_btn_diagnosis_1_clicked();
 
     void on_btn_page_left_1_clicked();
 
@@ -82,21 +93,8 @@ private slots:
 
     void on_btn_page_4_1_clicked();
 
-    void on_btn_confirm_3_clicked();
-
-    void on_btn_page_left_3_clicked();
 
     void on_btn_page_right_3_clicked();
-
-    void page_hide_3();
-
-    void on_btn_page_1_3_clicked();
-
-    void on_btn_page_2_3_clicked();
-
-    void on_btn_page_3_3_clicked();
-
-    void on_btn_page_4_3_clicked();
 
     void on_btn_confirm_4_clicked();
 

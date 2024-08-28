@@ -32,6 +32,7 @@ SOURCES += $$files(./*.cpp)
 HEADERS += $$files(./*.h)
 FORMS += $$files(./*.ui)
 
+
 INCLUDEPATH += $$PWD
 
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -41,20 +42,20 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 RESOURCES += \
     qss.qrc
 
-#unix:!macx: LIBS += -L$$OUT_PWD/../dataclass/ -ldataclass
+unix:!macx: LIBS += -L$$OUT_PWD/../dataclass/ -ldataclass
 
-#INCLUDEPATH += $$PWD/../dataclass
-#DEPENDPATH += $$PWD/../dataclass
+INCLUDEPATH += $$PWD/../dataclass
+DEPENDPATH += $$PWD/../dataclass
 
 
 
-#win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../shared/release/ -lshared
-#else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../shared/debug/ -lshared
-#else:unix: LIBS += -L$$OUT_PWD/../shared/ -lshared
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../shared/release/ -lshared
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../shared/debug/ -lshared
+else:unix: LIBS += -L$$OUT_PWD/../shared/ -lshared
 
-#INCLUDEPATH += $$PWD/../shared/include/ \
-#                $$PWD/../shared/
-#DEPENDPATH += $$PWD/../shared/include/ \
-#                $$PWD/../shared/
+INCLUDEPATH += $$PWD/../shared/include/ \
+                $$PWD/../shared/
+DEPENDPATH += $$PWD/../shared/include/ \
+                $$PWD/../shared/
 
 

@@ -1,6 +1,6 @@
 #include "netloader.h"
 
-#define SERVER_URL "http://0.0.0.0:8080"
+
 
 #include <QDebug>
 
@@ -8,21 +8,36 @@
 void NetLoader::post_create_doctor(HttpServer::Doctor doctor ,const NetClient& client){
     QUrl url(SERVER_URL);
     url.setPath("/doctor");
-    QJsonObject json = doctor.asJsonObject();
+    QJsonObject json = QJsonObject();
+    json.insert("id", doctor.getId());
+    json.insert("password", doctor.getPassword());
+    json.insert("apikey","");
+    json.insert("name","");
+    json.insert("gender","");
+    json.insert("office","");
+    json.insert("zc","");
+    json.insert("describe","");
     client.send_post_request(url, json);
 }
 
 void NetLoader::post_create_user(HttpServer::User user ,const NetClient& client){
     QUrl url(SERVER_URL);
     url.setPath("/user");
-    QJsonObject json = user.asJsonObject();
+    QJsonObject json = QJsonObject();
+    json.insert("id", user.getId());
+    json.insert("password", user.getPassword());
+    json.insert("name","");
+    json.insert("age","");
+    json.insert("gender","");
+    json.insert("phone","");
+    json.insert("address","");
     client.send_post_request(url, json);
 }
 
-void NetLoader::post_login(QString id, QString password,bool usertype,QString apikey ,const NetClient& client){
+void NetLoader::post_login(QString id, QString password,bool usertype, const NetClient& client){
     QUrl url(SERVER_URL);
     url.setPath("/login");
-    url.setQuery("id=" + id + "&password=" + password + "usertype" + usertype + "&apikey=" + apikey);
+    url.setQuery("id=" + id + "&password=" + password + "&usertype=" + usertype + "&apikey=");
     client.send_post_request(url,QJsonObject());
 }
 
@@ -33,6 +48,17 @@ void NetLoader::get_sql(QString sql, QString id, bool usertype, QString apikey,c
     client.send_get_request(url);
 }
 
+void NetLoader::send_message(QString sender_id, QString receiver_id, QString message, QString apikey,const NetClient &client){
+    client.send_socket_request("message:" + sender_id + ":" + receiver_id + ":" + message + ":" + apikey);
+}
+
+void NetLoader::send_picture(QString sender_id, QString receiver_id, QImage image, QString apikey,const NetClient &client){
+    QByteArray byteArray;
+    QBuffer buffer(&byteArray);
+    buffer.open(QIODevice::WriteOnly);
+    image.save(&buffer, "PNG");
+    client.send_socket_request("picture:" + sender_id + ":" + receiver_id + ":" + byteArray + ":" + apikey);
+}
 
 // void NetLoader::get_single_doctor(QString id,QString apikey ,const NetClient& client){
 //     QUrl url(SERVER_URL);
@@ -86,8 +112,8 @@ void NetLoader::get_sql(QString sql, QString id, bool usertype, QString apikey,c
 //     QUrl url(SERVER_URL);
 //     url.setPath("/appointment/patient");
 //     url.setQuery(
-//         "patient_id=" + QString::number(patientId) + 
-//         "&office=" + QString::number(officeId) + 
+//         "patient_id=" + QString::number(patientId) +
+//         "&office=" + QString::number(officeId) +
 //         "&apikey=" + apikey
 //     );
 //     client.send_get_request(url);

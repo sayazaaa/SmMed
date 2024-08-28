@@ -23,10 +23,6 @@ void little_history::set_label_date(const QString &text)
 {
     ui->label_date->setText(text);
 }
-void little_history::set_label_time(const QString &text)
-{
-    ui->label_time->setText(text);
-}
 void little_history::set_label_user_gender(const QString &text)
 {
     ui->label_gender->setText(text);
@@ -38,4 +34,8 @@ void little_history::set_label_age(const QString &text)
 void little_history::set_label_phone(const QString &text)
 {
     ui->label_phone->setText(text);
+}
+void little_history::set_label_which(const QString &text)
+{
+    ui->label_which->setText(text);
 }

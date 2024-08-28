@@ -66,7 +66,7 @@
        <widget class="QWidget" name="w_menu" native="true">
         <property name="minimumSize">
          <size>
-          <width>200</width>
+          <width>275</width>
           <height>0</height>
          </size>
         </property>
@@ -463,7 +463,7 @@
              </item>
             </layout>
            </widget>
-           <widget class="QWidget" name="">
+           <widget class="QWidget" name="layoutWidget">
             <property name="geometry">
              <rect>
               <x>0</x>
@@ -475,6 +475,12 @@
             <layout class="QGridLayout" name="gridLayout">
              <item row="0" column="0">
               <widget class="QToolButton" name="btn_menu_item_1">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="minimumSize">
                 <size>
                  <width>70</width>
@@ -483,8 +489,8 @@
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>70</width>
-                 <height>70</height>
+                 <width>16777215</width>
+                 <height>16777215</height>
                 </size>
                </property>
                <property name="font">
@@ -509,6 +515,12 @@
              </item>
              <item row="0" column="1">
               <widget class="QToolButton" name="btn_menu_item_2">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="minimumSize">
                 <size>
                  <width>70</width>
@@ -517,8 +529,8 @@
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>70</width>
-                 <height>70</height>
+                 <width>16777215</width>
+                 <height>16777215</height>
                 </size>
                </property>
                <property name="font">
@@ -543,6 +555,12 @@
              </item>
              <item row="0" column="2">
               <widget class="QToolButton" name="btn_menu_item_3">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="minimumSize">
                 <size>
                  <width>70</width>
@@ -551,8 +569,8 @@
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>70</width>
-                 <height>70</height>
+                 <width>16777215</width>
+                 <height>16777215</height>
                 </size>
                </property>
                <property name="font">
@@ -577,6 +595,12 @@
              </item>
              <item row="1" column="0">
               <widget class="QToolButton" name="btn_menu_item_4">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="minimumSize">
                 <size>
                  <width>70</width>
@@ -585,8 +609,8 @@
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>70</width>
-                 <height>70</height>
+                 <width>16777215</width>
+                 <height>16777215</height>
                 </size>
                </property>
                <property name="font">
@@ -712,7 +736,6 @@
            <zorder>layoutWidget</zorder>
            <zorder>layoutWidget</zorder>
            <zorder>lab_title</zorder>
-           <zorder>btn_menu_item_6</zorder>
           </widget>
          </item>
         </layout>
@@ -922,112 +945,118 @@
             </widget>
            </widget>
            <widget class="QWidget" name="page_1">
-            <layout class="QVBoxLayout" name="verticalLayout_8">
+            <layout class="QVBoxLayout" name="verticalLayout_15">
              <item>
               <layout class="QHBoxLayout" name="horizontalLayout_16">
                <item>
-                <widget class="QLabel" name="label_depart_1">
-                 <property name="text">
-                  <string>请选择科室</string>
-                 </property>
-                </widget>
+                <layout class="QGridLayout" name="gridLayout_4">
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="label_patient_1">
+                   <property name="text">
+                    <string>选择患者</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QComboBox" name="combo_patient_1"/>
+                 </item>
+                 <item row="0" column="2">
+                  <widget class="QLabel" name="label_depart_1">
+                   <property name="text">
+                    <string>选择科室</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="3">
+                  <widget class="QComboBox" name="combo_depart_1">
+                   <item>
+                    <property name="text">
+                     <string>naoke</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>a</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>M</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>c</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>all</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>耳鼻喉科</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>bilibili</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>黑神话科</string>
+                    </property>
+                   </item>
+                  </widget>
+                 </item>
+                 <item row="1" column="0">
+                  <widget class="QLabel" name="label_date_1">
+                   <property name="text">
+                    <string>选择日期</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QDateEdit" name="date_1"/>
+                 </item>
+                 <item row="1" column="2">
+                  <widget class="QLabel" name="label_docname_1">
+                   <property name="text">
+                    <string>选择医生</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="3">
+                  <widget class="QComboBox" name="combo_docname_1"/>
+                 </item>
+                </layout>
                </item>
                <item>
-                <widget class="QComboBox" name="combo_depart_1">
+                <layout class="QVBoxLayout" name="verticalLayout_8">
                  <item>
-                  <property name="text">
-                   <string>naoke</string>
-                  </property>
+                  <widget class="QPushButton" name="btn_report_1">
+                   <property name="text">
+                    <string>查询诊断报告</string>
+                   </property>
+                  </widget>
                  </item>
                  <item>
-                  <property name="text">
-                   <string>a</string>
-                  </property>
+                  <widget class="QPushButton" name="btn_prescription_1">
+                   <property name="text">
+                    <string>查询处方</string>
+                   </property>
+                  </widget>
                  </item>
                  <item>
-                  <property name="text">
-                   <string>M</string>
-                  </property>
+                  <widget class="QPushButton" name="btn_diagnosis_1">
+                   <property name="text">
+                    <string>查询医嘱</string>
+                   </property>
+                  </widget>
                  </item>
-                 <item>
-                  <property name="text">
-                   <string>c</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>all</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>耳鼻喉科</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>bilibili</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>黑神话科</string>
-                  </property>
-                 </item>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="label_date_1">
-                 <property name="text">
-                  <string>请选择预约日期</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QDateEdit" name="date_1"/>
-               </item>
-               <item>
-                <widget class="QLabel" name="label_docname_1">
-                 <property name="text">
-                  <string>查询医生姓名</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLineEdit" name="lineEdit_docname_1"/>
-               </item>
-               <item>
-                <widget class="QLabel" name="label_doc_gender_1">
-                 <property name="text">
-                  <string>选择医生性别</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QComboBox" name="combo_gender_1">
-                 <item>
-                  <property name="text">
-                   <string>全部</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>男</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>女</string>
-                  </property>
-                 </item>
-                </widget>
-               </item>
-               <item>
-                <widget class="QPushButton" name="btn_confirm_1">
-                 <property name="text">
-                  <string>确认</string>
-                 </property>
-                </widget>
+                </layout>
                </item>
               </layout>
              </item>
@@ -1100,30 +1129,7 @@
              </item>
             </layout>
            </widget>
-           <widget class="QWidget" name="page_2">
-            <layout class="QVBoxLayout" name="verticalLayout_9">
-             <item>
-              <widget class="QLabel" name="lab_mess_2">
-               <property name="font">
-                <font>
-                 <pointsize>20</pointsize>
-                 <weight>75</weight>
-                 <bold>true</bold>
-                </font>
-               </property>
-               <property name="layoutDirection">
-                <enum>Qt::LeftToRight</enum>
-               </property>
-               <property name="text">
-                <string>History2222222222222222222222222222</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
+           <widget class="QWidget" name="page_2"/>
            <widget class="QWidget" name="page_3">
             <layout class="QVBoxLayout" name="verticalLayout_3" stretch="2,7,2">
              <item>
