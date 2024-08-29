@@ -15,10 +15,12 @@
 #include <QDir>
 #include <QApplication>
 #include <QTime>
+#include <QDataStream>
+#include <QJsonArray>
 #include "messages.h"
 #include "apikey.h"
 
-#define SERVER_URL "http://0.0.0.0:8080"
+#define SERVER_URL "http://62.234.161.235:8080"
 
 class NetClient : public QObject {
     Q_OBJECT

@@ -34,8 +34,9 @@ int all_num=0;
 int page_state=1;
 QString  my_id="666";
 //QString apikey="";
+
 NetClient &client = NetClient::getInstance();
-//NetClient &client = NetClient::getInstance();
+
 
 Widget::Widget(QWidget *parent) :
     FramelessWidget(parent),
@@ -52,6 +53,8 @@ Widget::Widget(QWidget *parent) :
     connect(ui->listWidget_8, &QListWidget::itemClicked, this, &Widget::onItemClicked_8);
 
     connect(&client, &NetClient::received_json, this, &Widget::handleJsonReceived);
+    qDebug()<<"client:::::";
+    //client = NetClient::getInstance();
 
 
 
@@ -144,6 +147,7 @@ void Widget::getMessage()
 
 void Widget::handleJsonReceived(const QJsonObject &mainsource)
 {
+    qDebug()<<"888" << mainsource;
 
     if(mainsource.size()<=0)return;//如果source为空直接结束
     QJsonArray array=mainsource.value("data").toArray();
@@ -347,10 +351,10 @@ void Widget::handleJsonReceived(const QJsonObject &mainsource)
 //        else prescription_date=0;
 
         if(source.contains("huifu_text"))
-            *(huifu_text+n++)=source.value("huifu_text").toString();
+            *(huifu_text+n)=source.value("huifu_text").toString();
 //        else prescription_date=0;
 
-
+        n++;
     }
     all_num=n;
 
@@ -707,7 +711,7 @@ void Widget::set_doctors_1()
 //    )";
     QString sql ="SELECT doctor.name AS doctor_name FROM prescription, doctor, patient, office WHERE patient.name ='"+ui->combo_patient_1->currentText()+"' AND prescription.date = '"+ui->date_1->date().toString("yyMMdd")+"' AND office.name = '"+ui->combo_depart_1->currentText()+"';";
 
-
+    NetClient &client = NetClient::getInstance();
     NetLoader::get_sql(sql , USER_ID , 1 , API_KEY , client );
 
     //填入医生信息
@@ -1805,7 +1809,7 @@ void Widget::on_btn_confirm_9_clicked()
 
 void Widget::on_btn_ques_10_clicked()
 {
-    QString sql = " INSERT INTO tiezi (text, date , num , user_id ) VALUES ( '"+ui->textEdit_10->toPlainText()+"' , '"+ QDate::currentDate().toString("yyMMdd") +"', 0, '"+ USER_ID +"'); ";
+    QString sql = " INSERT INTO tiezi (text, date , num , user_id ) VALUES ( '"+ui->textEdit_10->toPlainText()+"' , "+ QDate::currentDate().toString("yyyyMMdd") +", 0, '"+ USER_ID +"'); ";
 //    QString sql= R"(
 //    SELECT
 //        tiezi.text AS tizi_text,
