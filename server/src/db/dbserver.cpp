@@ -10,6 +10,7 @@
 #include"qdatetime.h"
 #include"qdatastream.h"
 #include"qjsondocument.h"
+#include"qurl.h"
 void clear_jsonobj(QJsonObject & obj){
     //qDebug() << "clear json obj";
     auto ptr = obj.begin();
@@ -60,14 +61,18 @@ unsigned int DbServer::max_idle_time(){
     return m_max_idle_time;
 }
 void DbServer::sqlquery(std::string * sql, QSharedPointer<QJsonDocument> &res){
+
     qDebug() << QString((*sql).c_str());
     std::string s = sql->substr(0,6);
-    std::cout << s << std::endl;
+    std::cout << sql << std::endl;
     for(size_t i = 0; i < s.length();i++)s[i] = toupper(s[i]);
 
     QJsonArray jsonarray;
+    QString sqlq = QString(sql->c_str());
+    sqlq = QUrl::fromPercentEncoding(sqlq.toUtf8());
+    qDebug() << sqlq;
     mysqlpp::Connection * conptr = this->create();
-    mysqlpp::Query query = conptr->query(sql->c_str());
+    mysqlpp::Query query = conptr->query(sqlq.toUtf8());
     if(s != "SELECT"){
         qDebug() << sql;
         mysqlpp::SimpleResult temp = query.execute();
