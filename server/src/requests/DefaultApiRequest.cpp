@@ -126,10 +126,9 @@ void DefaultApiRequest::loginPostResponse(const Inline_response_200& res){
     }
 }
 
-void DefaultApiRequest::sqlGetResponse(const Object& res){
+void DefaultApiRequest::sqlGetResponse(const QJsonDocument& res){
     writeResponseHeaders();
-    QJsonDocument resDoc(::HttpServer::toJsonValue(res).toObject());
-    socket->writeJson(resDoc);
+    socket->writeJson(res);
     if(socket->isOpen()){
         socket->close();
     }

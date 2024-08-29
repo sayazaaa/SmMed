@@ -142,7 +142,6 @@ int main(int argc, char * argv[])
 
 
     sqlq.sprintf("USE %s",parser.value(databaseOption).toStdString().c_str());
-    qDebug() << sqlq;
     QSharedPointer<QJsonDocument> ptr;
     std::string sql = sqlq.toStdString();
     dbserver->sqlquery(&sql,ptr);
