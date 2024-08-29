@@ -373,7 +373,7 @@ void Widget::on_btn_main_item_1_clicked()
         //显示page
         ui->sw_main->setCurrentIndex(2*choice_state-1);
         //初始化日期
-        ui->date_1->setDisplayFormat("yyyy/MM/dd");
+        ui->date_1->setDisplayFormat("yyyy-MM-dd");
         ui->date_1->setDate(QDate::currentDate());
         ui->date_1->setMinimumDate(QDate::currentDate().addYears(-1));
         ui->date_1->setMaximumDate(QDate::currentDate());
@@ -386,7 +386,7 @@ void Widget::on_btn_main_item_1_clicked()
         //显示page
         ui->sw_main->setCurrentIndex(2*choice_state-1);
         //初始化日期
-        ui->date_3->setDisplayFormat("yyyy/MM/dd");
+        ui->date_3->setDisplayFormat("yyyy-MM-dd");
         ui->date_3->setDate(QDate::currentDate());
         ui->date_3->setReadOnly(true);
         QTime currentTime = QTime::currentTime();
@@ -416,7 +416,7 @@ void Widget::on_btn_main_item_1_clicked()
         //初始化日期
         ui->date_4->show();
         ui->label_date_text_4->show();
-        ui->date_4->setDisplayFormat("yyyy/MM/dd");
+        ui->date_4->setDisplayFormat("yyyy-MM-dd");
         ui->date_4->setDate(QDate::currentDate());
         ui->date_4->setReadOnly(false);
         ui->date_4->setCalendarPopup(true);
