@@ -385,7 +385,7 @@ void Widget::on_btn_main_item_1_clicked()
         //显示page
         ui->sw_main->setCurrentIndex(1);
         //初始化日期
-        ui->date_1->setDisplayFormat("yyyy/MM/dd");
+        ui->date_1->setDisplayFormat("yyyy-MM-dd");
         ui->date_1->setDate(QDate::currentDate());
         ui->date_1->setMinimumDate(QDate::currentDate().addYears(-1));
         ui->date_1->setMaximumDate(QDate::currentDate());
@@ -398,7 +398,7 @@ void Widget::on_btn_main_item_1_clicked()
         //显示page
         ui->sw_main->setCurrentIndex(3);
         //初始化日期
-        ui->date_3->setDisplayFormat("yyyy/MM/dd");
+        ui->date_3->setDisplayFormat("yyyy-MM-dd");
         ui->date_3->setDate(QDate::currentDate());
         ui->date_3->setMinimumDate(QDate::currentDate());
         ui->date_3->setMaximumDate(QDate::currentDate().addDays(10));
@@ -414,7 +414,7 @@ void Widget::on_btn_main_item_1_clicked()
         //初始化日期
         ui->date_5->show();
         ui->label_date_5->show();
-        ui->date_5->setDisplayFormat("yyyy/MM/dd");
+        ui->date_5->setDisplayFormat("yyyy-MM-dd");
         ui->date_5->setDate(QDate::currentDate());
         ui->date_5->setReadOnly(true);
         ui->date_5->setCalendarPopup(true);
@@ -456,7 +456,7 @@ void Widget::on_btn_main_item_2_clicked()
     {
         ui->sw_main->setCurrentIndex(1);
         //初始化日期
-        ui->date_1->setDisplayFormat("yyyy/MM/dd");
+        ui->date_1->setDisplayFormat("yyyy-MM-dd");
         ui->date_1->setDate(QDate::currentDate().addYears(-1));
         ui->date_1->setMinimumDate(QDate::currentDate().addYears(-20));
         ui->date_1->setMaximumDate(QDate::currentDate().addYears(-1));
@@ -470,7 +470,7 @@ void Widget::on_btn_main_item_2_clicked()
     {
         ui->sw_main->setCurrentIndex(4);
         //初始化日期
-        ui->date_4->setDisplayFormat("yyyy/MM/dd");
+        ui->date_4->setDisplayFormat("yyyy-MM-dd");
         ui->date_4->setDate(QDate::currentDate());
         ui->date_4->setCalendarPopup(true);
 
@@ -484,7 +484,7 @@ void Widget::on_btn_main_item_2_clicked()
         //初始化日期
         ui->date_5->show();
         ui->label_date_5->show();
-        ui->date_5->setDisplayFormat("yyyy/MM/dd");
+        ui->date_5->setDisplayFormat("yyyy-MM-dd");
         ui->date_5->setDate(QDate::currentDate());
         ui->date_5->setMinimumDate(QDate::currentDate());
         ui->date_5->setMaximumDate(QDate::currentDate().addDays(7));
@@ -705,7 +705,7 @@ void Widget::set_doctors_1()
 //        di.date = ')" + ui->date_1->date().toString() + R"(' AND
 //        o.name = ')" + ui->combo_depart_1->currentText() + R"(';
 //    )";
-    QString sql ="SELECT doctor.name AS doctor_name FROM prescription, doctor, patient, office WHERE patient.name ='"+ui->combo_patient_1->currentText()+"' AND prescription.date = '"+ui->date_1->date().toString("yyMMdd")+"' AND office.name = '"+ui->combo_depart_1->currentText()+"';";
+    QString sql ="SELECT doctor.name AS doctor_name FROM prescription, doctor, patient, office WHERE patient.name ='"+ui->combo_patient_1->currentText()+"' AND prescription.date = '"+ui->date_1->date().toString("yyyy-MM-dd")+"' AND office.name = '"+ui->combo_depart_1->currentText()+"';";
 
 
     NetLoader::get_sql(sql , USER_ID , 1 , API_KEY , client );
@@ -826,7 +826,7 @@ void Widget::search_1()
     if(three_which==1)
     {
 //        sql = "";
-        sql= " SELECT  patient.name AS patient_name,  inspreport.date AS inspreport_date,  office.name AS office_name,  doctor.name AS doctor_name, inspreport.filepath AS inspreport_filepath FROM patient , inspreport , doctor , office WHERE patient.name = '" + ui->combo_patient_1->currentText() + "' AND inspreport.date = '" + ui->date_1->date().toString("yyMMdd") + "' AND office.name = '" + ui->combo_depart_1->currentText() + "' AND  doctor.name = '" + ui->combo_docname_1->currentText() + "'; ";
+        sql= " SELECT  patient.name AS patient_name,  inspreport.date AS inspreport_date,  office.name AS office_name,  doctor.name AS doctor_name, inspreport.filepath AS inspreport_filepath FROM patient , inspreport , doctor , office WHERE patient.name = '" + ui->combo_patient_1->currentText() + "' AND inspreport.date = '" + ui->date_1->date().toString("yyyy-MM-dd") + "' AND office.name = '" + ui->combo_depart_1->currentText() + "' AND  doctor.name = '" + ui->combo_docname_1->currentText() + "'; ";
 //        QString sql ="SELECT doctor.name AS doctor_name FROM prescription, doctor, patient, office WHERE patient.name like %'"+ui->combo_patient_1->currentText()+"'% AND prescription.date = '"+ui->date_1->date().toString("yyMMdd")+"' AND office.name = '"+ui->combo_depart_1->currentText()+"';";
 
 
@@ -845,7 +845,7 @@ void Widget::search_1()
             patient , prescription , doctor , office
         WHERE
             patient.name = ')" + ui->combo_patient_1->currentText() + R"(' AND
-            prescription.date = ')" + ui->date_1->date().toString("yyMMdd") + R"(' AND
+            prescription.date = ')" + ui->date_1->date().toString("yyyy-MM-dd") + R"(' AND
             office.name = ')" + ui->combo_depart_1->currentText() + R"(' AND
             doctor.name = ')" + ui->combo_docname_1->currentText() + R"(';
         )";
@@ -863,7 +863,7 @@ void Widget::search_1()
             patient , diagnosis , doctor , office
         WHERE
             patient.name = ')" + ui->combo_patient_1->currentText() + R"(' AND
-            diagnosis.date = ')" + ui->date_1->date().toString("yyMMdd") + R"(' AND
+            diagnosis.date = ')" + ui->date_1->date().toString("yyyy-MM-dd") + R"(' AND
             office.name = ')" + ui->combo_depart_1->currentText() + R"(' AND
             doctor.name = ')" + ui->combo_docname_1->currentText() + R"(';
         )";
@@ -1035,7 +1035,7 @@ void Widget::putin_3(int i)
     w->set_label_gender( *(doctor_gender+page_now*9-9+i) );
     w->set_label_apartment( *(office_name+page_now*9-9+i) );
     w->set_label_describe( *(doctor_describe+page_now*9-9+i) );
-    w->adate_now = ui->date_3->date().toString();
+    w->adate_now = ui->date_3->date().toString("yyyy-MM-dd");
     w->doctor_id = doctor_id+page_now*9-9+i;
     w->patient_name = patient_name+page_now*9-9+i;
     //设置item大小
@@ -1805,7 +1805,7 @@ void Widget::on_btn_confirm_9_clicked()
 
 void Widget::on_btn_ques_10_clicked()
 {
-    QString sql = " INSERT INTO tiezi (text, date , num , user_id ) VALUES ( '"+ui->textEdit_10->toPlainText()+"' , '"+ QDate::currentDate().toString("yyMMdd") +"', 0, '"+ USER_ID +"'); ";
+    QString sql = " INSERT INTO tiezi (text, date , num , user_id ) VALUES ( '"+ui->textEdit_10->toPlainText()+"' , '"+ QDate::currentDate().toString("yyyy-MM-dd") +"', 0, '"+ USER_ID +"'); ";
 //    QString sql= R"(
 //    SELECT
 //        tiezi.text AS tizi_text,
