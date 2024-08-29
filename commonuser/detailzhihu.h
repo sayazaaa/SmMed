@@ -43,9 +43,9 @@ public:
 
     int allnum=0;
     int now=0;
-    QString *huifutext;
-    QString *huifutime;
-    QString *doctorname;
+    QString huifutext;
+    QString huifutime;
+    QString doctorname;
     QString tiez_id;
     void setquestion(const QString text);
 

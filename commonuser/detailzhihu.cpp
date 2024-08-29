@@ -54,7 +54,7 @@ detailZhihu::detailZhihu(QWidget *parent) :
 
         QNChatMessage_zhihu* messageW = new QNChatMessage_zhihu(ui->listWidget->parentWidget());
         QListWidgetItem* item = new QListWidgetItem(ui->listWidget);
-        dealMessage(messageW, item, *(huifutext+now), *(huifutime+now), QNChatMessage_zhihu::User_She);
+        dealMessage(messageW, item, huifutext, huifutime, QNChatMessage_zhihu::User_She);
         ui->listWidget->setCurrentRow(ui->listWidget->count()-1);
     }
 
@@ -90,7 +90,7 @@ void detailZhihu::dealMessage(QNChatMessage_zhihu *messageW, QListWidgetItem *it
     messageW->setFixedWidth(this->width());
     QSize size = messageW->fontRect(text);
     item->setSizeHint(size);
-    messageW->setText(*(doctorname+now),text, time , size, type);
+    messageW->setText(doctorname,text, time , size, type);
     ui->listWidget->setItemWidget(item, messageW);
 }
 
