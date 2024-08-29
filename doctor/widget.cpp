@@ -30,6 +30,10 @@ QVector<QString> prescription_id , prescription_title,prescription_filepath ,pre
 QVector<QString> tiezi_id ,tiezi_text,tiezi_date ,tiezi_num;
 QVector<QString> huifu_id , huifu_text,huifu_time ;
 
+
+
+
+
 int all_num=0;
 
 int page_state=1;
@@ -135,215 +139,259 @@ void Widget::littleShow()
 void Widget::handleJsonReceived(const QJsonObject &mainsource)
 {
 
+    qDebug()<<"888" << mainsource;
+
     if(mainsource.size()<=0)return;//如果source为空直接结束
-    QJsonArray array=mainsource.value("data").toArray();
+    QJsonArray array=mainsource.value("array").toArray();
     int n=0;
     for(auto item:array){
+
+
         QJsonObject source = item.toObject();
-        // qDebug()<<"777"<<source;
+        qDebug()<<"777"<<source;
         if(source.contains("doctor_id"))//如果source中有"name"值则提取
             doctor_id.push_back(source.value("doctor_id").toString());
         else doctor_id.clear();
+        // qDebug()<<"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
 
         if(source.contains("doctor_password"))
             doctor_password.push_back(source.value("doctor_password").toString());
         else doctor_password.clear();
-
+        // qDebug()<<"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
         if(source.contains("doctor_salt"))
-            doctor_salt[n]=source.value("doctor_salt").toString();
+            doctor_salt.push_back(source.value("doctor_salt").toString());
         else doctor_salt.clear();
 
         if(source.contains("doctor_name"))
-            doctor_name[n]=source.value("doctor_name").toString();
+            doctor_name.push_back(source.value("doctor_name").toString());
         else doctor_name.clear();
 
         if(source.contains("doctor_gender"))
-            doctor_gender[n]=source.value("doctor_gender").toString();
+            doctor_gender.push_back(source.value("doctor_gender").toString());
         else doctor_gender.clear();
 
         if(source.contains("doctor_describe"))
-            doctor_describe[n]=source.value("doctor_describe").toString();
+            doctor_describe.push_back(source.value("doctor_describe").toString());
         else doctor_describe.clear();
 
         if(source.contains("doctor_workingtime"))
-            doctor_workingtime[n]=source.value("doctor_workingtime").toString();
+            doctor_workingtime.push_back(source.value("doctor_workingtime").toString());
         else doctor_workingtime.clear();
 
         if(source.contains("doctor_zc"))
-            doctor_zc[n]=source.value("doctor_zc").toString();
+            doctor_zc.push_back(source.value("doctor_zc").toString());
         else doctor_zc.clear();
 
         if(source.contains("office_name"))
-            office_name[n]=source.value("office_name").toString();
+            office_name.push_back(source.value("office_name").toString());
         else office_name.clear();
 
         if(source.contains("office_id"))
-            office_id[n]=source.value("office_id").toString();
+            office_id.push_back(source.value("office_id").toString());
         else office_id.clear();
 
         if(source.contains("user_id"))
-            user_id[n]=source.value("user_id").toString();
+            user_id.push_back(source.value("user_id").toString());
         else user_id.clear();
 
         if(source.contains("user_password"))
-            user_password[n]=source.value("user_password").toString();
+            user_password.push_back(source.value("user_password").toString());
         else user_password.clear();
 
         if(source.contains("user_salt"))
-            user_salt[n]=source.value("user_salt").toString();
+            user_salt.push_back(source.value("user_salt").toString());
         else user_salt.clear();
 
         if(source.contains("user_age"))
-            user_age[n]=source.value("user_age").toString();
+            user_age.push_back(source.value("user_age").toString());
         else user_age.clear();
 
         if(source.contains("user_name"))
-            user_name[n]=source.value("user_name").toString();
+            user_name.push_back(source.value("user_name").toString());
         else user_name.clear();
 
         if(source.contains("user_gender"))
-            user_gender[n]=source.value("user_gender").toString();
+            user_gender.push_back(source.value("user_gender").toString());
         else user_gender.clear();
 
         if(source.contains("user_phone"))
-            user_phone[n]=source.value("user_phone").toString();
+            user_phone.push_back(source.value("user_phone").toString());
         else user_phone.clear();
 
         if(source.contains("user_address"))
-            user_address[n]=source.value("user_address").toString();
+            user_address.push_back(source.value("user_address").toString());
         else user_address.clear();
 
         if(source.contains("inspreport_id"))
-            inspreport_id[n]=source.value("inspreport_id").toString();
+            inspreport_id.push_back(source.value("inspreport_id").toString());
         else inspreport_id.clear();
 
         if(source.contains("inspreport_filepath"))
-            inspreport_filepath[n]=source.value("inspreport_filepath").toString();
+            inspreport_filepath.push_back(source.value("inspreport_filepath").toString());
         else inspreport_filepath.clear();
 
         if(source.contains("inspreport_title"))
-            inspreport_title[n]=source.value("inspreport_title").toString();
+            inspreport_title.push_back(source.value("inspreport_title").toString());
         else inspreport_title.clear();
 
         if(source.contains("inspreport_date"))
-            inspreport_date[n]=source.value("inspreport_date").toString();
+            inspreport_date.push_back(source.value("inspreport_date").toString());
         else inspreport_date.clear();
 
         if(source.contains("patient_id"))
-            patient_id[n]=source.value("patient_id").toString();
+            patient_id.push_back(source.value("patient_id").toString());
         else patient_id.clear();
 
         if(source.contains("patient_name"))
-            patient_name[n]=source.value("patient_name").toString();
+            patient_name.push_back(source.value("patient_name").toString());
         else patient_name.clear();
 
         if(source.contains("patient_gender"))
-            patient_gender[n]=source.value("patient_gender").toString();
+            patient_gender.push_back(source.value("patient_gender").toString());
         else patient_gender.clear();
 
         if(source.contains("patient_phone"))
-            patient_phone[n]=source.value("patient_phone").toString();
+            patient_phone.push_back(source.value("patient_phone").toString());
         else patient_phone.clear();
 
         if(source.contains("appointment_id"))
-            appointment_id [n]=source.value("appointment_id").toString();
+            appointment_id .push_back(source.value("appointment_id").toString());
         else appointment_id .clear();
 
         if(source.contains("appointment_date"))
-            appointment_date[n]=source.value("appointment_date").toString();
+            appointment_date.push_back(source.value("appointment_date").toString());
         else appointment_date.clear();
 
         if(source.contains("appointment_num"))
-            appointment_num[n]=source.value("appointment_num").toString();
+            appointment_num.push_back(source.value("appointment_num").toString());
         else appointment_num.clear();
 
         if(source.contains("appointment_time"))
-            appointment_time[n]=source.value("appointment_time").toString();
+            appointment_time.push_back(source.value("appointment_time").toString());
         else appointment_time.clear();
 
         if(source.contains("notifications_id"))
-            notifications_id[n]=source.value("notifications_id").toString();
+            notifications_id.push_back(source.value("notifications_id").toString());
         else notifications_id.clear();
 
         if(source.contains("notifications_title"))
-            notifications_title[n]=source.value("notifications_title").toString();
+            notifications_title.push_back(source.value("notifications_title").toString());
         else notifications_title.clear();
 
         if(source.contains("notifications_time"))
-            notifications_time[n]=source.value("notifications_time").toString();
+            notifications_time.push_back(source.value("notifications_time").toString());
         else notifications_time.clear();
 
         if(source.contains("notifications_enddate"))
-            notifications_enddate[n]=source.value("notifications_enddate").toString();
+            notifications_enddate.push_back(source.value("notifications_enddate").toString());
         else notifications_enddate.clear();
 
         if(source.contains("notifications_content"))
-            notifications_content[n]=source.value("notifications_content").toString();
+            notifications_content.push_back(source.value("notifications_content").toString());
         else notifications_content.clear();
 
         if(source.contains("diagnosis_id"))
-            diagnosis_id[n]=source.value("diagnosis_id").toString();
+            diagnosis_id.push_back(source.value("diagnosis_id").toString());
         else diagnosis_id.clear();
 
         if(source.contains("diagnosis_title"))
-            diagnosis_title[n]=source.value("diagnosis_title").toString();
+            diagnosis_title.push_back(source.value("diagnosis_title").toString());
         else diagnosis_title.clear();
 
         if(source.contains("diagnosis_filepath"))
-            diagnosis_filepath[n]=source.value("diagnosis_filepath").toString();
+            diagnosis_filepath.push_back(source.value("diagnosis_filepath").toString());
         else diagnosis_filepath.clear();
 
         if(source.contains("diagnosis_date"))
-            diagnosis_date[n]=source.value("diagnosis_date").toString();
+            diagnosis_date.push_back(source.value("diagnosis_date").toString());
         else diagnosis_date.clear();
 
         if(source.contains("prescription_id"))
-            prescription_id[n]=source.value("prescription_id").toString();
+            prescription_id.push_back(source.value("prescription_id").toString());
         else prescription_id.clear();
 
         if(source.contains("prescription_title"))
-            prescription_title[n]=source.value("prescription_title").toString();
+            prescription_title.push_back(source.value("prescription_title").toString());
         else prescription_title.clear();
 
         if(source.contains("prescription_filepath"))
-            prescription_filepath[n]=source.value("prescription_filepath").toString();
+            prescription_filepath.push_back(source.value("prescription_filepath").toString());
         else prescription_filepath.clear();
 
         if(source.contains("prescription_date"))
-            prescription_date[n]=source.value("prescription_date").toString();
+            prescription_date.push_back(source.value("prescription_date").toString());
         else prescription_date.clear();
 
         if(source.contains("tiezi_id"))
-            tiezi_id[n]=source.value("tiezi_id").toString();
-        else tiezi_id.clear();
+            tiezi_id.push_back(source.value("tiezi_id").toString());
+        // else tiezi_id.clear();
 
         if(source.contains("tiezi_text"))
-            tiezi_text[n]=source.value("tiezi_text").toString();
-        else tiezi_text.clear();
+            tiezi_text.push_back(source.value("tiezi_text").toString());
+        // else tiezi_text.clear();
 
         if(source.contains("tiezi_date"))
-            tiezi_date[n]=source.value("tiezi_date").toString();
-        else tiezi_date.clear();
+            tiezi_date.push_back(source.value("tiezi_date").toString());
+        // else tiezi_date.clear();
 
         if(source.contains("tiezi_num"))
-            tiezi_num[n]=source.value("tiezi_num").toString();
-        else tiezi_num.clear();
+            tiezi_num.push_back(source.value("tiezi_num").toString());
+        // else tiezi_num.clear();
 
         if(source.contains("huifu_id"))
-            huifu_id[n]=source.value("huifu_id").toString();
-        else huifu_id.clear();
+            huifu_id.push_back(source.value("huifu_id").toString());
+        // else huifu_id.clear();
 
         if(source.contains("huifu_time"))
-            huifu_time[n]=source.value("huifu_time").toString();
-        else huifu_time.clear();
+            huifu_time.push_back(source.value("huifu_time").toString());
+        // else huifu_time.clear();
 
         if(source.contains("huifu_text"))
-            huifu_text[n]=source.value("huifu_text").toString();
-        else huifu_text.clear();
+            huifu_text.push_back(source.value("huifu_text").toString());
+        // else huifu_text.clear();
+        qDebug()<<"111111111111111";
         n++;
     }
     all_num=n;
 
+    //删除数据
+    delete_3();
+    //填入数据
+    // for(int i=0;i<all_num-1;i++)
+    // {
+    //     putin_3(i);//缺少参数
+    // }
+    if(all_num>0)
+    {
+        qDebug()<<"------------------------------------------:"<<all_num;
+        qDebug()<<"--------------------->>>"<<patient_id;
+
+        putin_3(0);
+    }
+
+    // //删除数据
+    // delete_4();
+    // //填入数据
+    // if(all_num>9)
+    // {
+    //     for(int i=0;i<9;i++)
+    //     {
+    //         putin_4(i);//缺少参数
+    //     }
+    // }
+    // else
+    // {
+    //     for(int i=0;i<all_num;i++)
+    //     {
+    //         putin_4(i);//缺少参数
+    //     }
+    // }
+
+    // for(int i=0;i<all_num;i++)
+    // {
+    //     putin_9(i);
+    // }
+    // qDebug()<<"00000000000000000000000000"<<all_num;
 
 }
 
@@ -381,6 +429,27 @@ void Widget::on_btn_main_item_1_clicked()
         ui->date_1->setMinimumDate(QDate::currentDate().addYears(-1));
         ui->date_1->setMaximumDate(QDate::currentDate());
         ui->date_1->setCalendarPopup(true);
+
+
+        QString sql=R"(
+        SELECT
+            patient.name AS patient_name
+        FROM
+            patient , diagnosis , doctor
+        WHERE
+            doctor.id = diagnosis.doctor_id AND
+            patient.id = diagnosis.patient_id AND
+            diagnosis.date = ')" + ui->date_1->date().toString("yyyy-MM-dd")  + R"(' AND
+            doctor.id = ')" + USER_ID  + R"(';
+        )";
+
+        NetLoader::get_sql(sql , USER_ID , 0 , API_KEY , client );
+
+        for(int i=0;i<patient_name.length();i++)
+        {
+            ui->combo_patient_1->addItem(patient_name[i]);
+        }
+
 //        search_1();
     }
     //开始看诊
@@ -392,23 +461,23 @@ void Widget::on_btn_main_item_1_clicked()
         ui->date_3->setDisplayFormat("yyyy-MM-dd");
         ui->date_3->setDate(QDate::currentDate());
         ui->date_3->setReadOnly(true);
-        QTime currentTime = QTime::currentTime();
-        if(currentTime>QTime(8,0,0) && currentTime<QTime(12,0,0) )
-        {
-            ui->label_time_3->setText("上午");
-        }
-        else if(currentTime>QTime(13,0,0) && currentTime<QTime(17,0,0) )
-        {
-            ui->label_time_3->setText("下午");
-        }
-        else if(currentTime>QTime(18,0,0) && currentTime<QTime(22,0,0) )
-        {
-            ui->label_time_3->setText("晚上");
-        }
-        else
-        {
-            ui->label_time_3->setText("非工作时间");
-        }
+        // QTime currentTime = QTime::currentTime();
+        // if(currentTime>QTime(8,0,0) && currentTime<QTime(12,0,0) )
+        // {
+        //     ui->label_time_3->setText("上午");
+        // }
+        // else if(currentTime>QTime(13,0,0) && currentTime<QTime(17,0,0) )
+        // {
+        //     ui->label_time_3->setText("下午");
+        // }
+        // else if(currentTime>QTime(18,0,0) && currentTime<QTime(22,0,0) )
+        // {
+        //     ui->label_time_3->setText("晚上");
+        // }
+        // else
+        // {
+        //     ui->label_time_3->setText("非工作时间");
+        // }
         search_3();
     }
     //我的预约
@@ -435,7 +504,7 @@ void Widget::on_btn_main_item_1_clicked()
         //显示page
         ui->sw_main->setCurrentIndex(2*choice_state-1);
 
-        search_9();
+        on_btn_confirm_9_clicked();
     }
 
 }
@@ -448,7 +517,7 @@ void Widget::on_btn_main_item_2_clicked()
     {
         ui->sw_main->setCurrentIndex(2*choice_state-1);
         //初始化日期
-        ui->date_1->setDisplayFormat("yyyy/MM/dd");
+        ui->date_1->setDisplayFormat("yyyy-MM-dd");
         ui->date_1->setDate(QDate::currentDate().addYears(-1));
         ui->date_1->setMinimumDate(QDate::currentDate().addYears(-100));
         ui->date_1->setMaximumDate(QDate::currentDate().addYears(-1));
@@ -724,7 +793,9 @@ void Widget::search_1()
     //通过 患者 日期 医生id 查询 ：患者 日期 科室 医生 诊断报告/处方/医嘱
     if(three_which==1)
     {
-        sql=R"(
+        if(ui->combo_patient_1->currentText()=="")
+        {
+            sql=R"(
         SELECT
             patient.name AS patient_name,
             inspreport.date AS inspreport_date,
@@ -732,17 +803,43 @@ void Widget::search_1()
             doctor.name AS doctor_name,
             inspreport.filepath AS inspreport_filepath
         FROM
-            patient , inspreport , doctor , office
+            patient , inspreport , doctor ,office
         WHERE
-            patient.name = ')" + ui->combo_patient_1->currentText()  + R"( ' AND
-            inspreport.date = ')" + ui->date_1->date().toString("yyMMdd")  + R"(' AND
+            office.id = doctor.office_id AND
+            inspreport.patient_id = patient.id AND
+            inspreport.doctor_id = doctor.id AND
+            inspreport.date = ')" + ui->date_1->date().toString("yyyy-MM-dd")  + R"(' AND
             doctor.id = ')" + USER_ID  + R"(';
         )";
+        }
+        else
+        {
+            sql=R"(
+        SELECT
+            patient.name AS patient_name,
+            inspreport.date AS inspreport_date,
+            office.name AS office_name,
+            doctor.name AS doctor_name,
+            inspreport.filepath AS inspreport_filepath
+        FROM
+            patient , inspreport , doctor ,office
+        WHERE
+            office.id = doctor.office_id AND
+            inspreport.patient_id = patient.id AND
+            inspreport.doctor_id = doctor.id AND
+            patient.name = ')" + ui->combo_patient_1->currentText()  + R"( ' AND
+            inspreport.date = ')" + ui->date_1->date().toString("yyyy-MM-dd")  + R"(' AND
+            doctor.id = ')" + USER_ID  + R"(';
+        )";
+        }
+
 
     }
     else if(three_which==2)
     {
-        sql=R"(
+        if(ui->combo_patient_1->currentText()=="")
+        {
+            sql=R"(
         SELECT
             patient.name AS patient_name,
             prescription.date AS prescription_date,
@@ -752,14 +849,40 @@ void Widget::search_1()
         FROM
             patient , prescription , doctor , office
         WHERE
-            patient.name = ')" + ui->combo_patient_1->currentText()  + R"( ' AND
-            prescription.date = ')" + ui->date_1->date().toString("yyMMdd")  + R"(' AND
+            office.id = doctor.office_id AND
+            prescription.patient_id = patient.id AND
+            prescription.doctor_id = doctor.id AND
+            prescription.date = ')" + ui->date_1->date().toString("yyyy-MM-dd")  + R"(' AND
             doctor.id = ')" + USER_ID  + R"(';
         )";
+        }
+        else
+        {
+            sql=R"(
+        SELECT
+            patient.name AS patient_name,
+            prescription.date AS prescription_date,
+            office.name AS office_name,
+            doctor.name AS doctor_name,
+            prescription.filepath AS prescription_filepath
+        FROM
+            patient , prescription , doctor , office
+        WHERE
+            office.id = doctor.office_id AND
+            prescription.patient_id = patient.id AND
+            prescription.doctor_id = doctor.id AND
+            patient.name = ')" + ui->combo_patient_1->currentText()  + R"( ' AND
+            prescription.date = ')" + ui->date_1->date().toString("yyyy-MM-dd")  + R"(' AND
+            doctor.id = ')" + USER_ID  + R"(';
+        )";
+        }
+
     }
     else if(three_which==3)
     {
-        sql=R"(
+        if(ui->combo_patient_1->currentText()=="")
+        {
+            sql=R"(
         SELECT
             patient.name AS patient_name,
             diagnosis.date AS diagnosis_date,
@@ -769,10 +892,34 @@ void Widget::search_1()
         FROM
             patient , diagnosis , doctor , office
         WHERE
-            patient.name = ')" + ui->combo_patient_1->currentText()  + R"( ' AND
-            diagnosis.date = ')" + ui->date_1->date().toString("yyMMdd")  + R"(' AND
+            office.id = doctor.office_id AND
+            diagnosis.patient_id = patient.id AND
+            diagnosis.doctor_id = doctor.id AND
+            diagnosis.date = ')" + ui->date_1->date().toString("yyyy-MM-dd")  + R"(' AND
             doctor.id = ')" + USER_ID  + R"(';
         )";
+        }
+        else
+        {
+            sql=R"(
+        SELECT
+            patient.name AS patient_name,
+            diagnosis.date AS diagnosis_date,
+            office.name AS office_name,
+            doctor.name AS doctor_name,
+            diagnosis.filepath AS diagnosis_filepath
+        FROM
+            patient , diagnosis , doctor , office
+        WHERE
+            office.id = doctor.office_id AND
+            diagnosis.patient_id = patient.id AND
+            diagnosis.doctor_id = doctor.id AND
+            patient.name = ')" + ui->combo_patient_1->currentText()  + R"( ' AND
+            diagnosis.date = ')" + ui->date_1->date().toString("yyyy-MM-dd")  + R"(' AND
+            doctor.id = ')" + USER_ID  + R"(';
+        )";
+        }
+
     }
 
     NetLoader::get_sql(sql , USER_ID , 0 , API_KEY , client );
@@ -874,20 +1021,22 @@ void Widget::delete_3()
     }
 }
 
-void Widget::putin_3()
+void Widget::putin_3(int i)
 {
+    qDebug()<<"innnnnnnn";
     //创建item
     nowDiagnose *w = new nowDiagnose;
     QListWidgetItem* pItem = new QListWidgetItem;
     //填入数据
-    w->set_label_user_name( patient_name[0]  );
-    w->set_label_user_gender( patient_gender[0] );
+    w->set_label_user_name( patient_name[i]  );
+    w->set_label_user_gender( patient_gender[i] );
     w->set_label_age( "18" );
-    w->set_label_id(patient_id[0]);
-    w->doctor_id=doctor_id;
-    w->patient_id = patient_id;
-    w->date = ui->date_3->date().toString();
+    w->set_label_id(patient_id[i]);
+    w->doctor_id=doctor_id[i];
+    w->patient_id = patient_id[i];
+    w->date = ui->date_3->date().toString("yyyy-MM-dd");
 
+    qDebug()<<"endddddd";
     //设置item大小
     pItem->setSizeHint(QSize(ui->listWidget_3->width(),ui->listWidget_3->height() ));
     //添加进QlistWidget
@@ -895,14 +1044,16 @@ void Widget::putin_3()
     ui->listWidget_3->setItemWidget(pItem, w);
     //不可被选中
     pItem->setFlags(pItem->flags() & ~Qt::ItemIsEnabled & ~Qt::ItemIsSelectable);
+    qDebug()<<"bbbbbbbbbbbbbbbbbbbbbbbbbbbb";
 }
 
 void Widget::search_3()
 {
-    if(ui->label_time_3->text()=="非工作时间")
-    {
-        return ;
-    }
+    // if(ui->label_time_3->text()=="非工作时间")
+    // {
+    //     return ;
+    // }
+
     //get data()
     //通过 日期date 医生id 查询： 病人姓名 性别 年龄 预约叫号 id
     QString sql= R"(
@@ -910,13 +1061,15 @@ void Widget::search_3()
         patient.name AS patient_name,
         patient.gender AS patient_gender,
         patient.id AS patient_id,
+        doctor.id AS doctor_id,
         appointment.num AS appointment_num
     FROM
         patient , appointment , doctor
     WHERE
-        appointment.date = ')" + ui->date_3->date().toString("yyMMdd")  + R"(' AND
-        appointment.doctor_id = ' )" + USER_ID  + R"( ' AND
-        appointment.time = ')" + ui->label_time_3->text()  + R"(';
+        appointment.patient_id = patient.id AND
+        appointment.doctor_id = doctor.id AND
+        appointment.date = ')" + ui->date_3->date().toString("yyyy-MM-dd")  + R"(' AND
+        appointment.doctor_id = ')" + USER_ID + R"(';
     )";
 
 
@@ -928,11 +1081,7 @@ void Widget::search_3()
 
     //填写总数据量
     ui->label_data_num_text_3->setText("共有"+QString::number(data_num)+"项数据");
-    //删除数据
-    delete_3();
-    //填入数据
 
-    putin_3();//缺少参数
 
 }
 
@@ -1040,9 +1189,10 @@ void Widget::search_4()
     FROM
         patient , appointment , doctor
     WHERE
-        appointment.date = ')" + ui->date_4->date().toString("yyMMdd")  + R"(' AND
-        appointment.doctor_id = ' )" + USER_ID  + R"( ' AND
-        appointment.time = ')" + ui->combo_time_4->currentText()  + R"(';
+        patient.id = appointment.patient_id AND
+        doctor.id = appointment.doctor_id AND
+        appointment.date = ')" + ui->date_4->date().toString("yyyy-MM-dd")  + R"(' AND
+        appointment.doctor_id = ' )" + USER_ID  + R"(';
     )";
 
 
@@ -1054,23 +1204,7 @@ void Widget::search_4()
 
     //填写总数据量
     ui->label_data_num_text_4->setText("共有"+QString::number(data_num)+"项数据");
-    //删除数据
-    delete_4();
-    //填入数据
-    if(all_num>9)
-    {
-        for(int i=0;i<9;i++)
-        {
-            putin_4(i);//缺少参数
-        }
-    }
-    else
-    {
-        for(int i=0;i<all_num;i++)
-        {
-            putin_4(i);//缺少参数
-        }
-    }
+
 
 }
 
@@ -1259,37 +1393,61 @@ void Widget::delete_9()
     }
 }
 
-void Widget::putin_9()
+void Widget::putin_9(int i)
 {
-    QString sql= R"(
-    SELECT
-        huifu.text AS huifu_text,
-        doctor.name AS doctor_name,
-        huifu.time AS huifu_time
-    FROM
-        user , tiezi , doctor , huifu
-    WHERE
-        tiezi.id = '%)"+ tiezi_id[page_now] +R"(%'
-    )";
+    // QString sql= R"(
+    // SELECT
+    //     huifu.text AS huifu_text,
+    //     doctor.name AS doctor_name,
+    //     huifu.time AS huifu_time
+    // FROM
+    //     user , tiezi , doctor , huifu
+    // WHERE
+    //     tiezi.user_id = user.id AND
+    //     tiezi.id = huifu.tiezi_id AND
+    //     doctor.id = huifu_doctor_id AND
+    //     tiezi.id = ')"+ tiezi_id[page_now] +R"('
+    // )";
 
-    NetLoader::get_sql(sql , USER_ID , 0 , API_KEY , client );
+    // NetLoader::get_sql(sql , USER_ID , 0 , API_KEY , client );
 
+
+    // qDebug()<<"------------------------------------------:"<<all_num;
+    // qDebug()<<"--------------------->>>"<<tiezi_text;
 
     //创建item
     little_zhihu *w = new little_zhihu;
 
     QListWidgetItem* pItem = new QListWidgetItem;
 
+    // switch(i)
+    // {
+    // case 1:un="xiaoming";
+    // case 2:tt=""
+    // }
+
+
     //填入数据
-    w->set_label_user_name(user_name[page_now-1]);
-    w->set_label_user_context(tiezi_text[page_now-1]);
-    w->set_label_answernum(tiezi_num[page_now-1]);
-    w->tiezi_id = tiezi_id[page_now-1];
-    w->allnum=all_num;
-    w->now=page_now;
-    w->huifutext=huifu_text;
-    w->huifutime=huifu_time;
-    w->doctorname=doctor_name;
+
+    w->set_label_user_name(user_name[i]);
+    w->set_label_user_context(tiezi_text[i]);
+    w->set_label_answernum(tiezi_num[i]);
+    // w->tiezi_id = tiezi_id[i];
+    // w->allnum=all_num;
+    // w->now=page_now;
+    // w->huifutext=huifu_text[i];
+    // w->huifutime=huifu_time[i];
+    // w->doctorname=doctor_name[i];
+
+    // w->set_label_user_name("23");
+    // w->set_label_user_context("89");
+    // w->set_label_answernum("0");
+    // w->tiezi_id = "1";/*
+    // w->allnum=23;/*
+    // w->now=1;
+    // w->huifutext="12312";
+    // w->huifutime="123";
+    // w->doctorname="12312";*/*/
 
 //    pItem->setBackground(QColor("green"));
     //设置item大小
@@ -1303,9 +1461,9 @@ void Widget::putin_9()
 
 void Widget::search_9()
 {
-    QString sql= R"(
+    QString sql=R"(
     SELECT
-        tiezi.text AS tizi_text,
+        tiezi.text AS tiezi_text,
         tiezi.date AS tiezi_date,
         tiezi.id AS tiezi_id,
         tiezi.num AS tiezi_num,
@@ -1313,43 +1471,16 @@ void Widget::search_9()
     FROM
         user , tiezi
     WHERE
-        tiezi.text like '%)"+ ui->lineEdit_search_9->text() +R"(%'
-    )";
+        tiezi.user_id = user.id  )";
 
-//    qDebug()<<"666";
     NetLoader::get_sql(sql , USER_ID , 0 , API_KEY , client );
-
-    int data_num=all_num;
-
-    //填写总数据量
-//    ui->label_data_num_text_9->setText("共有"+QString::number(data_num)+"项数据");
-    //删除数据
-    delete_9();
-    if(all_num>50)
-    {
-        //填入数据
-        for(int i=0;i<50;i++)
-        {
-            putin_9();//缺少参数
-        }
-    }
-    else if(all_num>0)
-    {
-        //填入数据
-        for(int i=0;i<data_num;i++)
-        {
-            putin_9();//缺少参数
-        }
-    }
-
-
-
 
 }
 
 void Widget::on_btn_confirm_9_clicked()
 {
     search_9();//参数未填充
+    delete_9();
 
 }
 

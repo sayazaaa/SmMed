@@ -59,7 +59,7 @@ detailZhihu::detailZhihu(QWidget *parent) :
 
         QNChatMessage_zhihu* messageW = new QNChatMessage_zhihu(ui->listWidget->parentWidget());
         QListWidgetItem* item = new QListWidgetItem(ui->listWidget);
-        dealMessage(messageW, item, huifutext[now], huifutime[now], QNChatMessage_zhihu::User_She);
+        dealMessage(messageW, item, huifutext, huifutime, QNChatMessage_zhihu::User_She);
         ui->listWidget->setCurrentRow(ui->listWidget->count()-1);
     }
 
@@ -78,12 +78,12 @@ void detailZhihu::on_pushButton_clicked()
 
     bool isSending = true; // 发送中
 
-    QString sql = "INSERT INTO huifu (text, tiezi_id, doctor_id, time) VALUES ('"+ msg +"', '"+ tiez_id +"', '" + USER_ID + "', '"+ time +"');";
-    NetClient &client = NetClient::getInstance();
-    NetLoader::get_sql(sql , USER_ID , 0 , API_KEY , client );
+    // QString sql = "INSERT INTO huifu (text, tiezi_id, doctor_id, time) VALUES ('"+ msg +"', '"+ tiez_id +"', '" + USER_ID + "', '"+ time +"');";
+    // NetClient &client = NetClient::getInstance();
+    // NetLoader::get_sql(sql , USER_ID , 0 , API_KEY , client );
 
-    sql = "UPDATE tiezi  SET num=num+1  WHERE id = '"+tiez_id+"'; ";
-    NetLoader::get_sql(sql , USER_ID , 0 , API_KEY , client );
+    // sql = "UPDATE tiezi  SET num=num+1  WHERE id = '"+tiez_id+"'; ";
+    // NetLoader::get_sql(sql , USER_ID , 0 , API_KEY , client );
 
     QNChatMessage_zhihu* messageW = new QNChatMessage_zhihu(ui->listWidget->parentWidget());
     QListWidgetItem* item = new QListWidgetItem(ui->listWidget);
@@ -109,7 +109,7 @@ void detailZhihu::dealMessage(QNChatMessage_zhihu *messageW, QListWidgetItem *it
     //    NetClient &client = NetClient::getInstance();
     //    NetLoader::get_sql(sql , USER_ID , 0 , API_KEY , client );
 
-    messageW->setText(doctorname[0],text, time, size, type);
+    messageW->setText(doctorname,text, time, size, type);
     ui->listWidget->setItemWidget(item, messageW);
 }
 

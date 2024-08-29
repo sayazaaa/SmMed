@@ -141,7 +141,7 @@ private:
     void putin_1();
     void delete_1();
     void search_3();
-    void putin_3();
+    void putin_3(int i);
     void delete_3();
     void search_4();
     void putin_4(int i);
@@ -150,7 +150,7 @@ private:
     void putin_8();
     void delete_8();
     void search_9();
-    void putin_9();
+    void putin_9(int i);
     void delete_9();
 };
 QString convertDayToChinese(const QString& day);
