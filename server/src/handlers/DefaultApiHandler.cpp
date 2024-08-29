@@ -86,8 +86,7 @@ void DefaultApiHandler::sqlGet(QString sql, QString apikey, QString id, bool use
     {
         qDebug() << "going to send result...";
         qDebug() << (*resjson);
-        Object obj(resjson->toJson());
-        reqObj->sqlGetResponse(obj);
+        reqObj->sqlGetResponse(*resjson);
         qDebug() << "send succeed!";
     }
 }
