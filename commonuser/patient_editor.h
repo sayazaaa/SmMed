@@ -19,6 +19,9 @@ public:
     void set_age(int p);
     void set_phone(const QString &text);
 
+private slots:
+    void on_confirm_clicked();
+
 private:
     Ui::patient_editor *ui;
 };

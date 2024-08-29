@@ -2,6 +2,11 @@
 #include "ui_information.h"
 #include <QGraphicsDropShadowEffect>
 #include<QMessageBox>
+#include"netloader.h"
+#include"apikey.h"
+#include"netclient.h"
+#include "patient_editor.h"
+
 information::information(QWidget *parent) :
     FramelessWidget(parent),
     ui(new Ui::information)
@@ -61,6 +66,15 @@ void information::on_confirm_clicked()
 
         ui->age->setText(QString::number(age));
     }
+
+
+    QString sql= "UPDATE user SET name = '"+ ui->name->text() +"',gender='"+ ui->gender->currentText() +"',phone='"+ ui->phone->text() +"',address='"+ ui->address->text() +"',age='"+ ui->age->text() +"' WHERE id = '" + USER_ID + "'; ";
+
+    NetClient &client=NetClient::getInstance();
+    NetLoader::get_sql(sql , USER_ID , 1 , API_KEY , client );
+
+
+
 }
 
 
@@ -83,7 +97,7 @@ void information::initUi()
     shadow->setColor(QColor("#444444"));
     shadow->setBlurRadius(16);
     ui->inf->setGraphicsEffect(shadow);
-    ui->inf_lay->setMargin(12);
+//    ui->inf_lay->setMargin(12);
     this->setAttribute(Qt::WA_Hover);
 
 }
@@ -97,5 +111,12 @@ void information::on_close_btn_clicked()
 void information::on_id_editingFinished()
 {
 
+}
+
+
+void information::on_pushButton_clicked()
+{
+    patient_editor *pe = new patient_editor;
+    pe->show();
 }
 

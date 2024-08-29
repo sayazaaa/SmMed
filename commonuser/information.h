@@ -27,6 +27,8 @@ private slots:
 
     void on_id_editingFinished();
 
+    void on_pushButton_clicked();
+
 private:
     Ui::information *ui;
     void initUi();          //Ui界面初始化函数

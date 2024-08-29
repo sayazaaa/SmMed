@@ -25,6 +25,9 @@ int main(int argc, char *argv[])
     login *l=new login;
     l->show();
 
+//    Widget *w=new Widget;
+//    w->show();
+
     
     return a.exec();
 }

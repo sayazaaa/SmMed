@@ -2,6 +2,11 @@
 #include "ui_information.h"
 #include <QGraphicsDropShadowEffect>
 #include<QMessageBox>
+
+#include"netclient.h"
+#include"netloader.h"
+#include"apikey.h"
+
 information::information(QWidget *parent) :
     FramelessWidget(parent),
     ui(new Ui::information)
@@ -58,6 +63,11 @@ void information::on_confirm_clicked()
 
         ui->age->setText(QString::number(age));
     }
+
+    QString sql= "UPDATE doctor SET name = '"+ ui->name->text() +"',gender='"+ ui->gender->currentText() +"' WHERE id = '" + USER_ID + "'; ";
+
+    NetClient &client=NetClient::getInstance();
+    NetLoader::get_sql(sql , USER_ID ,0 , API_KEY , client );
 }
 
 
