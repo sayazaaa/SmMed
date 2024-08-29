@@ -66,7 +66,7 @@ void NetClient::send_socket_request(Message& msg, std::function<void(bool)> call
 
 void NetClient::send_socket_apikey_request(QString apikey) const {
 
-    socket->connectToHost("0.0.0.0", 8081);
+    socket->connectToHost("62.234.161.235", 8081);
     qDebug() << API_KEY;
     socket->write(API_KEY.toStdString().c_str());
     socket->write("\n");
@@ -79,11 +79,20 @@ void NetClient::handle_reply_json() {
     QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
     if (reply) {
         if (reply->error() == QNetworkReply::NoError) {
-            qDebug() << "handle reply json";
+            qDebug() << "handle reply json: ";
             QByteArray response = reply->readAll();
             QJsonDocument jsonDoc = QJsonDocument::fromJson(response);
+            qDebug() <<"doc"<< jsonDoc;
+            if (jsonDoc.isArray()){
+                QJsonArray jsonArray = jsonDoc.array();
+                QJsonObject jsonObj;
+                jsonObj.insert("array",jsonArray);
+                // qDebug() << "handle jsonarr: "<< json;
+                emit received_json(jsonObj);
+            }
             if (jsonDoc.isObject()) {
                 QJsonObject jsonObj = jsonDoc.object();
+                qDebug() << "handle jsonobj: "<< jsonObj;
                 emit received_json(jsonObj);
             }
         }

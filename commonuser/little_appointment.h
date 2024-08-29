@@ -13,8 +13,8 @@ class little_appointment : public QWidget
     Q_OBJECT
 
 public:
-    QString *doctor_id = 0;
-    QString *patient_name = 0;
+    QString doctor_id ;
+    QVector<QString> patient_name ;
     QString adate_now="";
     void set_label_doc_name(const QString &text);
     void set_label_gender(const QString &text);

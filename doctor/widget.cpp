@@ -18,17 +18,18 @@ int page_max=0;
 
 int three_which=0;
 
-QString* doctor_id =0, *doctor_password =0,* doctor_salt =0, *doctor_name=0 , *doctor_gender=0 , *doctor_zc =0, *doctor_describe=0 ,* doctor_workingtime=0;
-QString* office_name=0 ,  *office_id =0;
-QString* user_id=0 , *user_password =0, *user_salt =0, *user_age =0, *user_name =0, *user_gender=0 , *user_phone =0, *user_address=0;
-QString* inspreport_id=0 , *inspreport_filepath=0 ,* inspreport_title =0, *inspreport_date=0;
-QString* patient_id =0,* patient_name =0, *patient_gender=0 , *patient_phone=0 ;
-QString* appointment_id =0, *appointment_date =0, *appointment_num=0 , *appointment_time=0;
-QString* notifications_id =0,* notifications_title =0,* notifications_time=0 ,* notifications_enddate=0 , *notifications_content=0;
-QString* diagnosis_id =0, *diagnosis_title=0 , *diagnosis_filepath=0 , *diagnosis_date=0;
-QString* prescription_id =0,* prescription_title=0 , *prescription_filepath =0, *prescription_date=0;
-QString* tiezi_id =0,* tiezi_text=0 , *tiezi_date =0 , *tiezi_num=0;
-QString* huifu_id =0,* huifu_text=0 , *huifu_time =0;
+QVector<QString> doctor_id ,doctor_password , doctor_salt ,doctor_name,doctor_gender,doctor_zc ,doctor_describe, doctor_workingtime;
+QVector<QString> office_name,office_id;
+QVector<QString> user_id,user_password ,user_salt ,user_age ,user_name ,user_gender,user_phone ,user_address;
+QVector<QString> inspreport_id,inspreport_filepath,inspreport_title,inspreport_date;
+QVector<QString> patient_id ,patient_name ,patient_gender,patient_phone ;
+QVector<QString> appointment_id ,appointment_date ,appointment_num,appointment_time;
+QVector<QString> notifications_id , notifications_title, notifications_time, notifications_enddate,notifications_content;
+QVector<QString> diagnosis_id ,diagnosis_title,diagnosis_filepath,diagnosis_date;
+QVector<QString> prescription_id , prescription_title,prescription_filepath ,prescription_date;
+QVector<QString> tiezi_id ,tiezi_text,tiezi_date ,tiezi_num;
+QVector<QString> huifu_id , huifu_text,huifu_time ;
+
 int all_num=0;
 
 int page_state=1;
@@ -139,205 +140,207 @@ void Widget::handleJsonReceived(const QJsonObject &mainsource)
     int n=0;
     for(auto item:array){
         QJsonObject source = item.toObject();
+        // qDebug()<<"777"<<source;
         if(source.contains("doctor_id"))//如果source中有"name"值则提取
-            *(doctor_id+n)=source.value("doctor_id").toString();
-//        else doctor_id=0;
+            doctor_id.push_back(source.value("doctor_id").toString());
+        else doctor_id.clear();
 
         if(source.contains("doctor_password"))
-            *(doctor_password+n)=source.value("doctor_password").toString();
-//        else doctor_password=0;
+            doctor_password.push_back(source.value("doctor_password").toString());
+        else doctor_password.clear();
 
         if(source.contains("doctor_salt"))
-            *(doctor_salt+n)=source.value("doctor_salt").toString();
-//        else doctor_salt=0;
+            doctor_salt[n]=source.value("doctor_salt").toString();
+        else doctor_salt.clear();
 
         if(source.contains("doctor_name"))
-            *(doctor_name+n)=source.value("doctor_name").toString();
-//        else doctor_name=0;
+            doctor_name[n]=source.value("doctor_name").toString();
+        else doctor_name.clear();
 
         if(source.contains("doctor_gender"))
-            *(doctor_gender+n)=source.value("doctor_gender").toString();
-//        else doctor_gender=0;
+            doctor_gender[n]=source.value("doctor_gender").toString();
+        else doctor_gender.clear();
 
         if(source.contains("doctor_describe"))
-            *(doctor_describe+n)=source.value("doctor_describe").toString();
-//        else doctor_describe=0;
+            doctor_describe[n]=source.value("doctor_describe").toString();
+        else doctor_describe.clear();
 
         if(source.contains("doctor_workingtime"))
-            *(doctor_workingtime+n)=source.value("doctor_workingtime").toString();
-//        else doctor_workingtime=0;
+            doctor_workingtime[n]=source.value("doctor_workingtime").toString();
+        else doctor_workingtime.clear();
 
         if(source.contains("doctor_zc"))
-            *(doctor_zc+n)=source.value("doctor_zc").toString();
-//        else doctor_zc=0;
+            doctor_zc[n]=source.value("doctor_zc").toString();
+        else doctor_zc.clear();
 
         if(source.contains("office_name"))
-            *(office_name+n)=source.value("office_name").toString();
-//        else office_name=0;
+            office_name[n]=source.value("office_name").toString();
+        else office_name.clear();
 
         if(source.contains("office_id"))
-            *(office_id+n)=source.value("office_id").toString();
-//        else office_id=0;
+            office_id[n]=source.value("office_id").toString();
+        else office_id.clear();
 
         if(source.contains("user_id"))
-            *(user_id+n)=source.value("user_id").toString();
-//        else user_id=0;
+            user_id[n]=source.value("user_id").toString();
+        else user_id.clear();
 
         if(source.contains("user_password"))
-            *(user_password+n)=source.value("user_password").toString();
-//        else user_password=0;
+            user_password[n]=source.value("user_password").toString();
+        else user_password.clear();
 
         if(source.contains("user_salt"))
-            *(user_salt+n)=source.value("user_salt").toString();
-//        else user_salt=0;
+            user_salt[n]=source.value("user_salt").toString();
+        else user_salt.clear();
 
         if(source.contains("user_age"))
-            *(user_age+n)=source.value("user_age").toString();
-//        else user_age=0;
+            user_age[n]=source.value("user_age").toString();
+        else user_age.clear();
 
         if(source.contains("user_name"))
-            *(user_name+n)=source.value("user_name").toString();
-//        else user_name=0;
+            user_name[n]=source.value("user_name").toString();
+        else user_name.clear();
 
         if(source.contains("user_gender"))
-            *(user_gender+n)=source.value("user_gender").toString();
-//        else user_gender=0;
+            user_gender[n]=source.value("user_gender").toString();
+        else user_gender.clear();
 
         if(source.contains("user_phone"))
-            *(user_phone+n)=source.value("user_phone").toString();
-//        else user_phone=0;
+            user_phone[n]=source.value("user_phone").toString();
+        else user_phone.clear();
 
         if(source.contains("user_address"))
-            *(user_address+n)=source.value("user_address").toString();
-//        else user_address=0;
+            user_address[n]=source.value("user_address").toString();
+        else user_address.clear();
 
         if(source.contains("inspreport_id"))
-            *(inspreport_id+n)=source.value("inspreport_id").toString();
-//        else inspreport_id=0;
+            inspreport_id[n]=source.value("inspreport_id").toString();
+        else inspreport_id.clear();
 
         if(source.contains("inspreport_filepath"))
-            *(inspreport_filepath+n)=source.value("inspreport_filepath").toString();
-//        else inspreport_filepath=0;
+            inspreport_filepath[n]=source.value("inspreport_filepath").toString();
+        else inspreport_filepath.clear();
 
         if(source.contains("inspreport_title"))
-            *(inspreport_title+n)=source.value("inspreport_title").toString();
-//        else inspreport_title=0;
+            inspreport_title[n]=source.value("inspreport_title").toString();
+        else inspreport_title.clear();
 
         if(source.contains("inspreport_date"))
-            *(inspreport_date+n)=source.value("inspreport_date").toString();
-//        else inspreport_date=0;
+            inspreport_date[n]=source.value("inspreport_date").toString();
+        else inspreport_date.clear();
 
         if(source.contains("patient_id"))
-            *(patient_id+n)=source.value("patient_id").toString();
-//        else patient_id=0;
+            patient_id[n]=source.value("patient_id").toString();
+        else patient_id.clear();
 
         if(source.contains("patient_name"))
-            *(patient_name+n)=source.value("patient_name").toString();
-//        else patient_name=0;
+            patient_name[n]=source.value("patient_name").toString();
+        else patient_name.clear();
 
         if(source.contains("patient_gender"))
-            *(patient_gender+n)=source.value("patient_gender").toString();
-//        else patient_gender=0;
+            patient_gender[n]=source.value("patient_gender").toString();
+        else patient_gender.clear();
 
         if(source.contains("patient_phone"))
-            *(patient_phone+n)=source.value("patient_phone").toString();
-//        else patient_phone=0;
+            patient_phone[n]=source.value("patient_phone").toString();
+        else patient_phone.clear();
 
         if(source.contains("appointment_id"))
-            *(appointment_id +n)=source.value("appointment_id").toString();
-//        else appointment_id =0;
+            appointment_id [n]=source.value("appointment_id").toString();
+        else appointment_id .clear();
 
         if(source.contains("appointment_date"))
-            *(appointment_date+n)=source.value("appointment_date").toString();
-//        else appointment_date=0;
+            appointment_date[n]=source.value("appointment_date").toString();
+        else appointment_date.clear();
 
         if(source.contains("appointment_num"))
-            *(appointment_num+n)=source.value("appointment_num").toString();
-//        else appointment_num=0;
+            appointment_num[n]=source.value("appointment_num").toString();
+        else appointment_num.clear();
 
         if(source.contains("appointment_time"))
-            *(appointment_time+n)=source.value("appointment_time").toString();
-//        else appointment_time=0;
+            appointment_time[n]=source.value("appointment_time").toString();
+        else appointment_time.clear();
 
         if(source.contains("notifications_id"))
-            *(notifications_id+n)=source.value("notifications_id").toString();
-//        else notifications_id=0;
+            notifications_id[n]=source.value("notifications_id").toString();
+        else notifications_id.clear();
 
         if(source.contains("notifications_title"))
-            *(notifications_title+n)=source.value("notifications_title").toString();
-//        else notifications_title=0;
+            notifications_title[n]=source.value("notifications_title").toString();
+        else notifications_title.clear();
 
         if(source.contains("notifications_time"))
-            *(notifications_time+n)=source.value("notifications_time").toString();
-//        else notifications_time=0;
+            notifications_time[n]=source.value("notifications_time").toString();
+        else notifications_time.clear();
 
         if(source.contains("notifications_enddate"))
-            *(notifications_enddate+n)=source.value("notifications_enddate").toString();
-//        else notifications_enddate=0;
+            notifications_enddate[n]=source.value("notifications_enddate").toString();
+        else notifications_enddate.clear();
 
         if(source.contains("notifications_content"))
-            *(notifications_content+n)=source.value("notifications_content").toString();
-//        else notifications_content=0;
+            notifications_content[n]=source.value("notifications_content").toString();
+        else notifications_content.clear();
 
         if(source.contains("diagnosis_id"))
-            *(diagnosis_id+n)=source.value("diagnosis_id").toString();
-//        else diagnosis_id=0;
+            diagnosis_id[n]=source.value("diagnosis_id").toString();
+        else diagnosis_id.clear();
 
         if(source.contains("diagnosis_title"))
-            *(diagnosis_title+n)=source.value("diagnosis_title").toString();
-//        else diagnosis_title=0;
+            diagnosis_title[n]=source.value("diagnosis_title").toString();
+        else diagnosis_title.clear();
 
         if(source.contains("diagnosis_filepath"))
-            *(diagnosis_filepath+n)=source.value("diagnosis_filepath").toString();
-//        else diagnosis_filepath=0;
+            diagnosis_filepath[n]=source.value("diagnosis_filepath").toString();
+        else diagnosis_filepath.clear();
 
         if(source.contains("diagnosis_date"))
-            *(diagnosis_date+n)=source.value("diagnosis_date").toString();
-//        else diagnosis_date=0;
+            diagnosis_date[n]=source.value("diagnosis_date").toString();
+        else diagnosis_date.clear();
 
         if(source.contains("prescription_id"))
-            *(prescription_id+n)=source.value("prescription_id").toString();
-//        else prescription_id=0;
+            prescription_id[n]=source.value("prescription_id").toString();
+        else prescription_id.clear();
 
         if(source.contains("prescription_title"))
-            *(prescription_title+n)=source.value("prescription_title").toString();
-//        else prescription_title=0;
+            prescription_title[n]=source.value("prescription_title").toString();
+        else prescription_title.clear();
 
         if(source.contains("prescription_filepath"))
-            *(prescription_filepath+n)=source.value("prescription_filepath").toString();
-//        else prescription_filepath=0;
+            prescription_filepath[n]=source.value("prescription_filepath").toString();
+        else prescription_filepath.clear();
 
         if(source.contains("prescription_date"))
-            *(prescription_date+n)=source.value("prescription_date").toString();
-//        else prescription_date=0;
+            prescription_date[n]=source.value("prescription_date").toString();
+        else prescription_date.clear();
 
         if(source.contains("tiezi_id"))
-            *(tiezi_id+n)=source.value("tiezi_id").toString();
-//        else prescripdate=0;
+            tiezi_id[n]=source.value("tiezi_id").toString();
+        else tiezi_id.clear();
 
         if(source.contains("tiezi_text"))
-            *(tiezi_text+n)=source.value("tiezi_text").toString();
-//        else prescription_date=0;
+            tiezi_text[n]=source.value("tiezi_text").toString();
+        else tiezi_text.clear();
 
         if(source.contains("tiezi_date"))
-            *(tiezi_date+n)=source.value("tiezi_date").toString();
-//        else prescription_date=0;
+            tiezi_date[n]=source.value("tiezi_date").toString();
+        else tiezi_date.clear();
 
         if(source.contains("tiezi_num"))
-            *(tiezi_num+n)=source.value("tiezi_num").toString();
-//        else prescription_date=0;
+            tiezi_num[n]=source.value("tiezi_num").toString();
+        else tiezi_num.clear();
 
         if(source.contains("huifu_id"))
-            *(huifu_id+n)=source.value("huifu_id").toString();
-//        else prescription_date=0;
+            huifu_id[n]=source.value("huifu_id").toString();
+        else huifu_id.clear();
 
-        if(source.contains("huifu_id"))
-            *(huifu_id+n)=source.value("huifu_id").toString();
-//        else prescription_date=0;
+        if(source.contains("huifu_time"))
+            huifu_time[n]=source.value("huifu_time").toString();
+        else huifu_time.clear();
 
         if(source.contains("huifu_text"))
-            *(huifu_text+n++)=source.value("huifu_text").toString();
-//        else prescription_date=0;
+            huifu_text[n]=source.value("huifu_text").toString();
+        else huifu_text.clear();
+        n++;
     }
     all_num=n;
 
@@ -373,7 +376,7 @@ void Widget::on_btn_main_item_1_clicked()
         //显示page
         ui->sw_main->setCurrentIndex(2*choice_state-1);
         //初始化日期
-        ui->date_1->setDisplayFormat("yyyy/MM/dd");
+        ui->date_1->setDisplayFormat("yyyy-MM-dd");
         ui->date_1->setDate(QDate::currentDate());
         ui->date_1->setMinimumDate(QDate::currentDate().addYears(-1));
         ui->date_1->setMaximumDate(QDate::currentDate());
@@ -386,7 +389,7 @@ void Widget::on_btn_main_item_1_clicked()
         //显示page
         ui->sw_main->setCurrentIndex(2*choice_state-1);
         //初始化日期
-        ui->date_3->setDisplayFormat("yyyy/MM/dd");
+        ui->date_3->setDisplayFormat("yyyy-MM-dd");
         ui->date_3->setDate(QDate::currentDate());
         ui->date_3->setReadOnly(true);
         QTime currentTime = QTime::currentTime();
@@ -416,7 +419,7 @@ void Widget::on_btn_main_item_1_clicked()
         //初始化日期
         ui->date_4->show();
         ui->label_date_text_4->show();
-        ui->date_4->setDisplayFormat("yyyy/MM/dd");
+        ui->date_4->setDisplayFormat("yyyy-MM-dd");
         ui->date_4->setDate(QDate::currentDate());
         ui->date_4->setReadOnly(false);
         ui->date_4->setCalendarPopup(true);
@@ -686,10 +689,10 @@ void Widget::putin_1()
     little_history *w = new little_history;
     QListWidgetItem* pItem = new QListWidgetItem;
     //填入数据
-    w->set_label_user_name( *(patient_name +page_now-1) );
-    w->set_label_date( *(diagnosis_date +page_now-1) );
-    w->set_label_user_gender( *(patient_gender +page_now-1) );
-    w->set_label_phone( *(patient_phone +page_now-1) );
+    w->set_label_user_name( patient_name [page_now-1] );
+    w->set_label_date( diagnosis_date [page_now-1] );
+    w->set_label_user_gender( patient_gender [page_now-1] );
+    w->set_label_phone( patient_phone [page_now-1] );
     if(three_which==1)
     {
         w->set_label_which("诊断报告");
@@ -877,10 +880,10 @@ void Widget::putin_3()
     nowDiagnose *w = new nowDiagnose;
     QListWidgetItem* pItem = new QListWidgetItem;
     //填入数据
-    w->set_label_user_name( *(patient_name)  );
-    w->set_label_user_gender( *(patient_gender) );
+    w->set_label_user_name( patient_name[0]  );
+    w->set_label_user_gender( patient_gender[0] );
     w->set_label_age( "18" );
-    w->set_label_id(*(patient_id));
+    w->set_label_id(patient_id[0]);
     w->doctor_id=doctor_id;
     w->patient_id = patient_id;
     w->date = ui->date_3->date().toString();
@@ -1012,10 +1015,10 @@ void Widget::putin_4(int i)
     myAppointment *w = new myAppointment;
     QListWidgetItem* pItem = new QListWidgetItem;
     //填入数据
-    w->set_label_user_name(  *(patient_name+page_now*9-9+i) );
+    w->set_label_user_name(  patient_name[page_now*9-9+i] );
     w->set_label_user_age( "28" );
-    w->set_label_user_gender( *(patient_name+page_now*9-9+i) );
-    w->set_label_time( *(appointment_time+page_now*9-9+i) );
+    w->set_label_user_gender( patient_name[page_now*9-9+i] );
+    w->set_label_time( appointment_time[page_now*9-9+i] );
 
     //设置item大小
     pItem->setSizeHint(QSize(ui->listWidget_4->width()/3-10,ui->listWidget_4->height()/3 ));
@@ -1162,7 +1165,7 @@ void Widget::onItemClicked_8(QListWidgetItem *item)
 
 
     ui->label_docname_8->setText(item->text());
-    ui->widget_chat_box_8->set_receiver_id(*user_id);
+    ui->widget_chat_box_8->set_receiver_id(user_id[0]);
     ui->widget_chat_box_8->set_sender_id(USER_ID);
 }
 
@@ -1218,10 +1221,10 @@ void Widget::search_8()
         NetLoader::get_sql(sql , USER_ID , 0 , API_KEY , client );
 
 
-        if(ui->lineEdit_search_8->text()==""||ui->lineEdit_search_8->text()==*(user_name+in))
+        if(ui->lineEdit_search_8->text()==""||ui->lineEdit_search_8->text()==user_name[in])
         {
             //创建item
-            QListWidgetItem* pItem = new QListWidgetItem(QIcon(":/icons/money.png"), *(user_name+in));
+            QListWidgetItem* pItem = new QListWidgetItem(QIcon(":/icons/money.png"), user_name[in]);
 
             //设置item大小
             pItem->setSizeHint(QSize(ui->listWidget_8->width(),ui->listWidget_8->height()/6 ));
@@ -1266,7 +1269,7 @@ void Widget::putin_9()
     FROM
         user , tiezi , doctor , huifu
     WHERE
-        tiezi.id = '%)"+ *(tiezi_id+page_now) +R"(%'
+        tiezi.id = '%)"+ tiezi_id[page_now] +R"(%'
     )";
 
     NetLoader::get_sql(sql , USER_ID , 0 , API_KEY , client );
@@ -1278,10 +1281,10 @@ void Widget::putin_9()
     QListWidgetItem* pItem = new QListWidgetItem;
 
     //填入数据
-    w->set_label_user_name(*(user_name+page_now-1));
-    w->set_label_user_context(*(tiezi_text+page_now-1));
-    w->set_label_answernum(*(tiezi_num+page_now-1));
-    w->tiezi_id = *(tiezi_id+page_now-1);
+    w->set_label_user_name(user_name[page_now-1]);
+    w->set_label_user_context(tiezi_text[page_now-1]);
+    w->set_label_answernum(tiezi_num[page_now-1]);
+    w->tiezi_id = tiezi_id[page_now-1];
     w->allnum=all_num;
     w->now=page_now;
     w->huifutext=huifu_text;

@@ -49,7 +49,7 @@ void little_doctor::on_btn_ask_clicked()
 //    "insert into chat_messages(sender_id,receiver_id,message,timestamp) value('"+ USER_ID+"', '"+张三+"','"+1+"','"+3+"');";
 
 
-    QString sql = "insert into chat_history(sender_id,receiver_id) value('"+ USER_ID+"', '"+*doc_id+"');";
+    QString sql = "insert into chat_history(sender_id,receiver_id) value('"+ USER_ID+"', '"+doc_id+"');";
 
     DatabaseManager &dbm = DatabaseManager::getInstance();
     QSqlQuery query(dbm.getDatabase());

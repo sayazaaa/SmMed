@@ -52,9 +52,9 @@ public:
 
     int allnum=0;
     int now=0;
-    QString *huifutext;
-    QString *huifutime;
-    QString *doctorname;
+    QVector<QString> huifutext;
+    QVector<QString> huifutime;
+    QVector<QString> doctorname;
 //    QString tiez_id;
     QString tiez_id;
 //    void setquestion(const QString text);

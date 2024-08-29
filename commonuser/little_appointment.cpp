@@ -86,9 +86,9 @@ void little_appointment::on_btn_yes_clicked()
 
 
     //    将就诊人姓名填入nA的combo
-        for(int i=0;patient_name+i!=nullptr;i++)
+        for(int i=0;i<patient_name.length();i++)
         {
-            nA->set_patient(*(patient_name+i));
+            nA->set_patient(patient_name[i]);
         }
 
 
