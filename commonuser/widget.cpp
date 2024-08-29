@@ -150,7 +150,7 @@ void Widget::handleJsonReceived(const QJsonObject &mainsource)
     qDebug()<<"888" << mainsource;
 
     if(mainsource.size()<=0)return;//如果source为空直接结束
-    QJsonArray array=mainsource.value("data").toArray();
+    QJsonArray array=mainsource.value("array").toArray();
     int n=0;
     for(auto item:array){
         QJsonObject source = item.toObject();
@@ -1034,6 +1034,9 @@ void Widget::putin_3(int i)
     little_appointment *w = new little_appointment;
     QListWidgetItem* pItem = new QListWidgetItem;
 
+    // qDebug()<<*(doctor_name+page_now*9-9+i);
+    // qDebug()<< *(doctor_gender+page_now*9-9+i) ;
+
     //填入数据
     w->set_label_doc_name( *(doctor_name+page_now*9-9+i) );
     w->set_label_gender( *(doctor_gender+page_now*9-9+i) );
@@ -1060,11 +1063,13 @@ void Widget::search_3()
         doctor.gender AS doctor_gender,
         office.name AS office_name,
         doctor.describe AS doctor_describe
+        doctor.id AS doctor_id
+        patient.name AS patient_name
     FROM
-        doctor ,office
+        doctor ,office , patient
     WHERE
-        office.name like %')" + ui->combo_depart_3->currentText() + R"('% AND
-        doctor.name like %')" + ui->lineEdit_docname_3->text() + R"('% AND
+        office.name like '%)" + ui->combo_depart_3->currentText() + R"(%' AND
+        doctor.name like '%)" + ui->lineEdit_docname_3->text() + R"(%' AND
         doctor.gender = ')" + ui->combo_gender_3->currentText() + R"(';
     )";
 

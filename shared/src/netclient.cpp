@@ -87,7 +87,7 @@ void NetClient::handle_reply_json() {
                 QJsonArray jsonArray = jsonDoc.array();
                 QJsonObject jsonObj;
                 jsonObj.insert("array",jsonArray);
-                qDebug() << "handle jsonarr: "<< jsonObj;
+                // qDebug() << "handle jsonarr: "<< json;
                 emit received_json(jsonObj);
             }
             if (jsonDoc.isObject()) {
