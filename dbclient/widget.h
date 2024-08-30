@@ -14,11 +14,13 @@
 #include "mymessagebox.h"
 #include "framelesswidget.h"
 #include "information.h"
-#include "little_appointment.h"
+
 
 #include<QJsonObject>
 #include<QString>
 #include<QJsonArray>
+#include<chart_create.h>
+#include<patient_editor.h>
 
 namespace Ui {
 class Widget;
@@ -44,27 +46,15 @@ private slots:
 
     void changeMboxReturn(int num);
 
-    void on_btn_main_item_1_clicked();
-
-    void on_btn_main_item_2_clicked();
-
-    void on_btn_main_item_3_clicked();
-
-    void on_btn_main_item_4_clicked();
-
     void on_btn_logout_clicked();
 
     void on_btn_littleshow_clicked();
-
-    void on_btn_mine_clicked(bool checked);
 
     void on_btn_mine_clicked();
 
     void timerUpdate(void);
 
     void on_btn_home_clicked();
-
-    void btn_hide();
 
     void on_btn_menu_item_1_clicked();
 
@@ -73,12 +63,6 @@ private slots:
     void on_btn_menu_item_2_clicked();
 
     void on_btn_menu_item_4_clicked();
-
-    void on_btn_menu_item_5_clicked();
-
-    void on_btn_menu_item_6_clicked();
-
-    void on_btn_menu_item_7_clicked();
 
     void on_btn_report_1_clicked();
 
@@ -132,53 +116,28 @@ private slots:
 
     void on_btn_page_4_4_clicked();
 
-    void on_btn_confirm_5_clicked();
+    void on_btn_confirm_2_clicked();
 
-    void on_btn_page_left_5_clicked();
+    void on_btn_page_left_2_clicked();
 
-    void on_btn_page_right_5_clicked();
+    void on_btn_page_right_2_clicked();
 
-    void page_hide_5();
+    void page_hide_2();
 
-    void on_btn_page_1_5_clicked();
+    void on_btn_page_1_2_clicked();
 
-    void on_btn_page_2_5_clicked();
+    void on_btn_page_2_2_clicked();
 
-    void on_btn_page_3_5_clicked();
+    void on_btn_page_3_2_clicked();
 
-    void on_btn_page_4_5_clicked();
+    void on_btn_page_4_2_clicked();
 
-
-
-    void on_btn_confirm_6_clicked();
-
-    void on_btn_page_left_6_clicked();
-
-    void on_btn_page_right_6_clicked();
-
-    void page_hide_6();
-
-    void on_btn_page_1_6_clicked();
-
-    void on_btn_page_2_6_clicked();
-
-    void on_btn_page_3_6_clicked();
-
-    void on_btn_page_4_6_clicked();
-
-    void on_btn_confirm_8_clicked();
-
-    void on_btn_confirm_9_clicked();
-
-    void onItemClicked_8(QListWidgetItem *item);
 
     void on_combo_patient_1_currentIndexChanged(const QString &arg1);
 
     void on_combo_depart_1_currentIndexChanged(const QString &arg1);
 
     void on_date_1_userDateChanged(const QDate &date);
-
-    void on_btn_ques_10_clicked();
 
 private:
     Ui::Widget *ui;
@@ -202,24 +161,16 @@ private:
     void search_1();
     void putin_1();
     void delete_1();
+    void search_2();
+    void putin_2(int);
+    void delete_2();
     void search_3();
-    void putin_3();
+    void putin_3(int);
     void delete_3();
     void search_4();
-    void putin_4();
+    void putin_4(int);
     void delete_4();
-    void search_5();
-    void putin_5(int i);
-    void delete_5();
-    void search_6();
-    void putin_6(int i);
-    void delete_6();
-    void search_8();
-    void putin_8();
-    void delete_8();
-    void search_9();
-    void putin_9();
-    void delete_9();
+
 };
 QString convertDayToChinese(const QString& day);
 #endif // WIDGET_H

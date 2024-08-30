@@ -16,7 +16,7 @@ public:
     ~patient_editor();
     void set_name(const QString &text);
     void set_gender(const QString &text);
-    void set_age(int p);
+    void set_id(const QString &text);
     void set_phone(const QString &text);
 
 private:

@@ -15,17 +15,14 @@ class information : public FramelessWidget
 public:
     explicit information(QWidget *parent = nullptr);
     ~information();
+    void set_name(const QString & text);
+    void set_id(const QString & text);
+    void set_gender(const QString & text);
+    void set_password(const QString & text);
+    void set_address(const QString & text);
+    void set_phone(const QString & text);
 
 private slots:
-    void on_confirm_clicked();
-
-    void on_close_clicked();
-
-    void on_smallize_clicked();
-
-    void on_close_btn_clicked();
-
-    void on_id_editingFinished();
 
 private:
     Ui::information *ui;
