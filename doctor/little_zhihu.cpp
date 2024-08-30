@@ -1,6 +1,9 @@
 #include "little_zhihu.h"
 #include "ui_little_zhihu.h"
 #include "detailzhihu.h"
+#include "netclient.h"
+#include "netloader.h"
+#include "apikey.h"
 
 little_zhihu::little_zhihu(QWidget *parent) :
     QWidget(parent),
@@ -32,11 +35,7 @@ void little_zhihu:: on_btn_more_clicked()
     detailZhihu *dZ = new detailZhihu;
     dZ->setquestion(ui->label_context->text());
     dZ->tiez_id=tiezi_id;
-    dZ->huifutext=huifutext;
-    dZ->huifutime=huifutime;
-    dZ->doctorname=doctorname;
-    dZ->allnum=allnum;
-    dZ->now=now;
+
     dZ->show();
 }
 

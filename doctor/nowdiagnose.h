@@ -21,8 +21,8 @@ class nowDiagnose : public QWidget
     Q_OBJECT
 
 public:
-    QVector<QString> doctor_id;
-    QVector<QString> patient_id;
+    QString doctor_id;
+    QString patient_id;
     QString date;
     void set_label_user_name(const QString &text);
     void set_label_user_gender(const QString &text);

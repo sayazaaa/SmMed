@@ -39,7 +39,7 @@ void NetLoader::post_login(QString id, QString password, bool usertype, const Ne
     qDebug() << "post_login: " << usertype;
     url.setPath("/login");
     if (usertype) {
-        
+
         url.setQuery("id=" + id + "&password=" + password + "&usertype=" + "1" +"&apikey=");
     }
     else
@@ -62,7 +62,7 @@ void NetLoader::post_file(QString file,QString name, QString doctor_id, QString 
     QUrl url(SERVER_URL);
     url.setPath("/file");
     url.setQuery("name=" + name + "&doctor_id=" + doctor_id + "&patient_id=" + patient_id + "&type=" + type + "&apikey=" + apikey + "&appointment_id=" + appointment_id);
-    
+
     client.send_file_request(url, file);
 }
 
