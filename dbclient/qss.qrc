@@ -34,5 +34,6 @@
         <file>img/loading4.gif</file>
         <file>img/CustomerService.png</file>
         <file>img/Customer Copy.png</file>
+        <file>icons/chart.png</file>
     </qresource>
 </RCC>
