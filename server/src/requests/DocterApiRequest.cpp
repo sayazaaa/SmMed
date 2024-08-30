@@ -59,16 +59,18 @@ void DocterApiRequest::doctorPostRequest(){
         fromStringValue(socket->queryString().value("apikey"), apikey);
     }
     
- 
-    
-    QJsonDocument doc;
-    socket->readJson(doc);
-    QJsonObject obj = doc.object();
-    Inline_object_1 inline_object_1;
-    ::HttpServer::fromJsonValue(inline_object_1, obj);
-    
 
-    emit doctorPost(apikey, inline_object_1);
+    connect(socket,&QHttpEngine::Socket::readChannelFinished,this,[=](){
+        QJsonDocument doc;
+        socket->readJson(doc);
+        QJsonObject obj = doc.object();
+        Inline_object_1 inline_object_1;
+        ::HttpServer::fromJsonValue(inline_object_1, obj);
+
+
+        emit doctorPost(apikey, inline_object_1);
+    });
+
 }
 
 

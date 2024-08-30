@@ -14,13 +14,14 @@ class little_zhihu : public QWidget
 
 public:
 
-    int allnum=0;
-    int now=0;
-    QVector<QString> huifutext;
-    QVector<QString> huifutime;
-    QVector<QString> doctorname;
+//    int allnum=0;
+//    int now=0;
+//    QVector<QString> huifutext;
+//    QVector<QString> huifutime;
+//    QVector<QString> doctorname;
 //    QString tiezi_id;
     QString tiezi_id;
+
     void set_label_user_name(const QString &text);
     void set_label_user_context(const QString &text);
     void set_label_answernum(const  QString &text);

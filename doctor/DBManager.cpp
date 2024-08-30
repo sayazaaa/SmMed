@@ -23,11 +23,24 @@ DatabaseManager::DatabaseManager() {
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             sender_id VARCHAR(128) NOT NULL,
             receiver_id VARCHAR(128) NOT NULL,
-            message TEXT NOT NULL,
+            message BLOB NOT NULL,
+            ispicture BOOL NOT NULL,
             timestamp TEXT NOT NULL
         )
     )";
+    QString createHisTableQuery = R"(
+        CREATE TABLE IF NOT EXISTS chat_history (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            sender_id VARCHAR(128) NOT NULL,
+            receiver_id VARCHAR(128) NOT NULL
+        )
+    )";
     if (!query.exec(createTableQuery)) {
+        qDebug() << "Failed to create table:" << query.lastError();
+    } else {
+        qDebug() << "Table created successfully or already exists.";
+    }
+    if (!query.exec(createHisTableQuery)) {
         qDebug() << "Failed to create table:" << query.lastError();
     } else {
         qDebug() << "Table created successfully or already exists.";

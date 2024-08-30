@@ -62,25 +62,30 @@ unsigned int DbServer::max_idle_time(){
     return m_max_idle_time;
 }
 void DbServer::sqlquery(std::string * sql, QSharedPointer<QJsonDocument> &res){
-    try {
+    mysqlpp::Connection * conptr = this->create();
 
+
+    while(!conptr->connected()){
+        std::cout << "released one bad connection!" << std::endl;
+        qDebug() << "bad connection released";
+        release(conptr);
+        conptr = new mysqlpp::Connection();
+        conptr->connect("database_name", "server_ip", "user", "password");
+
+    }
+    mysqlpp::Transaction trans(*conptr);
+    try {
         std::string s = sql->substr(0,6);
         for(size_t i = 0; i < s.length();i++)s[i] = toupper(s[i]);
 
         QJsonArray jsonarray;
         QString sqlq = QString(sql->c_str());
         sqlq = QUrl::fromPercentEncoding(sqlq.toUtf8());
-        std::cout << sqlq.toStdString();
-//        qDebug() << sqlq;
-        mysqlpp::Connection * conptr = this->create();
-        mysqlpp::Transaction trans(*conptr);
-        while(!conptr->connected()){
-            std::cout << "released one bad connection!" << std::endl;
-            release(conptr);
-            conptr = new mysqlpp::Connection();
-            conptr->connect("database_name", "server_ip", "user", "password");
-        }
+        //std::cout << sqlq.toStdString() << std::endl;
+       qDebug() << sqlq;
+
         mysqlpp::Query query = conptr->query(sqlq.toUtf8());
+        qDebug() << "going to query...";
         if(s != "SELECT"){
             mysqlpp::SimpleResult temp = query.execute();
             int success = 0;
@@ -88,9 +93,11 @@ void DbServer::sqlquery(std::string * sql, QSharedPointer<QJsonDocument> &res){
             int getid = 0;
             getid = temp.insert_id();// only auto-increment id
             QJsonObject obj;
+            if(success) qDebug() << "succeed";
             obj["success"] = success;
             obj["id"] = getid;
             res = QSharedPointer<QJsonDocument>(new QJsonDocument(obj));
+            trans.commit();
             return;
         }
         mysqlpp::StoreQueryResult temp = query.store();
@@ -111,12 +118,14 @@ void DbServer::sqlquery(std::string * sql, QSharedPointer<QJsonDocument> &res){
             jsonarray.append(obj);
     //        qDebug() << obj;
         }
-    //    qDebug() << "after add:" << jsonarray;
+       qDebug() << "after add:" << jsonarray;
         this->release(conptr);
         qDebug() << "completed sql query";
         res = QSharedPointer<QJsonDocument>(new QJsonDocument(jsonarray));
         qDebug() << "res:" << *res;
+        trans.commit();
     } catch (std::exception e) {
+        trans.rollback();
         throw e;
     }
 }

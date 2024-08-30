@@ -185,7 +185,7 @@
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="qss.qrc">
+                 <iconset resource="../doctor/qss.qrc">
                   <normaloff>:/icons/setting.png</normaloff>:/icons/setting.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -217,7 +217,7 @@
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="qss.qrc">
+                 <iconset resource="../doctor/qss.qrc">
                   <normaloff>:/icons/doctor.png</normaloff>:/icons/doctor.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -350,7 +350,7 @@
                  <string>报告单查询</string>
                 </property>
                 <property name="icon">
-                 <iconset resource="qss.qrc">
+                 <iconset resource="../doctor/qss.qrc">
                   <normaloff>:/icons/list.png</normaloff>:/icons/list.png</iconset>
                 </property>
                 <property name="toolButtonStyle">
@@ -390,7 +390,7 @@
                  <string>医生查询</string>
                 </property>
                 <property name="icon">
-                 <iconset resource="qss.qrc">
+                 <iconset resource="../doctor/qss.qrc">
                   <normaloff>:/icons/check.png</normaloff>:/icons/check.png</iconset>
                 </property>
                 <property name="toolButtonStyle">
@@ -430,7 +430,7 @@
                  <string>预约查询</string>
                 </property>
                 <property name="icon">
-                 <iconset resource="qss.qrc">
+                 <iconset resource="../doctor/qss.qrc">
                   <normaloff>:/icons/register.png</normaloff>:/icons/register.png</iconset>
                 </property>
                 <property name="toolButtonStyle">
@@ -470,7 +470,7 @@
                  <string>患者查询</string>
                 </property>
                 <property name="icon">
-                 <iconset resource="qss.qrc">
+                 <iconset resource="../doctor/qss.qrc">
                   <normaloff>:/icons/message.png</normaloff>:/icons/message.png</iconset>
                 </property>
                 <property name="toolButtonStyle">
@@ -516,7 +516,7 @@
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="qss.qrc">
+                 <iconset resource="../doctor/qss.qrc">
                   <normaloff>:/icons/mini.png</normaloff>:/icons/mini.png</iconset>
                 </property>
                </widget>
@@ -555,7 +555,7 @@
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="qss.qrc">
+                 <iconset resource="../doctor/qss.qrc">
                   <normaloff>:/icons/home.png</normaloff>:/icons/home.png</iconset>
                 </property>
                </widget>
@@ -594,7 +594,7 @@
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="qss.qrc">
+                 <iconset resource="../doctor/qss.qrc">
                   <normaloff>:/icons/logout.png</normaloff>:/icons/logout.png</iconset>
                 </property>
                </widget>
@@ -787,7 +787,7 @@
          <item>
           <widget class="QStackedWidget" name="sw_main">
            <property name="currentIndex">
-            <number>5</number>
+            <number>1</number>
            </property>
            <widget class="QWidget" name="page_0">
             <widget class="QWidget" name="layoutWidget">
@@ -806,7 +806,7 @@
                  <string/>
                 </property>
                 <property name="pixmap">
-                 <pixmap resource="qss.qrc">:/icons/ambulance.png</pixmap>
+                 <pixmap resource="../doctor/qss.qrc">:/icons/ambulance.png</pixmap>
                 </property>
                </widget>
               </item>
@@ -1988,8 +1988,6 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources>
-  <include location="qss.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

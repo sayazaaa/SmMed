@@ -74,15 +74,14 @@ void DefaultApiRequest::loginPostRequest(){
         fromStringValue(socket->queryString().value("apikey"), apikey);
     }
     
- 
-    
-    Object body;
-    QJsonDocument resObject = QJsonDocument::fromJson(socket->readAll());
-    ::HttpServer::fromJsonValue(body, resObject.object());
-    
 
-    emit loginPost(id, password, usertype, apikey, body);
-}
+    connect(socket,&QHttpEngine::Socket::readChannelFinished,this,[=](){
+        Object body;
+        QJsonDocument resObject = QJsonDocument::fromJson(socket->readAll());
+        ::HttpServer::fromJsonValue(body, resObject.object());
+        emit loginPost(id, password, usertype, apikey, body);
+    });
+    }
 
 
 void DefaultApiRequest::sqlGetRequest(){
