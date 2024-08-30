@@ -30,7 +30,7 @@ class detailZhihu : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit detailZhihu(QWidget *parent = 0);
+    explicit detailZhihu(QWidget *parent = 0 ,QString tzid="");
     ~detailZhihu();
 
     QString tiez_id="3";
@@ -42,6 +42,8 @@ public:
     void dealMessage(QNChatMessage_zhihu *messageW, QListWidgetItem *item, QString text, QString time, QNChatMessage_zhihu::User_Type type);
     void dealMessageTime(QString curMsgTime);
 protected:
+
+    void closeEvent(QCloseEvent *event);
     void resizeEvent(QResizeEvent *event);
 private slots:
     void on_pushButton_clicked();

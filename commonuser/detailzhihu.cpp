@@ -31,12 +31,13 @@ void detailZhihu::setquestion(const QString text)
     ui->label->setText(text);
 }
 
-detailZhihu::detailZhihu(QWidget *parent) :
+detailZhihu::detailZhihu(QWidget *parent ,QString tzid ) :
     QMainWindow(parent),
+    tiez_id( tzid),
     ui(new Ui::detailZhihu)
 {
     ui->setupUi(this);
-
+    ui->textEdit->setText("仅医生可编辑");
     ui->textEdit->setDisabled(true);
     ui->pushButton->setDisabled(true);
     NetClient &client = NetClient::getInstance();
@@ -55,6 +56,12 @@ detailZhihu::detailZhihu(QWidget *parent) :
 detailZhihu::~detailZhihu()
 {
     delete ui;
+}
+
+void detailZhihu::closeEvent(QCloseEvent *event)
+{
+    this->~detailZhihu();
+    QWidget::closeEvent(event);
 }
 
 
@@ -160,7 +167,7 @@ void detailZhihu::putin_901()
 {
     searchstate=901;
     QString msg = huifutext[pagenow];
-    ui->textEdit->setText("");
+    ui->textEdit->setText("仅医生可编辑");
     QString time = QString::number(QDateTime::fromString(huifutime[pagenow]).toTime_t()); //时间戳
 //    QString time = QDateTime::fromString(huifutime[pagenow]).toString("yyyy-MM-dd");
     bool isSending = true; // 发送中

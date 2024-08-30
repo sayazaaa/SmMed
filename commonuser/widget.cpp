@@ -20,7 +20,7 @@ int page_max=0;
 int three_which=0;
 
 
-QVector<QString> v;
+QVector<QString> sql_query;
 
 QVector<QString> doctor_id ,doctor_password , doctor_salt ,doctor_name,doctor_gender,doctor_zc ,doctor_describe, doctor_workingtime;
 QVector<QString> office_name,office_id;
@@ -152,7 +152,107 @@ void Widget::getMessage()
 
 void Widget::handleJsonReceived(const QJsonObject &mainsource)
 {
-    qDebug()<<"888" << mainsource;
+//    qDebug()<<"888" << mainsource;
+    for(int i=0;i<1;i++){
+
+       doctor_id.clear();
+       doctor_password.clear();
+       doctor_salt.clear();
+       doctor_name.clear();
+
+       doctor_gender.clear();
+
+       doctor_describe.clear();
+
+       doctor_workingtime.clear();
+
+       doctor_zc.clear();
+
+       office_name.clear();
+
+       office_id.clear();
+
+       user_id.clear();
+
+       user_password.clear();
+
+       user_salt.clear();
+
+       user_age.clear();
+
+       user_name.clear();
+
+       user_gender.clear();
+
+       user_phone.clear();
+
+       user_address.clear();
+
+       inspreport_id.clear();
+
+       inspreport_filepath.clear();
+
+       inspreport_title.clear();
+
+       inspreport_date.clear();
+
+       patient_id.clear();
+
+       patient_name.clear();
+
+       patient_gender.clear();
+
+       patient_phone.clear();
+
+       appointment_id .clear();
+
+       appointment_date.clear();
+
+       appointment_num.clear();
+
+       appointment_time.clear();
+
+       notifications_id.clear();
+
+       notifications_title.clear();
+
+       notifications_time.clear();
+
+       notifications_enddate.clear();
+
+       notifications_content.clear();
+
+       diagnosis_id.clear();
+
+       diagnosis_title.clear();
+
+       diagnosis_filepath.clear();
+
+       diagnosis_date.clear();
+
+       prescription_id.clear();
+
+       prescription_title.clear();
+
+       prescription_filepath.clear();
+
+       prescription_date.clear();
+
+       tiezi_id.clear();
+
+       tiezi_text.clear();
+
+       tiezi_date.clear();
+
+       tiezi_num.clear();
+
+       huifu_id.clear();
+
+       huifu_time.clear();
+
+       huifu_text.clear();
+    }
+
 
     int n=0;
     if(mainsource.size()>0)//如果source为空直接结束
@@ -161,9 +261,9 @@ void Widget::handleJsonReceived(const QJsonObject &mainsource)
 
     for(auto item:array){
 
-        qDebug()<<"665";
+//        qDebug()<<"665";
         QJsonObject source = item.toObject();
-        qDebug()<<"777"<<source;
+        qDebug()<<"source"<<source;
         if(source.contains("doctor_id"))//如果source中有"name"值则提取
             doctor_id.push_back(source.value("doctor_id").toString());
         else doctor_id.clear();
@@ -364,7 +464,8 @@ void Widget::handleJsonReceived(const QJsonObject &mainsource)
         if(source.contains("huifu_text"))
             huifu_text.push_back(source.value("huifu_text").toString());
        else huifu_text.clear();
-        qDebug()<<"endifffffffffffffffffff";
+        qDebug()<<"endsource";
+
         n++;
     }
     }
@@ -729,10 +830,10 @@ void Widget::on_btn_littleshow_clicked()
     showMinimized();
 }
 
-void Widget::on_btn_mine_clicked(bool checked)
-{
+//void Widget::on_btn_mine_clicked(bool checked)
+//{
     
-}
+//}
 
 void Widget::on_btn_mine_clicked()
 {
@@ -742,11 +843,16 @@ void Widget::on_btn_mine_clicked()
 void Widget::putin_mine()
 {
     information *me=new information;
-    me->set_name(user_name[0]);
-    me->set_age(user_age[0]);
-    me->set_gender(user_gender[0]);
-    me->set_address(user_address[0]);
-    me->set_phone(user_address[0]);
+    if(user_name.empty()==false)
+        me->set_name(user_name[0]);
+    if(user_age.empty()==false)
+        me->set_age(user_age[0]);
+    if(user_gender.empty()==false)
+        me->set_gender(user_gender[0]);
+    if(user_address.empty()==false)
+        me->set_address(user_address[0]);
+    if(user_phone.empty()==false)
+        me->set_phone(user_phone[0]);
 
     me->show();
 }
@@ -767,6 +873,7 @@ void Widget::search_mine()
     WHERE
         user.id = ')"+ USER_ID +R"('
     )";
+    NetLoader::get_sql(sql , USER_ID , 1 , API_KEY , client );
 }
 
 // 映射表：英文星期名称到中文星期名称
@@ -865,12 +972,13 @@ void Widget::on_btn_menu_item_4_clicked()
 void Widget::on_btn_menu_item_5_clicked()
 {
     choice_state=5;
-    ui->sw_main->setCurrentIndex(9);
+
     btn_hide();
     ui->btn_main_item_1->setText("主页");
     ui->btn_main_item_2->setText("提问");
     ui->btn_main_item_1->show();
     ui->btn_main_item_2->show();
+    on_btn_main_item_1_clicked();
 }
 
 void Widget::on_btn_menu_item_6_clicked()
@@ -1200,14 +1308,17 @@ void Widget::page_hide_3()
 
 void Widget::delete_3()
 {
-    //清空QlistWidget
-    int n=ui->listWidget_3->count();//获取item的总数
+    ui->listWidget_3->clear();
+
+//    //清空QlistWidget
+//    int n=ui->listWidget_3->count();//获取item的总数
 //    删去所有item
-    for(int i=0;i<n;i++)
-    {
-        QListWidgetItem *item = ui->listWidget_3->takeItem(0);
-        delete item;
-    }
+//    for(int i=0;i<n;i++)
+//    {
+//        QListWidgetItem *item = ui->listWidget_3->takeItem(0);
+//        delete item;
+//        item=0;
+//    }
 }
 
 void Widget::putin_3(int i)
@@ -1804,15 +1915,15 @@ void Widget::putin_5(int i)
     little_doctor *w = new little_doctor;
     QListWidgetItem* pItem = new QListWidgetItem;
     //填入数据
-    qDebug()<<"before";
+//    qDebug()<<"before";
     w->set_label_name(  doctor_name[page_now*9-9+i]  );
     w->set_label_gender( doctor_gender[page_now*9-9+i] );
     w->set_label_apartment( office_name[page_now*9-9+i] );
     w->set_label_introduce( doctor_describe[page_now*9-9+i] );
     w->doc_id=doctor_id[page_now*9-9+i];
-    qDebug()<<"middddddddddddddddddd";
+//    qDebug()<<"middddddddddddddddddd";
     w->dw=this;
-    qDebug()<<"afterrrrrrrrrrrrrrrrrr";
+//    qDebug()<<"afterrrrrrrrrrrrrrrrrr";
     if(choice_state==3)
     {
         w->set_btn_hide();
@@ -2028,8 +2139,9 @@ void Widget::onItemClicked_8(QListWidgetItem *item)
 
 void Widget::delete_8()
 {
-    //清空QlistWidget
+//    清空QlistWidget
     int n=ui->listWidget_8->count();//获取item的总数
+    qDebug()<<n<<"------------------------------------";
 //    删去所有item
     for(int i=0;i<n;i++)
     {
@@ -2047,16 +2159,20 @@ void Widget::search_8()
     QSqlQuery query(dbm.getDatabase());
     query.exec(sql);
 
+    sql_query.clear();
     //删除数据
     delete_8();
-    qDebug()<<"123456";
+//    qDebug()<<"123456";
     while (query.next())
     {
-        qDebug()<<"987654321";
         QString qi= query.value(0).toString();
-        qDebug()<<qi;
+//        QThread::sleep(1);
+//        sql_query.push_back(qi);
         search_801(qi);
+//        search_801(query.value(0).toString());
     }
+//    if(sql_query.empty()==false)
+//        search_801();
 
 }
 
@@ -2079,7 +2195,21 @@ void Widget::putin_801()
 
         //添加进QlistWidget
         ui->listWidget_8->addItem(pItem);
+//        delete pItem;
+        ui->listWidget_8->update();
     }
+//        //创建item
+//        QListWidgetItem* pItem1 = new QListWidgetItem(QIcon(":/icons/money.png"), doctor_name[0]);
+
+//        //设置item大小
+//        pItem1->setSizeHint(QSize(ui->listWidget_8->width(),ui->listWidget_8->height()/6 ));
+
+//        //添加进QlistWidget
+//        ui->listWidget_8->addItem(pItem1);
+
+//    sql_query.pop_front();
+//    if(sql_query.empty()==false)
+//        search_801();
 }
 
 void Widget::search_801(QString qi)

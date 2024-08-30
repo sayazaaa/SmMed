@@ -11,6 +11,7 @@ little_doctor::little_doctor(QWidget *parent) :
 
 little_doctor::~little_doctor()
 {
+    qDebug()<<"没有析构析构析构gggggggg";
     delete ui;
 }
 

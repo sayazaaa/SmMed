@@ -55,7 +55,7 @@ private slots:
 
     void on_btn_littleshow_clicked();
 
-    void on_btn_mine_clicked(bool checked);
+//    void on_btn_mine_clicked(bool checked);
 
     void on_btn_mine_clicked();
 

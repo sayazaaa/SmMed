@@ -162,7 +162,7 @@ private:
 //    void putin_8();
     void delete_8();
 
-    void search_801(QString qi);
+    void search_801();
     void putin_801();
 
     void search_802(QString qi);

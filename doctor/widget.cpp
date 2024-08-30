@@ -17,6 +17,7 @@ int page_now=0;
 int page_max=0;
 
 int three_which=0;
+QVector<QString> sql_query;
 
 QVector<QString> doctor_id ,doctor_password , doctor_salt ,doctor_name,doctor_gender,doctor_zc ,doctor_describe, doctor_workingtime;
 QVector<QString> office_name,office_id;
@@ -139,7 +140,106 @@ void Widget::littleShow()
 
 void Widget::handleJsonReceived(const QJsonObject &mainsource)
 {
-    qDebug()<<"888" << mainsource;
+    for(int i=0;i<1;i++){
+
+       doctor_id.clear();
+       doctor_password.clear();
+       doctor_salt.clear();
+       doctor_name.clear();
+
+       doctor_gender.clear();
+
+       doctor_describe.clear();
+
+       doctor_workingtime.clear();
+
+       doctor_zc.clear();
+
+       office_name.clear();
+
+       office_id.clear();
+
+       user_id.clear();
+
+       user_password.clear();
+
+       user_salt.clear();
+
+       user_age.clear();
+
+       user_name.clear();
+
+       user_gender.clear();
+
+       user_phone.clear();
+
+       user_address.clear();
+
+       inspreport_id.clear();
+
+       inspreport_filepath.clear();
+
+       inspreport_title.clear();
+
+       inspreport_date.clear();
+
+       patient_id.clear();
+
+       patient_name.clear();
+
+       patient_gender.clear();
+
+       patient_phone.clear();
+
+       appointment_id .clear();
+
+       appointment_date.clear();
+
+       appointment_num.clear();
+
+       appointment_time.clear();
+
+       notifications_id.clear();
+
+       notifications_title.clear();
+
+       notifications_time.clear();
+
+       notifications_enddate.clear();
+
+       notifications_content.clear();
+
+       diagnosis_id.clear();
+
+       diagnosis_title.clear();
+
+       diagnosis_filepath.clear();
+
+       diagnosis_date.clear();
+
+       prescription_id.clear();
+
+       prescription_title.clear();
+
+       prescription_filepath.clear();
+
+       prescription_date.clear();
+
+       tiezi_id.clear();
+
+       tiezi_text.clear();
+
+       tiezi_date.clear();
+
+       tiezi_num.clear();
+
+       huifu_id.clear();
+
+       huifu_time.clear();
+
+       huifu_text.clear();
+    }
+
 
     if(mainsource.size()<=0)return;//如果source为空直接结束
     QJsonArray array=mainsource.value("array").toArray();
@@ -1386,15 +1486,21 @@ void Widget::search_8()
     DatabaseManager &dbm = DatabaseManager::getInstance();
     QSqlQuery query(dbm.getDatabase());
     query.exec(sql);
+    sql_query.clear();
 
     //删除数据
     delete_8();
 
+//    if(query.next())
     while (query.next())
     {
         QString qi= query.value(0).toString();
-        search_801(qi);
+        sql_query.push_back(qi);
+//        search_801(qi);
+//        search_801(query.value(0).toString());
     }
+    if(sql_query.empty()==false)
+        search_801();
 }
 
 void Widget::on_btn_confirm_8_clicked()
@@ -1416,9 +1522,12 @@ void Widget::putin_801()
         //添加进QlistWidget
         ui->listWidget_8->addItem(pItem);
     }
+    sql_query.pop_front();
+    if(sql_query.empty()==false)
+        search_801();
 }
 
-void Widget::search_801(QString qi)
+void Widget::search_801()
 {
     search_state=801;
     QString sql= R"(
@@ -1427,7 +1536,7 @@ void Widget::search_801(QString qi)
     FROM
         user
     WHERE
-        user.id = ')" +  qi  + R"(';
+        user.id = ')" +  sql_query[0]  + R"(';
     )";
 
     NetLoader::get_sql(sql , USER_ID , 0 , API_KEY , client );

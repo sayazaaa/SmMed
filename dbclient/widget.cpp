@@ -139,7 +139,106 @@ void Widget::getMessage()
 
 void Widget::handleJsonReceived(const QJsonObject &mainsource)
 {
-    qDebug()<<"888" << mainsource;
+    for(int i=0;i<1;i++){
+
+       doctor_id.clear();
+       doctor_password.clear();
+       doctor_salt.clear();
+       doctor_name.clear();
+
+       doctor_gender.clear();
+
+       doctor_describe.clear();
+
+       doctor_workingtime.clear();
+
+       doctor_zc.clear();
+
+       office_name.clear();
+
+       office_id.clear();
+
+       user_id.clear();
+
+       user_password.clear();
+
+       user_salt.clear();
+
+       user_age.clear();
+
+       user_name.clear();
+
+       user_gender.clear();
+
+       user_phone.clear();
+
+       user_address.clear();
+
+       inspreport_id.clear();
+
+       inspreport_filepath.clear();
+
+       inspreport_title.clear();
+
+       inspreport_date.clear();
+
+       patient_id.clear();
+
+       patient_name.clear();
+
+       patient_gender.clear();
+
+       patient_phone.clear();
+
+       appointment_id .clear();
+
+       appointment_date.clear();
+
+       appointment_num.clear();
+
+       appointment_time.clear();
+
+       notifications_id.clear();
+
+       notifications_title.clear();
+
+       notifications_time.clear();
+
+       notifications_enddate.clear();
+
+       notifications_content.clear();
+
+       diagnosis_id.clear();
+
+       diagnosis_title.clear();
+
+       diagnosis_filepath.clear();
+
+       diagnosis_date.clear();
+
+       prescription_id.clear();
+
+       prescription_title.clear();
+
+       prescription_filepath.clear();
+
+       prescription_date.clear();
+
+       tiezi_id.clear();
+
+       tiezi_text.clear();
+
+       tiezi_date.clear();
+
+       tiezi_num.clear();
+
+       huifu_id.clear();
+
+       huifu_time.clear();
+
+       huifu_text.clear();
+    }
+
 
     if(mainsource.size()<=0)return;//如果source为空直接结束
     QJsonArray array=mainsource.value("array").toArray();

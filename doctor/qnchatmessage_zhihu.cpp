@@ -30,7 +30,7 @@ QNChatMessage_zhihu::QNChatMessage_zhihu(QWidget *parent) : QWidget(parent)
     this->setFont(te_font);
     m_leftPixmap = QPixmap(":/img/Customer Copy.png");
     m_rightPixmap = QPixmap(":/img/CustomerService.png");
-    initPushButton();
+//    initPushButton();
     m_loadingMovie = new QMovie(this);
     m_loadingMovie->setFileName(":/img/loading4.gif");
     m_loading = new QLabel(this);

@@ -32,6 +32,10 @@ void newAppointment::handleJsonReceived(const QJsonObject &mainsource)
 {
 //    qDebug()<<"888" << mainsource;
     int n=0;
+     user_id_na.clear();
+     patient_id_na.clear();
+
+    patient_name_na.clear();
     if(mainsource.size()>0)//如果source为空直接结束
     {
     QJsonArray array=mainsource.value("array").toArray();
@@ -57,10 +61,10 @@ void newAppointment::handleJsonReceived(const QJsonObject &mainsource)
     all_num_na=n;
     qDebug()<<"12345678987654323456543345654345654345445654545454545454";
     ui->combo_user->clear();
-    for(int i=0;i<all_num_na;i++)
-    {
+//    for(int i=0;i<all_num_na;i++)
+//    {
         putin_101();
-    }
+//    }
 
 }
 
@@ -84,7 +88,7 @@ void newAppointment::search_101()
     QString sql= R"(
     SELECT
         patient.name AS patient_name_na,
-        patient.id AS patient_name_na
+        patient.id AS patient_id_na
     FROM
         patient , user
     WHERE
@@ -108,7 +112,7 @@ void newAppointment::on_Btn_yes_clicked()
         QMessageBox::information(this, QString::fromLocal8Bit("警告"),QString::fromLocal8Bit("未选择就诊人！"));
         return;
     }
-    QString sql="    INSERT INTO appointment (user_id,patient_id,doctor_id,date,time) VALUES ( '"+ USER_ID +"','"+ patient_id_na[ui->combo_user->currentIndex()] +"','"+ doctor_id +"','"+ ui->label_date->text() +"','"+ ui->combo_time->currentText() +"'  );";
+    QString sql="    INSERT INTO appointment (num,patient_id,doctor_id,date,time) VALUES ( 1,'"+ patient_id_na[ui->combo_user->currentIndex()] +"','"+ doctor_id +"','"+ ui->label_date->text() +"','"+ ui->combo_time->currentText() +"'  );";
 
     NetClient &client = NetClient::getInstance();
     //将数据发送到数据库

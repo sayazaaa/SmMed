@@ -32,8 +32,9 @@ void detailZhihu::setquestion(const QString text)
 }
 
 
-detailZhihu::detailZhihu(QWidget *parent) :
+detailZhihu::detailZhihu(QWidget *parent ,QString tzid) :
     QMainWindow(parent),
+    tiez_id(tzid),
     ui(new Ui::detailZhihu)
 {
     ui->setupUi(this);
@@ -51,7 +52,15 @@ detailZhihu::detailZhihu(QWidget *parent) :
 
 detailZhihu::~detailZhihu()
 {
+
+    qDebug()<<"888                     77777436y45ygertevsd";
     delete ui;
+}
+
+void detailZhihu::closeEvent(QCloseEvent *event)
+{
+    this->~detailZhihu();
+    QWidget::closeEvent(event);
 }
 
 
