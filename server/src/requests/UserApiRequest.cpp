@@ -20,88 +20,89 @@
 
 namespace HttpServer {
 
-UserApiRequest::UserApiRequest(QHttpEngine::Socket *s, QSharedPointer<UserApiHandler> hdl) : QObject(s), socket(s), handler(hdl) {
-    auto headers = s->headers();
-    for(auto itr = headers.begin(); itr != headers.end(); itr++) {
-        requestHeaders.insert(QString(itr.key()), QString(itr.value()));
+    UserApiRequest::UserApiRequest(QHttpEngine::Socket* s, QSharedPointer<UserApiHandler> hdl) : QObject(s), socket(s), handler(hdl) {
+        auto headers = s->headers();
+        for (auto itr = headers.begin(); itr != headers.end(); itr++) {
+            requestHeaders.insert(QString(itr.key()), QString(itr.value()));
+        }
     }
-}
 
-UserApiRequest::~UserApiRequest(){
-    disconnect(this, nullptr, nullptr, nullptr);
-    qDebug() << "UserApiRequest::~UserApiRequest()";
-}
-
-QMap<QString, QString>
-UserApiRequest::getRequestHeaders() const {
-    return requestHeaders;
-}
-
-void UserApiRequest::setResponseHeaders(const QMultiMap<QString, QString>& headers){
-    for(auto itr = headers.begin(); itr != headers.end(); ++itr) {
-        responseHeaders.insert(itr.key(), itr.value());
+    UserApiRequest::~UserApiRequest() {
+        disconnect(this, nullptr, nullptr, nullptr);
+        qDebug() << "UserApiRequest::~UserApiRequest()";
     }
-}
 
-
-QHttpEngine::Socket* UserApiRequest::getRawSocket(){
-    return socket;
-}
-
-
-void UserApiRequest::userPostRequest(){
-    qDebug() << "/user";
-    connect(this, &UserApiRequest::userPost, handler.data(), &UserApiHandler::userPost);
-
-    
- 
-    
-    QJsonDocument doc;
-    socket->readJson(doc);
-    QJsonObject obj = doc.object();
-    Inline_object inline_object;
-    ::HttpServer::fromJsonValue(inline_object, obj);
-    
-
-    emit userPost(inline_object);
-}
-
-
-
-void UserApiRequest::userPostResponse(const Inline_response_200_1& res){
-    writeResponseHeaders();
-    QJsonDocument resDoc(::HttpServer::toJsonValue(res).toObject());
-    socket->writeJson(resDoc);
-    if(socket->isOpen()){
-        socket->close();
+    QMap<QString, QString>
+        UserApiRequest::getRequestHeaders() const {
+        return requestHeaders;
     }
-}
 
-
-void UserApiRequest::userPostError(const Inline_response_200_1& res, QNetworkReply::NetworkError error_type, QString& error_str){
-    Q_UNUSED(error_type);
-    Q_UNUSED(res);
-    socket->writeError(404,error_str.toStdString().c_str());
-    if(socket->isOpen()){
-        socket->close();
+    void UserApiRequest::setResponseHeaders(const QMultiMap<QString, QString>& headers) {
+        for (auto itr = headers.begin(); itr != headers.end(); ++itr) {
+            responseHeaders.insert(itr.key(), itr.value());
+        }
     }
-}
 
 
-void UserApiRequest::sendCustomResponse(QByteArray & res, QNetworkReply::NetworkError error_type){
-    Q_UNUSED(error_type); // TODO
-    socket->write(res);
-    if(socket->isOpen()){
-        socket->close();
-    }    
-}
-
-void UserApiRequest::sendCustomResponse(QIODevice *res, QNetworkReply::NetworkError error_type){
-    Q_UNUSED(error_type);  // TODO
-    socket->write(res->readAll());
-    if(socket->isOpen()){
-        socket->close();
+    QHttpEngine::Socket* UserApiRequest::getRawSocket() {
+        return socket;
     }
-}
+
+
+    void UserApiRequest::userPostRequest() {
+        qDebug() << "/user";
+        connect(this, &UserApiRequest::userPost, handler.data(), &UserApiHandler::userPost);
+
+        connect(socket, &QHttpEngine::Socket::readChannelFinished, this, [this]() {
+            qDebug() << "UserApiReq";
+            QJsonDocument doc;
+            socket->readJson(doc);
+            QJsonObject obj = doc.object();
+            Inline_object inline_object;
+            ::HttpServer::fromJsonValue(inline_object, obj);
+            emit userPost(inline_object);
+            }
+        );
+
+
+    }
+
+
+
+    void UserApiRequest::userPostResponse(const Inline_response_200_1& res) {
+        writeResponseHeaders();
+        QJsonDocument resDoc(::HttpServer::toJsonValue(res).toObject());
+        socket->writeJson(resDoc);
+        if (socket->isOpen()) {
+            socket->close();
+        }
+    }
+
+
+    void UserApiRequest::userPostError(const Inline_response_200_1& res, QNetworkReply::NetworkError error_type, QString& error_str) {
+        Q_UNUSED(error_type);
+        Q_UNUSED(res);
+        socket->writeError(404, error_str.toStdString().c_str());
+        if (socket->isOpen()) {
+            socket->close();
+        }
+    }
+
+
+    void UserApiRequest::sendCustomResponse(QByteArray& res, QNetworkReply::NetworkError error_type) {
+        Q_UNUSED(error_type); // TODO
+        socket->write(res);
+        if (socket->isOpen()) {
+            socket->close();
+        }
+    }
+
+    void UserApiRequest::sendCustomResponse(QIODevice* res, QNetworkReply::NetworkError error_type) {
+        Q_UNUSED(error_type);  // TODO
+        socket->write(res->readAll());
+        if (socket->isOpen()) {
+            socket->close();
+        }
+    }
 
 }
