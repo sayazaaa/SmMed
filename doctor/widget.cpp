@@ -143,7 +143,7 @@ void Widget::handleJsonReceived(const QJsonObject &mainsource)
 
     if(mainsource.size()<=0)return;//如果source为空直接结束
     QJsonArray array=mainsource.value("array").toArray();
-    QJsonArray array=mainsource.value("array").toArray();
+//    QJsonArray array=mainsource.value("array").toArray();
     int n=0;
     for(auto item:array){
 
@@ -274,16 +274,16 @@ void Widget::handleJsonReceived(const QJsonObject &mainsource)
 
         if(source.contains("appointment_time"))
             appointment_time.push_back(source.value("appointment_time").toString());
-            appointment_time.push_back(source.value("appointment_time").toString());
+//            appointment_time.push_back(source.value("appointment_time").toString());
         else appointment_time.clear();
 
         if(source.contains("notifications_id"))
             notifications_id.push_back(source.value("notifications_id").toString());
-            notifications_id.push_back(source.value("notifications_id").toString());
+//            notifications_id.push_back(source.value("notifications_id").toString());
         else notifications_id.clear();
 
         if(source.contains("notifications_title"))
-            notifications_title.push_back(source.value("notifications_title").toString());
+//            notifications_title.push_back(source.value("notifications_title").toString());
             notifications_title.push_back(source.value("notifications_title").toString());
         else notifications_title.clear();
 
@@ -1019,7 +1019,7 @@ void Widget::delete_3()
     }
 }
 
-void Widget::putin_3(int i)
+void Widget::putin_3()
 {
     qDebug()<<"innnnnnnn";
     //创建item
@@ -1395,47 +1395,17 @@ void Widget::delete_9()
     }
 }
 
-void Widget::putin_9(int i)
+void Widget::putin_9()
 {
-//    QString sql= R"(
-//    SELECT
-//        huifu.text AS huifu_text,
-//        doctor.name AS doctor_name,
-//        huifu.time AS huifu_time
-//    FROM
-//        user , tiezi , doctor , huifu
-//    WHERE
-//        tiezi.id = '%)"+ tiezi_id[page_now] +R"(%'
-//    )";
-
-//    NetLoader::get_sql(sql , USER_ID , 0 , API_KEY , client );
-
-
-    // qDebug()<<"------------------------------------------:"<<all_num;
-    // qDebug()<<"--------------------->>>"<<tiezi_text;
-
     //创建item
     little_zhihu *w = new little_zhihu;
     QListWidgetItem* pItem = new QListWidgetItem;
-
-    // switch(i)
-    // {
-    // case 1:un="xiaoming";
-    // case 2:tt=""
-    // }
-
 
     //填入数据
     w->set_label_user_name(user_name[page_now-1]);
     w->set_label_user_context(tiezi_text[page_now-1]);
     w->set_label_answernum(tiezi_num[page_now-1]);
     w->tiezi_id = tiezi_id[page_now-1];
-//    w->allnum=all_num;
-//    w->now=page_now;
-//    w->huifutext=huifu_text;
-//    w->huifutime=huifu_time;
-//    w->doctorname=doctor_name;
-
     //设置item大小
     pItem->setSizeHint(QSize(ui->listWidget_9->width(),ui->listWidget_9->height()/5 ));
     //添加进QlistWidget

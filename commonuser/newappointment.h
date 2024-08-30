@@ -30,8 +30,6 @@ private slots:
 
     void on_Btn_yes_clicked();
 
-    void on_Btn_add_user_clicked();
-
 private:
     Ui::newAppointment *ui;
 };
