@@ -37,7 +37,11 @@ DbServer::DbServer(QString user,
 }
 mysqlpp::Connection* DbServer::grab(){
     mysqlpp::Connection* ptr = ConnectionPool::grab();
-    if(ptr == nullptr || (!ptr->connected()))ptr = this->create();
+    if(ptr == nullptr)ptr = this->create();
+    if(!ptr->connected()){
+        destroy(ptr);
+        ptr = create();
+    }
     return ptr;
 }
 void DbServer::release(const mysqlpp::Connection* pc){
