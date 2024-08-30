@@ -37,27 +37,6 @@ void information::set_name(QString const& text)
 void information::set_id(QString const& text)
 {
     ui->id->setText(text);
-    QString idNumber=ui->id->text();
-    //获取出生年月日
-    int year = idNumber.mid(6, 4).toInt();
-    int month = idNumber.mid(10, 2).toInt();
-    int day = idNumber.mid(12, 2).toInt();
-    // 获取当前日期
-    QDateTime currentDate = QDateTime::currentDateTime();
-    int currentYear = currentDate.date().year();
-    int currentMonth = currentDate.date().month();
-    int currentDay = currentDate.date().day();
-
-    // 计算年龄
-    int age = currentYear - year;
-
-    // 如果还没过生日，减一岁
-    if (currentMonth < month || (currentMonth == month && currentDay < day))
-    {
-        age--;
-    }
-
-    ui->age->setText(QString::number(age));
 }
 void information::set_gender(const QString & text)
 {
