@@ -1143,15 +1143,18 @@ void Widget::putin_1()
     {
         w->set_label_which("诊断报告");
         //将诊断报告添加到富文本编辑器
+         NetLoader::get_file(inspreport_filepath[page_now-1],API_KEY,client);
     }
     else if(three_which==2)
     {
         w->set_label_which("处方");
+        NetLoader::get_file(prescription_filepath[page_now-1],API_KEY,client);
         //将处方添加到富文本编辑器
     }
     else if(three_which==3)
     {
         w->set_label_which("医嘱");
+        NetLoader::get_file(diagnosis_filepath[page_now-1],API_KEY,client);
         //将医嘱添加到富文本编辑器
     }
 
