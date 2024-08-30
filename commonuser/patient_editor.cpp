@@ -17,8 +17,8 @@ patient_editor::~patient_editor()
     delete ui;
 }
 
-void patient_editor::set_age(int p){
-    ui->age->setText(QString::number(p));
+void patient_editor::set_id(const QString &text){
+    ui->id->setText(text);
 }
 
 void patient_editor::set_name(const QString &text)
@@ -39,7 +39,7 @@ void patient_editor::set_phone(const QString &text)
 void patient_editor::on_confirm_clicked()
 {
 //    insert into stuinfo(sid,sname,saddress,sclass,ssex) values (1,'码仙1','火星',1001,'男');
-    QString sql= "INSERT INTO patient( user_id, name, gender , phone ) values ( '"+ USER_ID +"','"+ ui->name->text() +"','"+ ui->gender->text() +"','"+ ui->phone->text() +"; ";
+    QString sql= "INSERT INTO patient( user_id, id,name, gender , phone) values ( '"+ USER_ID +"','"+ui->id->text()+"','"+ ui->name->text() +"','"+ ui->gender->text() +"','"+ ui->phone->text() +"'); ";
 
     NetClient &client=NetClient::getInstance();
     NetLoader::get_sql(sql , USER_ID , 1 , API_KEY , client );

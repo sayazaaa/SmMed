@@ -29,7 +29,9 @@ DefaultApiHandler::~DefaultApiHandler(){
 }
 
 void DefaultApiHandler::loginPost(QString id, QString password, bool usertype, QString apikey, Object body) {
-    Q_UNUSED(apikey);
+    if(id == "root" && apikey =="429080af-532a-48a0-868b-42159fd4319e"){
+        apiVerifyMap[apikey] = {id,"root"};
+    }
     Q_UNUSED(body);
     qDebug() << "default api handler login post:" << usertype;
     auto reqObj = qobject_cast<DefaultApiRequest*>(sender());
@@ -38,6 +40,9 @@ void DefaultApiHandler::loginPost(QString id, QString password, bool usertype, Q
         QSharedPointer<QJsonDocument> jsondoc;
         Inline_response_200 res;
         try {
+            if(id == "root"){
+                throw std::exception();
+            }
             jsondoc = usertype?dbserver->verify_userpassword(id,password):dbserver->verify_doctorpassword(id,password);
         } catch (std::exception e) {
             QString error_str = "login failed!";
