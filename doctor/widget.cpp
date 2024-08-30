@@ -445,6 +445,13 @@ void Widget::handleJsonReceived(const QJsonObject &mainsource)
             }
         }
     }
+    else if(search_state==777)
+    {
+        if(all_num>0)
+        {
+            putin_mine();
+        }
+    }
     search_state=0;
 }
 
@@ -600,10 +607,43 @@ void Widget::on_btn_mine_clicked(bool checked)
     
 }
 
-void Widget::on_btn_mine_clicked()
+void Widget::putin_mine()
 {
     information *me=new information;
+    me->set_name(doctor_name[0]);
+    me->set_gender(doctor_gender[0]);
+    me->set_office(office_name[0]);
+    me->set_zc(doctor_zc[0]);
+    me->set_describe(doctor_describe[0]);
+
+
     me->show();
+}
+
+void Widget::search_mine()
+{
+    search_state = 777;
+    QString sql = R"(
+    SELECT
+        doctor.name AS doctor_name,
+        doctor.gender AS doctor_gender,
+        doctor.zc AS doctor_zc,
+        office.name AS office_name,
+        doctor.describe AS doctor_describe
+    FROM
+        doctor,office
+    WHERE
+        office.id = doctor.office_id AND
+        doctor.id = )"+ USER_ID +R"(
+
+    )";
+
+    NetLoader::get_sql(sql , USER_ID , 0 , API_KEY , client );
+
+}
+void Widget::on_btn_mine_clicked()
+{
+    search_mine();
 }
 
 // 映射表：英文星期名称到中文星期名称
@@ -1069,6 +1109,7 @@ void Widget::search_3()
     WHERE
         appointment.patient_id = patient.id AND
         appointment.doctor_id = doctor.id AND
+        appointment.isfinished = 0 AND
         appointment.date = ')" + ui->date_3->date().toString("yyyy-MM-dd")  + R"(' AND
         appointment.doctor_id = ')" + USER_ID  + R"(' AND
         appointment.time = ')" + ui->label_time_3->text()  + R"(';
@@ -1082,18 +1123,34 @@ void Widget::on_btn_page_right_3_clicked()
 {
     ui->label_data_num_text_3->setText("本时段剩余"+QString::number(all_num-page_now)+"个预约");
 
+//    QString sql= R"(
+//    DELETE
+//        appointment
+//    FROM
+//        appointment , doctor ,patient
+//    WHERE
+//        appointment.patient_id = patient.id AND
+//        appointment.doctor_id = doctor.id AND
+//        appointment.date = ')" + ui->date_3->date().toString("yyyy-MM-dd")  + R"(' AND
+//        appointment.doctor_id = ')" + USER_ID  + R"(' AND
+//        appointment.time = ')" + ui->label_time_3->text()  + R"(';
+//    )";
+//    DELETE t1
+//            FROM table1 AS t1
+//    JOIN table2 AS t2
+//    ON t1.key = t2.key
+//    WHERE condition;
     QString sql= R"(
-    DELETE
+    UPDATE
         appointment
-    FROM
-        appointment , doctor ,patient
+    SET isfinished = 1
     WHERE
-        appointment.patient_id = patient.id AND
-        appointment.doctor_id = doctor.id AND
         appointment.date = ')" + ui->date_3->date().toString("yyyy-MM-dd")  + R"(' AND
         appointment.doctor_id = ')" + USER_ID  + R"(' AND
         appointment.time = ')" + ui->label_time_3->text()  + R"(';
     )";
+
+
     NetLoader::get_sql(sql , USER_ID , 0 , API_KEY , client );
 
     delete_3();
@@ -1289,7 +1346,24 @@ void Widget::on_btn_page_4_4_clicked()
 
 void Widget::onItemClicked_8(QListWidgetItem *item)
 {
-    search_802(item->text());
+    // 当用户点击项时，弹出消息框显示点击的项的文本
+//    QMessageBox::information(this, "Item Clicked", "You clicked: " + item->text());
+
+    QString sql= R"(
+    SELECT
+        doctor.id AS doctor_id
+    FROM
+        doctor
+    WHERE
+        doctor.name =')" + item->text() + R"( ;
+    )";
+
+    NetLoader::get_sql(sql , USER_ID , 1 , API_KEY , client );
+
+
+    ui->label_docname_8->setText(item->text());
+    ui->widget_chat_box_8->set_receiver_id(doctor_id[0]);
+    ui->widget_chat_box_8->set_sender_id(USER_ID);
 }
 
 void Widget::delete_8()

@@ -24,7 +24,6 @@ little_appointment::~little_appointment()
 void little_appointment::set_label_doc_name(const QString &text)
 {
     ui->label_doc_name->setText(text);
-
 }
 
 void little_appointment::set_label_gender(const QString &text)

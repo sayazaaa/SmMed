@@ -14,11 +14,11 @@ class little_zhihu : public QWidget
 
 public:
 
-    int allnum=0;
-    int now=0;
-    QString huifutext;
-    QString huifutime;
-    QString doctorname;
+//    int allnum=0;
+//    int now=0;
+//    QString huifutext;
+//    QString huifutime;
+//    QString doctorname;
     QString tiezi_id;
     void set_label_user_name(const QString &text);
     void set_label_user_context(const QString &text);

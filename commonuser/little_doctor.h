@@ -17,7 +17,7 @@ class little_doctor : public QWidget
 
 public:
     QString doc_id;
-    Widget w;
+    Widget* dw;
     void set_label_name(const QString &text);
     void set_label_gender(const QString &text);
     void set_label_apartment(const QString &text);

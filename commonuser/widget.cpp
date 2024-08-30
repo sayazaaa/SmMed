@@ -35,7 +35,7 @@ QVector<QString> tiezi_id ,tiezi_text,tiezi_date ,tiezi_num;
 QVector<QString> huifu_id , huifu_text,huifu_time ;
 
 int all_num=0;
-
+int search_state=0;
 int page_state=1;
 QString  my_id="666";
 //QString apikey="";
@@ -154,12 +154,14 @@ void Widget::handleJsonReceived(const QJsonObject &mainsource)
 {
     qDebug()<<"888" << mainsource;
 
-    if(mainsource.size()<=0)return;//如果source为空直接结束
-    QJsonArray array=mainsource.value("array").toArray();
     int n=0;
+    if(mainsource.size()>0)//如果source为空直接结束
+    {
+    QJsonArray array=mainsource.value("array").toArray();
+
     for(auto item:array){
 
-
+        qDebug()<<"665";
         QJsonObject source = item.toObject();
         qDebug()<<"777"<<source;
         if(source.contains("doctor_id"))//如果source中有"name"值则提取
@@ -362,10 +364,196 @@ void Widget::handleJsonReceived(const QJsonObject &mainsource)
         if(source.contains("huifu_text"))
             huifu_text.push_back(source.value("huifu_text").toString());
        else huifu_text.clear();
-        qDebug()<<"111111111111111";
+        qDebug()<<"endifffffffffffffffffff";
         n++;
     }
+    }
+
+
     all_num=n;
+    page_now=1;
+
+
+    if(search_state==101)
+    {
+        ui->combo_patient_1->clear();
+        for(int i=0;i<all_num;i++)
+        {
+            putin_101();
+        }
+    }
+    else if(search_state==102)
+    {
+        ui->combo_docname_1->clear();
+        for(int i=0;i<all_num;i++)
+        {
+            putin_102();
+        }
+    }
+    else if(search_state==1)
+    {
+        page_max=all_num;
+        page_now=1;
+
+        //填写总数据量
+        ui->label_data_num_text_1->setText("共有"+QString::number(all_num)+"项数据");
+        //删除数据
+        delete_1();
+        //填入数据
+        if(all_num>0)
+        {
+            putin_1();
+        }
+    }
+    else if(search_state==3)
+    {
+        if(all_num==0) page_max=0;
+        else   page_max=(all_num-1)/9+1;
+        page_now=1;
+        //填写总数据量
+        ui->label_data_num_text_3->setText("共有"+QString::number(all_num)+"项数据");
+
+        //删除数据
+        delete_3();
+        //填入数据
+        if(all_num>9)
+        {
+            for(int i=0;i<9;i++)
+            {
+                putin_3(i);
+            }
+        }
+        else
+        {
+            for(int i=0;i<all_num;i++)
+            {
+                putin_3(i);
+            }
+        }
+    }
+    else if(search_state==4)
+    {
+        if(all_num==0) page_max=0;
+        else   page_max=(all_num-1)/9+1;
+        page_now=1;
+        //填写总数据量
+        ui->label_data_num_text_4->setText("共有"+QString::number(all_num)+"项数据");
+
+        //删除数据
+        delete_4();
+        //填入数据
+        if(all_num>9)
+        {
+            for(int i=0;i<9;i++)
+            {
+                putin_4(i);
+            }
+        }
+        else
+        {
+            for(int i=0;i<all_num;i++)
+            {
+                putin_4(i);
+            }
+        }
+
+    }
+    else if(search_state==401)
+    {
+        ui->combo_user_4->clear();
+        for(int i=0;i<all_num;i++)
+        {
+            putin_401();
+        }
+        search_4();
+    }
+    else if(search_state==5)
+    {
+        if(all_num==0) page_max=0;
+        else   page_max=(all_num-1)/9+1;
+        qDebug()<<all_num;
+        qDebug()<<page_max;
+        page_now=1;
+        //填写总数据量
+        ui->label_data_num_text_5->setText("共有"+QString::number(all_num)+"项数据");
+//        qDebug()<<"eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee";
+        //删除数据
+        delete_5();
+        qDebug()<<"9999999999999999999999999999999999999";
+        //填入数据
+        if(all_num>9)
+        {
+//            qDebug()<<"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+            for(int i=0;i<9;i++)
+            {
+                putin_5(i);
+            }
+        }
+        else
+        {
+            qDebug()<<"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
+            for(int i=0;i<all_num;i++)
+            {
+                putin_5(i);
+            }
+        }
+
+        qDebug()<<"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+
+    }
+    else if(search_state==801)
+    {
+        if(all_num>0)
+            putin_801();
+    }
+    else if(search_state==802)
+    {
+        if(all_num>0)
+            putin_802();
+    }
+    else if(search_state==888)
+    {
+
+        ui->widget_chat_box_8->set_receiver_id(doctor_id[0]);
+        ui->widget_chat_box_8->set_sender_id(USER_ID);
+    }
+
+    else if(search_state==9)
+    {
+
+        page_max=all_num;
+        page_now=1;
+
+        //删除数据
+        delete_9();
+        //填入数据
+        if(all_num>20)
+        {
+            for(int i=0;i<20;i++)
+            {
+                putin_9();
+            }
+        }
+        else
+        {
+            for(int i=0;i<all_num;i++)
+            {
+                putin_9();
+            }
+        }
+    }
+    else if(search_state==555)
+    {
+        if(all_num>0)
+        {
+            putin_mine();
+        }
+    }
+
+    search_state=0;
+
+
+
 
     // qDebug()<<"00000000000000000000000000"<<all_num;
 }
@@ -403,6 +591,7 @@ void Widget::on_btn_main_item_1_clicked()
         ui->date_1->setMinimumDate(QDate::currentDate().addYears(-1));
         ui->date_1->setMaximumDate(QDate::currentDate());
         ui->date_1->setCalendarPopup(true);
+        search_101();
     }
     //预约挂号
     if(choice_state == 2)
@@ -415,7 +604,7 @@ void Widget::on_btn_main_item_1_clicked()
         ui->date_3->setMinimumDate(QDate::currentDate());
         ui->date_3->setMaximumDate(QDate::currentDate().addDays(10));
         ui->date_3->setCalendarPopup(true);
-        search_3();
+//        search_3();
     }
     //当日在班医生
     if(choice_state == 3)
@@ -469,7 +658,7 @@ void Widget::on_btn_main_item_2_clicked()
         ui->date_1->setMinimumDate(QDate::currentDate().addYears(-20));
         ui->date_1->setMaximumDate(QDate::currentDate().addYears(-1));
         ui->date_1->setCalendarPopup(true);
-//        search_1();
+        search_101();
 //        return;
     }
 
@@ -482,7 +671,7 @@ void Widget::on_btn_main_item_2_clicked()
         ui->date_4->setDate(QDate::currentDate());
         ui->date_4->setCalendarPopup(true);
 
-        search_4();
+        search_401();
 
     }
     //本周可预约医生
@@ -547,8 +736,37 @@ void Widget::on_btn_mine_clicked(bool checked)
 
 void Widget::on_btn_mine_clicked()
 {
+    search_mine();
+}
+
+void Widget::putin_mine()
+{
     information *me=new information;
+    me->set_name(user_name[0]);
+    me->set_age(user_age[0]);
+    me->set_gender(user_gender[0]);
+    me->set_address(user_address[0]);
+    me->set_phone(user_address[0]);
+
     me->show();
+}
+
+void Widget::search_mine()
+{
+    search_state=555;
+    QString sql= R"(
+    SELECT
+        user.name AS user_name,
+        user.gender AS user_gender,
+        user.id AS user_id,
+        user.age AS user_age,
+        user.phone AS user_phone,
+        user.address AS user_address
+    FROM
+        user
+    WHERE
+        user.id = ')"+ USER_ID +R"('
+    )";
 }
 
 // 映射表：英文星期名称到中文星期名称
@@ -681,52 +899,59 @@ void Widget::on_btn_menu_item_7_clicked()
 
 void Widget::on_combo_patient_1_currentIndexChanged(const QString &arg1)
 {
-    set_doctors_1();
+//    search_102();
 }
 
 void Widget::on_combo_depart_1_currentIndexChanged(const QString &arg1)
 {
-    set_doctors_1();
+//    search_102();
 }
 
 void Widget::on_date_1_userDateChanged(const QDate &date)
 {
-    set_doctors_1();
+//    search_102();
 }
 
-void Widget::set_doctors_1()
+void Widget::putin_102()
 {
-    //通过 患者 日期 科室 查询 ：医生
-//    QString sql= R"(
-//    SELECT
-//        d.name AS doctor_name
-//    FROM
-//        patient pa
-//    JOIN
-//        diagnosis di ON pa.id = di.patient_id
-//    JOIN
-//        doctor d ON di.doctor_id = d.id
-//    JOIN
-//        office o ON d.office_id = o.id
-//    WHERE
-//        pa.name  =')" + ui->combo_patient_1->currentText() + R"(' AND
-//        di.date = ')" + ui->date_1->date().toString() + R"(' AND
-//        o.name = ')" + ui->combo_depart_1->currentText() + R"(';
-//    )";
+     ui->combo_docname_1->addItem( doctor_name [ page_now - 1 ] );
+}
+//填入doctor
+void Widget::search_102()
+{
+    search_state=102;
+
     QString sql ="SELECT doctor.name AS doctor_name"
-                 " FROM prescription, doctor, patient, office "
+                 " FROM appointment, doctor, patient, office "
                  "WHERE "
-                 "prescription.patient_id=patient.id AND prescription.doctor_id = doctor.id AND doctor.office_id = office.id AND"
-                 " patient.name ='"+ui->combo_patient_1->currentText()+"' AND prescription.date = '"+ui->date_1->date().toString("yyyy-MM-dd")+"' AND office.name = '"+ui->combo_depart_1->currentText()+"';";
+                 "appointment.patient_id=patient.id AND appointment.doctor_id = doctor.id AND doctor.office_id = office.id AND"
+                 " appointment.date = '"+ui->date_1->date().toString("yyyy-MM-dd")+"' AND office.name = '"+ui->combo_depart_1->currentText()+"';";
 
     NetClient &client = NetClient::getInstance();
     NetLoader::get_sql(sql , USER_ID , 1 , API_KEY , client );
 
-    //填入医生信息
-    for(int i=0;i<all_num;i++)
-    {
-        ui->combo_docname_1->addItem( doctor_name [ all_num - 1 ] );
-    }
+}
+
+void Widget::putin_101()
+{
+     ui->combo_patient_1->addItem( patient_name [ page_now - 1 ] );
+}
+
+//填入患者
+void Widget::search_101()
+{
+    search_state=101;
+    QString sql= R"(
+    SELECT
+        patient.name AS patient_name
+    FROM
+        patient , user
+    WHERE
+        user.id = patient.user_id AND
+        user.id = ')" + USER_ID + R"(';
+    )";
+    NetClient &client = NetClient::getInstance();
+    NetLoader::get_sql(sql , USER_ID , 1 , API_KEY , client );
 
 }
 
@@ -893,24 +1118,7 @@ void Widget::search_1()
         )";
     }
 
-//    qDebug()<<"666";
     NetLoader::get_sql(sql , USER_ID , 1 , API_KEY , client );
-//    qDebug()<<"777";
-
-    int data_num=all_num;
-    page_max=data_num;
-    page_now=1;
-
-    //填写总数据量
-    ui->label_data_num_text_1->setText("共有"+QString::number(data_num)+"项数据");
-    //删除数据
-    delete_1();
-    //填入数据
-    if(data_num!=0)
-    {
-        putin_1();
-    }
-
 
 }
 
@@ -1054,7 +1262,7 @@ void Widget::putin_3(int i)
     little_appointment *w = new little_appointment;
     QListWidgetItem* pItem = new QListWidgetItem;
 
-    qDebug()<<"666666666666666";
+//    qDebug()<<"666666666666666";
     // qDebug()<< *(doctor_gender+page_now*9-9+i) ;
 
     //填入数据
@@ -1072,63 +1280,56 @@ void Widget::putin_3(int i)
     ui->listWidget_3->setItemWidget(pItem, w);
     //不可被选中
     pItem->setFlags(pItem->flags() & ~Qt::ItemIsEnabled & ~Qt::ItemIsSelectable);
+
 }
 
 void Widget::search_3()
 {
+    search_state=3;
+    QString sql="";
     //通过 科室 日期 医生姓名 医生性别 查询： 医生姓名 性别 科室 简介
-    QString sql= R"(
-    SELECT
-        doctor.name AS doctor_name,
-        doctor.gender AS doctor_gender,
-        office.name AS office_name,
-        doctor.describe AS doctor_describe,
-        doctor.id AS doctor_id
-    FROM
-        doctor ,office
-    WHERE
-        doctor.office_id = office.id AND
-        office.name = ')" + ui->combo_depart_3->currentText() + R"(' AND
-        doctor.name = ')" + ui->lineEdit_docname_3->text() + R"(' AND
-        doctor.gender = ')" + ui->combo_gender_3->currentText() + R"(';
-    )";
-
-    NetLoader::get_sql(sql , USER_ID , 1 , API_KEY , client );
-
-    int data_num=all_num;
-    page_max=data_num/9+1;
-    page_now=1;
-    qDebug()<<"9999999999999999999999";
-    //填写总数据量
-    ui->label_data_num_text_3->setText("共有"+QString::number(data_num)+"项数据");
-
-    qDebug()<<"2222222222222222222222222222";
-    //删除数据
-    delete_3();
-    //填入数据
-    if(data_num>9)
+    if(ui->lineEdit_docname_3->text()=="")
     {
-        for(int i=0;i<9;i++)
-        {
-            putin_3(i);//缺少参数
-        }
+        sql= R"(
+        SELECT
+            doctor.name AS doctor_name,
+            doctor.gender AS doctor_gender,
+            office.name AS office_name,
+            doctor.describe AS doctor_describe,
+            doctor.id AS doctor_id
+        FROM
+            doctor ,office
+        WHERE
+            doctor.office_id = office.id AND
+            office.name = ')" + ui->combo_depart_3->currentText() + R"(' AND
+            doctor.gender = ')" + ui->combo_gender_3->currentText() + R"(';
+        )";
     }
     else
     {
-        for(int i=0;i<data_num;i++)
-        {
-            putin_3(i);//缺少参数
-        }
+        sql= R"(
+        SELECT
+            doctor.name AS doctor_name,
+            doctor.gender AS doctor_gender,
+            office.name AS office_name,
+            doctor.describe AS doctor_describe,
+            doctor.id AS doctor_id
+        FROM
+            doctor ,office
+        WHERE
+            doctor.office_id = office.id AND
+            office.name = ')" + ui->combo_depart_3->currentText() + R"(' AND
+            doctor.name = ')" + ui->lineEdit_docname_3->text() + R"(' AND
+            doctor.gender = ')" + ui->combo_gender_3->currentText() + R"(';
+        )";
     }
-
+    NetLoader::get_sql(sql , USER_ID , 1 , API_KEY , client );
 
 }
 
 void Widget::on_btn_confirm_3_clicked()
 {
-//    查询
-    search_3();//参数未填充
-
+    search_3();
 }
 
 void Widget::on_btn_page_left_3_clicked()
@@ -1150,10 +1351,22 @@ void Widget::on_btn_page_right_3_clicked()
     {
         page_now++;
         delete_3();
-        for(int i=0;i<9;i++)
+
+        if(page_now<page_max)
         {
-            putin_3(i);//缺少参数
+            for(int i=0;i<9;i++)
+            {
+                putin_3(i);//缺少参数
+            }
         }
+        else
+        {
+            for(int i=0;i<all_num-9*(page_max-1);i++)
+            {
+                putin_3(i);
+            }
+        }
+
     }
 }
 
@@ -1161,9 +1374,19 @@ void Widget::on_btn_page_1_3_clicked()
 {
     page_now=1;
     delete_3();
-    for(int i=0;i<9;i++)
+    if(page_now<page_max)
     {
-        putin_3(i);//缺少参数
+        for(int i=0;i<9;i++)
+        {
+            putin_3(i);//缺少参数
+        }
+    }
+    else
+    {
+        for(int i=0;i<all_num-9*(page_max-1);i++)
+        {
+            putin_3(i);
+        }
     }
 }
 
@@ -1171,9 +1394,19 @@ void Widget::on_btn_page_2_3_clicked()
 {
     page_now--;
     delete_3();
-    for(int i=0;i<9;i++)
+    if(page_now<page_max)
     {
-        putin_3(i);//缺少参数
+        for(int i=0;i<9;i++)
+        {
+            putin_3(i);//缺少参数
+        }
+    }
+    else
+    {
+        for(int i=0;i<all_num-9*(page_max-1);i++)
+        {
+            putin_3(i);
+        }
     }
 
 }
@@ -1182,21 +1415,65 @@ void Widget::on_btn_page_3_3_clicked()
 {
     page_now++;
     delete_3();
-    for(int i=0;i<9;i++)
+    if(page_now<page_max)
     {
-        putin_3(i);//缺少参数
+        for(int i=0;i<9;i++)
+        {
+            putin_3(i);//缺少参数
+        }
+    }
+    else
+    {
+        for(int i=0;i<all_num-9*(page_max-1);i++)
+        {
+            putin_3(i);
+        }
     }
 }
 
 void Widget::on_btn_page_4_3_clicked()
 {
     page_now=page_max;
-    delete_3();
-    for(int i=0;i<9;i++)
+    if(page_now<page_max)
     {
-        putin_3(i);//缺少参数
+        for(int i=0;i<9;i++)
+        {
+            putin_3(i);//缺少参数
+        }
+    }
+    else
+    {
+        for(int i=0;i<all_num-9*(page_max-1);i++)
+        {
+            putin_3(i);
+        }
     }
 }
+
+
+void Widget::putin_401()
+{
+     ui->combo_user_4->addItem( patient_name [ page_now - 1 ] );
+}
+
+//填入患者
+void Widget::search_401()
+{
+    search_state=401;
+    QString sql= R"(
+    SELECT
+        patient.name AS patient_name
+    FROM
+        patient , user
+    WHERE
+        user.id = patient.user_id AND
+        user.id = ')" + USER_ID + R"(';
+    )";
+    NetClient &client = NetClient::getInstance();
+    NetLoader::get_sql(sql , USER_ID , 1 , API_KEY , client );
+
+}
+
 
 void Widget::page_hide_4()
 {
@@ -1266,7 +1543,6 @@ void Widget::putin_4(int i)
     }
 
     //创建item
-//    little_appointment *w = new little_appointment;
     myAppointment *w = new myAppointment;
     QListWidgetItem* pItem = new QListWidgetItem;
     //填入数据
@@ -1288,62 +1564,56 @@ void Widget::putin_4(int i)
 
 void Widget::search_4()
 {
-
+    search_state=4;
+    QString sql="";
     //通过 患者姓名 预约日期 医生 医生性别 部门 查询： 患者姓名 日期 时间 医生 部门 预约序号
-    QString sql= R"(
-    SELECT
-        patient.name AS patient_name,
-        appointment.date AS appointment_date,
-        appointment.num AS appointment_num,
-        appointment.time AS appointment_time,
-        doctor.name AS doctor_name,
-        office.name AS office_name
-    FROM
-        patient ,appointment, office , doctor
-    WHERE
-        patient.id=appointment.patient_id AND   appointment.doctor_id = doctor.id AND office.id = doctor.office_id AND
-        patient.name =')" + ui->combo_user_4->currentText() + R"(' AND
-        appointment.date =')" + ui->date_4->date().toString("yyMMdd") + R"(' AND
-        doctor.name =')" + ui->lineEdit_docname_4->text() + R"(' AND
-        doctor.gender =')" + ui->combo_gender_4->currentText() + R"(' AND
-        office.name = ')" + ui->combo_depart_4->currentText() + R"(';
-    )";
-
-    NetLoader::get_sql(sql , USER_ID , 1 , API_KEY , client );
-
-    int data_num=all_num;
-    page_max=data_num/9+1;
-    page_now=1;
-
-    //填写总数据量
-    ui->label_data_num_text_4->setText("共有"+QString::number(data_num)+"项数据");
-    //删除数据
-    delete_4();
-    //填入数据
-    if(data_num>9)
+    if(ui->lineEdit_docname_4->text()=="")
     {
-        for(int i=0;i<9;i++)
-        {
-            putin_4(i);//缺少参数
-        }
+        QString sql= R"(
+        SELECT
+            patient.name AS patient_name,
+            appointment.date AS appointment_date,
+            appointment.num AS appointment_num,
+            appointment.time AS appointment_time,
+            doctor.name AS doctor_name,
+            office.name AS office_name
+        FROM
+            patient ,appointment, office , doctor
+        WHERE
+            patient.id=appointment.patient_id AND   appointment.doctor_id = doctor.id AND office.id = doctor.office_id AND
+            patient.name =')" + ui->combo_user_4->currentText() + R"(' AND
+            appointment.date =')" + ui->date_4->date().toString("yyMMdd") + R"(' AND
+            doctor.gender =')" + ui->combo_gender_4->currentText() + R"(' AND
+            office.name = ')" + ui->combo_depart_4->currentText() + R"(';
+        )";
     }
     else
     {
-        for(int i=0;i<data_num;i++)
-        {
-            putin_4(i);//缺少参数
-        }
+        QString sql= R"(
+        SELECT
+            patient.name AS patient_name,
+            appointment.date AS appointment_date,
+            appointment.num AS appointment_num,
+            appointment.time AS appointment_time,
+            doctor.name AS doctor_name,
+            office.name AS office_name
+        FROM
+            patient ,appointment, office , doctor
+        WHERE
+            patient.id=appointment.patient_id AND   appointment.doctor_id = doctor.id AND office.id = doctor.office_id AND
+            patient.name =')" + ui->combo_user_4->currentText() + R"(' AND
+            appointment.date =')" + ui->date_4->date().toString("yyMMdd") + R"(' AND
+            doctor.name =')" + ui->lineEdit_docname_4->text() + R"(' AND
+            doctor.gender =')" + ui->combo_gender_4->currentText() + R"(' AND
+            office.name = ')" + ui->combo_depart_4->currentText() + R"(';
+        )";
     }
-
-
-
+    NetLoader::get_sql(sql , USER_ID , 1 , API_KEY , client );
 }
 
 void Widget::on_btn_confirm_4_clicked()
 {
-//    查询
-    search_4();//参数未填充
-
+    search_4();
 }
 
 void Widget::on_btn_page_left_4_clicked()
@@ -1365,9 +1635,19 @@ void Widget::on_btn_page_right_4_clicked()
     {
         page_now++;
         delete_4();
-        for(int i=0;i<9;i++)
+        if(page_now<page_max)
         {
-            putin_4(i);//缺少参数
+            for(int i=0;i<9;i++)
+            {
+                putin_4(i);//缺少参数
+            }
+        }
+        else
+        {
+            for(int i=0;i<all_num-9*(page_max-1);i++)
+            {
+                putin_4(i);
+            }
         }
     }
 }
@@ -1376,9 +1656,19 @@ void Widget::on_btn_page_1_4_clicked()
 {
     page_now=1;
     delete_4();
-    for(int i=0;i<9;i++)
+    if(page_now<page_max)
     {
-        putin_4(i);//缺少参数
+        for(int i=0;i<9;i++)
+        {
+            putin_4(i);//缺少参数
+        }
+    }
+    else
+    {
+        for(int i=0;i<all_num-9*(page_max-1);i++)
+        {
+            putin_4(i);
+        }
     }
 }
 
@@ -1386,9 +1676,19 @@ void Widget::on_btn_page_2_4_clicked()
 {
     page_now--;
     delete_4();
-    for(int i=0;i<9;i++)
+    if(page_now<page_max)
     {
-        putin_4(i);//缺少参数
+        for(int i=0;i<9;i++)
+        {
+            putin_4(i);//缺少参数
+        }
+    }
+    else
+    {
+        for(int i=0;i<all_num-9*(page_max-1);i++)
+        {
+            putin_4(i);
+        }
     }
 
 }
@@ -1397,9 +1697,19 @@ void Widget::on_btn_page_3_4_clicked()
 {
     page_now++;
     delete_4();
-    for(int i=0;i<9;i++)
+    if(page_now<page_max)
     {
-        putin_4(i);//缺少参数
+        for(int i=0;i<9;i++)
+        {
+            putin_4(i);//缺少参数
+        }
+    }
+    else
+    {
+        for(int i=0;i<all_num-9*(page_max-1);i++)
+        {
+            putin_4(i);
+        }
     }
 }
 
@@ -1407,9 +1717,19 @@ void Widget::on_btn_page_4_4_clicked()
 {
     page_now=page_max;
     delete_4();
-    for(int i=0;i<9;i++)
+    if(page_now<page_max)
     {
-        putin_4(i);//缺少参数
+        for(int i=0;i<9;i++)
+        {
+            putin_4(i);//缺少参数
+        }
+    }
+    else
+    {
+        for(int i=0;i<all_num-9*(page_max-1);i++)
+        {
+            putin_4(i);
+        }
     }
 }
 
@@ -1435,8 +1755,6 @@ void Widget::delete_5()
 
 void Widget::putin_5(int i)
 {
-
-
     page_hide_5();
     //填写页数
     ui->btn_page_now_5->setText(QString::number(page_now));
@@ -1486,11 +1804,15 @@ void Widget::putin_5(int i)
     little_doctor *w = new little_doctor;
     QListWidgetItem* pItem = new QListWidgetItem;
     //填入数据
+    qDebug()<<"before";
     w->set_label_name(  doctor_name[page_now*9-9+i]  );
     w->set_label_gender( doctor_gender[page_now*9-9+i] );
     w->set_label_apartment( office_name[page_now*9-9+i] );
     w->set_label_introduce( doctor_describe[page_now*9-9+i] );
     w->doc_id=doctor_id[page_now*9-9+i];
+    qDebug()<<"middddddddddddddddddd";
+    w->dw=this;
+    qDebug()<<"afterrrrrrrrrrrrrrrrrr";
     if(choice_state==3)
     {
         w->set_btn_hide();
@@ -1512,48 +1834,49 @@ void Widget::putin_5(int i)
 
 void Widget::search_5()
 {
-    //通过 科室 日期 医生姓名 医生性别 查询： 医生姓名 医生性别 科室 简介 id
-    QString sql = R"(
-    SELECT
-        doctor.name AS doctor_name,
-        doctor.gender AS doctor_gender,
-        office.name AS office_name,
-        doctor.describe AS doctor_describe,
-        doctor.id AS doctor_id
-    FROM
-        doctor , office
-    WHERE
-        doctor.office_id = office.id AND
-        office.name = ')" + ui->combo_depart_5->currentText() + R"(' AND
-        doctor.name = ')" + ui->lineEdit_docname_5->text() + R"(' AND
-        doctor.gender = ')" + ui->combo_gender_5->currentText() + R"(';
-    )";
-
-    NetLoader::get_sql(sql , USER_ID , 1 , API_KEY , client );
-
-    int data_num=all_num;
-    page_max=data_num/9+1;
-    page_now=1;
-
-    //填写总数据量
-    ui->label_data_num_text_5->setText("共有"+QString::number(data_num)+"项数据");
-    //删除数据
-    delete_5();
-    //填入数据
-    if(data_num>9)
+    search_state=5;
+    QString sql = "";
+    if(ui->lineEdit_docname_5->text()=="")
     {
-        for(int i=0;i<9;i++)
-        {
-            putin_5(i);//缺少参数
-        }
+        //通过 科室 日期 医生姓名 医生性别 查询： 医生姓名 医生性别 科室 简介 id
+        sql = R"(
+        SELECT
+            doctor.name AS doctor_name,
+            doctor.gender AS doctor_gender,
+            office.name AS office_name,
+            doctor.describe AS doctor_describe,
+            doctor.id AS doctor_id
+        FROM
+            doctor , office
+        WHERE
+            doctor.office_id = office.id AND
+            office.name = ')" + ui->combo_depart_5->currentText() + R"(' AND
+            doctor.gender = ')" + ui->combo_gender_5->currentText() + R"(';
+        )";
     }
     else
     {
-        for(int i=0;i<data_num;i++)
-        {
-            putin_5(i);//缺少参数
-        }
+        sql = R"(
+        SELECT
+            doctor.name AS doctor_name,
+            doctor.gender AS doctor_gender,
+            office.name AS office_name,
+            doctor.describe AS doctor_describe,
+            doctor.id AS doctor_id
+        FROM
+            doctor , office
+        WHERE
+            doctor.office_id = office.id AND
+            office.name = ')" + ui->combo_depart_5->currentText() + R"(' AND
+            doctor.name = ')" + ui->lineEdit_docname_5->text() + R"(' AND
+            doctor.gender = ')" + ui->combo_gender_5->currentText() + R"(';
+        )";
     }
+    //通过 科室 日期 医生姓名 医生性别 查询： 医生姓名 医生性别 科室 简介 id
+
+
+    NetLoader::get_sql(sql , USER_ID , 1 , API_KEY , client );
+
 
 
 
@@ -1584,10 +1907,21 @@ void Widget::on_btn_page_right_5_clicked()
     {
         page_now++;
         delete_5();
-        for(int i=0;i<9;i++)
+        if(page_now<page_max)
         {
-            putin_5(i);//缺少参数
+            for(int i=0;i<9;i++)
+            {
+                putin_5(i);//缺少参数
+            }
         }
+        else
+        {
+            for(int i=0;i<all_num-9*(page_max-1);i++)
+            {
+                putin_5(i);
+            }
+        }
+
     }
 }
 
@@ -1595,9 +1929,19 @@ void Widget::on_btn_page_1_5_clicked()
 {
     page_now=1;
     delete_5();
-    for(int i=0;i<9;i++)
+    if(page_now<page_max)
     {
-        putin_5(i);//缺少参数
+        for(int i=0;i<9;i++)
+        {
+            putin_5(i);//缺少参数
+        }
+    }
+    else
+    {
+        for(int i=0;i<all_num-9*(page_max-1);i++)
+        {
+            putin_5(i);
+        }
     }
 }
 
@@ -1605,9 +1949,19 @@ void Widget::on_btn_page_2_5_clicked()
 {
     page_now--;
     delete_5();
-    for(int i=0;i<9;i++)
+    if(page_now<page_max)
     {
-        putin_5(i);//缺少参数
+        for(int i=0;i<9;i++)
+        {
+            putin_5(i);//缺少参数
+        }
+    }
+    else
+    {
+        for(int i=0;i<all_num-9*(page_max-1);i++)
+        {
+            putin_5(i);
+        }
     }
 
 }
@@ -1616,9 +1970,19 @@ void Widget::on_btn_page_3_5_clicked()
 {
     page_now++;
     delete_5();
-    for(int i=0;i<9;i++)
+    if(page_now<page_max)
     {
-        putin_5(i);//缺少参数
+        for(int i=0;i<9;i++)
+        {
+            putin_5(i);//缺少参数
+        }
+    }
+    else
+    {
+        for(int i=0;i<all_num-9*(page_max-1);i++)
+        {
+            putin_5(i);
+        }
     }
 }
 
@@ -1626,9 +1990,19 @@ void Widget::on_btn_page_4_5_clicked()
 {
     page_now=page_max;
     delete_5();
-    for(int i=0;i<9;i++)
+    if(page_now<page_max)
     {
-        putin_5(i);//缺少参数
+        for(int i=0;i<9;i++)
+        {
+            putin_5(i);//缺少参数
+        }
+    }
+    else
+    {
+        for(int i=0;i<all_num-9*(page_max-1);i++)
+        {
+            putin_5(i);
+        }
     }
 }
 
@@ -1636,22 +2010,20 @@ void Widget::onItemClicked_8(QListWidgetItem *item)
 {
     // 当用户点击项时，弹出消息框显示点击的项的文本
 //    QMessageBox::information(this, "Item Clicked", "You clicked: " + item->text());
-
+    search_state=888;
     QString sql= R"(
     SELECT
         doctor.id AS doctor_id
     FROM
         doctor
     WHERE
-        doctor.name =')" + item->text() + R"( ;
+        doctor.name =')" + item->text() + R"(' ;
     )";
 
     NetLoader::get_sql(sql , USER_ID , 1 , API_KEY , client );
 
-
     ui->label_docname_8->setText(item->text());
-    ui->widget_chat_box_8->set_receiver_id(doctor_id[0]);
-    ui->widget_chat_box_8->set_sender_id(USER_ID);
+
 }
 
 void Widget::delete_8()
@@ -1666,21 +2038,10 @@ void Widget::delete_8()
     }
 }
 
-void Widget::putin_8()
-{
-    //创建item
-    QListWidgetItem* pItem = new QListWidgetItem(QIcon(":/icons/money.png"), "Text with icon");
-
-    //设置item大小
-    pItem->setSizeHint(QSize(ui->listWidget_8->width(),ui->listWidget_8->height()/6 ));
-
-    //添加进QlistWidget
-    ui->listWidget_8->addItem(pItem);
-}
-
 void Widget::search_8()
 {
-    QString sql = "select receiver_id from chat_history where sender_id ='"+USER_ID+"'; ";
+    search_state=8;
+    QString sql= "select receiver_id from chat_history where sender_id ='"+USER_ID+"'; ";
 
     DatabaseManager &dbm = DatabaseManager::getInstance();
     QSqlQuery query(dbm.getDatabase());
@@ -1688,34 +2049,13 @@ void Widget::search_8()
 
     //删除数据
     delete_8();
-
-    int in=0;
+    qDebug()<<"123456";
     while (query.next())
     {
-        QString sql= R"(
-        SELECT
-            doctor.name AS doctor_name,
-        FROM
-            doctor
-        WHERE
-            doctor.id  =)" +  query.value(1).toString()  + R"(;
-        )";
-
-        NetLoader::get_sql(sql , USER_ID , 1 , API_KEY , client );
-
-
-        if(ui->lineEdit_search_8->text()==""||ui->lineEdit_search_8->text()==doctor_name[in])
-        {
-            //创建item
-            QListWidgetItem* pItem = new QListWidgetItem(QIcon(":/icons/money.png"), doctor_name[in]);
-
-            //设置item大小
-            pItem->setSizeHint(QSize(ui->listWidget_8->width(),ui->listWidget_8->height()/6 ));
-
-            //添加进QlistWidget
-            ui->listWidget_8->addItem(pItem);
-        }
-
+        qDebug()<<"987654321";
+        QString qi= query.value(0).toString();
+        qDebug()<<qi;
+        search_801(qi);
     }
 
 }
@@ -1726,6 +2066,61 @@ void Widget::on_btn_confirm_8_clicked()
     search_8();//参数未填充
 }
 
+void Widget::putin_801()
+{
+
+    if(ui->lineEdit_search_8->text()==""||ui->lineEdit_search_8->text()==doctor_name[0])
+    {
+        //创建item
+        QListWidgetItem* pItem = new QListWidgetItem(QIcon(":/icons/money.png"), doctor_name[0]);
+
+        //设置item大小
+        pItem->setSizeHint(QSize(ui->listWidget_8->width(),ui->listWidget_8->height()/6 ));
+
+        //添加进QlistWidget
+        ui->listWidget_8->addItem(pItem);
+    }
+}
+
+void Widget::search_801(QString qi)
+{
+    search_state=801;
+    QString sql= R"(
+    SELECT
+        name AS doctor_name
+    FROM
+        doctor
+    WHERE
+        id = ')" +  qi  + R"(';
+    )";
+
+    NetLoader::get_sql(sql , USER_ID , 0 , API_KEY , client );
+}
+
+void Widget::putin_802()
+{
+    ui->label_docname_8->setText(doctor_name[0]);
+    ui->widget_chat_box_8->set_receiver_id(doctor_id[0]);
+    ui->widget_chat_box_8->set_sender_id(USER_ID);
+}
+
+void Widget::search_802(QString qi)
+{
+    search_state=802;
+    QString sql= R"(
+    SELECT
+        doctor.id AS doctor_id,
+        doctor.name AS doctor_name
+    FROM
+        doctor
+    WHERE
+        doctor.name = ')" + qi + R"(' ;
+    )";
+
+    NetLoader::get_sql(sql , USER_ID , 0 , API_KEY , client );
+
+}
+/*
 void Widget::delete_9()
 {
     //清空QlistWidget
@@ -1833,7 +2228,85 @@ void Widget::search_9()
 
 void Widget::on_btn_confirm_9_clicked()
 {
-    search_9();//参数未填充
+    search_9();//参数未填
+}*/
+
+
+void Widget::delete_9()
+{
+    //清空QlistWidget
+    int n=ui->listWidget_9->count();//获取item的总数
+//    删去所有item
+    for(int i=0;i<n;i++)
+    {
+        QListWidgetItem *item = ui->listWidget_9->takeItem(0);
+        delete item;
+    }
+}
+
+void Widget::putin_9()
+{
+    //创建item
+    little_zhihu *w = new little_zhihu;
+    QListWidgetItem* pItem = new QListWidgetItem;
+
+    //填入数据
+    w->set_label_user_name(user_name[page_now-1]);
+    w->set_label_user_context(tiezi_text[page_now-1]);
+    w->set_label_answernum(tiezi_num[page_now-1]);
+    w->tiezi_id = tiezi_id[page_now-1];
+    //设置item大小
+    pItem->setSizeHint(QSize(ui->listWidget_9->width(),ui->listWidget_9->height()/5 ));
+    //添加进QlistWidget
+    ui->listWidget_9->addItem(pItem);
+    ui->listWidget_9->setItemWidget(pItem, w);
+    //不可被选中
+    pItem->setFlags(pItem->flags() & ~Qt::ItemIsEnabled & ~Qt::ItemIsSelectable);
+    page_now++;
+}
+
+void Widget::search_9()
+{
+    search_state=9;
+    QString sql="";
+    if(ui->lineEdit_search_9->text()=="")
+    {
+        sql= R"(
+        SELECT
+            tiezi.text AS tiezi_text,
+            tiezi.date AS tiezi_date,
+            tiezi.id AS tiezi_id,
+            tiezi.num AS tiezi_num,
+            user.name AS user_name
+        FROM
+            user , tiezi
+        WHERE
+            user.id = tiezi.user_id
+        )";
+    }
+    else
+    {
+        sql= R"(
+        SELECT
+            tiezi.text AS tiezi_text,
+            tiezi.date AS tiezi_date,
+            tiezi.id AS tiezi_id,
+            tiezi.num AS tiezi_num,
+            user.name AS user_name
+        FROM
+            user , tiezi
+        WHERE
+            user.id = tiezi.user_id AND
+            tiezi.text = ')"+ ui->lineEdit_search_9->text() +R"('
+        )";
+    }
+
+    NetLoader::get_sql(sql , USER_ID , 0 , API_KEY , client );
+}
+
+void Widget::on_btn_confirm_9_clicked()
+{
+    search_9();
 }
 
 
@@ -1843,20 +2316,7 @@ void Widget::on_btn_confirm_9_clicked()
 void Widget::on_btn_ques_10_clicked()
 {
     QString sql = " INSERT INTO tiezi (text, date , num , user_id ) VALUES ( '"+ui->textEdit_10->toPlainText()+"' , '"+ QDate::currentDate().toString("yyyy-MM-dd") +"', 0, '"+ USER_ID +"'); ";
-//    QString sql= R"(
-//    SELECT
-//        tiezi.text AS tizi_text,
-//        tiezi.date AS tiezi_date,
-//        tiezi.id AS tiezi_id,
-//        tiezi.num AS tiezi_num,
-//        user.name AS user_name
-//    FROM
-//        user , tiezi
-//    WHERE
-//        tiezi.text like '%)"+ ui->lineEdit_search_9->text() +R"(%'
-//    )";
 
-//    qDebug()<<"666";
     NetLoader::get_sql(sql , USER_ID , 1 , API_KEY , client );
 
     ui->textEdit_10->setText("提交成功");

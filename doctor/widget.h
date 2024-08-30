@@ -151,6 +151,9 @@ private:
     void putin_3();
     void delete_3();
 
+    void search_mine();
+    void putin_mine();
+
     void search_4();
     void putin_4();
     void delete_4();

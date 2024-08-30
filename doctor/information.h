@@ -13,6 +13,16 @@ class information : public FramelessWidget
     Q_OBJECT
 
 public:
+
+    void set_name(const QString &text);
+    void set_gender(const QString &text);
+    void set_office(const QString &text);
+    void set_zc(const QString &text);
+    void set_describe(const QString &text);
+
+
+
+
     explicit information(QWidget *parent = nullptr);
     ~information();
 

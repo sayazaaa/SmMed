@@ -14,6 +14,14 @@ class newAppointment : public QWidget
 
 public:
 
+    void putin_101();
+    //填入患者
+    void search_101();
+
+//    void putin_102();
+//    //填入患者
+//    void search_102();
+
     QString doctor_id;
     void set_name(const QString &text);
     void set_gender(const QString &text);
@@ -23,6 +31,10 @@ public:
 
     explicit newAppointment(QWidget *parent = nullptr);
     ~newAppointment();
+
+public slots:
+    void handleJsonReceived(const QJsonObject &mainsource);  // 槽函数
+
 
 private slots:
 
