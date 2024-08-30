@@ -40,25 +40,33 @@ void NetLoader::post_login(QString id, QString password, bool usertype, const Ne
     url.setPath("/login");
     if (usertype) {
 
-        url.setQuery("id=" + id + "&password=" + password + "&usertype=" + "1" +"&apikey=");
+        url.setQuery("id=" + id + "&password=" + password + "&usertype=" + "1" + "&apikey=");
     }
-    else
-    {
-        url.setQuery("id=" + id + "&password=" + password + "&usertype=" + "0" +"&apikey=");
+    else {
+        url.setQuery("id=" + id + "&password=" + password + "&usertype=" + "0" + "&apikey=");
     }
 
     client.send_post_request(url, QJsonObject());
 }
 
+void NetLoader::post_login(QString id, QString password, QString apikey, const NetClient& client) {
+    QUrl url(SERVER_URL);
+    qDebug() << "post_login: " << "roottttttttttttttttttttt";
+    url.setPath("/login");
+    url.setQuery("id=" + id + "&password=" + password +  "&usertype=" + "1" +"&apikey=" + apikey);
+    client.send_post_request(url, QJsonObject());
+}
+
+
 void NetLoader::get_sql(QString sql, QString id, bool usertype, QString apikey, const NetClient& client) {
     QUrl url(SERVER_URL);
-    sql=sql.simplified();
+    sql = sql.simplified();
     url.setPath("/sql");
     url.setQuery("sql=" + sql + "&id=" + id + "&usertype=" + QString(usertype) + "&apikey=" + apikey);
     client.send_get_request(url);
 }
 
-void NetLoader::post_file(QString file,QString name, QString doctor_id, QString patient_id, QString type, QString apikey,QString appointment_id, const NetClient& client){
+void NetLoader::post_file(QString file, QString name, QString doctor_id, QString patient_id, QString type, QString apikey, QString appointment_id, const NetClient& client) {
     QUrl url(SERVER_URL);
     url.setPath("/file");
     url.setQuery("name=" + name + "&doctor_id=" + doctor_id + "&patient_id=" + patient_id + "&type=" + type + "&apikey=" + apikey + "&appointment_id=" + appointment_id);
@@ -66,7 +74,7 @@ void NetLoader::post_file(QString file,QString name, QString doctor_id, QString 
     client.send_file_request(url, file);
 }
 
-void NetLoader::get_file(QString uuid, QString apikey, const NetClient& client){
+void NetLoader::get_file(QString uuid, QString apikey, const NetClient& client) {
     QUrl url(SERVER_URL);
     url.setQuery("uuid=" + uuid + "&apikey=" + apikey);
     client.send_get_request(url);

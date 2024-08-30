@@ -22,6 +22,7 @@ namespace  NetLoader {
     void post_create_doctor(HttpServer::Doctor doctor, const NetClient& client);
     void post_create_user(HttpServer::User user, const NetClient& client);
     void post_login(QString id, QString password,bool usertype,const NetClient& client);
+    void post_login(QString id, QString password, QString apikey, const NetClient& client);
     void get_sql(QString sql, QString id, bool usertype, QString apikey, const NetClient& client);
 
     void post_file(QString filepath,QString name, QString doctor_id, QString patient_id, QString type, QString apikey,QString appointment_id, const NetClient& client);
