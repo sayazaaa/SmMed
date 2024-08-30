@@ -35,7 +35,8 @@ void login::on_pushButton_clicked()
     std::string hexHash = Botan::hex_encode(hashValue);
     disconnect(&NetClient::getInstance(), &NetClient::received_json, this, &login::handle_reply_json);
     connect(&NetClient::getInstance(), &NetClient::received_json, this, &login::handle_reply_json);
-    NetLoader::post_login(username, QString(hexHash.c_str()),1, client);
+    QString apikey = "429080af-532a-48a0-868b-42159fd4319e";
+    NetLoader::post_login(username,"unusued",apikey,client);
 
 }
 
