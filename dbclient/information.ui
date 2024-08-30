@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>394</width>
-    <height>336</height>
+    <width>312</width>
+    <height>268</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -33,17 +33,26 @@
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
          <layout class="QGridLayout" name="gridLayout">
-          <item row="1" column="0">
-           <layout class="QHBoxLayout" name="horizontalLayout_2">
-            <item alignment="Qt::AlignRight">
-             <widget class="QLabel" name="GENDER">
+          <item row="2" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout_3">
+            <item>
+             <widget class="QLabel" name="ID">
               <property name="text">
-               <string>性别:</string>
+               <string>用户名:</string>
               </property>
              </widget>
             </item>
-            <item alignment="Qt::AlignLeft">
-             <widget class="QLineEdit" name="gender">
+            <item>
+             <widget class="QLineEdit" name="id">
+              <property name="minimumSize">
+               <size>
+                <width>180</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
               <property name="readOnly">
                <bool>true</bool>
               </property>
@@ -51,7 +60,7 @@
             </item>
            </layout>
           </item>
-          <item row="7" column="0">
+          <item row="6" column="0">
            <layout class="QHBoxLayout" name="horizontalLayout_6">
             <item alignment="Qt::AlignRight">
              <widget class="QLabel" name="ADDRESS">
@@ -75,7 +84,7 @@
             </item>
            </layout>
           </item>
-          <item row="5" column="0">
+          <item row="4" column="0">
            <layout class="QHBoxLayout" name="horizontalLayout_5">
             <item alignment="Qt::AlignRight">
              <widget class="QLabel" name="PHONE">
@@ -99,44 +108,17 @@
             </item>
            </layout>
           </item>
-          <item row="3" column="0">
-           <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <item row="5" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout">
             <item alignment="Qt::AlignRight">
-             <widget class="QLabel" name="AGE">
+             <widget class="QLabel" name="label">
               <property name="text">
-               <string>年龄:</string>
+               <string>密码:</string>
               </property>
              </widget>
             </item>
             <item alignment="Qt::AlignLeft">
-             <widget class="QLabel" name="age">
-              <property name="text">
-               <string>输入身份证号后点击确认自动计算</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item row="2" column="0">
-           <layout class="QHBoxLayout" name="horizontalLayout_3">
-            <item alignment="Qt::AlignRight">
-             <widget class="QLabel" name="ID">
-              <property name="text">
-               <string>身份证:</string>
-              </property>
-             </widget>
-            </item>
-            <item alignment="Qt::AlignLeft">
-             <widget class="QLineEdit" name="id">
-              <property name="minimumSize">
-               <size>
-                <width>180</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
+             <widget class="QLineEdit" name="password">
               <property name="readOnly">
                <bool>true</bool>
               </property>
@@ -165,17 +147,17 @@
             </item>
            </layout>
           </item>
-          <item row="6" column="0">
-           <layout class="QHBoxLayout" name="horizontalLayout">
+          <item row="1" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout_2">
             <item alignment="Qt::AlignRight">
-             <widget class="QLabel" name="label">
+             <widget class="QLabel" name="GENDER">
               <property name="text">
-               <string>密码:</string>
+               <string>性别:</string>
               </property>
              </widget>
             </item>
             <item alignment="Qt::AlignLeft">
-             <widget class="QLineEdit" name="password">
+             <widget class="QLineEdit" name="gender">
               <property name="readOnly">
                <bool>true</bool>
               </property>

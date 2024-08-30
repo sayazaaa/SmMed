@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QtCharts>
 #include<QDateTime>
+
+
 using namespace QtCharts;
 
 namespace Ui {
@@ -18,6 +20,7 @@ public:
     explicit chart_create(QWidget *parent = nullptr);
     ~chart_create();
     void set(int day, int* item_group);
+    void create();
 
 private:
     void createQSplineSeries();

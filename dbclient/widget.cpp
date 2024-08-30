@@ -13,7 +13,7 @@ int choice_state=0;
 int page_now=0;
 int page_max=0;
 int three_which=0;
-int day[7]={0};
+
 QVector<QString> v;
 
 QVector<QString> doctor_id ,doctor_password , doctor_salt ,doctor_name,doctor_gender,doctor_zc ,doctor_describe, doctor_workingtime;
@@ -34,7 +34,7 @@ QString  USER_ID="root";
 QString apikey="429080af-532a-48a0-868b-42159fd4319e";
 NetClient &client = NetClient::getInstance();
 //NetClient &client = NetClient::getInstance();
-
+int daydata[7]={0};
 Widget::Widget(QWidget *parent) :
     FramelessWidget(parent),
     ui(new Ui::Widget)
@@ -545,56 +545,63 @@ void Widget::handleJsonReceived(const QJsonObject &mainsource)
             }
         }
     }else if(choice_state == 0){
-        day[choice_state++] =all_num;
-    }else if(choice_state == 1){
-        day[choice_state++] =all_num;
+        daydata[choice_state++] =all_num;
         QString sql ="SELECT appointment.patient_id AS patient_id "
                      "FROM appointment "
                      "WHERE "
-                     "appointment.date ='"+(QDateTime::currentDateTime().addDays(-1)).toString("yyyy-MM-dd")+"';";
+                     "appointment.date ='"+QDateTime::currentDateTime().addDays(-1).toString("yyyy-MM-dd")+"';";
         NetLoader::get_sql(sql , USER_ID , 1 , API_KEY , client );
-    }else if(choice_state == 2){
-        day[choice_state++] =all_num;
+    }else if(choice_state == 1){
+        daydata[choice_state++] =all_num;
+        qDebug()<<"                          ssssssssssssssssssssssss     ";
         QString sql ="SELECT appointment.patient_id AS patient_id "
-                     "FROM appointment"
-                     "WHERE"
+                     "FROM appointment "
+                     "WHERE "
                      "appointment.date ='"+(QDateTime::currentDateTime().addDays(-2)).toString("yyyy-MM-dd")+"';";
         NetLoader::get_sql(sql , USER_ID , 1 , API_KEY , client );
-    }else if(choice_state == 3){
-        day[choice_state++] =all_num;
+    }else if(choice_state == 2){
+        daydata[choice_state++] =all_num;
         QString sql ="SELECT appointment.patient_id AS patient_id "
                      "FROM appointment "
                      "WHERE "
                      "appointment.date ='"+(QDateTime::currentDateTime().addDays(-3)).toString("yyyy-MM-dd")+"';";
         NetLoader::get_sql(sql , USER_ID , 1 , API_KEY , client );
-    }else if(choice_state == 4){
-        day[choice_state++] =all_num;
+    }else if(choice_state == 3){
+        daydata[choice_state++] =all_num;
         QString sql ="SELECT appointment.patient_id AS patient_id "
                      "FROM appointment "
                      "WHERE "
                      "appointment.date ='"+(QDateTime::currentDateTime().addDays(-4)).toString("yyyy-MM-dd")+"';";
         NetLoader::get_sql(sql , USER_ID , 1 , API_KEY , client );
-    }else if(choice_state == 5){
-        day[choice_state++] =all_num;
+    }else if(choice_state == 4){
+        daydata[choice_state++] =all_num;
         QString sql ="SELECT appointment.patient_id AS patient_id "
                      "FROM appointment "
                      "WHERE "
                      "appointment.date ='"+(QDateTime::currentDateTime().addDays(-5)).toString("yyyy-MM-dd")+"';";
         NetLoader::get_sql(sql , USER_ID , 1 , API_KEY , client );
-    }else if(choice_state == 6){
-        day[choice_state++] =all_num;
+    }else if(choice_state == 5){
+        daydata[choice_state++] =all_num;
         QString sql ="SELECT appointment.patient_id AS patient_id "
                      "FROM appointment "
                      "WHERE "
                      "appointment.date ='"+(QDateTime::currentDateTime().addDays(-6)).toString("yyyy-MM-dd")+"';";
         NetLoader::get_sql(sql , USER_ID , 1 , API_KEY , client );
-    }else if(choice_state == 7){
+    }else if(choice_state == 6){
+        daydata[choice_state++] =all_num;
         chart_create *a = new chart_create();
-        a->set(7,day);
+        a->set(7,daydata);
+        a->create();
         a->show();
     }
 
-    // qDebug()<<"00000000000000000000000000"<<all_num;
+    //
+}
+
+void chart_create::set(int day, int* item_group)
+{
+    days=day;
+    item=item_group;
 }
 
 void Widget::closeEvent(QCloseEvent *event)
@@ -676,6 +683,7 @@ void Widget::timerUpdate(void)
 
 void Widget::on_btn_home_clicked()
 {
+
     choice_state=0;
     ui->sw_main->setCurrentIndex(0);
 }
@@ -692,11 +700,12 @@ void Widget::on_btn_menu_item_2_clicked()
     ui->sw_main->setCurrentIndex(2);
     QString sql= R"(
     SELECT
-        user.id AS user_id,
-        user.gender AS user_gender,
-        user.phone AS  user_phone,
+        user.id       AS user_id,
+        user.name     AS user_name,
+        user.gender   AS user_gender,
+        user.phone   AS  user_phone,
         user.password AS user_password,
-        user.address AS user_address
+        user.address  AS user_address
     FROM
         user;
     )";
@@ -713,7 +722,9 @@ void Widget::on_btn_menu_item_3_clicked()
         doctor.name AS doctor_name,
         doctor.gender AS doctor_gender,
         office.name AS office_name,
-        doctor.describe AS doctor_describe
+        doctor.describe AS doctor_describe,
+        doctor.id AS doctor_id,
+        doctor.password AS doctor_password
     FROM
         doctor ,office
     WHERE
@@ -778,12 +789,13 @@ void Widget::set_doctors_1()
 //        di.date = ')" + ui->date_1->date().toString() + R"(' AND
 //        o.name = ')" + ui->combo_depart_1->currentText() + R"(';
 //    )";
-    QString sql ="SELECT doctor.name AS doctor_name "
-                 "FROM prescription, doctor, patient, office "
-                 "WHERE "
-                 "prescription.doctor_id = doctor.id AND prescription.patient_id = patient.id AND doctor.office_id = office.id "
-                 " patient.name ='"+ui->combo_patient_1->currentText()+"' "
-                 " AND prescription.date = '"+ui->date_1->date().toString("yyMMdd")+"' AND office.name = '"+ui->combo_depart_1->currentText()+"';";
+
+    QString sql;
+    sql.sprintf(
+            "SELECT doctor.name AS doctor_name FROM prescription, doctor, patient, office WHERE prescription.doctor_id = doctor.id AND prescription.patient_id = patient.id AND doctor.office_id = office.id %s %s",
+            ((ui->label_patient_1->text() == "")?"":("AND patient.name = '"+ui->label_patient_1->text().toStdString()+"'")).c_str(),
+            ((ui->date_1->date().toString("yyyy-MM-dd")=="")?"":("AND patient.name = '"+ui->date_1->date().toString("yyyy-MM-dd").toStdString()+"'")).c_str()
+        );
 
     choice_state=100;
     NetLoader::get_sql(sql , USER_ID , 1 , API_KEY , client );
@@ -899,54 +911,37 @@ void Widget::search_1()
     //通过 患者 日期 科室 医生 查询 ：患者 日期 科室 医生 诊断报告/处方/医嘱
     if(three_which==1)
     {
-//        sql = "";
-        sql= " SELECT  patient.name AS patient_name,  inspreport.date AS inspreport_date,  office.name AS office_name,  doctor.name AS doctor_name,"
-             " inspreport.filepath AS inspreport_filepath FROM patient , inspreport , doctor , office"
-             " WHERE "
-             "patient.id = inspreport.patient_id AND doctor.id = inspreport.doctor_id AND doctor.office_id = office.id AND "
-             "patient.name = '" + ui->combo_patient_1->currentText() + "' AND inspreport.date = '" + ui->date_1->date().toString("yyMMdd") + "' AND office.name = '" + ui->combo_depart_1->currentText() + "' AND  doctor.name = '" + ui->combo_docname_1->currentText() + "'; ";
-//        QString sql ="SELECT doctor.name AS doctor_name FROM prescription, doctor, patient, office WHERE patient.name ='"+ui->combo_patient_1->currentText()+"' AND prescription.date = '"+ui->date_1->date().toString("yyMMdd")+"' AND office.name = '"+ui->combo_depart_1->currentText()+"';";
 
+        sql.sprintf(
+                "SELECT patient.name AS patient_name,  inspreport.date AS inspreport_date,  office.name AS office_name,  doctor.name AS doctor_nameinspreport.filepath AS inspreport_filepath FROM patient , inspreport , doctor , office WHERE patient.id = inspreport.patient_id AND doctor.id = inspreport.doctor_id AND doctor.office_id = office.id %s %s %s %s",
+                ((ui->label_patient_1->text() == "")?"":("AND patient.name = '"+ui->label_patient_1->text().toStdString()+"'")).c_str(),
+                ((ui->date_1->date().toString("yyyy-MM-dd")=="")?"":("AND inspreport.date = '"+ui->date_1->date().toString("yyyy-MM-dd").toStdString()+"'")).c_str(),
+                ((ui->combo_depart_1->currentText()=="")?"":("AND office.name = '"+ui->combo_depart_1->currentText().toStdString()+"'")).c_str(),
+                 ((ui->combo_docname_1->currentText()=="")?"":("AND doctor.name ='"+ui->combo_docname_1->currentText().toStdString()  +"'")).c_str()
+            );
 
 
     }
     else if(three_which==2)
     {
-        sql= R"(
-        SELECT
-            patient.name AS patient_name,
-            prescription.date AS prescription_date,
-            office.name AS office_name,
-            doctor.name AS doctor_name,
-            prescription.filepath AS prescription_filepath
-        FROM
-            patient , prescription , doctor , office
-        WHERE
-            patient.id = prescription.patient_id AND doctor.id = prescription.doctor_id AND doctor.office_id = office.id AND
-            patient.name = ')" + ui->combo_patient_1->currentText() + R"(' AND
-            prescription.date = ')" + ui->date_1->date().toString("yyMMdd") + R"(' AND
-            office.name = ')" + ui->combo_depart_1->currentText() + R"(' AND
-            doctor.name = ')" + ui->combo_docname_1->currentText() + R"(';
-        )";
+        sql.sprintf(
+                "SELECT patient.name AS patient_name,prescription.date AS prescription_date, office.name AS office.name,doctor.name AS doctor_name, prescription.filepath AS prescription_filepath"
+                " FROM patient, prescription , doctor , office WHERE patient.id = prescription.patient_id AND doctor.id = prescription.doctor_id AND doctor.office_id = office.id %s %s %s %s",
+                    ((ui->label_patient_1->text() == "")?"":("AND patient.name = '"+ui->label_patient_1->text().toStdString()+"'")).c_str(),
+                    ((ui->date_1->date().toString("yyyy-MM-dd")=="")?"":("AND inspreport.date = '"+ui->date_1->date().toString("yyyy-MM-dd").toStdString()+"'")).c_str(),
+                    ((ui->combo_depart_1->currentText()=="")?"":("AND office.name = '"+ui->combo_depart_1->currentText().toStdString()+"'")).c_str(),
+                     ((ui->combo_docname_1->currentText()=="")?"":("AND doctor.name ='"+ui->combo_docname_1->currentText().toStdString()  +"'")).c_str()
+            );
     }
     else if(three_which==3)
     {
-        sql= R"(
-        SELECT
-            patient.name AS patient_name,
-            diagnosis.date AS diagnosis_date,
-            office.name AS office_name,
-            doctor.name AS doctor_name,
-            diagnosis.filepath AS diagnosis_filepath
-        FROM
-            patient , diagnosis , doctor , office
-        WHERE
-            patient.id = diagnosis.patient_id AND doctor.id = diagnosis.doctor_id AND doctor.office_id = office.id AND
-            patient.name = ')" + ui->combo_patient_1->currentText() + R"(' AND
-            diagnosis.date = ')" + ui->date_1->date().toString("yyMMdd") + R"(' AND
-            office.name = ')" + ui->combo_depart_1->currentText() + R"(' AND
-            doctor.name = ')" + ui->combo_docname_1->currentText() + R"(';
-        )";
+        sql.sprintf(
+                "SELECT patient.name AS patient_name,diagnosis.date AS diagnosis_date, office.name AS office.name,doctor.name AS doctor_name, diagnosis.filepath AS diagnosis_filepath FROM patient, diagnosis , doctor , office WHERE patient.id = prescription.patient_id AND doctor.id = prescription.doctor_id AND doctor.office_id = office.id %s %s %s %s",
+                    ((ui->label_patient_1->text() == "")?"":("AND patient.name = '"+ui->label_patient_1->text().toStdString()+"'")).c_str(),
+                    ((ui->date_1->date().toString("yyyy-MM-dd")=="")?"":("AND inspreport.date = '"+ui->date_1->date().toString("yyyy-MM-dd").toStdString()+"'")).c_str(),
+                    ((ui->combo_depart_1->currentText()=="")?"":("AND office.name = '"+ui->combo_depart_1->currentText().toStdString()+"'")).c_str(),
+                     ((ui->combo_docname_1->currentText()=="")?"":("AND doctor.name ='"+ui->combo_docname_1->currentText().toStdString()  +"'")).c_str()
+            );
     }
 
 //    qDebug()<<"666";
@@ -1104,7 +1099,7 @@ void Widget::putin_3(int i)
     w->set_label_apartment( office_name[page_now*9-9+i] );
     w->set_label_introduce( doctor_describe[page_now*9-9+i] );
     w->set_label_id( doctor_id[page_now*9-9+i]);
-    w->set_label_name( patient_name[page_now*9-9+i]);
+    w->set_label_password(doctor_password[page_now*9-9+i]);
     //设置item大小
     pItem->setSizeHint(QSize(ui->listWidget_3->width()/3-10,ui->listWidget_3->height()/3 ));
     //添加进QlistWidget
@@ -1117,20 +1112,13 @@ void Widget::putin_3(int i)
 void Widget::search_3()
 {
     //通过 科室 日期 医生姓名 医生性别 查询： 医生姓名 性别 科室 简介
-    QString sql= R"(
-    SELECT
-        doctor.name AS doctor_name,
-        doctor.gender AS doctor_gender,
-        office.name AS office_name,
-        doctor.describe AS doctor_describe
-    FROM
-        doctor ,office
-    WHERE
-        doctor.office_id = office.id AND
-        office.name = ')" + ui->combo_depart_3->currentText() + R"(' AND
-        doctor.name = ')" + ui->lineEdit_docname_3->text() + R"(' AND
-        doctor.gender = ')" + ui->combo_gender_3->currentText() + R"(';
-    )";
+    QString sql;
+    sql.sprintf(
+            "SELECT doctor.name AS doctor_name,doctor.gender AS doctor_gender,office.name AS office_name,doctor.describe AS doctor_describe,doctor.id AS doctor_id,doctor.password AS doctor_password FROM doctor ,office WHERE doctor.office_id = office.id %s %s %s",
+            ((ui->combo_depart_3->currentText() == "")?"":("AND office.name = '"+ui->combo_depart_3->currentText().toStdString()+"'")).c_str(),
+            ((ui->lineEdit_docname_3->text()=="")?"":("AND doctor.name = '"+ui->lineEdit_docname_3->text().toStdString()+"'")).c_str(),
+            ((ui->combo_gender_3->currentText()=="全部")?"":("AND doctor.gender = '"+ui->combo_gender_3->currentText().toStdString()+"'")).c_str()
+        );
 
     NetLoader::get_sql(sql , USER_ID , 1 , API_KEY , client );
     choice_state=301;
@@ -1306,24 +1294,10 @@ void Widget::search_4()
     QString sql;
     sql.sprintf(
         "SELECT patient.name AS patient_name,patient.id AS patient_id,patient.gender AS patient_gender,patient.phone AS  patient_phone FROM patient WHERE 1 %s %s %s",
-        ((ui->combo_gender_4->currentText() == "")?"":("AND patient.gender = '"+ui->combo_gender_4->currentText().toStdString()+"'")).c_str(),
+        ((ui->combo_gender_4->currentText() == "全部")?"":("AND patient.gender = '"+ui->combo_gender_4->currentText().toStdString()+"'")).c_str(),
         ((ui->lineEdit_docname_4->text()=="")?"":("AND patient.name = '"+ui->lineEdit_docname_4->text().toStdString()+"'")).c_str(),
         ((ui->lineEdit_phone_4->text()=="")?"":("AND patient.name = '"+ui->lineEdit_phone_4->text().toStdString()+"'")).c_str()
     );
-    qDebug() << ((ui->combo_gender_4->currentText() == "")?" ":("AND patient.gender = '"+ui->combo_gender_4->currentText().toStdString()+"'")).c_str();
-    // R"(
-    // SELECT
-    //     patient.name AS patient_name,
-    //     patient.id AS patient_id,
-    //     patient.gender AS patient_gender,
-    //     patient.phone AS  patient_phone
-    // FROM
-    //     patient
-    // WHERE
-    //     " + ( ? "" : )+ R"(' AND
-    //     patient.name = ')" + (ui->lineEdit_docname_4->text()==""?"":ui->lineEdit_docname_4->text() ) + R"(' AND
-    //     patient.phone = ')"+(ui->lineEdit_phone_4->text()==""?"":ui->lineEdit_docname_4->text() ) +R"(' ;
-    // )";
 
     NetLoader::get_sql(sql , USER_ID , 1 , API_KEY , client );
     choice_state=401;
@@ -1429,7 +1403,7 @@ void Widget::delete_2()
 
 void Widget::putin_2(int i)
 {
-    page_hide_4();
+    page_hide_2();
     //填写页数
     ui->btn_page_now_2->setText(QString::number(page_now));
     ui->btn_page_now_2->setEnabled(false);
@@ -1479,12 +1453,12 @@ void Widget::putin_2(int i)
     information *w = new information;
     QListWidgetItem* pItem = new QListWidgetItem;
     //填入数据
-    w->set_name(user_name[page_now*9-i-9]);
+    w->set_name(user_name[page_now*9+i-9]);
     w->set_address(user_address[page_now*9-9+i]);
     w->set_gender(user_gender[page_now*9-9+i]);
     w->set_id(user_id[page_now*9-9+i]);
     w->set_password(user_password[page_now*9-9+i]);
-    w->set_phone(user_phone[page_now*9-i+9]);
+    w->set_phone(user_phone[page_now*9+i-9]);
 
     //设置item大小
     pItem->setSizeHint(QSize(ui->listWidget_2->width()/3-10,ui->listWidget_2->height()/3 ));
@@ -1499,18 +1473,11 @@ void Widget::search_2()
 {
 
     //通过 患者姓名 预约日期 医生 医生性别 部门 查询： 患者姓名 日期 时间 医生 部门 预约序号
-    QString sql= R"(
-    SELECT
-        user.id AS user_id,
-        user.gender AS user_gender,
-        user.phone AS  user_phone,
-        user.password AS user_password,
-        user.address AS user_address
-    FROM
-        user
-    WHERE
-        user.id = ')"+ui->lineEdit_docname_2->text() +R"(' ;
-    )";
+    QString sql;
+    sql.sprintf(
+            "SELECT user.id AS user_id,user.name AS user_name,user.gender AS user_gender,user.phone AS  user_phone,user.password AS user_password,user.address AS user_address FROM user WHERE 1 %s ",
+            ((ui->lineEdit_docname_2->text() == "")?"":("AND user.id = '"+ui->lineEdit_docname_2->text().toStdString()+"'")).c_str()
+            );
 
     NetLoader::get_sql(sql , USER_ID , 1 , API_KEY , client );
     choice_state=201;

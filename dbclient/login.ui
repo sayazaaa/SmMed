@@ -70,14 +70,7 @@
        <item>
         <widget class="QLabel" name="label_3">
          <property name="text">
-          <string>没有账号？点击</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushButton_2">
-         <property name="text">
-          <string>注册</string>
+          <string>数据库端无注册，请联系管理员获取账号</string>
          </property>
         </widget>
        </item>
