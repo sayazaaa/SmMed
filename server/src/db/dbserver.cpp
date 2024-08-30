@@ -33,10 +33,12 @@ DbServer::DbServer(QString user,
              QString charset ,
              int port ):user(user),password(password),ip(ip),dbname(dbname),charset(charset),port(port)
 {
-    m_max_idle_time = 28800;
+    m_max_idle_time = 300;
 }
 mysqlpp::Connection* DbServer::grab(){
-    return ConnectionPool::grab();
+    mysqlpp::Connection* ptr = ConnectionPool::grab();
+    if(ptr == nullptr || (!ptr->connected()))ptr = this->create();
+    return ptr;
 }
 void DbServer::release(const mysqlpp::Connection* pc){
     ConnectionPool::release(pc);
@@ -62,17 +64,9 @@ unsigned int DbServer::max_idle_time(){
     return m_max_idle_time;
 }
 void DbServer::sqlquery(std::string * sql, QSharedPointer<QJsonDocument> &res){
-    mysqlpp::Connection * conptr = this->create();
-
-
-    while(!conptr->connected()){
-        std::cout << "released one bad connection!" << std::endl;
-        qDebug() << "bad connection released";
-        release(conptr);
-        conptr = new mysqlpp::Connection();
-        conptr->connect("database_name", "server_ip", "user", "password");
-
-    }
+    qDebug() << "sqlquery";
+    mysqlpp::Connection * conptr = this->grab();
+    qDebug() << "get conn";
     mysqlpp::Transaction trans(*conptr);
     try {
         std::string s = sql->substr(0,6);
@@ -82,7 +76,7 @@ void DbServer::sqlquery(std::string * sql, QSharedPointer<QJsonDocument> &res){
         QString sqlq = QString(sql->c_str());
         sqlq = QUrl::fromPercentEncoding(sqlq.toUtf8());
         //std::cout << sqlq.toStdString() << std::endl;
-       qDebug() << sqlq;
+       qDebug() <<"sql : "<< sqlq;
 
         mysqlpp::Query query = conptr->query(sqlq.toUtf8());
         qDebug() << "going to query...";
@@ -119,7 +113,6 @@ void DbServer::sqlquery(std::string * sql, QSharedPointer<QJsonDocument> &res){
     //        qDebug() << obj;
         }
        qDebug() << "after add:" << jsonarray;
-        this->release(conptr);
         qDebug() << "completed sql query";
         res = QSharedPointer<QJsonDocument>(new QJsonDocument(jsonarray));
         qDebug() << "res:" << *res;
@@ -128,6 +121,7 @@ void DbServer::sqlquery(std::string * sql, QSharedPointer<QJsonDocument> &res){
         trans.rollback();
         throw e;
     }
+    this->release(conptr);
 }
 QSharedPointer<QJsonDocument> DbServer::set_userpassword(QString id, QString password){
     auto ciphertext = StringFactory::salt_hash(password.toStdString());
