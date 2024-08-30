@@ -1214,7 +1214,7 @@ void Widget::search_4()
         patient
     WHERE
         patient.gender = ')" + ui->combo_gender_4->currentText() + R"(' AND
-        patien.name = ')" + ui->lineEdit_docname_4->text() + R"(' AND
+        patient.name = ')" + ui->lineEdit_docname_4->text() + R"(' AND
         patient.phone = ')"+ui->lineEdit_phone_4->text() +R"(' ;
     )";
 
