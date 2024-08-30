@@ -13,8 +13,8 @@ patient_editor::~patient_editor()
     delete ui;
 }
 
-void patient_editor::set_age(int p){
-    ui->age->setText(QString::number(p));
+void patient_editor::set_id(const QString & text){
+    ui->id->setText(text);
 }
 
 void patient_editor::set_name(const QString &text)
