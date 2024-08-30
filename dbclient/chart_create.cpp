@@ -6,6 +6,15 @@ chart_create::chart_create(QWidget *parent) :
     ui(new Ui::chart_create)
 {
     ui->setupUi(this);
+
+}
+
+chart_create::~chart_create()
+{
+    delete ui;
+}
+
+void chart_create::create(){
     QChart *chart = new QChart();
     QLineSeries *series = new QLineSeries();
     QDateTime curDateTIme = QDateTime::currentDateTime();
@@ -27,6 +36,8 @@ chart_create::chart_create(QWidget *parent) :
     QValueAxis *AxisY = new QValueAxis();
     AxisY->setTitleText("预约人数");
     AxisY->setGridLineVisible(false);
+    AxisY->setTickCount(20);
+    AxisY->setRange(0, 100);
 
     // 添加数据系列和轴到图表
     chart->addSeries(series);
@@ -34,12 +45,11 @@ chart_create::chart_create(QWidget *parent) :
     chart->addAxis(AxisY, Qt::AlignLeft);
     series->attachAxis(AxisY);
     series->attachAxis(AxisX);
-
     // 循环添加数据点
     for (unsigned short index = 0; index < days; ++index)
     {
         QDateTime temp_AddTimePos = startDate.addSecs(index * 60 * 60 * 24); // 每天一个数据点
-        series->append(temp_AddTimePos.toMSecsSinceEpoch(), *(item + index));
+        series->append(temp_AddTimePos.toMSecsSinceEpoch(), *(item - index + 6));
     }
 
     // 设置其他属性
@@ -52,15 +62,4 @@ chart_create::chart_create(QWidget *parent) :
     ui->my_chart->resize(900, 400);
     ui->my_chart->setRenderHint(QPainter::Antialiasing);
     this->resize(1200, 600);
-
-
-}
-void chart_create::set(int day, int* item_group)
-{
-    days=day;
-    item=item_group;
-}
-chart_create::~chart_create()
-{
-    delete ui;
 }
