@@ -60,7 +60,7 @@ void nowDiagnose::on_btn_push_1_clicked() {
         return;
     }
     // 通过 日期 患者姓名 医生id 富文本编辑器 增加：诊断报告
-    NetLoader::post_file(path + filename, filename, USER_ID, patient_id, "diagnose", API_KEY, appointment_id, NetClient::getInstance());
+    NetLoader::post_file(path + filename, filename, USER_ID, patient_id, "inspreport", API_KEY, appointment_id, NetClient::getInstance());
 
     ui->btn_push_1->setText("已提交诊断报告");
     ui->btn_push_1->setDisabled(true);
@@ -110,7 +110,7 @@ void nowDiagnose::on_btn_push_3_clicked() {
         return;
     }
     // 通过 日期 患者姓名 医生id 富文本编辑器 增加：医嘱
-    NetLoader::post_file(path + filename, filename, USER_ID, patient_id, "inspreport", API_KEY, appointment_id, NetClient::getInstance());
+    NetLoader::post_file(path + filename, filename, USER_ID, patient_id, "diagnosis", API_KEY, appointment_id, NetClient::getInstance());
     ui->btn_push_3->setText("已提交医嘱");
     ui->btn_push_3->setDisabled(true);
 }

@@ -142,6 +142,7 @@
                 <property name="font">
                  <font>
                   <pointsize>10</pointsize>
+                  <weight>75</weight>
                   <bold>true</bold>
                  </font>
                 </property>
@@ -152,9 +153,6 @@
               </item>
               <item>
                <spacer name="horizontalSpacer">
-                <property name="orientation">
-                 <enum>Qt::Orientation::Horizontal</enum>
-                </property>
                 <property name="sizeHint" stdset="0">
                  <size>
                   <width>40</width>
@@ -184,7 +182,7 @@
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="qss.qrc">
+                 <iconset resource="../commonuser/qss.qrc">
                   <normaloff>:/icons/setting.png</normaloff>:/icons/setting.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -216,7 +214,7 @@
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="qss.qrc">
+                 <iconset resource="../commonuser/qss.qrc">
                   <normaloff>:/icons/doctor.png</normaloff>:/icons/doctor.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -243,6 +241,7 @@
                  <property name="font">
                   <font>
                    <pointsize>9</pointsize>
+                   <weight>50</weight>
                    <bold>false</bold>
                   </font>
                  </property>
@@ -250,7 +249,7 @@
                   <string notr="true"/>
                  </property>
                  <property name="orientation">
-                  <enum>Qt::Orientation::Horizontal</enum>
+                  <enum>Qt::Vertical</enum>
                  </property>
                 </widget>
                </item>
@@ -265,6 +264,7 @@
                  <property name="font">
                   <font>
                    <pointsize>10</pointsize>
+                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -310,6 +310,7 @@
             </property>
             <property name="font">
              <font>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -329,9 +330,6 @@
             <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,0,2,0,2,0,1">
              <item>
               <spacer name="horizontalSpacer_4">
-               <property name="orientation">
-                <enum>Qt::Orientation::Horizontal</enum>
-               </property>
                <property name="sizeHint" stdset="0">
                 <size>
                  <width>40</width>
@@ -361,16 +359,13 @@
                 <string/>
                </property>
                <property name="icon">
-                <iconset resource="qss.qrc">
+                <iconset resource="../commonuser/qss.qrc">
                  <normaloff>:/icons/mini.png</normaloff>:/icons/mini.png</iconset>
                </property>
               </widget>
              </item>
              <item>
               <spacer name="horizontalSpacer_2">
-               <property name="orientation">
-                <enum>Qt::Orientation::Horizontal</enum>
-               </property>
                <property name="sizeHint" stdset="0">
                 <size>
                  <width>40</width>
@@ -400,16 +395,13 @@
                 <string/>
                </property>
                <property name="icon">
-                <iconset resource="qss.qrc">
+                <iconset resource="../commonuser/qss.qrc">
                  <normaloff>:/icons/home.png</normaloff>:/icons/home.png</iconset>
                </property>
               </widget>
              </item>
              <item>
               <spacer name="horizontalSpacer_3">
-               <property name="orientation">
-                <enum>Qt::Orientation::Horizontal</enum>
-               </property>
                <property name="sizeHint" stdset="0">
                 <size>
                  <width>40</width>
@@ -439,16 +431,13 @@
                 <string/>
                </property>
                <property name="icon">
-                <iconset resource="qss.qrc">
+                <iconset resource="../commonuser/qss.qrc">
                  <normaloff>:/icons/logout.png</normaloff>:/icons/logout.png</iconset>
                </property>
               </widget>
              </item>
              <item>
               <spacer name="horizontalSpacer_5">
-               <property name="orientation">
-                <enum>Qt::Orientation::Horizontal</enum>
-               </property>
                <property name="sizeHint" stdset="0">
                 <size>
                  <width>40</width>
@@ -471,6 +460,12 @@
             <layout class="QGridLayout" name="gridLayout">
              <item row="0" column="0">
               <widget class="QToolButton" name="btn_menu_item_1">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="minimumSize">
                 <size>
                  <width>70</width>
@@ -479,8 +474,8 @@
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>70</width>
-                 <height>70</height>
+                 <width>16777215</width>
+                 <height>16777215</height>
                 </size>
                </property>
                <property name="font">
@@ -495,16 +490,28 @@
                 <string>过往看诊</string>
                </property>
                <property name="icon">
-                <iconset resource="qss.qrc">
+                <iconset resource="../commonuser/qss.qrc">
                  <normaloff>:/icons/list.png</normaloff>:/icons/list.png</iconset>
                </property>
+               <property name="iconSize">
+                <size>
+                 <width>16</width>
+                 <height>16</height>
+                </size>
+               </property>
                <property name="toolButtonStyle">
-                <enum>Qt::ToolButtonStyle::ToolButtonTextUnderIcon</enum>
+                <enum>Qt::ToolButtonIconOnly</enum>
                </property>
               </widget>
              </item>
              <item row="0" column="1">
               <widget class="QToolButton" name="btn_menu_item_2">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="minimumSize">
                 <size>
                  <width>70</width>
@@ -513,8 +520,8 @@
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>70</width>
-                 <height>70</height>
+                 <width>16777215</width>
+                 <height>16777215</height>
                 </size>
                </property>
                <property name="font">
@@ -529,16 +536,22 @@
                 <string>今日看诊</string>
                </property>
                <property name="icon">
-                <iconset resource="qss.qrc">
+                <iconset resource="../commonuser/qss.qrc">
                  <normaloff>:/icons/register.png</normaloff>:/icons/register.png</iconset>
                </property>
                <property name="toolButtonStyle">
-                <enum>Qt::ToolButtonStyle::ToolButtonTextUnderIcon</enum>
+                <enum>Qt::ToolButtonIconOnly</enum>
                </property>
               </widget>
              </item>
              <item row="0" column="2">
               <widget class="QToolButton" name="btn_menu_item_3">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="minimumSize">
                 <size>
                  <width>70</width>
@@ -547,8 +560,8 @@
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>70</width>
-                 <height>70</height>
+                 <width>16777215</width>
+                 <height>16777215</height>
                 </size>
                </property>
                <property name="font">
@@ -563,16 +576,22 @@
                 <string>我的预约</string>
                </property>
                <property name="icon">
-                <iconset resource="qss.qrc">
+                <iconset resource="../commonuser/qss.qrc">
                  <normaloff>:/icons/check.png</normaloff>:/icons/check.png</iconset>
                </property>
                <property name="toolButtonStyle">
-                <enum>Qt::ToolButtonStyle::ToolButtonTextUnderIcon</enum>
+                <enum>Qt::ToolButtonIconOnly</enum>
                </property>
               </widget>
              </item>
              <item row="1" column="0">
               <widget class="QToolButton" name="btn_menu_item_4">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="minimumSize">
                 <size>
                  <width>70</width>
@@ -581,8 +600,8 @@
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>70</width>
-                 <height>70</height>
+                 <width>16777215</width>
+                 <height>16777215</height>
                 </size>
                </property>
                <property name="font">
@@ -597,16 +616,22 @@
                 <string>医患沟通</string>
                </property>
                <property name="icon">
-                <iconset resource="qss.qrc">
+                <iconset resource="../commonuser/qss.qrc">
                  <normaloff>:/icons/message.png</normaloff>:/icons/message.png</iconset>
                </property>
                <property name="toolButtonStyle">
-                <enum>Qt::ToolButtonStyle::ToolButtonTextUnderIcon</enum>
+                <enum>Qt::ToolButtonIconOnly</enum>
                </property>
               </widget>
              </item>
              <item row="1" column="1">
               <widget class="QToolButton" name="btn_menu_item_5">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="minimumSize">
                 <size>
                  <width>70</width>
@@ -615,8 +640,8 @@
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>70</width>
-                 <height>70</height>
+                 <width>16777209</width>
+                 <height>16777215</height>
                 </size>
                </property>
                <property name="font">
@@ -631,11 +656,11 @@
                 <string>治乎</string>
                </property>
                <property name="icon">
-                <iconset resource="qss.qrc">
+                <iconset resource="../commonuser/qss.qrc">
                  <normaloff>:/icons/check.png</normaloff>:/icons/check.png</iconset>
                </property>
                <property name="toolButtonStyle">
-                <enum>Qt::ToolButtonStyle::ToolButtonTextUnderIcon</enum>
+                <enum>Qt::ToolButtonIconOnly</enum>
                </property>
               </widget>
              </item>
@@ -665,7 +690,7 @@
                 <string>关于我们</string>
                </property>
                <property name="toolButtonStyle">
-                <enum>Qt::ToolButtonStyle::ToolButtonTextUnderIcon</enum>
+                <enum>Qt::ToolButtonIconOnly</enum>
                </property>
               </widget>
              </item>
@@ -698,9 +723,6 @@
            </property>
            <item>
             <spacer name="horizontalSpacer_8">
-             <property name="orientation">
-              <enum>Qt::Orientation::Horizontal</enum>
-             </property>
              <property name="sizeHint" stdset="0">
               <size>
                <width>40</width>
@@ -729,6 +751,7 @@
              <property name="font">
               <font>
                <pointsize>9</pointsize>
+               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -757,6 +780,7 @@
              <property name="font">
               <font>
                <pointsize>9</pointsize>
+               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -785,6 +809,7 @@
              <property name="font">
               <font>
                <pointsize>9</pointsize>
+               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -813,6 +838,7 @@
              <property name="font">
               <font>
                <pointsize>9</pointsize>
+               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -826,9 +852,6 @@
            </item>
            <item>
             <spacer name="horizontalSpacer_9">
-             <property name="orientation">
-              <enum>Qt::Orientation::Horizontal</enum>
-             </property>
              <property name="sizeHint" stdset="0">
               <size>
                <width>40</width>
@@ -855,13 +878,13 @@
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout">
-              <item alignment="Qt::AlignmentFlag::AlignHCenter">
+              <item>
                <widget class="QLabel" name="label_4">
                 <property name="text">
                  <string/>
                 </property>
                 <property name="pixmap">
-                 <pixmap resource="qss.qrc">:/icons/ambulance.png</pixmap>
+                 <pixmap resource="../commonuser/qss.qrc">:/icons/ambulance.png</pixmap>
                 </property>
                </widget>
               </item>
@@ -1323,8 +1346,6 @@
    <header>zhihulistwidget.h</header>
   </customwidget>
  </customwidgets>
- <resources>
-  <include location="qss.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

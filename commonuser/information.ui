@@ -59,7 +59,7 @@
            <string/>
           </property>
           <property name="icon">
-           <iconset resource="qss.qrc">
+           <iconset resource="../doctor/qss.qrc">
             <normaloff>:/icons/mini.png</normaloff>:/icons/mini.png</iconset>
           </property>
          </widget>
@@ -85,7 +85,7 @@
            <string/>
           </property>
           <property name="icon">
-           <iconset resource="qss.qrc">
+           <iconset resource="../doctor/qss.qrc">
             <normaloff>:/icons/error.png</normaloff>:/icons/error.png</iconset>
           </property>
          </widget>
@@ -94,73 +94,74 @@
       </item>
       <item>
        <layout class="QGridLayout" name="gridLayout">
-        <item row="2" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item row="1" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
           <item alignment="Qt::AlignRight">
-           <widget class="QLabel" name="ID">
+           <widget class="QLabel" name="GENDER">
             <property name="text">
-             <string>身份证:</string>
+             <string>性别:</string>
             </property>
            </widget>
           </item>
           <item alignment="Qt::AlignLeft">
-           <widget class="QLineEdit" name="id">
-            <property name="minimumSize">
+           <widget class="QComboBox" name="gender">
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <item>
+             <property name="text">
+              <string>男</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>女</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="4" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="1,1">
+          <item alignment="Qt::AlignRight">
+           <widget class="QLabel" name="AGE">
+            <property name="maximumSize">
              <size>
-              <width>180</width>
-              <height>0</height>
+              <width>200</width>
+              <height>16777215</height>
              </size>
             </property>
             <property name="text">
-             <string/>
+             <string>年龄:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="age">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>123123</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="layoutDirection">
+             <enum>Qt::LeftToRight</enum>
             </property>
            </widget>
           </item>
          </layout>
         </item>
         <item row="7" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout_6">
-          <item alignment="Qt::AlignRight">
-           <widget class="QLabel" name="ADDRESS">
-            <property name="text">
-             <string>家庭住址:</string>
-            </property>
-           </widget>
-          </item>
-          <item alignment="Qt::AlignLeft">
-           <widget class="QLineEdit" name="address">
-            <property name="minimumSize">
-             <size>
-              <width>200</width>
-              <height>0</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item row="6" column="0">
          <layout class="QHBoxLayout" name="horizontalLayout"/>
         </item>
-        <item row="3" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout_4">
-          <item alignment="Qt::AlignRight">
-           <widget class="QLabel" name="AGE">
-            <property name="text">
-             <string>年龄:</string>
-            </property>
-           </widget>
-          </item>
-          <item alignment="Qt::AlignLeft">
-           <widget class="QLabel" name="age">
-            <property name="text">
-             <string>输入身份证号后点击确认自动计算</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item row="5" column="0">
+        <item row="6" column="0">
          <layout class="QHBoxLayout" name="horizontalLayout_5">
           <item alignment="Qt::AlignRight">
            <widget class="QLabel" name="PHONE">
@@ -208,30 +209,26 @@
           </item>
          </layout>
         </item>
-        <item row="1" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item row="2" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_3"/>
+        </item>
+        <item row="8" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_6">
           <item alignment="Qt::AlignRight">
-           <widget class="QLabel" name="GENDER">
+           <widget class="QLabel" name="ADDRESS">
             <property name="text">
-             <string>性别:</string>
+             <string>家庭住址:</string>
             </property>
            </widget>
           </item>
           <item alignment="Qt::AlignLeft">
-           <widget class="QComboBox" name="gender">
-            <property name="cursor">
-             <cursorShape>PointingHandCursor</cursorShape>
+           <widget class="QLineEdit" name="address">
+            <property name="minimumSize">
+             <size>
+              <width>200</width>
+              <height>0</height>
+             </size>
             </property>
-            <item>
-             <property name="text">
-              <string>男</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>女</string>
-             </property>
-            </item>
            </widget>
           </item>
          </layout>
@@ -293,8 +290,6 @@
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="qss.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

@@ -21,6 +21,9 @@ public:
     explicit myAppointment(QWidget *parent = nullptr);
     ~myAppointment();
 
+private slots:
+    void on_btn_cancel_clicked();
+
 private:
     Ui::myAppointment *ui;
 };

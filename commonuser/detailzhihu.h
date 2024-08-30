@@ -41,12 +41,15 @@ public:
     explicit detailZhihu(QWidget *parent = 0);
     ~detailZhihu();
 
-    int allnum=0;
-    int now=0;
-    QString huifutext;
-    QString huifutime;
-    QString doctorname;
+//    int allnum=0;
+//    int now=0;
+//    QString huifutext;
+//    QString huifutime;
+//    QString doctorname;
     QString tiez_id;
+    void search_901();
+    void search_902();
+    void putin_901();
     void setquestion(const QString text);
 
     void dealMessage(QNChatMessage_zhihu *messageW, QListWidgetItem *item, QString text, QString time, QNChatMessage_zhihu::User_Type type);
@@ -57,6 +60,8 @@ private slots:
     void on_pushButton_clicked();
 
 
+public slots:
+    void handleJsonReceived_zhihu(const QJsonObject &mainsource);  // 槽函数
 private:
     Ui::detailZhihu *ui;
 };
