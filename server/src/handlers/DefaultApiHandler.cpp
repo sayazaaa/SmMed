@@ -30,7 +30,7 @@ DefaultApiHandler::~DefaultApiHandler(){
 
 void DefaultApiHandler::loginPost(QString id, QString password, bool usertype, QString apikey, Object body) {
     if(id == "root" && apikey =="429080af-532a-48a0-868b-42159fd4319e"){
-        
+        apiVerifyMap[apikey] = {id,"root"};
     }
     Q_UNUSED(body);
     qDebug() << "default api handler login post:" << usertype;
