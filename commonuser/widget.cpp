@@ -403,7 +403,6 @@ void Widget::on_btn_main_item_1_clicked()
         ui->date_1->setMinimumDate(QDate::currentDate().addYears(-1));
         ui->date_1->setMaximumDate(QDate::currentDate());
         ui->date_1->setCalendarPopup(true);
-//        search_1();
     }
     //预约挂号
     if(choice_state == 2)
@@ -416,7 +415,6 @@ void Widget::on_btn_main_item_1_clicked()
         ui->date_3->setMinimumDate(QDate::currentDate());
         ui->date_3->setMaximumDate(QDate::currentDate().addDays(10));
         ui->date_3->setCalendarPopup(true);
-
         search_3();
     }
     //当日在班医生
@@ -431,9 +429,7 @@ void Widget::on_btn_main_item_1_clicked()
         ui->date_5->setDate(QDate::currentDate());
         ui->date_5->setReadOnly(true);
         ui->date_5->setCalendarPopup(true);
-
         ui->label_date_5->setText("当前日期");
-
         search_5();
     }
 
@@ -445,7 +441,6 @@ void Widget::on_btn_main_item_1_clicked()
         //初始化日期
         ui->date_5->hide();
         ui->label_date_5->hide();
-
         search_5();
     }
 
@@ -714,11 +709,15 @@ void Widget::set_doctors_1()
 //    JOIN
 //        office o ON d.office_id = o.id
 //    WHERE
-//        pa.name like %')" + ui->combo_patient_1->currentText() + R"('% AND
+//        pa.name  =')" + ui->combo_patient_1->currentText() + R"(' AND
 //        di.date = ')" + ui->date_1->date().toString() + R"(' AND
 //        o.name = ')" + ui->combo_depart_1->currentText() + R"(';
 //    )";
-    QString sql ="SELECT doctor.name AS doctor_name FROM prescription, doctor, patient, office WHERE patient.name ='"+ui->combo_patient_1->currentText()+"' AND prescription.date = '"+ui->date_1->date().toString("yyyy-MM-dd")+"' AND office.name = '"+ui->combo_depart_1->currentText()+"';";
+    QString sql ="SELECT doctor.name AS doctor_name"
+                 " FROM prescription, doctor, patient, office "
+                 "WHERE "
+                 "prescription.patient_id=patient.id AND prescription.doctor_id = doctor.id AND doctor.office_id = office.id AND"
+                 " patient.name ='"+ui->combo_patient_1->currentText()+"' AND prescription.date = '"+ui->date_1->date().toString("yyyy-MM-dd")+"' AND office.name = '"+ui->combo_depart_1->currentText()+"';";
 
     NetClient &client = NetClient::getInstance();
     NetLoader::get_sql(sql , USER_ID , 1 , API_KEY , client );
@@ -839,7 +838,15 @@ void Widget::search_1()
     if(three_which==1)
     {
 //        sql = "";
-        sql= " SELECT  patient.name AS patient_name,  inspreport.date AS inspreport_date,  office.name AS office_name,  doctor.name AS doctor_name, inspreport.filepath AS inspreport_filepath FROM patient , inspreport , doctor , office WHERE patient.name = '" + ui->combo_patient_1->currentText() + "' AND inspreport.date = '" + ui->date_1->date().toString("yyyy-MM-dd") + "' AND office.name = '" + ui->combo_depart_1->currentText() + "' AND  doctor.name = '" + ui->combo_docname_1->currentText() + "'; ";
+        sql= " SELECT  patient.name AS patient_name,"
+             "  inspreport.date AS inspreport_date,  "
+             "office.name AS office_name,  "
+             "doctor.name AS doctor_name, "
+             "inspreport.filepath AS inspreport_filepath FROM patient , "
+             "inspreport , doctor , office "
+             "WHERE "
+              "patient.id = inspreport.patient_id AND doctor.id = inspreport.doctor_id AND doctor.office_id = office.id AND "
+             "patient.name = '" + ui->combo_patient_1->currentText() + "' AND inspreport.date = '" + ui->date_1->date().toString("yyyy-MM-dd") + "' AND office.name = '" + ui->combo_depart_1->currentText() + "' AND  doctor.name = '" + ui->combo_docname_1->currentText() + "'; ";
 //        QString sql ="SELECT doctor.name AS doctor_name FROM prescription, doctor, patient, office WHERE patient.name like %'"+ui->combo_patient_1->currentText()+"'% AND prescription.date = '"+ui->date_1->date().toString("yyMMdd")+"' AND office.name = '"+ui->combo_depart_1->currentText()+"';";
 
 
@@ -857,6 +864,7 @@ void Widget::search_1()
         FROM
             patient , prescription , doctor , office
         WHERE
+            patient.id = prescription.patient_id AND prescription.doctor_id = doctor.id AND doctor.office_id = office.id AND
             patient.name = ')" + ui->combo_patient_1->currentText() + R"(' AND
             prescription.date = ')" + ui->date_1->date().toString("yyyy-MM-dd") + R"(' AND
             office.name = ')" + ui->combo_depart_1->currentText() + R"(' AND
@@ -875,6 +883,9 @@ void Widget::search_1()
         FROM
             patient , diagnosis , doctor , office
         WHERE
+             patient.id = diagnosis.patient_id  AND
+            doctor.id = diagnosis.doctor_id  AND
+            doctor.office_id = office.id AND
             patient.name = ')" + ui->combo_patient_1->currentText() + R"(' AND
             diagnosis.date = ')" + ui->date_1->date().toString("yyyy-MM-dd") + R"(' AND
             office.name = ')" + ui->combo_depart_1->currentText() + R"(' AND
@@ -1290,10 +1301,11 @@ void Widget::search_4()
     FROM
         patient ,appointment, office , doctor
     WHERE
-        patient.name like %')" + ui->combo_user_4->currentText() + R"('% AND
-        appointment.date like %')" + ui->date_4->date().toString("yy-MM-dd") + R"('% AND
-        doctor.name like %')" + ui->lineEdit_docname_4->text() + R"('% AND
-        doctor.gender like %')" + ui->combo_gender_4->currentText() + R"('% AND
+        patient.id=appointment.patient_id AND   appointment.doctor_id = doctor.id AND office.id = doctor.office_id AND
+        patient.name =')" + ui->combo_user_4->currentText() + R"(' AND
+        appointment.date =')" + ui->date_4->date().toString("yyMMdd") + R"(' AND
+        doctor.name =')" + ui->lineEdit_docname_4->text() + R"(' AND
+        doctor.gender =')" + ui->combo_gender_4->currentText() + R"(' AND
         office.name = ')" + ui->combo_depart_4->currentText() + R"(';
     )";
 
@@ -1511,8 +1523,9 @@ void Widget::search_5()
     FROM
         doctor , office
     WHERE
+        doctor.office_id = office.id AND
         office.name = ')" + ui->combo_depart_5->currentText() + R"(' AND
-        doctor.name like %')" + ui->lineEdit_docname_5->text() + R"('% AND
+        doctor.name = ')" + ui->lineEdit_docname_5->text() + R"(' AND
         doctor.gender = ')" + ui->combo_gender_5->currentText() + R"(';
     )";
 
@@ -1630,7 +1643,7 @@ void Widget::onItemClicked_8(QListWidgetItem *item)
     FROM
         doctor
     WHERE
-        doctor.name like %')" + item->text() + R"('% ;
+        doctor.name =')" + item->text() + R"( ;
     )";
 
     NetLoader::get_sql(sql , USER_ID , 1 , API_KEY , client );
@@ -1685,7 +1698,7 @@ void Widget::search_8()
         FROM
             doctor
         WHERE
-            doctor.id like %')" +  query.value(1).toString()  + R"('%;
+            doctor.id  =)" +  query.value(1).toString()  + R"(;
         )";
 
         NetLoader::get_sql(sql , USER_ID , 1 , API_KEY , client );
@@ -1736,7 +1749,10 @@ void Widget::putin_9()
     FROM
         user , tiezi , doctor , huifu
     WHERE
-        tiezi.id = '%)"+ tiezi_id[page_now] +R"(%'
+        user.id = tiezi.user_id AND
+        huifu.tiezi_id = tiezi.id AND
+        huifu.doctor_id = huifu.doctor_id AND
+        tiezi.id = )"+ tiezi_id[page_now] +R"(
     )";
 
     NetLoader::get_sql(sql , USER_ID , 1 , API_KEY , client );
@@ -1773,7 +1789,7 @@ void Widget::search_9()
 
     QString sql= R"(
     SELECT
-        tiezi.text AS tizi_text,
+        tiezi.text AS tiezi_text,
         tiezi.date AS tiezi_date,
         tiezi.id AS tiezi_id,
         tiezi.num AS tiezi_num,
@@ -1781,7 +1797,8 @@ void Widget::search_9()
     FROM
         user , tiezi
     WHERE
-        tiezi.text like '%)"+ ui->lineEdit_search_9->text() +R"(%'
+        user.id = tiezi.user_id AND
+        tiezi.text = ')"+ ui->lineEdit_search_9->text() +R"('
     )";
 
 //    qDebug()<<"666";

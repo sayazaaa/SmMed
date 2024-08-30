@@ -3,6 +3,7 @@
 
 #include <QDebug>
 
+int ch=0;
 chat_box::chat_box(QWidget* parent) :
     QWidget(parent),
     ui(new Ui::chat_box),

@@ -26,7 +26,7 @@
     <string>确认</string>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>100</x>
@@ -48,7 +48,7 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>100</x>
@@ -61,16 +61,16 @@
     <item>
      <widget class="QLabel" name="label_3">
       <property name="text">
-       <string>年龄:</string>
+       <string>身份证:</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="age"/>
+     <widget class="QLineEdit" name="id"/>
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>100</x>
@@ -92,7 +92,7 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>100</x>

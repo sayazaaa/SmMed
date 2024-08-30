@@ -31,7 +31,7 @@ void newAppointment::on_Btn_yes_clicked()
 
     //从ui中获取数据
     //通过 医生 科室 医生性别 日期 时间 就诊人 添加： 到appointment
-    QString sql="    INSERT INTO appointment (patient_id,doctor_id,date,time) VALUES ( '"+ USER_ID +"','"+ doctor_id +"','"+ ui->label_date->text() +"','"+ ui->combo_time->currentText() +"'  ));";
+    QString sql="    INSERT INTO appointment (user_id,patient_id,doctor_id,date,time) VALUES ( '"+ USER_ID +"','"+ doctor_id +"',"+ ui->label_date->text() +",'"+ ui->combo_time->currentText() +"'  );";
 
     NetClient &client = NetClient::getInstance();
     //将数据发送到数据库
@@ -64,9 +64,3 @@ void newAppointment::set_patient(const QString &text)
     ui->combo_user->addItem(text);
 
 }
-void newAppointment::on_Btn_add_user_clicked()
-{
-    //添加就诊人
-
-}
-

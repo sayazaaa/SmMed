@@ -219,19 +219,6 @@
     </property>
    </item>
   </widget>
-  <widget class="QPushButton" name="Btn_add_user">
-   <property name="geometry">
-    <rect>
-     <x>360</x>
-     <y>300</y>
-     <width>89</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>添加就诊人</string>
-   </property>
-  </widget>
  </widget>
  <resources/>
  <connections/>
