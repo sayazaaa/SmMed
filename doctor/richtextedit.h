@@ -27,6 +27,8 @@
 #include <QTextDocumentWriter>
 #include <QInputDialog>
 #include <QTextDocumentFragment>
+#include <QImageReader>
+#include <QApplication>
 
 #define FONT_SIZE 16
 

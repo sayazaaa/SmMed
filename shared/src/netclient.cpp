@@ -43,8 +43,11 @@ void NetClient::send_delete_request(const QUrl& url) const {
 void NetClient::send_file_request(const QUrl& url, QString filepath) const {
     QNetworkRequest request(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/octet-stream");
+    qDebug() << "send file request" << filepath;
     QFile file(filepath);
+    file.open(QIODevice::ReadOnly);
     QNetworkReply* reply = manager->post(request, file.readAll());
+    file.close();
     qDebug() << "send file request";
     connect(reply, &QNetworkReply::finished, this, &NetClient::handle_reply_json);
 }

@@ -356,13 +356,18 @@ void RichTextEdit::readonly(bool b) {
 
 
 bool RichTextEdit::save(QUrl saveUrl) {
-    QTemporaryDir tempDir;
-    if (!tempDir.isValid()) {
-        return false;
+    qDebug() << "saveurl : " << saveUrl;
+    //mkdir
+    qDebug() << "saveUrl.toLocalFile()" << saveUrl;
+    QString tempDir = QDir::cleanPath(QApplication::applicationDirPath() + QDir::separator() + "temp");
+    QDir dir(tempDir);
+    if (!dir.exists()) {
+        dir.mkpath(".");
     }
 
-    QString tempDirPath = tempDir.path();
+    QString tempDirPath = tempDir;
     qDebug() << "tempDirPath: " << tempDirPath;
+    
 
     QTextDocument* copyDocument = new QTextDocument();
     copyDocument->setHtml(textEdit->document()->toHtml());
@@ -400,14 +405,20 @@ bool RichTextEdit::save(QUrl saveUrl) {
     QProcess process;
     process.setProgram("zip");
     QStringList arguments;
+    qDebug() << "saveUrl html" << tempDirPath + "/main.html";
     arguments << "-j" << saveUrl.toLocalFile() << tempDirPath + "/main.html";
     for (int i = 0; i < imageIndex; ++i) {
         arguments << tempDirPath + QString("/image%1.png").arg(i);
     }
     process.setArguments(arguments);
     process.start();
-    process.waitForFinished();
-    return process.exitCode() == 0;
+    if(process.waitForFinished()){
+        qDebug() << "savesuccess---------------------------------";
+        return process.exitCode() == 0;
+    }else{
+        qDebug() << "savefailed---------------------------------";
+        return false;
+    }
 }
 
 bool RichTextEdit::load(QUrl url) {

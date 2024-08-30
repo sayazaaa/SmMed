@@ -46,19 +46,16 @@ void nowDiagnose::on_btn_push_1_clicked() {
 
     RichTextEdit* textEdit = ui->thewidget;
     QString path = QDir::cleanPath(QApplication::applicationDirPath() + QDir::separator());
-    QString filename = QTime::currentTime().toString("yyyyMMddhhmmss") + ".zip";
-    QFile file(path + filename);
-    if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-        qDebug() << "Could not open file for writing";
-        return;
-    }
-    if (textEdit->save(QUrl(path + filename))) {
+    QString filename = QTime::currentTime().toString("yyyyMMddhhmmss");
+    
+    if (textEdit->save(QUrl("file://"+path + filename))) {
         qDebug() << "save success";
     }
     else {
         qDebug() << "save failed";
         return;
     }
+    filename += ".zip";
     // 通过 日期 患者姓名 医生id 富文本编辑器 增加：诊断报告
     NetLoader::post_file(path + filename, filename, USER_ID, patient_id, "inspreport", API_KEY, appointment_id, NetClient::getInstance());
 
@@ -70,19 +67,16 @@ void nowDiagnose::on_btn_push_1_clicked() {
 void nowDiagnose::on_btn_push_2_clicked() {
     RichTextEdit* textEdit = ui->thewidget;
     QString path = QDir::cleanPath(QApplication::applicationDirPath() + QDir::separator());
-    QString filename = QTime::currentTime().toString("yyyyMMddhhmmss") + ".zip";
-    QFile file(path + filename);
-    if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-        qDebug() << "Could not open file for writing";
-        return;
-    }
-    if (textEdit->save(QUrl(path + filename))) {
+    QString filename = QTime::currentTime().toString("yyyyMMddhhmmss");
+    
+    if (textEdit->save(QUrl("file://"+path + filename))) {
         qDebug() << "save success";
     }
     else {
         qDebug() << "save failed";
         return;
     }
+    filename += ".zip";
     // 通过 日期 患者姓名 医生id 富文本编辑器 增加：处方
     NetLoader::post_file(path + filename, filename, USER_ID, patient_id, "prescription", API_KEY, appointment_id, NetClient::getInstance());
 
@@ -96,19 +90,16 @@ void nowDiagnose::on_btn_push_2_clicked() {
 void nowDiagnose::on_btn_push_3_clicked() {
     RichTextEdit* textEdit = ui->thewidget;
     QString path = QDir::cleanPath(QApplication::applicationDirPath() + QDir::separator());
-    QString filename = QTime::currentTime().toString("yyyyMMddhhmmss") + ".zip";
-    QFile file(path + filename);
-    if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-        qDebug() << "Could not open file for writing";
-        return;
-    }
-    if (textEdit->save(QUrl(path + filename))) {
+    QString filename = QTime::currentTime().toString("yyyyMMddhhmmss");
+    
+    if (textEdit->save(QUrl("file://"+path + filename))) {
         qDebug() << "save success";
     }
     else {
         qDebug() << "save failed";
         return;
     }
+    filename += ".zip";
     // 通过 日期 患者姓名 医生id 富文本编辑器 增加：医嘱
     NetLoader::post_file(path + filename, filename, USER_ID, patient_id, "diagnosis", API_KEY, appointment_id, NetClient::getInstance());
     ui->btn_push_3->setText("已提交医嘱");
