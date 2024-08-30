@@ -41,9 +41,10 @@ detailZhihu::detailZhihu(QWidget *parent) :
 
     connect(&client, &NetClient::received_json, this, &detailZhihu::handleJsonReceived_zhihu);
 
-    resize(600,700);
+//    resize(600,700);
 
     qDebug()<<"tytytytytytytytytytytytytytytyt";
+    qDebug()<<"tiez_id";
 
     search_901();
 }
@@ -129,6 +130,7 @@ void detailZhihu::handleJsonReceived_zhihu(const QJsonObject &mainsource)
 void detailZhihu::search_901()
 {
     searchstate=901;
+    qDebug()<<"9090909090909090909090";
     QString sql=R"(
         SELECT
             huifu.text AS huifutext,

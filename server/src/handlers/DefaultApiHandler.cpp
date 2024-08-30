@@ -29,12 +29,19 @@ DefaultApiHandler::~DefaultApiHandler(){
 }
 
 void DefaultApiHandler::loginPost(QString id, QString password, bool usertype, QString apikey, Object body) {
+    auto reqObj = qobject_cast<DefaultApiRequest*>(sender());
     if(id == "root" && apikey =="429080af-532a-48a0-868b-42159fd4319e"){
         apiVerifyMap[apikey] = {id,"root"};
+        QJsonObject obj;
+        obj.insert("apikey",apikey);
+        QJsonDocument doc(obj);
+        reqObj->loginPostResponse(Inline_response_200(doc.toJson()));
+        qDebug() << "send succeed";
+        return;
     }
     Q_UNUSED(body);
     qDebug() << "default api handler login post:" << usertype;
-    auto reqObj = qobject_cast<DefaultApiRequest*>(sender());
+
     if( reqObj != nullptr )
     {
         QSharedPointer<QJsonDocument> jsondoc;
@@ -63,10 +70,12 @@ void DefaultApiHandler::sqlGet(QString sql, QString apikey, QString id, bool use
     QSharedPointer<QJsonDocument> resjson;
     try {
         if(apiVerifyMap[apikey].first != id){
+            qDebug() << apiVerifyMap[apikey].first << ":" << id;
             std::exception e;
             throw e;
         }
         std::string sqlstd = sql.toStdString();
+        qDebug() << "going to sqlquery:" << sql;
         dbserver->sqlquery(&sqlstd,resjson);
         std::string s = sqlstd.substr(0,6);
         for(size_t i = 0; i < s.length();i++)s[i] = toupper(s[i]);

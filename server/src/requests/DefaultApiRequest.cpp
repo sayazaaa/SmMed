@@ -146,6 +146,7 @@ void DefaultApiRequest::loginPostError(const Inline_response_200& res, QNetworkR
 void DefaultApiRequest::sqlGetError(const Object& res, QNetworkReply::NetworkError error_type, QString& error_str){
     Q_UNUSED(error_type);
     Q_UNUSED(res);
+    qDebug() << "error";
     socket->writeError(404,error_str.toStdString().c_str());
     if(socket->isOpen()){
         socket->close();

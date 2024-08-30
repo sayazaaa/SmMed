@@ -33,7 +33,7 @@ public:
     explicit detailZhihu(QWidget *parent = 0);
     ~detailZhihu();
 
-    QString tiez_id;
+    QString tiez_id="3";
 
     void search_901();
     void search_902();

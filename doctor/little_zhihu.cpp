@@ -35,7 +35,7 @@ void little_zhihu:: on_btn_more_clicked()
     detailZhihu *dZ = new detailZhihu;
     dZ->setquestion(ui->label_context->text());
     dZ->tiez_id=tiezi_id;
-
+//    dZ->detailZhihu;
     dZ->show();
 }
 
