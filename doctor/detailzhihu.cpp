@@ -198,8 +198,8 @@ void detailZhihu::on_pushButton_clicked()
     NetClient &client = NetClient::getInstance();
     NetLoader::get_sql(sql , USER_ID , 0 , API_KEY , client );
 
-    sql = "UPDATE tiezi  SET num=num+1  WHERE id = '"+tiez_id+"'; ";
-    NetLoader::get_sql(sql , USER_ID , 0 , API_KEY , client );
+    // sql = "UPDATE tiezi  SET num=num+1  WHERE id = '"+tiez_id+"'; ";
+    // NetLoader::get_sql(sql , USER_ID , 0 , API_KEY , client );
 
     QNChatMessage_zhihu* messageW = new QNChatMessage_zhihu(ui->listWidget->parentWidget());
     QListWidgetItem* item = new QListWidgetItem(ui->listWidget);

@@ -142,7 +142,6 @@
                 <property name="font">
                  <font>
                   <pointsize>10</pointsize>
-                  <weight>75</weight>
                   <bold>true</bold>
                  </font>
                 </property>
@@ -154,7 +153,7 @@
               <item>
                <spacer name="horizontalSpacer">
                 <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
+                 <enum>Qt::Orientation::Horizontal</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
@@ -244,7 +243,6 @@
                  <property name="font">
                   <font>
                    <pointsize>9</pointsize>
-                   <weight>50</weight>
                    <bold>false</bold>
                   </font>
                  </property>
@@ -252,7 +250,7 @@
                   <string notr="true"/>
                  </property>
                  <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
+                  <enum>Qt::Orientation::Horizontal</enum>
                  </property>
                 </widget>
                </item>
@@ -267,7 +265,6 @@
                  <property name="font">
                   <font>
                    <pointsize>10</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -313,7 +310,6 @@
             </property>
             <property name="font">
              <font>
-              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -334,7 +330,7 @@
              <item>
               <spacer name="horizontalSpacer_4">
                <property name="orientation">
-                <enum>Qt::Horizontal</enum>
+                <enum>Qt::Orientation::Horizontal</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -373,7 +369,7 @@
              <item>
               <spacer name="horizontalSpacer_2">
                <property name="orientation">
-                <enum>Qt::Horizontal</enum>
+                <enum>Qt::Orientation::Horizontal</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -412,7 +408,7 @@
              <item>
               <spacer name="horizontalSpacer_3">
                <property name="orientation">
-                <enum>Qt::Horizontal</enum>
+                <enum>Qt::Orientation::Horizontal</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -451,7 +447,7 @@
              <item>
               <spacer name="horizontalSpacer_5">
                <property name="orientation">
-                <enum>Qt::Horizontal</enum>
+                <enum>Qt::Orientation::Horizontal</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -503,7 +499,7 @@
                  <normaloff>:/icons/list.png</normaloff>:/icons/list.png</iconset>
                </property>
                <property name="toolButtonStyle">
-                <enum>Qt::ToolButtonTextUnderIcon</enum>
+                <enum>Qt::ToolButtonStyle::ToolButtonTextUnderIcon</enum>
                </property>
               </widget>
              </item>
@@ -537,7 +533,7 @@
                  <normaloff>:/icons/register.png</normaloff>:/icons/register.png</iconset>
                </property>
                <property name="toolButtonStyle">
-                <enum>Qt::ToolButtonTextUnderIcon</enum>
+                <enum>Qt::ToolButtonStyle::ToolButtonTextUnderIcon</enum>
                </property>
               </widget>
              </item>
@@ -571,7 +567,7 @@
                  <normaloff>:/icons/check.png</normaloff>:/icons/check.png</iconset>
                </property>
                <property name="toolButtonStyle">
-                <enum>Qt::ToolButtonTextUnderIcon</enum>
+                <enum>Qt::ToolButtonStyle::ToolButtonTextUnderIcon</enum>
                </property>
               </widget>
              </item>
@@ -605,7 +601,7 @@
                  <normaloff>:/icons/message.png</normaloff>:/icons/message.png</iconset>
                </property>
                <property name="toolButtonStyle">
-                <enum>Qt::ToolButtonTextUnderIcon</enum>
+                <enum>Qt::ToolButtonStyle::ToolButtonTextUnderIcon</enum>
                </property>
               </widget>
              </item>
@@ -639,7 +635,7 @@
                  <normaloff>:/icons/check.png</normaloff>:/icons/check.png</iconset>
                </property>
                <property name="toolButtonStyle">
-                <enum>Qt::ToolButtonTextUnderIcon</enum>
+                <enum>Qt::ToolButtonStyle::ToolButtonTextUnderIcon</enum>
                </property>
               </widget>
              </item>
@@ -669,7 +665,7 @@
                 <string>关于我们</string>
                </property>
                <property name="toolButtonStyle">
-                <enum>Qt::ToolButtonTextUnderIcon</enum>
+                <enum>Qt::ToolButtonStyle::ToolButtonTextUnderIcon</enum>
                </property>
               </widget>
              </item>
@@ -703,7 +699,7 @@
            <item>
             <spacer name="horizontalSpacer_8">
              <property name="orientation">
-              <enum>Qt::Horizontal</enum>
+              <enum>Qt::Orientation::Horizontal</enum>
              </property>
              <property name="sizeHint" stdset="0">
               <size>
@@ -733,7 +729,6 @@
              <property name="font">
               <font>
                <pointsize>9</pointsize>
-               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -762,7 +757,6 @@
              <property name="font">
               <font>
                <pointsize>9</pointsize>
-               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -791,7 +785,6 @@
              <property name="font">
               <font>
                <pointsize>9</pointsize>
-               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -820,7 +813,6 @@
              <property name="font">
               <font>
                <pointsize>9</pointsize>
-               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
@@ -835,7 +827,7 @@
            <item>
             <spacer name="horizontalSpacer_9">
              <property name="orientation">
-              <enum>Qt::Horizontal</enum>
+              <enum>Qt::Orientation::Horizontal</enum>
              </property>
              <property name="sizeHint" stdset="0">
               <size>
@@ -850,7 +842,7 @@
          <item>
           <widget class="QStackedWidget" name="sw_main">
            <property name="currentIndex">
-            <number>8</number>
+            <number>3</number>
            </property>
            <widget class="QWidget" name="page_0">
             <widget class="QWidget" name="layoutWidget">
@@ -863,7 +855,7 @@
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout">
-              <item alignment="Qt::AlignHCenter">
+              <item alignment="Qt::AlignmentFlag::AlignHCenter">
                <widget class="QLabel" name="label_4">
                 <property name="text">
                  <string/>

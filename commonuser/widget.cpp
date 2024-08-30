@@ -1291,7 +1291,7 @@ void Widget::search_4()
         patient ,appointment, office , doctor
     WHERE
         patient.name like %')" + ui->combo_user_4->currentText() + R"('% AND
-        appointment.date like %')" + ui->date_4->date().toString("yyMMdd") + R"('% AND
+        appointment.date like %')" + ui->date_4->date().toString("yy-MM-dd") + R"('% AND
         doctor.name like %')" + ui->lineEdit_docname_4->text() + R"('% AND
         doctor.gender like %')" + ui->combo_gender_4->currentText() + R"('% AND
         office.name = ')" + ui->combo_depart_4->currentText() + R"(';

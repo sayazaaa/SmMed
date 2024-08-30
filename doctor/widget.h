@@ -148,7 +148,7 @@ private:
     void delete_1();
 
     void search_3();
-    void putin_3();
+    void putin_3(int i);
     void delete_3();
 
     void search_4();
@@ -167,7 +167,7 @@ private:
 
 
     void search_9();
-    void putin_9();
+    void putin_9(int i);
     void delete_9();
 
 };
