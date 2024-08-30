@@ -1204,19 +1204,27 @@ void Widget::search_4()
 {
 
     //通过 患者姓名 预约日期 医生 医生性别 部门 查询： 患者姓名 日期 时间 医生 部门 预约序号
-    QString sql= R"(
-    SELECT
-        patient.name AS patient_name,
-        patient.id AS patient_id,
-        patient.gender AS patient_gender,
-        patient.phone AS  patient_phone
-    FROM
-        patient
-    WHERE
-        patient.gender = ')" + ui->combo_gender_4->currentText() + R"(' AND
-        patient.name = ')" + ui->lineEdit_docname_4->text() + R"(' AND
-        patient.phone = ')"+ui->lineEdit_phone_4->text() +R"(' ;
-    )";
+    QString sql;
+    sql.sprintf(
+        "SELECT patient.name AS patient_name,patient.id AS patient_id,patient.gender AS patient_gender,patient.phone AS  patient_phone FROM patient WHERE 1 %s %s %s",
+        ((ui->combo_gender_4->currentText() == "")?"":("AND patient.gender = '"+ui->combo_gender_4->currentText().toStdString()+"'")).c_str(),
+        ((ui->lineEdit_docname_4->text()=="")?"":("AND patient.name = '"+ui->lineEdit_docname_4->text().toStdString()+"'")).c_str(),
+        ((ui->lineEdit_phone_4->text()=="")?"":("AND patient.name = '"+ui->lineEdit_phone_4->text().toStdString()+"'")).c_str()
+    );
+    qDebug() << ((ui->combo_gender_4->currentText() == "")?" ":("AND patient.gender = '"+ui->combo_gender_4->currentText().toStdString()+"'")).c_str();
+    // R"(
+    // SELECT
+    //     patient.name AS patient_name,
+    //     patient.id AS patient_id,
+    //     patient.gender AS patient_gender,
+    //     patient.phone AS  patient_phone
+    // FROM
+    //     patient
+    // WHERE
+    //     " + ( ? "" : )+ R"(' AND
+    //     patient.name = ')" + (ui->lineEdit_docname_4->text()==""?"":ui->lineEdit_docname_4->text() ) + R"(' AND
+    //     patient.phone = ')"+(ui->lineEdit_phone_4->text()==""?"":ui->lineEdit_docname_4->text() ) +R"(' ;
+    // )";
 
     NetLoader::get_sql(sql , USER_ID , 1 , API_KEY , client );
     choice_state=401;
