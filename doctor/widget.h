@@ -119,6 +119,8 @@ private slots:
 
     void onItemClicked_8(QListWidgetItem *item);
 
+    void on_date_1_userDateChanged(const QDate &date);
+
 private:
     Ui::Widget *ui;
 
@@ -137,21 +139,37 @@ private:
     void initMember();      //成员变量初始化函数
     void littleShow();      //最小化显示函数
 
+    void search_101();
+    void putin_101(int i);
+    void delete_101();
+
     void search_1();
     void putin_1();
     void delete_1();
+
     void search_3();
     void putin_3(int i);
     void delete_3();
+
     void search_4();
-    void putin_4(int i);
+    void putin_4();
     void delete_4();
+
     void search_8();
-    void putin_8();
+//    void putin_8();
     void delete_8();
+
+    void search_801(QString qi);
+    void putin_801();
+
+    void search_802(QString qi);
+    void putin_802();
+
+
     void search_9();
     void putin_9(int i);
     void delete_9();
+
 };
 QString convertDayToChinese(const QString& day);
 #endif // WIDGET_H

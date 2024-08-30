@@ -971,7 +971,7 @@
                  <item>
                   <widget class="QPushButton" name="btn_page_now_1">
                    <property name="text">
-                    <string>5</string>
+                    <string>0</string>
                    </property>
                   </widget>
                  </item>
@@ -1153,7 +1153,7 @@
                  <item>
                   <widget class="QPushButton" name="btn_page_now_4">
                    <property name="text">
-                    <string>5</string>
+                    <string>0</string>
                    </property>
                   </widget>
                  </item>
