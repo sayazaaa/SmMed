@@ -53,14 +53,25 @@ void ClientTask::sendMessage(Message& msg, QTcpSocket* recipientSocket) {
 }
 
 void ClientTask::handleReadyRead(){
-    QTcpSocket* socket = qobject_cast<QTcpSocket*>(sender());
-    QSharedPointer<Message> msg = receive_message(*socket);
-    qDebug() << "get messsage!!!!!!!!!!!!!!!!!!"<<msg->get_apikey();
+    try {
+        QTcpSocket* socket = qobject_cast<QTcpSocket*>(sender());
+        QSharedPointer<Message> msg;
+        try {
+            msg = receive_message(*socket);
+        } catch (std::exception e) {
+            return;
+        }
 
-    if (msg) {
-        QString recipientId = msg->get_recipient();
-        emit forwardMessage(*msg);
+        qDebug() << "get messsage!!!!!!!!!!!!!!!!!!"<<msg->get_apikey();
+
+        if (msg) {
+            QString recipientId = msg->get_recipient();
+            emit forwardMessage(*msg);
+        }
+    } catch (std::exception e) {
+        qDebug() << "read message failed";
     }
+
 }
 
 void ClientTask::handleDisconnected() {

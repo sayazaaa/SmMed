@@ -222,7 +222,10 @@ void PictureMessage::set_data(QByteArray& newdata){
 QSharedPointer<Message> receive_message(QTcpSocket& socket){
    QByteArray block = socket.readAll();
    QDataStream in(&block, QIODevice::ReadOnly);
-
+   qDebug() << block.size();
+   if(!block.size()){
+       throw(std::exception());
+   }
    QString type;
    in >> type;
 
